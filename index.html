@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mục Lục 57 Bài Tập Tích Phân Bội - Toán Cao Cấp C3</title>
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']]
+      }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f1f5f9;
+            color: #1e293b;
+            margin: 0;
+            padding: 0 0 60px 0;
+        }
+        .hero {
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+            color: white;
+            padding: 40px 24px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .hero h1 { margin: 0 0 10px 0; font-size: 28px; }
+        .hero p { margin: 0 0 22px 0; color: #cbd5e1; font-size: 16px; }
+        .cta-btn {
+            display: inline-block;
+            background: #38bdf8;
+            color: #0f172a;
+            font-weight: 700;
+            font-size: 16px;
+            padding: 12px 26px;
+            border-radius: 8px;
+            text-decoration: none;
+            box-shadow: 0 4px 14px rgba(56, 189, 248, 0.4);
+            transition: transform 0.15s, background 0.15s;
+        }
+        .cta-btn:hover {
+            background: #7dd3fc;
+            transform: translateY(-2px);
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+        .section-title {
+            font-size: 21px;
+            color: #0f172a;
+            border-left: 5px solid #0284c7;
+            padding-left: 12px;
+            margin: 32px 0 16px 0;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 16px;
+        }
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 18px;
+            text-decoration: none;
+            color: inherit;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+            border: 1px solid #e2e8f0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+        }
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 18px rgba(0,0,0,0.1);
+            border-color: #38bdf8;
+        }
+        .card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .card-title {
+            font-weight: 700;
+            font-size: 16px;
+            color: #0284c7;
+        }
+        .card-open {
+            font-size: 12px;
+            color: #64748b;
+            font-weight: 600;
+        }
+        .card-body {
+            font-size: 14px;
+            color: #334155;
+            line-height: 1.6;
+            margin-bottom: 12px;
+            overflow-x: auto;
+        }
+        .card-ans {
+            font-size: 13px;
+            background: #f8fafc;
+            border-top: 1px solid #f1f5f9;
+            padding-top: 8px;
+            color: #0f766e;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <h1>📚 Toán Cao Cấp C3 — Tích Phân Bội</h1>
+        <p>Hệ thống 57 bài giải chi tiết từng bước, hướng dẫn vẽ hình bằng tay và mô phỏng 2D/3D tương tác</p>
+        <a class="cta-btn" href="TCC3_Tron_Bo_57_Bai.html">🚀 Mở Bản Gộp Trọn Bộ 57 Bài (1 File Duy Nhất Có Menu)</a>
+    </div>
+    <div class="container">
+        <h2 class="section-title">Phần B1: Tích Phân Kép Trong Tọa Độ Đề-các (20 Bài: B1.1 → B1.20)</h2>
+        <div class="grid">
+            
+            <a class="card" href="B1_1.html">
+                <div class="card-top">
+                    <span class="card-title">Bài B1.1</span>
+                    <span class="card-open">Mở bài ↗</span>
+                </div>
+                <div class="card-body">Tính \(\iint_D (x^2 + xy^3) dxdy\), với \(D\) là miền phẳng được giới hạn bởi đường thẳng \(y = x\) và parabol \(y = x^2\).</div>
+                <div class="card-ans">Đáp số: \(\frac{1}{15}\) (khớp với đáp án 1/15)</div>
+            </a>
+
+            <a class="card" href="B1_2.html">
+                <div class="card-top">
+                    <span class="card-title">Bài B1.2</span>
+                    <span class="card-open">Mở bài ↗</span>
+                </div>
+                <div class="card-body">Tính \(\iint_D (x^2 + y) dxdy\), với \(D\) là miền phẳng được giới hạn bởi đường thẳng \(y = 4\) và parabol \(y = x^2\).</div>
+                <div class="card-ans">Đáp số: \(\frac{512}{15}\) (khớp với đáp án 512/15)</div>
+            </a>
+
+            <a class="card" href="B1_3.html">
+                <div class="card-top">
+                    <span class="card-title">Bài B1.3</span>
+                    <span class="card-open">Mở bài ↗</span>
+                </div>
+                <div class="card-body">Tính \(\int_0^1 \int_y^1 e^{x^2} dx dy\)</div>
+                <div class="card-ans">Đáp số: \(- \frac{1}{2} - \frac{\sqrt{\pi} \left(- \frac{e}{\sqrt{\pi}} + \operatorname{erfi}{\left(1 \right)}\right)}{2} + \frac{\sqrt{\pi} \operatorname{erfi}{\left(1 \right)}}{2}\) (khớp với đáp án \(\frac{1}{2}(e-1)\))</div>
+            </a>
+
+            <a class="card" href="B1_4.html">
+                <div class="card-top">
+                    <span class="card-title">Bài B1.4</span>
+                    <span class="card-open">Mở bài ↗</span>
+                </div>
+                <div class="card-body">Tính \(\iint_D x^3y dxdy\), với \(D\) là phần hình tròn đơn vị \(x^2 + y^2 \le 1\) lấy trong miền \(x \ge 0\) và \(y \ge 0\).</div>
+                <div class="card-ans">Đáp số: \(\frac{1}{24}\) (khớp với đáp án 1/24)</div>
+            </a>
+
+            <a class="card" href="B1_5.html">
+                <div class="card-top">
+                    <span class="card-title">Bài B1.5</span>
+                    <span class="card-open">Mở bài ↗</span>
+                </div>
+                <div class="card-body">Đổi thứ tự tính tích phân: \(\int_0^1 dx \int_{\sqrt{x}}^{\sqrt{2-x^2}} f(x;y) dy\).</div>
+                <div class="card-ans">Đáp số: Không yêu cầu tính giá trị (bài toán đổi thứ tự).</div>
+            </a>
+
+            <a class="card" href="B1_6.html">
+                <div class="card-top">
+                    <span class="card-title">Bài B1.6</span>
+                    <span class="card-open">Mở bài ↗</span>
+                </div>
+                <div class="card-body">Tính \(\iint_D y dxdy\), với \(D\) là miền phẳng giới hạn bởi parabol \(y = x^2\) và parabol \(y = 4 - x^2 + 2x\).</div>
+                <div class="card-ans">Đáp số: \(\frac{45}{2}\) (khớp với đáp án 45/2)</div>
+            </a>
+
+            <a class="card" href="B1_7.html">
+                <div class="card-top">
+                    <span class="card-title">Bài B1.7</span>
+                    <span class="card-open">Mở bài ↗</span>
+                </div>
+                <div class="card-body">Tính \(\iint_D x^2y dxdy\), với \(D\) là miền phẳng giới hạn bởi parabola \(y = 3 - x^2\) và trục \(Ox\).</div>
+                <div class="card-ans">Đáp số: \(\frac{72 \sqrt{3}}{35}\) (khớp với đáp án \(72\sqrt{3}/35\))</div>
+            </a>
+
+            <a class="card" href="B1_8.html">
+                <div class="card-top">
+                    <span class="card-title">Bài B1.8</span>
+                    <span class="card-open">Mở bài ↗</span>
+                </div>
+                <div class="card-body">\(\iint_D (x-y)dxdy\) với D là tam giác A(1;0), B(2;1), C(0;1)</div>
+                <div class="card-ans">Đáp số: \(\frac{1}{3}\) (khớp 1/3)</div>
+            </a>
+
+            <a class="card" href="B1_9.html">
+                <div class="card-top">
+                    <span class="card-title">Bài B1.9</span>
+                    <span class="card-open">Mở bài ↗</span>
+                </div>
+                <div class="card-body">Diện tích miền D giới hạn bởi hai parabol \(y = x^2\) và \(y = 2 - x^2\)</div>
+                <div class="card-ans">Đáp số: \(\frac{8}{3}\) (khớp 8/3)</div>
+            </a>
+
+            <a class="card" href="B1_10.html">
+                <div class="card-top">
+                    <span class="card-title">Bài B1.10</span>
+                    <span class="card-open">Mở bài ↗</span>
+                </div>
+                <div class="card-body">\(\iint_D y^2 dxdy\), D giới hạn bởi parabol \(y = x^2\), \(y = 2-x\), và trục Ox</div>
+                <div class="card-ans">Đáp số: \(\frac{11}{84}\) (khớp 11/84)</div>
+            </a>
+
+            <a class="card" href="B1_11.html">
+                <div class="card-top">
+                    <span class="card-title">Bài B1.11</span>
+                    <span class="card-open">Mở bài ↗</span>
+                </div>
+                <div class="card-body">\(\iint_D xydxdy\), D giới hạn bởi \(y=x^2, y=2-x, Oy, x \ge 0\)</div>
+                <div class="card-ans">Đáp số: \(\frac{3}{8}\) (khớp 3/8)</div>
+            </a>
+
+            <a class="card" href="B1_12.html">
+                <div class="card-top">
+                    <span class="card-title">Bài B1.12</span>
+                    <span class="card-open">Mở bài ↗</span>
+                </div>
+                <div class="card-body">\(\iint_D (x+y)dxdy\), D giới hạn bởi \(y=x^2, y=2-x\)</div>
+                <div class="card-ans">Đáp số: \(\frac{99}{20}\) (khớp 99/20)</div>
+            </a>
+
+            <a class="card" href="B1_13.html">
+                <div class="card-top">
+                    <span class="card-title">Bài B1.13</span>
+                    <span class="card-open">Mở bài ↗</span>
+                </div>
+                <div class="card-body">\(\iint_D (\frac{x}{y} + \frac{y}{x})dxdy\), D là HCN \(1 \le x \le 4, 1 \le y \le 2\)</div>
+                <div class="card-ans">Đáp số: \(\frac{3 \log{\left(4 \right)}}{2} + \frac{15 \log{\left(2 \right)}}{2}\) (khớp 21*ln(2)/2)</div>
+            </a>
+
+            <a class="card" href="B1_14.html">
+                <div class="card-top">
+                    <span class="card-title">Bài B1.14</span>
+                    <span class="card-open">Mở bài ↗</span>
+                </div>
+                <div class="card-body">Đổi thứ tự tính tích phân \(\int_0^2 dx \int_0^{\sqrt{2x-x^2}} f(x;y) dy\)</div>
+                <div class="card-ans">Đáp số: Không yêu cầu tính</div>
+            </a>
+
+            <a class="card" href="B1_15.html">
+                <div class="card-top">
+                    <span class="card-title">Bài B1.15</span>
+                    <span class="card-open">Mở bài ↗</span>
+                </div>
+                <div class="card-body">Đổi thứ tự tính tích phân \(\int_0^2 dx \int_{\sqrt{2x-x^2}}^{\sqrt{2x}} f(x;y) dy\)</div>
+                <div class="card-ans">Đáp số: Không yêu cầu tính</div>
+            </a>
+
+            <a class="card" href="B1_16.html">
+                <div class="card-top">
+                    <span class="card-title">Bài B1.16</span>
+                    <span class="card-open">Mở bài ↗</span>
+                </div>
+                <div class="card-body">\(\iint_D xydxdy\), D là hình thang M(1;1), N(2;3), P(2;4), Q(1;5)</div>
+                <div class="card-ans">Đáp số: \(\frac{271}{24}\) (khớp 271/24)</div>
+            </a>
+
+            <a class="card" href="B1_17.html">
+                <div class="card-top">
+                    <span class="card-title">Bài B1.17</span>
+                    <span class="card-open">Mở bài ↗</span>
+                </div>
+                <div class="card-body">\(\iint_D x^4y^4 dxdy\), D giới hạn bởi \(x = -y^2\) và \(y = x^2\)</div>
+                <div class="card-ans">Đáp số: \(\frac{1}{75}\) (khớp 1/75)</div>
+            </a>
+
+            <a class="card" href="B1_18.html">
+                <div class="card-top">
+                    <span class="card-title">Bài B1.18</span>
+                    <span class="card-open">Mở bài ↗</span>
+                </div>
+                <div class="card-body">\(\iint_D xy dxdy\), D giới hạn bởi \(y=1, y=4, xy=1, x=0\)</div>
+                <div class="card-ans">Đáp số: \(\frac{\log{\left(4 \right)}}{2}\) (khớp ln(2))</div>
+            </a>
+
+            <a class="card" href="B1_19.html">
+                <div class="card-top">
+                    <span class="card-title">Bài B1.19</span>
+                    <span class="card-open">Mở bài ↗</span>
+                </div>
+                <div class="card-body">\(\iint_D \sqrt{|x^2-y|}dxdy\), D hình chữ nhật -1<=x<=1, 0<=y<=2</div>
+                <div class="card-ans">Đáp số: \(3.2375\) ~ (khớp 5/3 + pi/2)</div>
+            </a>
+
+            <a class="card" href="B1_20.html">
+                <div class="card-top">
+                    <span class="card-title">Bài B1.20</span>
+                    <span class="card-open">Mở bài ↗</span>
+                </div>
+                <div class="card-body">\(\iint_D \max(x^2, y) dxdy\), D giới hạn bởi \(y = 8 - x^2\) và trục Ox</div>
+                <div class="card-ans">Đáp số: \(\frac{512 \sqrt{2}}{15} + \frac{1024}{15}\) (Đáp án)</div>
+            </a>
+        </div>
+
+        <h2 class="section-title">Phần B2: Đổi Biến Tích Phân Kép & Tọa Độ Cực (22 Bài: B2.1 → B2.22)</h2>
+        <div class="grid">
+            
+            <a class="card" href="B2_1.html">
+                <div class="card-top">
+                    <span class="card-title">Bài B2.1</span>
+                    <span class="card-open">Mở bài ↗</span>
+                </div>
+                <div class="card-body">\(\iint_D (x^2+y^2)^2 dxdy\), D: \(1 \le x^2+y^2 \le 4, x \ge 0, y \ge 0\)</div>
+                <div class="card-ans">Đáp số: \(21\pi/4\)</div>
+            </a>
+
+            <a class="card" href="B2_2.html">
+                <div class="card-top">
+                    <span class="card-title">Bài B2.2</span>
+                    <span class="card-open">Mở bài ↗</span>
+                </div>
+                <div class="card-body">\(\iint_D (5x^2+2y^2) dxdy\), D: \(x^2+y^2 \le 1\)</div>
+                <div class="card-ans">Đáp số: \(7\pi/4\)</div>
+            </a>
+
+            <a class="card" href="B2_3.html">
+                <div class="card-top">
+                    <span class="card-title">Bài B2.3</span>
+                    <span class="card-open">Mở bài ↗</span>
+                </div>
+                <div class="card-body">\(\iint_D y^2 dxdy\), D: \(x^2+y^2 \le 2, x \ge 0\)</div>
+                <div class="card-ans">Đáp số: \(\pi/2\)</div>
+            </a>
+
+            <a class="card" href="B2_4.html">
+                <div class="card-top">
+                    <span class="card-title">Bài B2.4</span>
+                    <span class="card-open">Mở bài ↗</span>
+                </div>
+                <div class="card-body">\(\iint_D y dxdy\), D là nửa hình tròn \(x^2+y^2 \le 4x\) thoả \(y \le 0\)</div>
+                <div class="card-ans">Đáp số: \(-16/3\)</div>
+            </a>
+
+            <a class="card" href="B2_5.html">
+                <div class="card-top">
+                    <span class="card-title">Bài B2.5</span>
+                    <span class="card-open">Mở bài ↗</span>
+                </div>
+                <div class="card-body">\(\iint_D xydxdy\), D là nửa hình tròn tâm (0;1) bán kính 1, \(x \ge 0\)</div>
+                <div class="card-ans">Đáp số: \(2/3\)</div>
+            </a>
+
+            <a class="card" href="B2_6.html">
+                <div class="card-top">
+                    <span class="card-title">Bài B2.6</span>
+                    <span class="card-open">Mở bài ↗</span>
+                </div>
+                <div class="card-body">\(\iint_D xydxdy\), D giới hạn bởi \(y=-x\) và \(x^2+y^2=2x\) (diện tích nhỏ hơn)</div>
+                <div class="card-ans">Đáp số: \(-1/12\)</div>
+            </a>
+
+            <a class="card" href="B2_7.html">
+                <div class="card-top">
+                    <span class="card-title">Bài B2.7</span>
+                    <span class="card-open">Mở bài ↗</span>
+                </div>
+                <div class="card-body">\(\iint_D (\sqrt{x^2+y^2}+1) dxdy\), D là hình tròn đơn vị</div>
+                <div class="card-ans">Đáp số: \(5\pi/3\)</div>
+            </a>
+
+            <a class="card" href="B2_8.html">
+                <div class="card-top">
+                    <span class="card-title">Bài B2.8</span>
+                    <span class="card-open">Mở bài ↗</span>
+                </div>
+                <div class="card-body">\(\iint_D (x^2+y^2)e^{\sqrt{x^2+y^2}} dxdy\), D: \(x^2+y^2 \le 1, y \ge 0\)</div>
+                <div class="card-ans">Đáp số: \(2\pi(3-e)\)</div>
+            </a>
+
+            <a class="card" href="B2_9.html">
+                <div class="card-top">
+                    <span class="card-title">Bài B2.9</span>
+                    <span class="card-open">Mở bài ↗</span>
+                </div>
+                <div class="card-body">\(\iint_D \frac{\sqrt{x^2+y^2}-1}{x^2+y^2} dxdy\), D: \(1 \le x^2+y^2 \le 4\)</div>
+                <div class="card-ans">Đáp số: \(2\pi(1 - \ln 2)\)</div>
+            </a>
+
+            <a class="card" href="B2_10.html">
+                <div class="card-top">
+                    <span class="card-title">Bài B2.10</span>
+                    <span class="card-open">Mở bài ↗</span>
+                </div>
+                <div class="card-body">\(\iint_D (x^2+y^2+1)^2 dxdy\), D giữa \(x^2+y^2=1\) và \(x^2+y^2=9\), \(x, y \ge 0\)</div>
+                <div class="card-ans">Đáp số: \(248\pi/3\)</div>
+            </a>
+
+            <a class="card" href="B2_11.html">
+                <div class="card-top">
+                    <span class="card-title">Bài B2.11</span>
+                    <span class="card-open">Mở bài ↗</span>
+                </div>
+                <div class="card-body">\(\iint_D xydxdy\), D: \(x^2+y^2 \le 2x, y \ge 0\)</div>
+                <div class="card-ans">Đáp số: \(2/3\)</div>
+            </a>
+
+            <a class="card" href="B2_12.html">
+                <div class="card-top">
+                    <span class="card-title">Bài B2.12</span>
+                    <span class="card-open">Mở bài ↗</span>
+                </div>
+                <div class="card-body">\(\iint_D \sqrt{(x^2+y^2)^3} dxdy\), D: \(x^2+y^2 \le 2y\)</div>
+                <div class="card-ans">Đáp số: \(512/75\)</div>
+            </a>
+
+            <a class="card" href="B2_13.html">
+                <div class="card-top">
+                    <span class="card-title">Bài B2.13</span>
+                    <span class="card-open">Mở bài ↗</span>
+                </div>
+                <div class="card-body">\(\iint_D (x+y) dxdy\), D tâm (3;0) bk 3 lấy \(y \ge 0\)</div>
+                <div class="card-ans">Đáp số: \(27\pi/2 + 18\)</div>
+            </a>
+
+            <a class="card" href="B2_14.html">
+                <div class="card-top">
+                    <span class="card-title">Bài B2.14</span>
+                    <span class="card-open">Mở bài ↗</span>
+                </div>
+                <div class="card-body">\(\iint_D xy(x^2+y^2) dxdy\), D tâm (0;2) bk 2 lấy \(x \ge 0\)</div>
+                <div class="card-ans">Đáp số: \(256/3\)</div>
+            </a>
+
+            <a class="card" href="B2_15.html">
+                <div class="card-top">
+                    <span class="card-title">Bài B2.15</span>
+                    <span class="card-open">Mở bài ↗</span>
+                </div>
+                <div class="card-body">\(\iint_D y^2 dxdy\), D nằm giữa \(x^2+y^2=2x\) và \(x^2+y^2=4\)</div>
+                <div class="card-ans">Đáp số: \(15\pi/4\)</div>
+            </a>
+
+            <a class="card" href="B2_16.html">
+                <div class="card-top">
+                    <span class="card-title">Bài B2.16</span>
+                    <span class="card-open">Mở bài ↗</span>
+                </div>
+                <div class="card-body">\(\iint_D xydxdy\), D giới hạn bởi \(y=-x\) và \(x^2+y^2=2x\)</div>
+                <div class="card-ans">Đáp số: \(-1/12\)</div>
+            </a>
+
+            <a class="card" href="B2_17.html">
+                <div class="card-top">
+                    <span class="card-title">Bài B2.17</span>
+                    <span class="card-open">Mở bài ↗</span>
+                </div>
+                <div class="card-body">Tính \(\iint_D \frac{\ln(\sqrt{x^2+y^2}+2)}{(\sqrt{x^2+y^2}+2)\sqrt{x^2+y^2}} dxdy\) với \(D: (e-2)^2 \le x^2+y^2 \le (e^2-2)^2\)</div>
+                <div class="card-ans">Đáp số: \(3\pi\)</div>
+            </a>
+
+            <a class="card" href="B2_18.html">
+                <div class="card-top">
+                    <span class="card-title">Bài B2.18</span>
+                    <span class="card-open">Mở bài ↗</span>
+                </div>
+                <div class="card-body">Tính \(\iint_D \sqrt{(4a^2-x^2-y^2)^3} dxdy\) với \(D\) là miền nửa hình tròn tâm \(A(a; 0)\), bán kính \(a > 0\) nằm giữa \(y=x\) và trục \(Oy\) trong góc phần tư thứ nhất.</div>
+                <div class="card-ans">Đáp số: \(\frac{4a^5}{75}(30\pi - 43\sqrt{2})\)</div>
+            </a>
+
+            <a class="card" href="B2_19.html">
+                <div class="card-top">
+                    <span class="card-title">Bài B2.19</span>
+                    <span class="card-open">Mở bài ↗</span>
+                </div>
+                <div class="card-body">Tính \(\iint_D x^2 y dxdy\) với \(D\) là miền phẳng xác định bởi \(2x \le x^2+y^2 \le 4x\) và \(-x \le y \le x\sqrt{3}\).</div>
+                <div class="card-ans">Đáp số: \(93/64\)</div>
+            </a>
+
+            <a class="card" href="B2_20.html">
+                <div class="card-top">
+                    <span class="card-title">Bài B2.20</span>
+                    <span class="card-open">Mở bài ↗</span>
+                </div>
+                <div class="card-body">\(\iint_D y^2 dxdy\), D: \(4x^2+y^2=4\)</div>
+                <div class="card-ans">Đáp số: \(2\pi\)</div>
+            </a>
+
+            <a class="card" href="B2_21.html">
+                <div class="card-top">
+                    <span class="card-title">Bài B2.21</span>
+                    <span class="card-open">Mở bài ↗</span>
+                </div>
+                <div class="card-body">\(\iint_D (x-y)^2 dxdy\), D: \(x^2/a^2+y^2/b^2 \le 1\)</div>
+                <div class="card-ans">Đáp số: \(\frac{\pi}{4}ab(a^2+b^2)\)</div>
+            </a>
+
+            <a class="card" href="B2_22.html">
+                <div class="card-top">
+                    <span class="card-title">Bài B2.22</span>
+                    <span class="card-open">Mở bài ↗</span>
+                </div>
+                <div class="card-body">Tính tích phân \(\iint_D xy dxdy\) với \(D\) là hình bình hành với phương trình các cạnh là \(x-y=0, x-y=1, 2x+y=1, 2x+y=3\).</div>
+                <div class="card-ans">Đáp số: \(16/81\)</div>
+            </a>
+        </div>
+
+        <h2 class="section-title">Phần B3: Tích Phân Bội Ba & Vẽ Vật Thể 3D (15 Bài: B3.1 → B3.15)</h2>
+        <div class="grid">
+            
+            <a class="card" href="B3_1.html">
+                <div class="card-top">
+                    <span class="card-title">Bài B3.1</span>
+                    <span class="card-open">Mở bài ↗</span>
+                </div>
+                <div class="card-body">\(\iiint_\Omega x^3yz^2\,dxdydz\), \(\Omega\): hình hộp chữ nhật \(0\le x\le1,\;1\le y\le2,\;0\le z\le2\)</div>
+                <div class="card-ans">Đáp số: \(1\)</div>
+            </a>
+
+            <a class="card" href="B3_2.html">
+                <div class="card-top">
+                    <span class="card-title">Bài B3.2</span>
+                    <span class="card-open">Mở bài ↗</span>
+                </div>
+                <div class="card-body">\(\iiint_\Omega xz\,dxdydz\), \(\Omega\): \(0\le x\le1,\;\sqrt{x}\le y\le1,\;0\le z\le1-y\)</div>
+                <div class="card-ans">Đáp số: \(\dfrac{1}{420}\)</div>
+            </a>
+
+            <a class="card" href="B3_3.html">
+                <div class="card-top">
+                    <span class="card-title">Bài B3.3</span>
+                    <span class="card-open">Mở bài ↗</span>
+                </div>
+                <div class="card-body">\(\iiint_\Omega z\,dxdydz\), \(\Omega\) là tứ diện \(x+2y+z=6,\;x=0,\;y=0,\;z=0\)</div>
+                <div class="card-ans">Đáp số: \(27\)</div>
+            </a>
+
+            <a class="card" href="B3_4.html">
+                <div class="card-top">
+                    <span class="card-title">Bài B3.4</span>
+                    <span class="card-open">Mở bài ↗</span>
+                </div>
+                <div class="card-body">Tính tích phân \(\iiint_\Omega \sqrt{x^2+z^2} dxdydz\), trong đó \(\Omega\) là vật thể giới hạn bởi mặt trụ \(x^2+z^2=1\), mặt phẳng \(y+z=2\) và mặt phẳng \(Oxz\).</div>
+                <div class="card-ans">Đáp số: \(\dfrac{4\pi}{3}\)</div>
+            </a>
+
+            <a class="card" href="B3_5.html">
+                <div class="card-top">
+                    <span class="card-title">Bài B3.5</span>
+                    <span class="card-open">Mở bài ↗</span>
+                </div>
+                <div class="card-body">\(\iiint_\Omega (x^2+y^2+z^2)\,dxdydz\), \(\Omega\): \(|x|+|y|+|z|\le a\)</div>
+                <div class="card-ans">Đáp số: \(\dfrac{2a^5}{5}\)</div>
+            </a>
+
+            <a class="card" href="B3_6.html">
+                <div class="card-top">
+                    <span class="card-title">Bài B3.6</span>
+                    <span class="card-open">Mở bài ↗</span>
+                </div>
+                <div class="card-body">\(\iiint_\Omega (x^2+z)\,dxdydz\), \(\Omega\): \(z=2-x^2-y^2,\;x=\pm1,\;y=\pm1,\;z=0\)</div>
+                <div class="card-ans">Đáp số: \(\dfrac{32}{3}\)</div>
+            </a>
+
+            <a class="card" href="B3_7.html">
+                <div class="card-top">
+                    <span class="card-title">Bài B3.7</span>
+                    <span class="card-open">Mở bài ↗</span>
+                </div>
+                <div class="card-body">Thể tích vật thể giới hạn bởi \(z=1+x^2+y^2\) và \(x=0,\;y=0,\;z=0,\;x+y=1\)</div>
+                <div class="card-ans">Đáp số: \(\dfrac{2}{3}\)</div>
+            </a>
+
+            <a class="card" href="B3_8.html">
+                <div class="card-top">
+                    <span class="card-title">Bài B3.8</span>
+                    <span class="card-open">Mở bài ↗</span>
+                </div>
+                <div class="card-body">Thể tích vật thể: \(y=x^2,\;y=4x^2,\;y=1,\;z=0,\;z=1\)</div>
+                <div class="card-ans">Đáp số: \(\dfrac{2}{3}\)</div>
+            </a>
+
+            <a class="card" href="B3_9.html">
+                <div class="card-top">
+                    <span class="card-title">Bài B3.9</span>
+                    <span class="card-open">Mở bài ↗</span>
+                </div>
+                <div class="card-body">\(\iiint_\Omega z^2\,dxdydz\), \(\Omega\): \((x-a)^2+(y-b)^2\le R^2,\;h\le z\le k\)</div>
+                <div class="card-ans">Đáp số: \(\dfrac{\pi R^2}{3}(k^3-h^3)\)</div>
+            </a>
+
+            <a class="card" href="B3_10.html">
+                <div class="card-top">
+                    <span class="card-title">Bài B3.10</span>
+                    <span class="card-open">Mở bài ↗</span>
+                </div>
+                <div class="card-body">Vẽ vật thể \(\Omega\) giới hạn bởi paraboloid \(z=x^2+y^2\) và mặt cầu \(z=2-x^2-y^2\)</div>
+                <div class="card-ans">Đáp số: Bài chỉ yêu cầu vẽ</div>
+            </a>
+
+            <a class="card" href="B3_11.html">
+                <div class="card-top">
+                    <span class="card-title">Bài B3.11</span>
+                    <span class="card-open">Mở bài ↗</span>
+                </div>
+                <div class="card-body">Vẽ vật thể \(\Omega\): \(z=2+x^2+y^2,\;x^2+y^2=1,\;Oxy\)</div>
+                <div class="card-ans">Đáp số: Bài chỉ yêu cầu vẽ</div>
+            </a>
+
+            <a class="card" href="B3_12.html">
+                <div class="card-top">
+                    <span class="card-title">Bài B3.12</span>
+                    <span class="card-open">Mở bài ↗</span>
+                </div>
+                <div class="card-body">Vẽ vật thể \(\Omega\): \(z=\sqrt{x^2+y^2},\;z=1,\;z=2\)</div>
+                <div class="card-ans">Đáp số: Bài chỉ yêu cầu vẽ</div>
+            </a>
+
+            <a class="card" href="B3_13.html">
+                <div class="card-top">
+                    <span class="card-title">Bài B3.13</span>
+                    <span class="card-open">Mở bài ↗</span>
+                </div>
+                <div class="card-body">Vẽ vật thể \(\Omega\): \(z=\sqrt{x^2+y^2},\;x^2+y^2+z^2=4,\;z\ge0\)</div>
+                <div class="card-ans">Đáp số: Bài chỉ yêu cầu vẽ</div>
+            </a>
+
+            <a class="card" href="B3_14.html">
+                <div class="card-top">
+                    <span class="card-title">Bài B3.14</span>
+                    <span class="card-open">Mở bài ↗</span>
+                </div>
+                <div class="card-body">Vẽ vật thể \(\Omega\): \(z=4-x^2-y^2,\;x^2+y^2=1,\;Oxy\) (có hai vật thể)</div>
+                <div class="card-ans">Đáp số: Bài chỉ yêu cầu vẽ</div>
+            </a>
+
+            <a class="card" href="B3_15.html">
+                <div class="card-top">
+                    <span class="card-title">Bài B3.15</span>
+                    <span class="card-open">Mở bài ↗</span>
+                </div>
+                <div class="card-body">Vẽ vật thể \(\Omega\): \(z=\sqrt{x^2+y^2},\;x^2+y^2+z^2=1,\;x^2+y^2+z^2=4,\;z\ge0\)</div>
+                <div class="card-ans">Đáp số: Bài chỉ yêu cầu vẽ</div>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,91 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Bài B2.18</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']]
+      }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; background-color: #f8f9fa; line-height: 1.6; }
+        h1, h2 { color: #2c3e50; }
+        .problem { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 40px; }
+        .code-block { background: #282c34; color: #abb2bf; padding: 15px; border-radius: 5px; overflow-x: auto; font-family: monospace; font-size: 14px; }
+        .plot-container { display: flex; justify-content: center; }
+    </style>
+</head>
+<body>
+    <div class="problem">
+        <h2>Bài B2.18</h2>
+        <p><strong>Đề bài:</strong> Tính \(\iint_D \sqrt{(4a^2-x^2-y^2)^3} dxdy\) với \(D\) là miền nửa hình tròn tâm \(A(a; 0)\), bán kính \(a > 0\) nằm giữa \(y=x\) và trục \(Oy\) trong góc phần tư thứ nhất.</p>
+        <p><strong>Kiểm tra đáp án:</strong> \(\frac{4a^5}{75}(30\pi - 43\sqrt{2})\)</p>
+        
+<p style="text-align:center; color:#e67e22; font-weight:bold; margin-bottom:5px;">&#128208; Hình vẽ cho: Miền \(D\): nửa hình tròn \((x-a)^2+y^2 \le a^2\) giữa \(y=x\) và trục \(Oy\) (vẽ với \(a=1\))</p>
+
+<div style="background:#fff3cd; border-left:5px solid #ffc107; padding:15px; margin:20px 0; border-radius:6px; font-size:14px; color:#555;">
+  <h4 style="color:#b9770e; margin-top:0; margin-bottom:10px;">&#127912; Hướng dẫn chi tiết cách vẽ hình</h4>
+  <ul style="margin:0; padding-left:20px; line-height:1.6;">
+  <li><strong>Phác họa miền D:</strong> Kẻ trục tọa độ Oxy. Dựa vào phương trình biên để kẻ các đường giới hạn.</li>
+  <li><em>💡 Mẹo vẽ 2D bằng tay:</em> Bước quan trọng nhất là lập phương trình hoành độ giao điểm để tìm tọa độ các góc của miền D. Chấm các giao điểm này lên trục trước, rồi dùng thước/tay nối các đường biên lại. Vùng bị khép kín chính là diện tích cần tìm.</li>
+  </ul>
+</div>
+<div class="plot-container"><div style="height:700px; width:700px;">                        <script>window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-4.1.1.min.js" crossorigin="anonymous"></script>                <div id="db186089-bd32-4f66-8844-47be311e0b0d" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("db186089-bd32-4f66-8844-47be311e0b0d")) {                    Plotly.newPlot(                        "db186089-bd32-4f66-8844-47be311e0b0d",                        [{"fill":"toself","name":"Mi\u1ec1n D","x":{"dtype":"f8","bdata":"AAAAAAAAAAABAAAAAADwPyu4hqkGfu8\u002fRjJosxX87j\u002f5\u002fXR9NXruP0BPaWZu+O0\u002f3+Ziy8h27T+DFVcHTfXsP33iiHIDdOw\u002fBF\u002f\u002fYfTy6z\u002fKLvwmKHLrP8dOcg6n8eo\u002fHiN9YHlx6j\u002fc1Ndfp\u002fHpP20IVUk5cuk\u002fiPVWUzfz6D9f6UetqXToP7Q7E3+Y9uc\u002fuL+e6At55z8huUQBDPzmP1ReTtegf+Y\u002fFPBub9ID5j9hbz\u002fEqIjlPwT6usUrDuU\u002fPNa7WGOU5D8DNnlWVxvkP2W6BYwPo+M\u002fE7\u002fOuZMr4z+ndhyT67TiP7\u002ffkr0eP+I\u002fOpuz0DTK4T+Iq2BVNVbhP1YlYMUn4+A\u002fdNngihNx4D\u002f8\u002f\u002f\u002f\u002f\u002f\u002f\u002ffPz\u002fZn9zoH98\u002fRqe\u002fHPBB3j\u002fqT4kOJGbdP2IyRtySjNw\u002ft3N1i0q12z\u002f8qeT7WODaP3b1yubLDdo\u002fa5bm3bA92T8aDp1KFXDYP4DZHW0Gpdc\u002fx9OHW5Hc1j\u002fzThEBwxbWP13wMh2oU9U\u002f117VQk2T1D8E0IHXvtXTP0qClRIJG9M\u002fkjB4\u002fDdj0j+XjNVtV67RP\u002fXM2Q5z\u002fNA\u002fR1txVpZN0D+AXRcTmUPPPyC\u002fwnRB8s0\u002f2\u002f16jzunzD9wf5S4nGLLP6H1wdt5JMo\u002fqja7eefsyD+q+eqm+bvHP4yOIwrEkcY\u002fwKVa21luxT8dPWzizVHEPyrG5HUyPMM\u002f2JnSeZktwj9VzZ5eFCbBP4R67R+0JcA\u002fdx4LhxJZvj\u002f0aYCwR3W8P27F\u002f+kmoLo\u002fFVReb87ZuD9gn46IWyK3P0GBvYfqebU\u002fZuN+x5bgsz8ddQqpelayP\u002fdxiJKv27A\u002fTS7d2pvgrj+1w9pJ2iisP\u002fBg20hHkKk\u002fPcA9rA0Xpz+L+ipDVr2kP8w\u002f9dRHg6I\u002fzg2YHgdpoD8eJLSgbd2cP6u3IRfvKJk\u002fGAgNwc+0lT9y2wKZSIGSPyL6uN8cHY8\u002f4r6w0qO5iT8mRO\u002fxftiEPx9mQb7+eYA\u002f+OUcmtY8eT\u002fU0GWHCIxyP42amU0DxGk\u002fVWu01j5+YD+1+aZKuY5SPyri4\u002f9Of0A\u002fBBRhDJN\u002fID9IXYqFzndDOQ=="},"y":{"dtype":"f8","bdata":"AAAAAAAAAAABAAAAAADwP+45zwb4\u002fu8\u002fCAdALOD77z+ErFqjuPbvP5VLKcGB7+8\u002fZWay\u002fDvm7z9fNPHu59rvPzTGy1KGze8\u002fZ\u002foGBRi+7z\u002fwQjgEnqzvPwU9tXAZme8\u002fGByBjIuD7z8k6Te79WvvP7+X94FZUu8\u002fQvJGh7g27z\u002fhXvqSFBnvPyN\u002fFo5v+e4\u002fBKywgsvX7j9XUM2bKrTuP\u002f0jPCWPju4\u002f8Ulyi\u002ftm7j\u002fFU2Jbcj3uPxstUkL2Ee4\u002fwvGuDYrk7T9csd6qMLXtP5MjECftg+0\u002f2U8Ir8JQ7T8ULO6OtBvtP341FDLG5Ow\u002fUAfAIvur7D\u002fB8u8JV3HsPzKcHq\u002fdNOw\u002fX6EE+JL26z+pTFjoerbrP4tZi6GZdOs\u002fds6GYvMw6z+68GSHjOvqP5FWKYlppOo\u002fXhx3\u002fY5b6j+XQUWWARHqP1cykSHGxOk\u002fmYIPieF26T8l4NrRWCfpP4hAIRwx1ug\u002fOVDPom+D6D+hKDq7GS\u002foP11Sx9Q02ec\u002fhxmTeMaB5z+2ORVJ1CjnP7bnwwFkzuY\u002f2T61dnty5j\u002f\u002fFz+UIBXmP5ZQlV5ZtuU\u002f0odm8StW5T+IWHd\u002fnvTkPx4WPFK3keQ\u002fPhNxyXwt5D\u002f1eLFa9cfjP8y0DJEnYeM\u002fR4WaDBr54j8Dqw2C04\u002fiPyZGRbpaJeI\u002f0Obckba54T8NWLv47UzhP18soPEH3+A\u002fYhOwkQtw4D\u002f\u002f\u002f\u002f\u002f\u002f\u002f\u002f\u002ffPxlNPurYHd8\u002fV7U\u002fdbA53j\u002fxqD5VlVPdP4bJmF6Wa9w\u002fhkDahMKB2z+zEsfZKJbaP+GBYozYqNk\u002fNov05+C52D\u002f6kw1TUcnXP4tTiE4519Y\u002f9wuKdKjj1T9AIYF3ru7UP9cfIiFb+NM\u002fYENjUb4A0z++jXb95wfSP5KAwi7oDdE\u002fm4jZAc8S0D+PWuBKWS3OP+UppLIiM8w\u002fRd6r2ho3yj+brKCAYjnIP4dzC34aOsY\u002f5sQ2xmM5xD\u002fcRA9kXzfCP\u002fSDAnguNMA\u002fJ+y4a+RfvD\u002fcU0fFl1W4PxnJ6KS5SbQ\u002f+4W1zIw8sD98ILAoqFyoP63bfMmkPqA\u002fwvoozyo\u002fkD8HXBQzJqahPA=="},"type":"scatter"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05}}},"xaxis":{"title":{"text":"x"},"zeroline":true,"zerolinecolor":"black","zerolinewidth":2,"showgrid":true,"gridcolor":"lightgray"},"yaxis":{"title":{"text":"y"},"zeroline":true,"zerolinecolor":"black","zerolinewidth":2,"showgrid":true,"gridcolor":"lightgray","scaleanchor":"x","scaleratio":1},"plot_bgcolor":"white","width":700,"height":700,"hovermode":"x unified"},                        {"responsive": true}                    )                };            </script>        </div></div>
+        
+        <h3>Mã Nguồn Tham Khảo (Cho AI khác)</h3>
+        <pre class="code-block"><code></code></pre>
+    
+<div style="background:#eaf4fb; border-left:5px solid #2980b9; padding:20px; margin-top:30px; border-radius:6px;">
+  <h3 style="color:#1a5276;">Lời giải - Bài B2.18</h3>
+  <p><strong>Đề bài đầy đủ:</strong> Tính \(I = \iint_D \sqrt{(4a^2-x^2-y^2)^3} dxdy\)<br>với \(D\) là miền nửa hình tròn tâm \(A(a; 0)\), bán kính \(a > 0\) nằm giữa \(y=x\) và trục \(Oy\) trong góc phần tư thứ nhất.</p>
+  
+  <p><strong>Bước 1: Phân tích miền D và chuyển sang tọa độ cực.</strong><br>
+  Hình tròn tâm \(A(a,0)\) bán kính \(a\) có phương trình \((x-a)^2 + y^2 \le a^2 \iff x^2+y^2 \le 2ax\).<br>
+  Trong tọa độ cực (\(x = r\cos\theta, y = r\sin\theta\)), phương trình này trở thành \(r^2 \le 2ar\cos\theta \implies r \le 2a\cos\theta\).<br>
+  Góc phần tư thứ nhất có \(x \ge 0, y \ge 0\). Nằm giữa \(y=x\) (tương ứng \(\theta = \pi/4\)) và trục \(Oy\) (tương ứng \(x=0 \implies \theta = \pi/2\)).<br>
+  Vậy miền \(D\) trong tọa độ cực là:<br>
+  \(\pi/4 \le \theta \le \pi/2\)<br>
+  \(0 \le r \le 2a\cos\theta\)<br>
+  Định thức Jacobi \(J = r\).</p>
+  
+  <p><strong>Bước 2: Thiết lập tích phân.</strong><br>
+  Hàm dưới dấu tích phân trở thành \(\sqrt{(4a^2-r^2)^3} = (4a^2-r^2)^{3/2}\).<br>
+  \[ I = \int_{\pi/4}^{\pi/2} d\theta \int_0^{2a\cos\theta} (4a^2-r^2)^{3/2} r \,dr \]
+  </p>
+  
+  <p><strong>Bước 3: Tính tích phân theo r.</strong><br>
+  Đặt \(u = 4a^2-r^2 \implies du = -2r dr \implies r dr = -\frac{du}{2}\).<br>
+  Đổi cận:<br>
+  - Khi \(r = 0 \implies u = 4a^2\).<br>
+  - Khi \(r = 2a\cos\theta \implies u = 4a^2 - 4a^2\cos^2\theta = 4a^2\sin^2\theta\).<br>
+  Tích phân lớp trong:
+  \[ I_r = \int_{4a^2}^{4a^2\sin^2\theta} u^{3/2} \left(-\frac{du}{2}\right) = \frac{1}{2} \int_{4a^2\sin^2\theta}^{4a^2} u^{3/2} \,du = \frac{1}{2} \left[ \frac{2}{5} u^{5/2} \right]_{4a^2\sin^2\theta}^{4a^2} \]
+  \[ = \frac{1}{5} \left( (4a^2)^{5/2} - (4a^2\sin^2\theta)^{5/2} \right) = \frac{1}{5} \left( 32a^5 - 32a^5\sin^5\theta \right) = \frac{32a^5}{5} (1 - \sin^5\theta) \]
+  </p>
+  
+  <p><strong>Bước 4: Tính tích phân theo \(\theta\).</strong><br>
+  \[ I = \frac{32a^5}{5} \int_{\pi/4}^{\pi/2} (1 - \sin^5\theta) d\theta \]
+  Ta tách thành 2 tích phân. Phần thứ nhất: \(\int_{\pi/4}^{\pi/2} 1 d\theta = \frac{\pi}{4}\).<br>
+  Phần thứ hai: Tính \(\int_{\pi/4}^{\pi/2} \sin^5\theta d\theta = \int_{\pi/4}^{\pi/2} (1-\cos^2\theta)^2 \sin\theta d\theta\).<br>
+  Đặt \(t = \cos\theta \implies dt = -\sin\theta d\theta\). Cận chạy từ \(t = \frac{\sqrt{2}}{2}\) đến \(t = 0\).<br>
+  \[ \int_{\sqrt{2}/2}^0 (1-t^2)^2 (-dt) = \int_0^{\sqrt{2}/2} (t^4 - 2t^2 + 1) dt = \left[ \frac{t^5}{5} - \frac{2t^3}{3} + t \right]_0^{\sqrt{2}/2} \]
+  Thay \(t = \frac{\sqrt{2}}{2}\) vào, chú ý \((\frac{\sqrt{2}}{2})^3 = \frac{\sqrt{2}}{4}\) và \((\frac{\sqrt{2}}{2})^5 = \frac{\sqrt{2}}{8}\):<br>
+  \[ = \frac{\sqrt{2}}{40} - \frac{2\sqrt{2}}{12} + \frac{\sqrt{2}}{2} = \sqrt{2} \left( \frac{3}{120} - \frac{20}{120} + \frac{60}{120} \right) = \frac{43\sqrt{2}}{120} \]
+  Ghép lại ta được:
+  \[ I = \frac{32a^5}{5} \left( \frac{\pi}{4} - \frac{43\sqrt{2}}{120} \right) = \frac{8\pi a^5}{5} - \frac{1376\sqrt{2} a^5}{600} = \frac{8\pi a^5}{5} - \frac{172\sqrt{2} a^5}{75} \]
+  Quy đồng mẫu số 75:
+  \[ I = \frac{120\pi a^5 - 172\sqrt{2} a^5}{75} = \frac{4a^5}{75}(30\pi - 43\sqrt{2}) \]
+  </p>
+  
+  <p style="color:#1a5276; font-weight:bold;">\(\boxed{I = \frac{4a^5}{75}(30\pi - 43\sqrt{2})}\) ✓ Khớp hoàn toàn với đáp án!</p>
+</div></div>
+</body>
+</html>
