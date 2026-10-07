@@ -52,6 +52,26 @@
     <li>\(r^2 \le z \le 8 - r^2\) (đi từ mặt paraboloid dưới \(z = r^2\) lên mặt paraboloid trên \(z = 8 - r^2\))</li>
   </ul>
 
+  
+  <div style="background:#eef9ff; border-left:4px solid #0284c7; padding:12px 16px; margin:12px 0; border-radius:4px;">
+    <strong>🔎 Giải thích chi tiết về chiều cao \(z\):</strong>
+    <ul>
+      <li><strong>Bước 1 (Chuyển phương trình 2 mặt sang \(r\)):</strong> Thay \(x^2+y^2 = r^2\) vào hai mặt paraboloid:
+        <ul>
+          <li>Mặt thứ nhất: \(z = x^2+y^2 \implies z = r^2\).</li>
+          <li>Mặt thứ hai: \(z = 8 - x^2 - y^2 = 8 - (x^2+y^2) \implies z = 8 - r^2\).</li>
+        </ul>
+      </li>
+      <li><strong>Bước 2 (Làm sao biết mặt nào là cận dưới, mặt nào là cận trên?):</strong> Ta lấy thử điểm tâm \(O\) (\(r = 0\)) thuộc miền trong giao tuyến (\(0 \le r \le 2\)):
+        <ul>
+          <li>Tại \(r = 0\): mặt \(z = r^2\) có độ cao \(z = 0\), còn mặt \(z = 8 - r^2\) có độ cao \(z = 8\).</li>
+          <li>Vì \(0 < 8\), nên trên toàn bộ miền \(0 \le r \le 2\), mặt \(z = r^2\) nằm bên dưới (làm đáy) và mặt \(z = 8 - r^2\) nằm bên trên (làm nắp).</li>
+        </ul>
+        Tại đúng biên giao tuyến \(r = 2\), hai mặt chạm nhau ở cùng độ cao \(z = 2^2 = 8 - 2^2 = 4\). Vậy <strong>\(r^2 \le z \le 8 - r^2\)</strong>.
+      </li>
+    </ul>
+  </div>
+
   <h4>Bước 3: Thiết lập công thức thể tích và tính tích phân theo \(z\)</h4>
   \[ V = \iiint_\Omega dxdydz = \int_0^{2\pi} d\varphi \int_0^2 r\,dr \int_{r^2}^{8-r^2} dz \]
   <p>Lớp trong cùng theo \(z\):</p>

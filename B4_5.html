@@ -49,6 +49,21 @@
     <li>Biểu thức dưới dấu tích phân: \((x^2+y^2)\,dxdydz = r^2 \cdot r\,dz\,dr\,d\varphi = r^3\,dz\,dr\,d\varphi\).</li>
   </ul>
 
+  
+  <div style="background:#eef9ff; border-left:4px solid #0284c7; padding:12px 16px; margin:12px 0; border-radius:4px;">
+    <strong>🔎 Giải thích chi tiết về chiều cao \(z\):</strong>
+    <ul>
+      <li><strong>Bước 1 (Đổi phương trình mặt nắp theo \(r\)):</strong> Mặt paraboloid \(z = 5 - x^2 - y^2 = 5 - (x^2+y^2)\). Thay \(x^2+y^2 = r^2\) ta được \(z = 5 - r^2\).</li>
+      <li><strong>Bước 2 (Kiểm tra độ cao trên miền \(0 \le r \le 1\)):</strong>
+        <ul>
+          <li>Tại tâm \(r = 0\): đỉnh vòm cao \(z = 5 - 0 = 5\).</li>
+          <li>Tại thành trụ \(r = 1\): mép vòm hạ xuống độ cao \(z = 5 - 1^2 = 4\).</li>
+        </ul>
+        Như vậy trên toàn bộ hình tròn \(r \in [0,1]\), độ cao của paraboloid luôn dương (\(4 \le z \le 5\)), nằm hoàn toàn phía trên mặt sàn \(z = 0\). Do đó tia thẳng đứng đi từ sàn <strong>\(z_{\text{dưới}} = 0\)</strong> lên tới vòm <strong>\(z_{\text{trên}} = 5 - r^2\)</strong>.
+      </li>
+    </ul>
+  </div>
+
   <h4>Bước 3: Tính tích phân từng lớp</h4>
   \[ I = \int_0^{2\pi} d\varphi \int_0^1 r^3\,dr \int_0^{5-r^2} dz \]
   <ul>

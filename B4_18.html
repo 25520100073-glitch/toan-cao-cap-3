@@ -48,7 +48,18 @@
   \[ V = 2\pi \int_4^3 \sqrt{u}\,(-du) = 2\pi \int_3^4 u^{1/2}\,du = 2\pi \left[ \frac{2}{3}u^{3/2} \right]_3^4 \]
   <p>Ta có \(4^{3/2} = (\sqrt{4})^3 = 2^3 = 8\) và \(3^{3/2} = 3\sqrt{3}\):</p>
   \[ V = \frac{4\pi}{3} \left( 8 - 3\sqrt{3} \right) = \frac{32\pi}{3} - 4\pi\sqrt{3} \]
-  <p style="color:#27ae60; font-weight:bold;">\(\boxed{V = \dfrac{32\pi}{3} - 4\pi\sqrt{3}}\) ✓ Khớp hoàn toàn với đáp án đề bài!</p>
+  
+  <div style="background:#eef9ff; border-left:4px solid #0284c7; padding:12px 16px; margin:12px 0; border-radius:4px;">
+    <strong>🔎 Giải thích chi tiết về chiều cao \(z\):</strong>
+    <ul>
+      <li>Đề bài KHÔNG giới hạn \(z \ge 0\), nghĩa là vật thể lấy cả phần phía trên (\(z > 0\)) lẫn phần phía dưới (\(z < 0\)) mặt phẳng \(Oxy\).</li>
+      <li>Điểm \((x,y,z)\) nằm bên trong mặt cầu \(x^2+y^2+z^2 \le 4\). Thay \(x^2+y^2 = r^2\) vào ta được:
+        \[ r^2 + z^2 \le 4 \iff z^2 \le 4 - r^2 \iff \mathbf{-\sqrt{4 - r^2} \le z \le \sqrt{4 - r^2}} \]
+      </li>
+      <li>Như vậy: <strong>cận dưới</strong> là vòm cầu phía Nam \(z_{\text{dưới}} = -\sqrt{4-r^2}\) và <strong>cận trên</strong> là vòm cầu phía Bắc \(z_{\text{trên}} = +\sqrt{4-r^2}\). Khi lấy cận trên trừ cận dưới: \(\sqrt{4-r^2} - (-\sqrt{4-r^2}) = 2\sqrt{4-r^2}\).</li>
+    </ul>
+  </div>
+<p style="color:#27ae60; font-weight:bold;">\(\boxed{V = \dfrac{32\pi}{3} - 4\pi\sqrt{3}}\) ✓ Khớp hoàn toàn với đáp án đề bài!</p>
 </div>
         <div class="answer-box">&#10003; Kết quả: \(\dfrac{32\pi}{3} - 4\pi\sqrt{3}\)</div>
         <div class="check">Kết quả tính toán: \(\dfrac{32\pi}{3} - 4\pi\sqrt{3}\). Khớp đáp án đề ✓</div>

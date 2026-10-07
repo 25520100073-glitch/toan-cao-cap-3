@@ -51,6 +51,26 @@
     <li>\(r^2 \le z \le \sqrt{2 - r^2}\) (đi từ sàn paraboloid \(z = r^2\) lên vòm cầu \(z = \sqrt{2-r^2}\)).</li>
   </ul>
 
+  
+  <div style="background:#eef9ff; border-left:4px solid #0284c7; padding:12px 16px; margin:12px 0; border-radius:4px;">
+    <strong>🔎 Giải thích chi tiết về chiều cao \(z\):</strong>
+    <ul>
+      <li><strong>Bước 1 (Rút \(z\) từ phương trình mặt cầu và paraboloid):</strong>
+        <ul>
+          <li>Từ mặt paraboloid: \(z = x^2+y^2 = r^2\).</li>
+          <li>Từ mặt cầu: \(x^2+y^2+z^2 = 2 \iff r^2 + z^2 = 2 \iff z^2 = 2 - r^2\). Vì đề bài cho vật thể nằm trong phần \(z \ge 0\), ta lấy căn bậc hai dương: <strong>\(z = \sqrt{2 - r^2}\)</strong>.</li>
+        </ul>
+      </li>
+      <li><strong>Bước 2 (Xác định cận dưới và cận trên của \(z\)):</strong> Thử tại tâm \(r = 0\) (trong miền \(0 \le r \le 1\)):
+        <ul>
+          <li>Mặt paraboloid có \(z = 0^2 = 0\) (nằm dưới \(\implies\) <strong>cận dưới \(z = r^2\)</strong>).</li>
+          <li>Mặt cầu có \(z = \sqrt{2 - 0} = \sqrt{2} \approx 1{,}414\) (nằm trên \(\implies\) <strong>cận trên \(z = \sqrt{2-r^2}\)</strong>).</li>
+        </ul>
+        Hai mặt cắt nhau tại độ cao \(z = 1\) khi \(r = 1\). Vậy <strong>\(r^2 \le z \le \sqrt{2 - r^2}\)</strong>.
+      </li>
+    </ul>
+  </div>
+
   <h4>Bước 3: Thiết lập và tính tích phân thể tích</h4>
   \[ V = \iiint_\Omega dxdydz = \int_0^{2\pi} d\varphi \int_0^1 r\,dr \int_{r^2}^{\sqrt{2-r^2}} dz = 2\pi \int_0^1 r\left( \sqrt{2-r^2} - r^2 \right) dr \]
   <p>Tách thành hai nguyên hàm cơ bản:</p>

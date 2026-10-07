@@ -49,6 +49,16 @@
   \[ \int_0^{4-r^2} \Big( r(\cos\varphi + \sin\varphi) + z \Big) dz = \left[ r(\cos\varphi + \sin\varphi)z + \frac{z^2}{2} \right]_{z=0}^{z=4-r^2} \]
   \[ = r(\cos\varphi + \sin\varphi)(4 - r^2) + \frac{(4 - r^2)^2}{2} \]
 
+  
+  <div style="background:#eef9ff; border-left:4px solid #0284c7; padding:12px 16px; margin:12px 0; border-radius:4px;">
+    <strong>🔎 Giải thích chi tiết về chiều cao \(z\):</strong>
+    <ul>
+      <li><strong>Cận dưới của \(z\):</strong> Vật thể nằm trong "góc phần tám thứ nhất" (\(x \ge 0, y \ge 0, z \ge 0\)), nghĩa là mặt sàn dưới cùng chính là mặt phẳng \(Oxy\) có phương trình <strong>\(z = 0\)</strong>.</li>
+      <li><strong>Cận trên của \(z\):</strong> Vật thể nằm "bên dưới mặt paraboloid \(z = 4 - x^2 - y^2\)". Khi đổi sang tọa độ trụ, ta nhóm \(x^2+y^2 = r^2\) nên phương trình mái vòm trở thành <strong>\(z = 4 - r^2\)</strong>.</li>
+      <li>Do đó, tia thẳng đứng bắn từ sàn lên mái sẽ đi từ <strong>\(z = 0\)</strong> đến <strong>\(z = 4 - r^2\)</strong> (khi \(z=0 \implies 4-r^2=0 \implies r=2\) chính là bán kính giao tuyến ở đáy).</li>
+    </ul>
+  </div>
+
   <h4>Bước 3: Nhân thêm \(r\) (Jacobi) và tách thành 2 tích phân \(I_1 + I_2\)</h4>
   \[ I = \underbrace{\int_0^{\pi/2} (\cos\varphi + \sin\varphi)\,d\varphi \int_0^2 r^2(4 - r^2)\,dr}_{I_1} + \underbrace{\int_0^{\pi/2} d\varphi \int_0^2 \frac{r(4 - r^2)^2}{2}\,dr}_{I_2} \]
   <ul>

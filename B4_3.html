@@ -51,6 +51,20 @@
     <li>Hàm dưới dấu tích phân: \(x^2 = (r\cos\varphi)^2 = r^2\cos^2\varphi\).</li>
   </ul>
 
+  
+  <div style="background:#eef9ff; border-left:4px solid #0284c7; padding:12px 16px; margin:12px 0; border-radius:4px;">
+    <strong>🔎 Giải thích chi tiết về chiều cao \(z\):</strong>
+    <ul>
+      <li><strong>Bước 1 (Đổi mặt biên sang biến \(r\)):</strong>
+        <ul>
+          <li>Mặt phẳng đáy dưới: \(z = 0\) (mặt phẳng \(Oxy\)).</li>
+          <li>Mặt paraboloid phía trên: \(z = 1 + x^2 + y^2 = 1 + (x^2+y^2)\). Thay \(x^2+y^2 = r^2\) vào ta được <strong>\(z = 1 + r^2\)</strong>.</li>
+        </ul>
+      </li>
+      <li><strong>Bước 2 (So sánh độ cao để đặt cận):</strong> Vì \(r^2 \ge 0\) nên \(1 + r^2 \ge 1 > 0\) với mọi điểm. Tại tâm (\(r=0\)), mái cao \(z=1\); càng ra sát thành trụ (\(r=1\)), mái cong vểnh lên tới độ cao \(z = 1 + 1^2 = 2\). Do đó tia thẳng đứng luôn đi từ sàn phẳng \(z_{\text{dưới}} = 0\) lên tới mái paraboloid \(z_{\text{trên}} = 1 + r^2\). Vậy <strong>\(0 \le z \le 1 + r^2\)</strong>.</li>
+    </ul>
+  </div>
+
   <h4>Bước 3: Thiết lập và tính tích phân lớp trong theo \(z\)</h4>
   \[ I = \int_0^{2\pi} d\varphi \int_0^1 dr \int_0^{1+r^2} (r^2\cos^2\varphi) \cdot r\,dz = \int_0^{2\pi} \cos^2\varphi\,d\varphi \int_0^1 r^3 \left( \int_0^{1+r^2} dz \right) dr \]
   <p>Tính tích phân theo \(z\): \(\displaystyle \int_0^{1+r^2} dz = \Big[ z \Big]_0^{1+r^2} = 1 + r^2\). Suy ra:</p>

@@ -45,6 +45,16 @@
   \[ I = \int_0^{2\pi} d\varphi \int_1^4 r^2(\cos\varphi - \sin\varphi)\,dr \int_0^{r\sin\varphi+4} dz \]
   \[ = \int_0^{2\pi} d\varphi \int_1^4 r^2(\cos\varphi - \sin\varphi)(r\sin\varphi + 4)\,dr \]
 
+  
+  <div style="background:#eef9ff; border-left:4px solid #0284c7; padding:12px 16px; margin:12px 0; border-radius:4px;">
+    <strong>🔎 Giải thích chi tiết về chiều cao \(z\):</strong>
+    <ul>
+      <li><strong>Cận dưới của \(z\):</strong> Đề bài ghi "bên trên mặt phẳng \(Oxy\)", mà mặt phẳng \(Oxy\) có phương trình \(z = 0 \implies\) <strong>\(z_{\text{dưới}} = 0\)</strong>.</li>
+      <li><strong>Cận trên của \(z\):</strong> Đề bài ghi "bên dưới mặt phẳng \(z = y + 4\)". Trong tọa độ trụ, ta thay \(y = r\sin\varphi\) vào phương trình mặt phẳng này, lập tức thu được <strong>\(z_{\text{trên}} = r\sin\varphi + 4\)</strong>.</li>
+      <li><strong>Kiểm tra xem mặt phẳng nghiêng có cắt xuống dưới sàn \(z=0\) không:</strong> Vì \(1 \le r \le 4\) và \(-1 \le \sin\varphi \le 1\), nên \(y = r\sin\varphi \ge -4 \implies z = r\sin\varphi + 4 \ge 0\) trên toàn miền! Tức là mặt phẳng nghiêng luôn nằm phía trên mặt phẳng \(Oxy\) (chỉ vừa chạm đất tại điểm \((0,-4,0)\)). Vậy <strong>\(0 \le z \le r\sin\varphi + 4\)</strong>.</li>
+    </ul>
+  </div>
+
   <h4>Bước 3: Khai triển và sử dụng tính chất tích phân lượng giác trên \([0, 2\pi]\)</h4>
   <p>Khai triển biểu thức dưới dấu tích phân:</p>
   \[ r^2(\cos\varphi - \sin\varphi)(r\sin\varphi + 4) = r^3\sin\varphi\cos\varphi + 4r^2\cos\varphi - 4r^2\sin\varphi - r^3\sin^2\varphi \]

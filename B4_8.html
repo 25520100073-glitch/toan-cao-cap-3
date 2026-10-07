@@ -47,6 +47,15 @@
   \[ xyz\,dxdydz = (\rho\sin\theta\cos\varphi)(\rho\sin\theta\sin\varphi)(\rho\cos\theta) \cdot \rho^2\sin\theta\,d\rho\,d\theta\,d\varphi \]
   \[ = \rho^5 \cdot (\sin^3\theta\cos\theta) \cdot (\sin\varphi\cos\varphi)\,d\rho\,d\theta\,d\varphi \]
 
+  
+  <div style="background:#eef9ff; border-left:4px solid #0284c7; padding:12px 16px; margin:12px 0; border-radius:4px;">
+    <strong>🔎 Giải thích chi tiết về chiều cao \(z\) trong bài toán:</strong>
+    <ul>
+      <li>Trong tọa độ cầu, chiều cao \(z\) được thay bằng <strong>\(z = \rho\cos\theta\)</strong>.</li>
+      <li>Điều kiện \(z \ge 0\) (thuộc góc phần tám thứ nhất) tương đương \(\rho\cos\theta \ge 0 \iff \cos\theta \ge 0 \iff \mathbf{0 \le \theta \le \frac{\pi}{2}}\) (chỉ lấy từ trục \(Oz\) dương tại \(\theta=0\) xuống tới mặt sàn \(z=0\) tại \(\theta=\frac{\pi}{2}\)).</li>
+    </ul>
+  </div>
+
   <h4>Bước 3: Tách tích phân và tính từng biến</h4>
   \[ I = \left( \int_0^{\pi/2} \sin\varphi\cos\varphi\,d\varphi \right) \cdot \left( \int_0^{\pi/2} \sin^3\theta\cos\theta\,d\theta \right) \cdot \left( \int_0^{\sqrt{2}} \rho^5\,d\rho \right) \]
   <ul>

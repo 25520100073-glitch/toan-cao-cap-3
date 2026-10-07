@@ -50,6 +50,22 @@
   <p>Thay \(z^2 = (\rho\cos\theta)^2 = \rho^2\cos^2\theta\) và \(|J| = \rho^2\sin\theta\):</p>
   \[ I = \int_0^{2\pi} d\varphi \int_{\pi/4}^\pi \cos^2\theta\sin\theta\,d\theta \int_0^2 \rho^4\,d\rho \]
 
+  
+  <div style="background:#eef9ff; border-left:4px solid #0284c7; padding:12px 16px; margin:12px 0; border-radius:4px;">
+    <strong>🔎 Giải thích chi tiết về chiều cao \(z\) và cách đổi phương trình mặt nón sang góc \(\theta\):</strong>
+    <ul>
+      <li><strong>Chuyển phương trình chiều cao mặt nón \(z = \sqrt{x^2+y^2}\):</strong> Thay \(z = \rho\cos\theta\) và \(\sqrt{x^2+y^2} = \rho\sin\theta\) vào:
+        \[ \rho\cos\theta = \rho\sin\theta \iff \tan\theta = 1 \iff \theta = \frac{\pi}{4} \text{ (tức góc } 45^\circ\text{)} \]
+      </li>
+      <li><strong>Tại sao cận \(\theta\) lại từ \(\frac{\pi}{4}\) đến \(\pi\)?</strong>
+        <ul>
+          <li>Từ trục \(Oz\) dương (\(\theta = 0\)) mở ra tới mặt nón (\(\theta = \frac{\pi}{4}\)) là phần phễu hẹp phía trên (thể tích nhỏ).</li>
+          <li>Từ mặt nón (\(\theta = \frac{\pi}{4}\)) mở rộng qua mặt phẳng ngang \(z=0\) (\(\theta = \frac{\pi}{2}\)) xuống tận đáy cầu âm \(z = -2\) (\(\theta = \pi\)) là <strong>miền có thể tích lớn hơn</strong> mà đề bài yêu cầu.</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
   <h4>Bước 3: Tính từng tích phân đơn</h4>
   <ul>
     <li><strong>Theo \(\varphi\):</strong> \(\displaystyle \int_0^{2\pi} d\varphi = 2\pi\).</li>

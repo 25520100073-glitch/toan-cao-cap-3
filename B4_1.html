@@ -56,6 +56,44 @@
     <li><strong>Chiều cao \(z\):</strong> Với mỗi điểm \((r,\varphi)\) cố định, tia thẳng đứng đi từ vỏ mặt nón \(z = \sqrt{x^2+y^2} = r\) lên đến nắp phẳng \(z = 1\): \(r \le z \le 1\).</li>
   </ul>
 
+  
+  <div style="background:#eef9ff; border-left:4px solid #0284c7; padding:14px 18px; margin:14px 0; border-radius:6px;">
+    <strong>🔎 Giải thích thật kỹ về chiều cao \(z\) trong Bài B4.1 (Tại sao \(r \le z \le 1\) mà không phải \(0 \le z \le 1\)?):</strong>
+    <p>Trong bài B4.1, biến chiều cao \(z\) xuất hiện ở <strong>2 vai trò</strong> rất quan trọng:</p>
+    <ol>
+      <li><strong>Vai trò 1 – Cận của chiều cao \(z\) (\(r \le z \le 1\)):</strong>
+        <ul>
+          <li><strong>Sai lầm hay gặp:</strong> Thấy đỉnh nón chạm gốc \(O(0,0,0)\) và nắp phẳng ở \(z=1\) nên nhầm tưởng \(z\) chạy từ \(0\) đến \(1\). Thực tế, chỉ tại đúng tâm \(O\) (\(r=0\)) thì độ cao mới bắt đầu từ \(0\)!</li>
+          <li><strong>Hình dung bằng "tia thẳng đứng":</strong> Vật thể \(\Omega\) có hình dạng giống như một <strong>chiếc phễu kem ốc quế</strong> có vỏ nghiêng là mặt nón \(z = \sqrt{x^2+y^2} = r\) và nắp đậy phẳng ở trên là \(z = 1\).<br>
+          Khi bạn đứng ở vị trí cách trục \(Oz\) một khoảng bán kính \(r\) và nhìn thẳng từ dưới đất lên:
+            <ul>
+              <li>Từ độ cao \(0\) đến \(r\): Bạn đang ở <em>bên ngoài</em> vỏ phễu (phần không khí trống phía dưới mặt nón, không thuộc vật thể \(\Omega\)).</li>
+              <li>Đúng tại độ cao <strong>\(z = r\)</strong>: Tia thẳng đứng bắt đầu <strong>đâm xuyên qua vỏ mặt nón để đi vào bên trong lòng phễu</strong> \(\implies\) Mặt nón đóng vai trò là "sàn nghiêng" nên <strong>cận dưới là \(z_{\text{dưới}} = r\)</strong>.</li>
+              <li>Đúng tại độ cao <strong>\(z = 1\)</strong>: Tia chạm vào nắp phẳng ngang và thoát ra khỏi phễu \(\implies\) Mặt phẳng \(z=1\) là "mái" nên <strong>cận trên là \(z_{\text{trên}} = 1\)</strong>.</li>
+            </ul>
+          </li>
+          <li><strong>Ví dụ con số cụ thể để dễ thấy:</strong>
+            <ul>
+              <li>Tại tâm (\(r = 0\)): vỏ nón ở \(z = 0\), nắp ở \(z = 1 \implies 0 \le z \le 1\) (cột dài nhất).</li>
+              <li>Tại lưng chừng (\(r = 0{,}5\)): vỏ nón đã cao lên \(z = 0{,}5\), nắp ở \(z = 1 \implies 0{,}5 \le z \le 1\).</li>
+              <li>Tại sát mép ngoài (\(r = 1\)): vỏ nón chạm khít nắp ở \(z = 1 \implies 1 \le z \le 1\) (cột thu về 1 điểm).</li>
+            </ul>
+            Vì vậy, với bán kính \(r\) bất kỳ trong khoảng \([0,1]\), chiều cao \(z\) luôn bị kẹp giữa: <strong>\(r \le z \le 1\)</strong>.
+          </li>
+        </ul>
+      </li>
+      <li><strong>Vai trò 2 – Chữ \(z\) trong hàm dưới dấu tích phân \(\iiint_\Omega z\,dxdydz\):</strong>
+        <ul>
+          <li>Trong tọa độ trụ, tọa độ \(z\) giữ nguyên (\(z = z\)), còn \(dxdydz = r\,dr\,d\varphi\,dz\).</li>
+          <li>Khi tính tích phân lớp trong cùng theo \(dz\), chữ \(r\) được coi là hằng số nên đẩy ra ngoài, chỉ lấy nguyên hàm của \(z\) theo \(dz\):
+            \[\int_{z=r}^{z=1} z\,dz = \left[\frac{z^2}{2}\right]_{z=r}^{z=1} = \frac{1^2}{2} - \frac{r^2}{2} = \frac{1 - r^2}{2}\]
+          </li>
+          <li>Sau bước thế cận \(z=1\) và \(z=r\) này, biến \(z\) đã được chuyển hóa hoàn toàn sang biến \(r\), nhân tiếp với \(r\) (của định thức Jacobi) thành \(r \cdot \frac{1-r^2}{2} = \frac{r - r^3}{2}\) để tính tích phân theo \(r\)!</li>
+        </ul>
+      </li>
+    </ol>
+  </div>
+
   <h4>Bước 3: Thiết lập tích phân lặp và tính lớp trong cùng (theo \(z\))</h4>
   \[ I = \iiint_\Omega z\,dxdydz = \int_0^{2\pi} d\varphi \int_0^1 r\,dr \int_r^1 z\,dz \]
   <p>Tính tích phân lớp trong cùng theo biến \(z\) (nguyên hàm của \(z\) là \(\frac{z^2}{2}\)):</p>

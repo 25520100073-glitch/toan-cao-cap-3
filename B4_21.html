@@ -50,7 +50,20 @@
 
   <p><strong>Cách 2 (Nhận xét nhanh bằng tính đối xứng):</strong><br>
   Miền \(\Omega\) đối xứng hoàn toàn qua mặt phẳng \(x = 0\) (vì \(x \in [-\sqrt{4-y^2}, \sqrt{4-y^2}]\)), trong khi hàm dưới dấu tích phân \(f(x,y,z) = xz\) là <strong>hàm lẻ theo biến \(x\)</strong> (\(f(-x,y,z) = -f(x,y,z)\)). Do đó tích phân trên toàn miền bằng \(0\).</p>
-  <p style="color:#27ae60; font-weight:bold;">\(\boxed{I = 0}\) ✓ Khớp hoàn toàn với đáp án đề bài!</p>
+  
+  <div style="background:#eef9ff; border-left:4px solid #0284c7; padding:12px 16px; margin:12px 0; border-radius:4px;">
+    <strong>🔎 Giải thích chi tiết về chiều cao \(z\):</strong>
+    <ul>
+      <li>Nhìn vào dấu tích phân trong cùng \(\int_{\sqrt{x^2+y^2}}^2 xz\,dz\):
+        <ul>
+          <li><strong>Cận dưới của \(z\):</strong> \(z = \sqrt{x^2+y^2}\). Thay \(x^2+y^2 = r^2\) ta được <strong>\(z_{\text{dưới}} = \sqrt{r^2} = r\)</strong> (mặt nón).</li>
+          <li><strong>Cận trên của \(z\):</strong> <strong>\(z_{\text{trên}} = 2\)</strong> (mặt phẳng nằm ngang ở độ cao \(z = 2\)).</li>
+        </ul>
+      </li>
+      <li>Hai mặt này cắt nhau khi \(r = 2\), khớp hoàn toàn với hình tròn chiếu \(x^2+y^2 \le 4\) (\(0 \le r \le 2\)) của hai dấu tích phân bên ngoài!</li>
+    </ul>
+  </div>
+<p style="color:#27ae60; font-weight:bold;">\(\boxed{I = 0}\) ✓ Khớp hoàn toàn với đáp án đề bài!</p>
 </div>
         <div class="answer-box">&#10003; Kết quả: \(0\)</div>
         <div class="check">Kết quả tính toán: \(0\). Khớp đáp án đề: <strong>0</strong> ✓</div>

@@ -50,6 +50,20 @@
     <li>Nhân thêm \(|J| = r\): \(r^3 \cdot r = r^4\).</li>
   </ul>
 
+  
+  <div style="background:#eef9ff; border-left:4px solid #0284c7; padding:12px 16px; margin:12px 0; border-radius:4px;">
+    <strong>🔎 Giải thích chi tiết về chiều cao \(z\):</strong>
+    <ul>
+      <li>Trong tích phân lặp \(\int_{-1}^1 dx \int_{-\sqrt{1-x^2}}^{\sqrt{1-x^2}} dy \int_{x^2+y^2}^{2-x^2-y^2} (x^2+y^2)^{3/2}\,dz\), tích phân trong cùng tính theo \(dz\) có:
+        <ul>
+          <li><strong>Cận dưới của \(z\):</strong> \(z = x^2 + y^2\). Thay \(x^2+y^2 = r^2\) ta được <strong>\(z_{\text{dưới}} = r^2\)</strong> (mặt paraboloid ngửa).</li>
+          <li><strong>Cận trên của \(z\):</strong> \(z = 2 - x^2 - y^2 = 2 - (x^2+y^2)\). Thay \(x^2+y^2 = r^2\) ta được <strong>\(z_{\text{trên}} = 2 - r^2\)</strong> (mặt paraboloid úp).</li>
+        </ul>
+      </li>
+      <li>Do đó trong tọa độ trụ, cận của chiều cao \(z\) là <strong>\(r^2 \le z \le 2 - r^2\)</strong>.</li>
+    </ul>
+  </div>
+
   <h4>Bước 3: Tính tích phân</h4>
   \[ I = \int_0^{2\pi} d\varphi \int_0^1 r^4\,dr \int_{r^2}^{2-r^2} dz = 2\pi \int_0^1 r^4(2 - 2r^2)\,dr \]
   \[ = 4\pi \int_0^1 (r^4 - r^6)\,dr = 4\pi \left[ \frac{r^5}{5} - \frac{r^7}{7} \right]_0^1 = 4\pi \left( \frac{1}{5} - \frac{1}{7} \right) = 4\pi \cdot \frac{2}{35} = \frac{8\pi}{35} \]

@@ -45,6 +45,16 @@
   <p>Nguyên hàm của \(e^z\) theo \(z\) chính là \(e^z\):</p>
   \[ \int_0^{1+r^2} e^z\,dz = \Big[ e^z \Big]_{z=0}^{z=1+r^2} = e^{1+r^2} - e^0 = e^{1+r^2} - 1 \]
 
+  
+  <div style="background:#eef9ff; border-left:4px solid #0284c7; padding:12px 16px; margin:12px 0; border-radius:4px;">
+    <strong>🔎 Giải thích chi tiết về chiều cao \(z\):</strong>
+    <ul>
+      <li><strong>Cận dưới của \(z\):</strong> Giới hạn bởi mặt phẳng \(Oxy\) tức là mặt sàn <strong>\(z = 0\)</strong>.</li>
+      <li><strong>Cận trên của \(z\):</strong> Giới hạn bởi mặt paraboloid \(z = 1 + x^2 + y^2\). Thay \(x^2+y^2 = r^2\) trong tọa độ trụ, ta được <strong>\(z = 1 + r^2\)</strong>.</li>
+      <li>Vì \(1 + r^2 \ge 1 > 0\) nên mặt paraboloid luôn nằm hoàn toàn phía trên mặt phẳng \(z = 0\). Vậy chiều cao \(z\) chạy từ \(0\) đến \(1 + r^2\).</li>
+    </ul>
+  </div>
+
   <h4>Bước 3: Tính tích phân theo \(r\) và \(\varphi\)</h4>
   \[ I = 2\pi \int_0^{\sqrt{5}} r\left( e^{1+r^2} - 1 \right) dr \]
   <p>Đặt \(u = r^2 \implies du = 2r\,dr \implies r\,dr = \frac{1}{2}du\).<br>
