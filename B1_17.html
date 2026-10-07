@@ -20,7 +20,58 @@
         .problem { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 40px; }
         .code-block { background: #282c34; color: #abb2bf; padding: 15px; border-radius: 5px; overflow-x: auto; font-family: monospace; font-size: 14px; }
         .plot-container { display: flex; justify-content: center; }
-    </style>
+    
+        /* Nút Ẩn / Hiện Lời Giải Chi Tiết */
+        .solution-toggle-wrapper {
+            margin: 28px 0 16px 0;
+        }
+        .solution-toggle-btn {
+            width: 100%;
+            background: #f8fafc;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 13px 20px;
+            font-size: 15px;
+            font-weight: 700;
+            color: #0284c7;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            font-family: inherit;
+        }
+        .solution-toggle-btn:hover {
+            background: #f0f9ff;
+            border-color: #38bdf8;
+            color: #0369a1;
+        }
+        .solution-toggle-btn.is-open {
+            background: #e0f2fe;
+            border-color: #0284c7;
+            color: #0369a1;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+        .solution-collapsible-content {
+            display: none;
+            border: 1.5px solid #0284c7;
+            border-top: none;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+            padding: 20px 22px;
+            background: #ffffff;
+        }
+        .solution-collapsible-content.is-open {
+            display: block;
+            animation: fadeInSol 0.25s ease-in-out;
+        }
+        @keyframes fadeInSol {
+            from { opacity: 0; transform: translateY(-4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+</style>
 </head>
 <body>
     <div class="problem">
@@ -35,27 +86,153 @@
         <h3>Mã Nguồn Tham Khảo (Cho AI khác)</h3>
         <pre class="code-block"><code>ans = sp.integrate(x**4*y**4, (y, x**2, sp.sqrt(-x)), (x, -1, 0))</code></pre>
     
-<div style="background:#eaf4fb; border-left:5px solid #2980b9; padding:20px; margin-top:30px; border-radius:6px;">
-  <h3 style="color:#1a5276;">Lời giải – Bài B1.17</h3>
-  <p><strong>Đề bài:</strong> Tính \(\iint_D x^4 y^4\,dxdy\), D giới hạn bởi \(x=-y^2\) và \(y=x^2\).</p>
+<div class="solution-toggle-wrapper">
+  <button type="button" class="solution-toggle-btn" onclick="toggleSolutionBox(this)">
+    <span><span class="sol-icon">📖</span> <span class="sol-text">Xem lời giải chi tiết (Bấm để mở)</span></span>
+    <span class="sol-arrow">▼</span>
+  </button>
+  <div class="solution-collapsible-content">
+<div style="background:#eaf4fb; border-left:5px solid #2980b9; padding:20px; margin-top:30px; border-radius:6px; line-height: 1.8;">
+  <h3 style="color:#1a5276;">Lời giải chi tiết – Bài B1.17</h3>
+  
+  <p><strong>Đề bài yêu cầu:</strong> Tính tích phân kép (ký hiệu là \(\iint_D\)) của hàm số \(f(x, y) = x^4 y^4\) trên miền D. Miền D được giới hạn bởi hai đường cong: parabol thứ nhất có phương trình \(x = -y^2\) và parabol thứ hai có phương trình \(y = x^2\).</p>
+  
+  <div style="background:#e0f7fa; padding:10px; border-radius:5px; margin-bottom:15px;">
+    <strong>💡 Ký hiệu \(\iint_D\) có ý nghĩa gì?</strong><br>
+    Đó là "tích phân kép", hiểu đơn giản là ta sẽ tính tổng (hay gom lại) giá trị của hàm số \(x^4 y^4\) trên toàn bộ bề mặt của miền hình học D. Để làm được điều này, ta cần chia việc tính toán thành hai bước: tính theo biến \(x\) trước, rồi tính theo biến \(y\) (hoặc ngược lại). Nhưng trước hết, ta phải xác định được "kích thước" (tức là cận) của miền D.
+  </div>
 
-  <p><strong>Bước 1: Tìm giao điểm.</strong><br>
-  \(x = -y^2\) và \(y = x^2\): thay \(x=-y^2\) vào \(y=x^2\): \(y=y^4 \Rightarrow y(y^3-1)=0 \Rightarrow y=0\) hoặc \(y=1\).<br>
-  Tại \(y=0\): \(x=0\). Tại \(y=1\): \(x=-1\).<br>
-  Giao điểm: \((0,0)\) và \((-1,1)\).</p>
+  <h4>Bước 1: Tìm giao điểm của hai đường cong (để biết miền D bắt đầu và kết thúc ở đâu)</h4>
+  <p><strong>Vì sao phải làm bước này?</strong> Để tính tích phân, ta cần biết các giới hạn (cận) của biến \(x\) và biến \(y\). Giao điểm của hai đường cong chính là các "góc" của miền D.</p>
+  
+  <p>Ta giải hệ phương trình tạo bởi hai đường biên:</p>
+  <ol>
+    <li>Phương trình 1: \(x = -y^2\)</li>
+    <li>Phương trình 2: \(y = x^2\)</li>
+  </ol>
+  
+  <p>Thế \(x\) từ phương trình 1 vào phương trình 2, ta được:</p>
+  \[y = (-y^2)^2\]
+  \[y = y^4\]
+  
+  <p>Chuyển tất cả về một vế để giải phương trình:</p>
+  \[y^4 - y = 0\]
+  
+  <p>Rút nhân tử chung \(y\) ra ngoài:</p>
+  \[y(y^3 - 1) = 0\]
+  
+  <p>Đến đây, ta có hai trường hợp (vì tích của hai số bằng 0 thì một trong hai số phải bằng 0):</p>
+  <ul>
+    <li>Trường hợp 1: \(y = 0\). Thay ngược lại vào \(x = -y^2\), ta có \(x = -0^2 = 0\). Điểm đầu tiên là \((0, 0)\).</li>
+    <li>Trường hợp 2: \(y^3 - 1 = 0 \Rightarrow y^3 = 1 \Rightarrow y = 1\). Thay lại vào \(x = -y^2\), ta có \(x = -1^2 = -1\). Điểm thứ hai là \((-1, 1)\).</li>
+  </ul>
+  
+  <p>Vậy hai đường cong cắt nhau tại hai điểm là \((0, 0)\) và \((-1, 1)\).</p>
 
-  <p><strong>Bước 2: Lấy y từ 0 đến 1, x từ \(-y^2\) đến \(-\sqrt{y}\) (cần kiểm tra thứ tự).</strong><br>
-  Trên D: \(x=-y^2\) là cạnh phải (\(x\) lớn hơn), \(x=-\sqrt{y}\) từ \(y=x^2\Rightarrow x=-\sqrt{y}\) (phía âm).<br>
-  So sánh: tại \(y=1/4\), \(-y^2=-1/16\) và \(-\sqrt{y}=-1/2\). Ta thấy \(-y^2 > -\sqrt{y}\), nên x từ \(-\sqrt{y}\) đến \(-y^2\).</p>
+  <h4>Bước 2: Xác định cận của tích phân (cận trên và cận dưới)</h4>
+  <p><strong>Vì sao phải làm bước này?</strong> Để thiết lập hai dấu tích phân \(\int\) với các con số cụ thể ở trên và dưới (gọi là cận), cho biết ta sẽ quét qua vùng không gian nào.</p>
+  
+  <p>Dựa vào hai giao điểm \((0,0)\) và \((-1,1)\), ta thấy giá trị của \(y\) trải dài từ 0 đến 1. Vậy cận của biến \(y\) là một con số cố định: <strong>\(y\) đi từ 0 đến 1</strong>.</p>
+  
+  <p>Bây giờ, với mỗi giá trị của \(y\) nằm giữa 0 và 1, đường nào sẽ nằm bên trái (x nhỏ) và đường nào nằm bên phải (x lớn)?</p>
+  <ul>
+    <li>Đường cong thứ nhất: \(x = -y^2\).</li>
+    <li>Đường cong thứ hai: \(y = x^2\). Vì miền D nằm trong khoảng \(x\) từ -1 đến 0 (do hai giao điểm), nên khi rút \(x\) theo \(y\) từ \(y = x^2\), ta phải lấy phần âm: \(x = -\sqrt{y}\).</li>
+  </ul>
+  
+  <p><strong>Xét dấu để tìm cận dưới và cận trên của x:</strong> Lấy thử một điểm nằm giữa 0 và 1, ví dụ \(y = \frac{1}{4}\).</p>
+  <ul>
+    <li>Đường thứ nhất sẽ có \(x = -\left(\frac{1}{4}\right)^2 = -\frac{1}{16}\).</li>
+    <li>Đường thứ hai sẽ có \(x = -\sqrt{\frac{1}{4}} = -\frac{1}{2}\).</li>
+  </ul>
+  <p>Vì \(-\frac{1}{2}\) nhỏ hơn \(-\frac{1}{16}\), nên đường \(x = -\sqrt{y}\) nằm bên trái (cận dưới), và đường \(x = -y^2\) nằm bên phải (cận trên).</p>
+  
+  <p>Vậy ta đã xác định xong các cận: <strong>\(y\) đi từ 0 đến 1</strong>, còn <strong>\(x\) đi từ \(-\sqrt{y}\) đến \(-y^2\)</strong>.</p>
 
-  \[I = \int_0^1\int_{-\sqrt{y}}^{-y^2} x^4 y^4\,dx\,dy = \int_0^1 y^4\left[\frac{x^5}{5}\right]_{-\sqrt{y}}^{-y^2}dy\]
-  \[= \frac{1}{5}\int_0^1 y^4\left[(-y^2)^5-(-\sqrt{y})^5\right]dy = \frac{1}{5}\int_0^1 y^4\left[-y^{10}+y^{5/2}\right]dy\]
-  \[= \frac{1}{5}\int_0^1\left(y^{13/2}-y^{14}\right)dy\]
-  \[= \frac{1}{5}\left[\frac{y^{15/2}}{15/2}-\frac{y^{15}}{15}\right]_0^1 = \frac{1}{5}\left(\frac{2}{15}-\frac{1}{15}\right) = \frac{1}{5}\cdot\frac{1}{15} = \frac{1}{75}\]
+  <h4>Bước 3: Tính toán tích phân từng lớp</h4>
+  <p><strong>Vì sao phải làm bước này?</strong> Đây là bước ráp công thức vào và tính toán kết quả cuối cùng. Ta sẽ tính lớp bên trong (theo biến \(x\)) trước, coi \(y\) như một hằng số. Sau đó tính lớp bên ngoài (theo biến \(y\)).</p>
+  
+  <p>Biểu thức tích phân được viết lại như sau:</p>
+  \[I = \int_{0}^{1} \left( \int_{-\sqrt{y}}^{-y^2} x^4 y^4 \,dx \right) \,dy\]
 
-  <p style="color:#1a5276; font-weight:bold;">\(\boxed{I = \dfrac{1}{75}}\) ✓ Khớp với đáp án.</p>
+  <p><strong>Lớp thứ nhất (tính theo x):</strong> Ta đưa \(y^4\) ra ngoài vì lúc này \(y\) đóng vai trò như một con số (hằng số).</p>
+  \[\int_{-\sqrt{y}}^{-y^2} x^4 y^4 \,dx = y^4 \int_{-\sqrt{y}}^{-y^2} x^4 \,dx\]
+  
+  <p><em>Nhắc lại quy tắc nguyên hàm:</em> \(\int x^n \,dx = \frac{x^{n+1}}{n+1}\). Áp dụng vào đây, nguyên hàm của \(x^4\) là \(\frac{x^5}{5}\). Ta thế cận vào:</p>
+  \[y^4 \left[ \frac{x^5}{5} \right]_{x=-\sqrt{y}}^{x=-y^2}\]
+  
+  <p>Thế cận trên \(-y^2\) rồi trừ đi khi thế cận dưới \(-\sqrt{y}\):</p>
+  \[= y^4 \left( \frac{(-y^2)^5}{5} - \frac{(-\sqrt{y})^5}{5} \right)\]
+  
+  <p>Làm gọn biểu thức bên trong. Ta nhớ quy tắc lũy thừa: \((a^m)^n = a^{m \cdot n}\) và dấu âm mũ lẻ thì vẫn âm.</p>
+  <ul>
+    <li>\((-y^2)^5 = -y^{10}\)</li>
+    <li>\((-\sqrt{y})^5 = (-y^{\frac{1}{2}})^5 = -y^{\frac{5}{2}}\)</li>
+  </ul>
+  
+  <p>Ráp lại:</p>
+  \[= \frac{y^4}{5} \left( -y^{10} - (-y^{\frac{5}{2}}) \right) = \frac{y^4}{5} \left( -y^{10} + y^{\frac{5}{2}} \right)\]
+  
+  <p>Nhân phân phối \(y^4\) vào trong (quy tắc \(a^m \cdot a^n = a^{m+n}\)):</p>
+  \[= \frac{1}{5} \left( -y^{10} \cdot y^4 + y^{\frac{5}{2}} \cdot y^4 \right)\]
+  \[= \frac{1}{5} \left( -y^{14} + y^{\frac{5}{2} + \frac{8}{2}} \right)\]
+  \[= \frac{1}{5} \left( -y^{14} + y^{\frac{13}{2}} \right)\]
+
+  <p><strong>Lớp thứ hai (tính theo y):</strong> Giờ ta tính tích phân của kết quả vừa rồi, với biến \(y\) từ 0 đến 1.</p>
+  \[I = \int_{0}^{1} \frac{1}{5} \left( -y^{14} + y^{\frac{13}{2}} \right) \,dy\]
+  
+  <p>Đưa số \(\frac{1}{5}\) ra ngoài, ta áp dụng lại quy tắc nguyên hàm lũy thừa \(\int y^n \,dy = \frac{y^{n+1}}{n+1}\):</p>
+  <ul>
+    <li>Nguyên hàm của \(y^{14}\) là \(\frac{y^{15}}{15}\).</li>
+    <li>Nguyên hàm của \(y^{\frac{13}{2}}\) là \(\frac{y^{\frac{13}{2} + 1}}{\frac{13}{2} + 1} = \frac{y^{\frac{15}{2}}}{\frac{15}{2}} = \frac{2}{15} y^{\frac{15}{2}}\).</li>
+  </ul>
+  
+  <p>Ráp lại và thế cận từ 0 đến 1:</p>
+  \[I = \frac{1}{5} \left[ -\frac{y^{15}}{15} + \frac{2}{15} y^{\frac{15}{2}} \right]_{0}^{1}\]
+  
+  <p>Tại cận dưới bằng 0, toàn bộ biểu thức sẽ bằng 0. Vậy ta chỉ cần thế cận trên bằng 1 vào:</p>
+  \[I = \frac{1}{5} \left( -\frac{1^{15}}{15} + \frac{2}{15} \cdot 1^{\frac{15}{2}} \right)\]
+  \[I = \frac{1}{5} \left( -\frac{1}{15} + \frac{2}{15} \right)\]
+  \[I = \frac{1}{5} \left( \frac{1}{15} \right)\]
+  \[I = \frac{1}{75}\]
+
+  <h4>Bước 4: Kết luận và kiểm tra</h4>
+  <p><strong>Kết luận:</strong> Giá trị của tích phân kép trên miền D là:</p>
+  <p style="color:#1a5276; font-size: 1.2em; text-align: center;"><strong>\(\boxed{I = \dfrac{1}{75}}\)</strong></p>
+  
+  <div style="background:#f9ebea; padding:10px; border-radius:5px; margin-top:15px;">
+    <strong>🔍 Ý nghĩa của bài toán &amp; Kiểm tra:</strong><br>
+    Hàm số \(f(x, y) = x^4 y^4\) luôn là số dương (hoặc bằng 0) vì mũ 4 là mũ chẵn. Do đó, kết quả của tích phân (tổng các giá trị dương) bắt buộc phải là một số lớn hơn 0. Kết quả \(1/75\) của ta là một số dương, hoàn toàn hợp lý với tính chất toán học này. Kết quả này cũng hoàn toàn trùng khớp với đáp án ở đầu bài!
+  </div>
+</div>
+  </div>
 </div>
 
 </div>
+<script>
+    function toggleSolutionBox(btn) {
+        const content = btn.nextElementSibling;
+        const isOpen = content.classList.contains('is-open');
+        const icon = btn.querySelector('.sol-icon');
+        const text = btn.querySelector('.sol-text');
+        const arrow = btn.querySelector('.sol-arrow');
+        if (isOpen) {
+            content.classList.remove('is-open');
+            btn.classList.remove('is-open');
+            if (icon) icon.textContent = '📖';
+            if (text) text.textContent = 'Xem lời giải chi tiết (Bấm để mở)';
+            if (arrow) arrow.textContent = '▼';
+        } else {
+            content.classList.add('is-open');
+            btn.classList.add('is-open');
+            if (icon) icon.textContent = '🙈';
+            if (text) text.textContent = 'Thu gọn lời giải';
+            if (arrow) arrow.textContent = '▲';
+            if (window.MathJax && MathJax.typesetPromise) {
+                MathJax.typesetPromise([content]).catch(err => console.log(err));
+            }
+        }
+    }
+</script>
 </body>
 </html>

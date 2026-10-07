@@ -20,7 +20,58 @@
         .problem { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 40px; }
         .code-block { background: #282c34; color: #abb2bf; padding: 15px; border-radius: 5px; overflow-x: auto; font-family: monospace; font-size: 14px; }
         .plot-container { display: flex; justify-content: center; }
-    </style>
+    
+        /* Nút Ẩn / Hiện Lời Giải Chi Tiết */
+        .solution-toggle-wrapper {
+            margin: 28px 0 16px 0;
+        }
+        .solution-toggle-btn {
+            width: 100%;
+            background: #f8fafc;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 13px 20px;
+            font-size: 15px;
+            font-weight: 700;
+            color: #0284c7;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            font-family: inherit;
+        }
+        .solution-toggle-btn:hover {
+            background: #f0f9ff;
+            border-color: #38bdf8;
+            color: #0369a1;
+        }
+        .solution-toggle-btn.is-open {
+            background: #e0f2fe;
+            border-color: #0284c7;
+            color: #0369a1;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+        .solution-collapsible-content {
+            display: none;
+            border: 1.5px solid #0284c7;
+            border-top: none;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+            padding: 20px 22px;
+            background: #ffffff;
+        }
+        .solution-collapsible-content.is-open {
+            display: block;
+            animation: fadeInSol 0.25s ease-in-out;
+        }
+        @keyframes fadeInSol {
+            from { opacity: 0; transform: translateY(-4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+</style>
 </head>
 <body>
     <div class="problem">
@@ -35,20 +86,126 @@
         <h3>Mã Nguồn Tham Khảo (Cho AI khác)</h3>
         <pre class="code-block"><code>ans = sp.integrate(y**2, (x, sp.sqrt(y), 2-y), (y, 0, 1))</code></pre>
     
+<div class="solution-toggle-wrapper">
+  <button type="button" class="solution-toggle-btn" onclick="toggleSolutionBox(this)">
+    <span><span class="sol-icon">📖</span> <span class="sol-text">Xem lời giải chi tiết (Bấm để mở)</span></span>
+    <span class="sol-arrow">▼</span>
+  </button>
+  <div class="solution-collapsible-content">
 <div style="background:#eaf4fb; border-left:5px solid #2980b9; padding:20px; margin-top:30px; border-radius:6px;">
-  <h3 style="color:#1a5276;">Lời giải – Bài B1.10</h3>
-  <p><strong>Đề bài:</strong> Tính \(\iint_D y^2\,dxdy\), với \(D\) giới hạn bởi parabol \(y=x^2\), đường thẳng \(y=2-x\) và trục \(Ox\) (\(y=0\)).</p>
-  <p><strong>Bước 1: Xác định giao điểm và miền \(D\).</strong><br>
-  - Giao của \(y=x^2\) và \(y=2-x\) trong góc phần tư thứ nhất: \(x^2 = 2-x \iff x^2+x-2=0 \Rightarrow x=1, y=1\).<br>
-  - Giao của \(y=x^2\) với trục \(Ox\) (\(y=0\)): \((0,0)\).<br>
-  - Giao của \(y=2-x\) với trục \(Ox\) (\(y=0\)): \((2,0)\).<br>
-  Nếu chiếu lên trục \(Oy\) (quét ngang): với mỗi \(y \in [0, 1]\), \(x\) chạy từ nhánh parabol \(x = \sqrt{y}\) bên trái sang đường thẳng \(x = 2-y\) bên phải (không cần chia làm 2 miền!).</p>
-  <p><strong>Bước 2: Thiết lập và tính tích phân lặp.</strong></p>
-  \[I = \int_0^1 y^2 \,dy \int_{\sqrt{y}}^{2-y} dx = \int_0^1 y^2 \left(2 - y - y^{1/2}\right) dy = \int_0^1 \left(2y^2 - y^3 - y^{5/2}\right) dy\]
-  \[= \left[ \frac{2y^3}{3} - \frac{y^4}{4} - \frac{2y^{7/2}}{7} \right]_0^1 = \frac{2}{3} - \frac{1}{4} - \frac{2}{7}\]
-  <p>Quy đồng mẫu số chung 84:</p>
-  \[I = \frac{56 - 21 - 24}{84} = \frac{11}{84}\]
-  <p style="color:#1a5276; font-weight:bold;">\(\boxed{I = \dfrac{11}{84}}\) ✓ Khớp với đáp án.</p>
+  <h3 style="color:#1a5276;">Lời giải chi tiết và siêu dễ hiểu – Bài B1.10</h3>
+
+  <p><strong>Đề bài yêu cầu gì?</strong><br>
+  Chúng ta cần tính một <strong>tích phân kép</strong> (viết là \(\iint_D\)). Ký hiệu này có nghĩa là chúng ta sẽ cộng gộp tất cả các giá trị của hàm số \(f(x,y) = y^2\) trên một mặt phẳng (gọi là miền \(D\)). <br>
+  Miền \(D\) của chúng ta bị nhốt lại (giới hạn) bởi 3 đường: 
+  1. Đường cong parabol \(y = x^2\)
+  2. Đường thẳng xiên \(y = 2 - x\)
+  3. Trục ngang \(Ox\) (chính là đường thẳng \(y = 0\))
+  </p>
+
+  
+  <h4>Bước 1: Tìm các điểm cắt nhau (hoành độ giao điểm) để biết kích thước của "miếng bánh"</h4>
+  <p>Để tính toán, ta cần biết các giới hạn (điểm bắt đầu và kết thúc). Ta đi tìm các điểm mà các đường này chạm nhau nhé:</p>
+  <ul>
+    <li><strong>Điểm cắt giữa parabol \(y = x^2\) và đường thẳng \(y = 2 - x\):</strong><br>
+      Ta cho hai giá trị \(y\) bằng nhau:<br>
+      \[ x^2 = 2 - x \]
+      Chuyển vế để được phương trình bậc 2:<br>
+      \[ x^2 + x - 2 = 0 \]
+      Nhẩm nghiệm (hoặc dùng máy tính), ta phân tích được: \( (x - 1)(x + 2) = 0 \).<br>
+      Vậy ta có \(x = 1\) hoặc \(x = -2\). <br>
+      Nhìn trên hình vẽ (trên trục dương), giao điểm ta quan tâm nằm ở bên phải, tức là \(x = 1\).<br>
+      Thế \(x = 1\) vào phương trình \(y = x^2\), ta được \(y = 1^2 = 1\). Điểm đỉnh của miếng bánh là <strong>\((1, 1)\)</strong>.
+    </li>
+    <li><strong>Điểm cắt với trục \(Ox\) (khi \(y = 0\)):</strong><br>
+      Parabol \(y = x^2\) cắt trục \(Ox\) tại \(x = 0\) (điểm <strong>\((0, 0)\)</strong>).<br>
+      Đường thẳng \(y = 2 - x\) cắt trục \(Ox\) khi \(2 - x = 0\), tức là \(x = 2\) (điểm <strong>\((2, 0)\)</strong>).
+    </li>
+  </ul>
+
+  <h4>Bước 2: Chọn cách quét (chiếu) miền D</h4>
+  <p>Để tính tích phân dễ nhất, ta có hai cách là quét dọc (theo \(x\)) hoặc quét ngang (theo \(y\)).<br>
+  - Nếu quét dọc (chiếu xuống trục \(Ox\)), ta phải chia miền \(D\) thành 2 phần (từ \(0\) đến \(1\) và từ \(1\) đến \(2\)) vì phía trên bị giới hạn bởi 2 đường khác nhau (nửa trái là parabol, nửa phải là đường thẳng). Thế thì dài lắm!<br>
+  - <strong>Nên quét ngang (chiếu lên trục \(Oy\)):</strong> Ta nhìn theo trục dọc \(Oy\) từ dưới lên trên. Nhìn trên trục \(Oy\), miền \(D\) chạy từ điểm thấp nhất là \(y = 0\) đến điểm cao nhất là \(y = 1\). <br>
+  Với mỗi chiều cao \(y\) bất kỳ (từ \(0\) đến \(1\)), biên bên trái của miếng bánh luôn là đường parabol, và biên bên phải luôn là đường thẳng. <br>
+  Ta viết lại phương trình 2 đường này theo biến \(y\):<br>
+  + Biên trái (parabol): \(y = x^2 \Rightarrow x = \sqrt{y}\) (ta lấy dấu cộng vì ở nhánh bên phải của trục \(Oy\)).<br>
+  + Biên phải (đường thẳng): \(y = 2 - x \Rightarrow x = 2 - y\).<br>
+  Vậy, tại một độ cao \(y\), giá trị \(x\) chạy từ \(x = \sqrt{y}\) đến \(x = 2 - y\).
+  </p>
+
+  <h4>Bước 3: Lắp vào công thức và tính toán từ từ</h4>
+  <p>Bây giờ ta chuyển tích phân kép thành hai tích phân đơn (tích phân lặp). Ta tính theo \(x\) trước (từ trái qua phải), rồi tính theo \(y\) sau (từ dưới lên trên):</p>
+  \[ I = \int_{0}^{1} \left( \int_{\sqrt{y}}^{2-y} y^2 \,dx \right) dy \]
+  
+  <p><strong>Tính lớp bên trong (theo biến \(x\)):</strong><br>
+  Bởi vì ta đang tính theo \(x\), nên \(y^2\) đóng vai trò như một hằng số (con số bình thường). Tích phân của \(1 \,dx\) chính là \(x\):</p>
+  \[ \int_{\sqrt{y}}^{2-y} y^2 \,dx = y^2 \cdot [x] \text{ đi từ } x=\sqrt{y} \text{ đến } x=2-y \]
+  Thế cận trên trừ cận dưới vào chữ \(x\):
+  \[ = y^2 \cdot \left( (2 - y) - (\sqrt{y}) \right) \]
+  
+  <p><strong>Tính lớp bên ngoài (theo biến \(y\)):</strong><br>
+  Bây giờ ta đem kết quả trên nhân tung ra để tính tích phân theo \(y\). Nhắc lại một chút: \(\sqrt{y}\) chính là \(y^{1/2}\).</p>
+  \[ y^2 \cdot (2 - y - y^{1/2}) = 2y^2 - y^3 - y^2 \cdot y^{1/2} \]
+  Lưu ý phép nhân lũy thừa: \(y^2 \cdot y^{1/2} = y^{2 + 1/2} = y^{5/2}\).<br>
+  Vậy ta có biểu thức cần tính là:
+  \[ 2y^2 - y^3 - y^{5/2} \]
+  
+  Giờ thì lắp vào tích phân ngoài cùng:
+  \[ I = \int_{0}^{1} \left( 2y^2 - y^3 - y^{5/2} \right) dy \]
+  
+  Áp dụng quy tắc cơ bản của tích phân: \(\int y^n \,dy = \frac{y^{n+1}}{n+1}\):
+  <ul>
+    <li>\( \int 2y^2 \,dy = \frac{2y^3}{3} \)</li>
+    <li>\( \int y^3 \,dy = \frac{y^4}{4} \)</li>
+    <li>\( \int y^{5/2} \,dy = \frac{y^{5/2 + 1}}{5/2 + 1} = \frac{y^{7/2}}{7/2} = \frac{2y^{7/2}}{7} \)</li>
+  </ul>
+  
+  Lắp lại vào trong ngoặc vuông và thế cận \(y=0\) đến \(y=1\):
+  \[ I = \left[ \frac{2y^3}{3} - \frac{y^4}{4} - \frac{2y^{7/2}}{7} \right]_{0}^{1} \]
+  
+  Thế \(y=1\):
+  \[ = \frac{2 \cdot 1^3}{3} - \frac{1^4}{4} - \frac{2 \cdot 1^{7/2}}{7} = \frac{2}{3} - \frac{1}{4} - \frac{2}{7} \]
+  Thế \(y=0\) thì toàn bộ biểu thức bằng \(0\), nên ta không cần trừ nữa.
+  
+  <p><strong>Quy đồng mẫu số để ra kết quả cuối:</strong><br>
+  Mẫu số chung của 3, 4, và 7 là \(3 \times 4 \times 7 = 84\).</p>
+  \[ \frac{2}{3} = \frac{2 \times 28}{3 \times 28} = \frac{56}{84} \]
+  \[ \frac{1}{4} = \frac{1 \times 21}{4 \times 21} = \frac{21}{84} \]
+  \[ \frac{2}{7} = \frac{2 \times 12}{7 \times 12} = \frac{24}{84} \]
+  
+  Trừ các tử số cho nhau:
+  \[ I = \frac{56 - 21 - 24}{84} = \frac{11}{84} \]
+
+  <p style="color:#1a5276; font-size: 1.1em;"><strong>Kết luận:</strong></p>
+  <p><strong>Kết quả cuối cùng là \( \mathbf{\dfrac{11}{84}} \). Kết quả này là một số dương, điều này rất hợp lý vì hàm số bên trong \(y^2\) luôn lớn hơn hoặc bằng 0, nên tổng của chúng trên miền D không thể nào là số âm được!</strong></p>
+</div>
+  </div>
 </div></div>
+<script>
+    function toggleSolutionBox(btn) {
+        const content = btn.nextElementSibling;
+        const isOpen = content.classList.contains('is-open');
+        const icon = btn.querySelector('.sol-icon');
+        const text = btn.querySelector('.sol-text');
+        const arrow = btn.querySelector('.sol-arrow');
+        if (isOpen) {
+            content.classList.remove('is-open');
+            btn.classList.remove('is-open');
+            if (icon) icon.textContent = '📖';
+            if (text) text.textContent = 'Xem lời giải chi tiết (Bấm để mở)';
+            if (arrow) arrow.textContent = '▼';
+        } else {
+            content.classList.add('is-open');
+            btn.classList.add('is-open');
+            if (icon) icon.textContent = '🙈';
+            if (text) text.textContent = 'Thu gọn lời giải';
+            if (arrow) arrow.textContent = '▲';
+            if (window.MathJax && MathJax.typesetPromise) {
+                MathJax.typesetPromise([content]).catch(err => console.log(err));
+            }
+        }
+    }
+</script>
 </body>
 </html>

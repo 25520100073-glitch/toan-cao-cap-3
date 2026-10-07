@@ -20,7 +20,58 @@
         .problem { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 40px; }
         .code-block { background: #282c34; color: #abb2bf; padding: 15px; border-radius: 5px; overflow-x: auto; font-family: monospace; font-size: 14px; }
         .plot-container { display: flex; justify-content: center; }
-    </style>
+    
+        /* Nút Ẩn / Hiện Lời Giải Chi Tiết */
+        .solution-toggle-wrapper {
+            margin: 28px 0 16px 0;
+        }
+        .solution-toggle-btn {
+            width: 100%;
+            background: #f8fafc;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 13px 20px;
+            font-size: 15px;
+            font-weight: 700;
+            color: #0284c7;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            font-family: inherit;
+        }
+        .solution-toggle-btn:hover {
+            background: #f0f9ff;
+            border-color: #38bdf8;
+            color: #0369a1;
+        }
+        .solution-toggle-btn.is-open {
+            background: #e0f2fe;
+            border-color: #0284c7;
+            color: #0369a1;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+        .solution-collapsible-content {
+            display: none;
+            border: 1.5px solid #0284c7;
+            border-top: none;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+            padding: 20px 22px;
+            background: #ffffff;
+        }
+        .solution-collapsible-content.is-open {
+            display: block;
+            animation: fadeInSol 0.25s ease-in-out;
+        }
+        @keyframes fadeInSol {
+            from { opacity: 0; transform: translateY(-4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+</style>
 </head>
 <body>
     <div class="problem">
@@ -35,20 +86,148 @@
         <h3>Mã Nguồn Tham Khảo (Cho AI khác)</h3>
         <pre class="code-block"><code></code></pre>
     
-<div style="background:#eaf4fb; border-left:5px solid #2980b9; padding:20px; margin-top:30px; border-radius:6px;">
-  <h3 style="color:#1a5276;">Lời giải – Bài B2.14</h3>
-  <p><strong>Đề bài:</strong> Tính \(\iint_D xy(x^2+y^2)\,dxdy\), \(D\) tâm \((0,2)\) bk 2 lấy \(x \ge 0\).</p>
-  <p><strong>Bước 1: Phương trình hình tròn.</strong><br>
-  \(x^2+(y-2)^2 \le 4 \Leftrightarrow x^2+y^2 \le 4y\).<br>
-  Tọa độ cực: \(r \le 4\sin\theta\). Với \(x \ge 0\) ta có \(0 \le \theta \le \frac{\pi}{2}\).</p>
-  <p><strong>Bước 2: Tính tích phân.</strong></p>
-  \[I = \int_0^{\pi/2} \int_0^{4\sin\theta} (r\cos\theta \cdot r\sin\theta)(r^2) \cdot r\,dr\,d\theta = \int_0^{\pi/2} \cos\theta\sin\theta \left[\frac{r^6}{6}\right]_0^{4\sin\theta} d\theta\]
-  \[= \frac{4096}{6} \int_0^{\pi/2} \cos\theta\sin^7\theta\,d\theta\]
-  <p>Đặt \(u = \sin\theta \Rightarrow du = \cos\theta\,d\theta\):</p>
-  \[I = \frac{2048}{3} \int_0^1 u^7\,du = \frac{2048}{3} \left[\frac{u^8}{8}\right]_0^1 = \frac{2048}{24} = \frac{256}{3}\]
-  <p style="color:#1a5276; font-weight:bold;">\(\boxed{I = \dfrac{256}{3}}\) ✓ Khớp với đáp án.</p>
+<div class="solution-toggle-wrapper">
+  <button type="button" class="solution-toggle-btn" onclick="toggleSolutionBox(this)">
+    <span><span class="sol-icon">📖</span> <span class="sol-text">Xem lời giải chi tiết (Bấm để mở)</span></span>
+    <span class="sol-arrow">▼</span>
+  </button>
+  <div class="solution-collapsible-content">
+<div style="background:#eaf4fb; border-left:5px solid #2980b9; padding:20px; margin-top:30px; border-radius:6px; line-height: 1.8;">
+  <h3 style="color:#1a5276;">Lời giải chi tiết – Bài B2.14</h3>
+  <p><strong>Đề bài:</strong> Tính tích phân kép \(I = \iint_D xy(x^2+y^2)\,dxdy\).<br>
+  Trong đó, miền \(D\) là một nửa hình tròn có tâm tại \((0; 2)\), bán kính bằng \(2\), và chỉ lấy phần nằm bên phải trục tung (tức là \(x \ge 0\)).</p>
+
+  <h4>1. Hiểu đề bài và hình dáng miền D</h4>
+  <p>Hãy tưởng tượng bạn có một miếng bánh hình tròn. 
+  <ul>
+    <li>Ký hiệu \(\iint_D\) có nghĩa là chúng ta đang tính tổng của một "đại lượng" trên toàn bộ diện tích của miếng bánh (miền \(D\)).</li>
+    <li>Miền \(D\) của chúng ta là hình tròn tâm \((0; 2)\) trên trục \(Oy\), bán kính \(R = 2\). Nghĩa là hình tròn này nằm hoàn toàn phía trên trục hoành \(Ox\) (vì tâm ở độ cao 2 và bán kính cũng là 2, nên mép dưới chạm vào gốc tọa độ \(O(0;0)\)).</li>
+    <li>Điều kiện \(x \ge 0\) nghĩa là chúng ta chỉ lấy nửa bên phải của hình tròn này.</li>
+  </ul>
+  </p>
+
+  <div style="background:#fff3cd; padding:10px; border-radius:5px; margin:10px 0;">
+    <strong>💡 Mẹo nhỏ:</strong> Khi thấy biểu thức có chứa \(x^2 + y^2\) và miền \(D\) là hình tròn, cách nhanh nhất và dễ nhất là chuyển sang <strong>hệ tọa độ cực</strong>. Tọa độ cực giúp biến đổi các phương trình đường tròn rắc rối thành những đường thẳng đơn giản hơn rất nhiều!
+  </div>
+
+  <h4>2. Đổi sang hệ tọa độ cực</h4>
+  <p>Trong tọa độ cực, ta thay tọa độ \((x, y)\) quen thuộc bằng \((r, \theta)\), trong đó:
+  <ul>
+    <li>\(r\) là khoảng cách từ gốc tọa độ \(O\) đến điểm ta đang xét (\(r \ge 0\)).</li>
+    <li>\(\theta\) (đọc là "tê-ta") là góc quay tạo bởi tia nối điểm đó và trục \(Ox\).</li>
+  </ul>
+  Ta có công thức chuyển đổi:
+  \[ x = r\cos\theta \]
+  \[ y = r\sin\theta \]
+  Khi đó, biểu thức \(x^2 + y^2\) sẽ trở thành \(r^2\) (theo định lý Pytago: \(r^2\cos^2\theta + r^2\sin^2\theta = r^2\)).<br>
+  <strong>Chú ý:</strong> Khi đổi biến số trong tích phân kép sang tọa độ cực, ta luôn phải nhân thêm một lượng gọi là "định thức Jacobi", đó chính là chữ \(r\). Nên \(dxdy\) sẽ biến thành \(r\,dr\,d\theta\).
+  </p>
+
+  <h4>3. Tìm cận (giới hạn) cho góc \(\theta\) và khoảng cách \(r\)</h4>
+  <p><strong>Bước 3.1: Viết phương trình biên của hình tròn.</strong><br>
+  Hình tròn tâm \((0;2)\) bán kính \(2\) có phương trình là:
+  \[ x^2 + (y - 2)^2 \le 4 \]
+  Chúng ta khai triển hằng đẳng thức \((y - 2)^2 = y^2 - 4y + 4\):
+  \[ x^2 + y^2 - 4y + 4 \le 4 \]
+  Trừ cả 2 vế cho 4:
+  \[ x^2 + y^2 - 4y \le 0 \]
+  Chuyển \(4y\) sang vế phải:
+  \[ x^2 + y^2 \le 4y \]
+  Bây giờ, thay \(x^2 + y^2 = r^2\) và \(y = r\sin\theta\) vào phương trình trên:
+  \[ r^2 \le 4r\sin\theta \]
+  Chia cả hai vế cho \(r\) (vì \(r \ge 0\)), ta được giới hạn của \(r\):
+  \[ r \le 4\sin\theta \]
+  Vậy, với mỗi góc \(\theta\), mũi tên khoảng cách \(r\) sẽ đi từ gốc \(O\) (tức là \(r = 0\)) đến mép hình tròn (tức là \(r = 4\sin\theta\)).
+  </p>
+  
+  <p><strong>Bước 3.2: Tìm giới hạn của góc \(\theta\).</strong><br>
+  Toàn bộ hình tròn nằm phía trên trục \(Ox\) nên góc \(\theta\) nằm từ \(0\) đến \(\pi\) (từ 0 đến 180 độ).<br>
+  Nhưng đề bài yêu cầu \(x \ge 0\) (chỉ lấy nửa bên phải). Ở nửa bên phải, góc \(\theta\) chỉ được quét từ trục \(Ox\) lên đến trục \(Oy\). Trục \(Oy\) tương ứng với góc \(90^\circ\) hay \(\frac{\pi}{2}\).<br>
+  Vì thế, giới hạn của góc \(\theta\) là:
+  \[ 0 \le \theta \le \frac{\pi}{2} \]
+  </p>
+
+  <h4>4. Ráp tất cả vào tích phân và tính toán</h4>
+  <p>Bây giờ chúng ta thay mọi thứ vào biểu thức ban đầu. Biểu thức cần tính là \(xy(x^2+y^2)\):
+  <ul>
+    <li>\(x\) thay bằng \(r\cos\theta\)</li>
+    <li>\(y\) thay bằng \(r\sin\theta\)</li>
+    <li>\(x^2+y^2\) thay bằng \(r^2\)</li>
+    <li>\(dxdy\) thay bằng \(r\,dr\,d\theta\)</li>
+  </ul>
+  Ráp lại, hàm bên trong tích phân trở thành:
+  \[ (r\cos\theta) \cdot (r\sin\theta) \cdot (r^2) \cdot r = r^5 \sin\theta \cos\theta \]
+  </p>
+  
+  <p>Tích phân \(I\) của chúng ta được viết lại thành 2 lớp tích phân: một lớp theo \(dr\) bên trong, một lớp theo \(d\theta\) bên ngoài.</p>
+  \[ I = \int_{0}^{\pi/2} \left( \int_{0}^{4\sin\theta} r^5 \sin\theta \cos\theta \,dr \right) d\theta \]
+  
+  <p><strong>Bước 4.1: Tính lớp tích phân bên trong (theo biến \(r\))</strong><br>
+  Khi tính theo \(r\), ta coi \(\sin\theta\) và \(\cos\theta\) là hằng số (chỉ là những con số bình thường, không tham gia vào việc lấy nguyên hàm).<br>
+  Nguyên hàm của \(r^5\) theo quy tắc lũy thừa là \(\frac{r^6}{6}\). Ta thay cận từ \(0\) đến \(4\sin\theta\):
+  \[ \int_{0}^{4\sin\theta} r^5 \,dr = \left[ \frac{r^6}{6} \right]_{0}^{4\sin\theta} \]
+  Thay cận trên \(4\sin\theta\) vào:
+  \[ = \frac{(4\sin\theta)^6}{6} - \frac{0^6}{6} \]
+  Tính lũy thừa \(4^6 = 4096\):
+  \[ = \frac{4096\sin^6\theta}{6} = \frac{2048}{3}\sin^6\theta \]
+  Đừng quên nhân lại với phần hằng số \(\sin\theta \cos\theta\) ta đã tạm gác ra ngoài:
+  \[ \text{Hàm bên trong} = \frac{2048}{3}\sin^6\theta \cdot \sin\theta \cdot \cos\theta = \frac{2048}{3}\sin^7\theta \cos\theta \]
+  </p>
+
+  <p><strong>Bước 4.2: Tính lớp tích phân bên ngoài (theo biến \(\theta\))</strong><br>
+  Giờ ta tính tích phân còn lại theo góc \(\theta\):
+  \[ I = \frac{2048}{3} \int_{0}^{\pi/2} \sin^7\theta \cos\theta \,d\theta \]
+  Để tính tích phân này dễ dàng, ta dùng <strong>phương pháp đổi biến số</strong> (như kiểu đặt tên khác cho một cụm phức tạp để nhìn cho gọn).<br>
+  Đặt \(u = \sin\theta\).<br>
+  Đạo hàm hai vế ta được: \(du = \cos\theta \,d\theta\). (Thật tuyệt vời vì cụm \(\cos\theta \,d\theta\) có sẵn trong bài!)<br>
+  Đổi cận (khi đổi biến thì giới hạn cũng thay đổi):
+  <ul>
+    <li>Khi \(\theta = 0\) thì \(u = \sin(0) = 0\).</li>
+    <li>Khi \(\theta = \frac{\pi}{2}\) thì \(u = \sin\left(\frac{\pi}{2}\right) = 1\).</li>
+  </ul>
+  Tích phân trở thành rất đơn giản:
+  \[ I = \frac{2048}{3} \int_{0}^{1} u^7 \,du \]
+  Nguyên hàm của \(u^7\) là \(\frac{u^8}{8}\):
+  \[ I = \frac{2048}{3} \left[ \frac{u^8}{8} \right]_{0}^{1} \]
+  Thay số \(1\) và \(0\) vào:
+  \[ I = \frac{2048}{3} \cdot \left( \frac{1^8}{8} - \frac{0^8}{8} \right) \]
+  \[ I = \frac{2048}{3} \cdot \frac{1}{8} \]
+  Lấy \(2048\) chia cho \(8\) ta được \(256\):
+  \[ I = \frac{256}{3} \]
+  </p>
+
+  <h4>5. Kết luận</h4>
+  <p style="color:#1a5276; font-size:18px;"><strong>\(\boxed{I = \dfrac{256}{3}}\)</strong></p>
+  <p><strong>Ý nghĩa:</strong> Con số \(256/3\) (khoảng 85.33) không phải là diện tích thông thường, mà nó đại diện cho "trọng lượng" hoặc "khối lượng" của một nửa hình tròn nếu như mật độ vật chất tại mỗi điểm \((x,y)\) thay đổi theo công thức \(xy(x^2+y^2)\). Vì ở xa gốc tọa độ, mật độ này rất lớn nên tổng khối lượng tính ra là một con số khá to.</p>
+</div>
+  </div>
 </div>
 
 </div>
+<script>
+    function toggleSolutionBox(btn) {
+        const content = btn.nextElementSibling;
+        const isOpen = content.classList.contains('is-open');
+        const icon = btn.querySelector('.sol-icon');
+        const text = btn.querySelector('.sol-text');
+        const arrow = btn.querySelector('.sol-arrow');
+        if (isOpen) {
+            content.classList.remove('is-open');
+            btn.classList.remove('is-open');
+            if (icon) icon.textContent = '📖';
+            if (text) text.textContent = 'Xem lời giải chi tiết (Bấm để mở)';
+            if (arrow) arrow.textContent = '▼';
+        } else {
+            content.classList.add('is-open');
+            btn.classList.add('is-open');
+            if (icon) icon.textContent = '🙈';
+            if (text) text.textContent = 'Thu gọn lời giải';
+            if (arrow) arrow.textContent = '▲';
+            if (window.MathJax && MathJax.typesetPromise) {
+                MathJax.typesetPromise([content]).catch(err => console.log(err));
+            }
+        }
+    }
+</script>
 </body>
 </html>

@@ -20,7 +20,58 @@
         .problem { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 40px; }
         .code-block { background: #282c34; color: #abb2bf; padding: 15px; border-radius: 5px; overflow-x: auto; font-family: monospace; font-size: 14px; }
         .plot-container { display: flex; justify-content: center; }
-    </style>
+    
+        /* Nút Ẩn / Hiện Lời Giải Chi Tiết */
+        .solution-toggle-wrapper {
+            margin: 28px 0 16px 0;
+        }
+        .solution-toggle-btn {
+            width: 100%;
+            background: #f8fafc;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 13px 20px;
+            font-size: 15px;
+            font-weight: 700;
+            color: #0284c7;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            font-family: inherit;
+        }
+        .solution-toggle-btn:hover {
+            background: #f0f9ff;
+            border-color: #38bdf8;
+            color: #0369a1;
+        }
+        .solution-toggle-btn.is-open {
+            background: #e0f2fe;
+            border-color: #0284c7;
+            color: #0369a1;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+        .solution-collapsible-content {
+            display: none;
+            border: 1.5px solid #0284c7;
+            border-top: none;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+            padding: 20px 22px;
+            background: #ffffff;
+        }
+        .solution-collapsible-content.is-open {
+            display: block;
+            animation: fadeInSol 0.25s ease-in-out;
+        }
+        @keyframes fadeInSol {
+            from { opacity: 0; transform: translateY(-4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+</style>
 </head>
 <body>
     <div class="problem">
@@ -35,22 +86,165 @@
         <h3>Mã Nguồn Tham Khảo (Cho AI khác)</h3>
         <pre class="code-block"><code>ans = sp.integrate(x*y, (y, 2*x-1, 6-x), (x, 1, 2))</code></pre>
     
+<div class="solution-toggle-wrapper">
+  <button type="button" class="solution-toggle-btn" onclick="toggleSolutionBox(this)">
+    <span><span class="sol-icon">📖</span> <span class="sol-text">Xem lời giải chi tiết (Bấm để mở)</span></span>
+    <span class="sol-arrow">▼</span>
+  </button>
+  <div class="solution-collapsible-content">
 <div style="background:#eaf4fb; border-left:5px solid #2980b9; padding:20px; margin-top:30px; border-radius:6px;">
-  <h3 style="color:#1a5276;">Lời giải – Bài B1.16</h3>
-  <p><strong>Đề bài:</strong> Tính \(\iint_D xy\,dxdy\), với \(D\) là hình thang có các đỉnh \(M(1;1), N(2;3), P(2;4), Q(1;5)\).</p>
-  <p><strong>Bước 1: Viết phương trình các cạnh của hình thang \(MNPQ\).</strong><br>
-  - Cạnh trái \(MQ\) đi qua \(M(1;1)\) và \(Q(1;5)\): đường thẳng đứng \(x = 1\).<br>
-  - Cạnh phải \(NP\) đi qua \(N(2;3)\) và \(P(2;4)\): đường thẳng đứng \(x = 2\).<br>
-  - Cạnh dưới \(MN\) đi qua \(M(1;1)\) và \(N(2;3)\): hệ số góc \(k = \frac{3-1}{2-1} = 2 \Rightarrow y - 1 = 2(x-1) \iff y = 2x - 1\).<br>
-  - Cạnh trên \(QP\) đi qua \(Q(1;5)\) và \(P(2;4)\): hệ số góc \(k = \frac{4-5}{2-1} = -1 \Rightarrow y - 5 = -(x-1) \iff y = 6 - x\).<br>
-  Vậy miền \(D\) được xác định bởi: \(1 \le x \le 2\) và \(2x - 1 \le y \le 6 - x\).</p>
-  <p><strong>Bước 2: Tính tích phân lặp.</strong></p>
-  \[I = \int_1^2 x\,dx \int_{2x-1}^{6-x} y\,dy = \int_1^2 x \left[ \frac{y^2}{2} \right]_{2x-1}^{6-x} dx = \frac{1}{2} \int_1^2 x \left[ (6-x)^2 - (2x-1)^2 \right] dx\]
-  <p>Khai triển biểu thức trong ngoặc:</p>
-  \[(6-x)^2 - (2x-1)^2 = (36 - 12x + x^2) - (4x^2 - 4x + 1) = -3x^2 - 8x + 35\]
-  \[I = \frac{1}{2} \int_1^2 \left(-3x^3 - 8x^2 + 35x\right) dx = \frac{1}{2} \left[ -\frac{3x^4}{4} - \frac{8x^3}{3} + \frac{35x^2}{2} \right]_1^2\]
-  \[= \frac{1}{2} \left[ \left(-12 - \frac{64}{3} + 70\right) - \left(-\frac{3}{4} - \frac{8}{3} + \frac{35}{2}\right) \right] = \frac{1}{2} \left( \frac{110}{3} - \frac{169}{12} \right) = \frac{1}{2} \cdot \frac{440 - 169}{12} = \frac{271}{24}\]
-  <p style="color:#1a5276; font-weight:bold;">\(\boxed{I = \dfrac{271}{24}}\) ✓ Khớp với đáp án.</p>
+  <h3 style="color:#1a5276;">Lời giải chi tiết – Bài B1.16 (Dành cho người bắt đầu)</h3>
+  
+  <p><strong>Đề bài:</strong> Tính tích phân kép \( I = \iint_D xydxdy \), trong đó miền \( D \) là hình thang được tạo bởi 4 đỉnh \( M(1;1) \), \( N(2;3) \), \( P(2;4) \), \( Q(1;5) \).</p>
+
+  <div style="background:#fff; border:1px solid #ddd; padding:15px; border-radius:5px; margin-bottom:15px;">
+    <h4 style="margin-top:0; color:#c0392b;">🔍 Bước 0: Hiểu các ký hiệu trong bài toán</h4>
+    <ul>
+      <li>Ký hiệu <strong>\( \iint_D \) (tích phân kép)</strong>: Hãy tưởng tượng bạn đang tính tổng thể tích của một khối có đáy là miền \( D \) trên mặt phẳng, và chiều cao tại mỗi điểm \((x,y)\) là hàm số \( f(x,y) = xy \).</li>
+      <li><strong>\( dxdy \)</strong>: Nghĩa là ta sẽ chia nhỏ miền \( D \) thành vô số các hình chữ nhật bé xíu xiu có chiều rộng là \( dx \) và chiều dài là \( dy \).</li>
+      <li><strong>Miền \( D \)</strong>: Là phần "mặt bằng" (cái đáy), ở bài này nó là hình thang giới hạn bởi các đoạn thẳng nối các điểm \( M, N, P, Q \). Mục tiêu đầu tiên là phải "số hóa" cái hình thang này bằng các phương trình toán học để đưa vào tích phân.</li>
+    </ul>
+  </div>
+
+  <h4>📍 Bước 1: Mô tả hình dáng miền \( D \) và tìm phương trình các cạnh</h4>
+  <p>Để tính được tích phân, ta cần biết giới hạn (hay còn gọi là <strong>cận</strong>) của \( x \) (từ đâu tới đâu) và của \( y \) (từ đâu tới đâu).</p>
+  <p>Hãy nhìn vào tọa độ của 4 đỉnh: \( M(1;1), N(2;3), P(2;4), Q(1;5) \). Nhận thấy rằng:</p>
+  <ul>
+    <li>Điểm \( M \) và \( Q \) đều có hoành độ \( x = 1 \). Nghĩa là cạnh \( MQ \) nằm trên đường thẳng đứng \( x = 1 \).</li>
+    <li>Điểm \( N \) và \( P \) đều có hoành độ \( x = 2 \). Nghĩa là cạnh \( NP \) nằm trên đường thẳng đứng \( x = 2 \).</li>
+  </ul>
+  <p>Như vậy, toàn bộ hình thang này bị "kẹp" giữa hai bức tường thẳng đứng là \( x = 1 \) và \( x = 2 \). Vậy, giới hạn của \( x \) rất đơn giản: <strong>\( x \) chạy từ \( 1 \) đến \( 2 \)</strong>.</p>
+  
+  <p>Bây giờ, ta cần tìm phương trình của "trần nhà" (cạnh trên \( QP \)) và "sàn nhà" (cạnh dưới \( MN \)) để biết \( y \) chạy từ đâu đến đâu. Nhớ lại công thức lập phương trình đường thẳng đi qua 2 điểm \( (x_1, y_1) \) và \( (x_2, y_2) \):</p>
+  <p><strong>Công thức tính hệ số góc \( k \):</strong> \( k = \frac{y_2 - y_1}{x_2 - x_1} \)</p>
+  <p><strong>Phương trình đường thẳng:</strong> \( y - y_1 = k(x - x_1) \)</p>
+
+  <ol>
+    <li><strong>Tìm phương trình cạnh dưới \( MN \) (đi qua \( M(1;1) \) và \( N(2;3) \)):</strong>
+      <ul>
+        <li>Hệ số góc \( k_1 = \frac{3 - 1}{2 - 1} = \frac{2}{1} = 2 \).</li>
+        <li>Thế vào công thức với điểm \( M(1;1) \): \( y - 1 = 2(x - 1) \).</li>
+        <li>Nhân phá ngoặc: \( y - 1 = 2x - 2 \).</li>
+        <li>Chuyển vế: \( y = 2x - 2 + 1 \).</li>
+        <li>Kết quả: <strong>\( y = 2x - 1 \)</strong>. Đây chính là "sàn nhà" (cận dưới của \( y \)).</li>
+      </ul>
+    </li>
+    <li><strong>Tìm phương trình cạnh trên \( QP \) (đi qua \( Q(1;5) \) và \( P(2;4) \)):</strong>
+      <ul>
+        <li>Hệ số góc \( k_2 = \frac{4 - 5}{2 - 1} = \frac{-1}{1} = -1 \).</li>
+        <li>Thế vào công thức với điểm \( Q(1;5) \): \( y - 5 = -1(x - 1) \).</li>
+        <li>Nhân phá ngoặc: \( y - 5 = -x + 1 \).</li>
+        <li>Chuyển vế: \( y = -x + 1 + 5 \).</li>
+        <li>Kết quả: <strong>\( y = 6 - x \)</strong>. Đây chính là "trần nhà" (cận trên của \( y \)).</li>
+      </ul>
+    </li>
+  </ol>
+
+  <div style="background:#e8f8f5; border-left:4px solid #1abc9c; padding:10px; margin-bottom:15px;">
+    <em>💡 <strong>Tóm lại miền D:</strong></em> Hình thang này chiếu xuống trục Ox thì nằm gọn từ 1 đến 2. Tại mỗi vị trí \( x \) bất kỳ (nằm giữa 1 và 2), giá trị \( y \) sẽ đi từ đường thẳng \( y = 2x - 1 \) lên đến đường thẳng \( y = 6 - x \). Do đó, ta biểu diễn miền \( D \) bằng toán học như sau:
+    \[ D = \{ (x,y) \mid 1 \le x \le 2, \quad 2x - 1 \le y \le 6 - x \} \]
+  </div>
+
+  <h4>📍 Bước 2: Thiết lập tích phân lặp</h4>
+  <p>Để tính tích phân kép \( \iint_D xydxdy \), ta sẽ tính lần lượt từng biến một. Vì cận của \( y \) phụ thuộc vào \( x \) (chứa chữ \( x \)), ta phải tính tích phân theo \( y \) <strong>trước</strong>, theo \( x \) <strong>sau</strong>.</p>
+  <p>Quy tắc: Cận số (1 và 2) để ở tích phân ngoài cùng, cận chứa biến (\(2x-1\) và \(6-x\)) để ở tích phân bên trong.</p>
+  \[ I = \int_{1}^{2} \left( \int_{2x-1}^{6-x} xy \, dy \right) dx \]
+
+  <h4>📍 Bước 3: Tính tích phân bên trong (theo biến \( y \))</h4>
+  <p>Khi tính tích phân theo biến \( y \), ta coi \( x \) như là một hằng số (một con số bình thường, không thay đổi).</p>
+  <p>Biểu thức cần lấy nguyên hàm là \( xy \). Vì \( x \) là hằng số, ta giữ nguyên. Ta chỉ cần tìm nguyên hàm của \( y \).</p>
+  <p>Nhắc lại công thức nguyên hàm cơ bản: \( \int y^n dy = \frac{y^{n+1}}{n+1} \). Áp dụng cho \( y^1 \), ta có nguyên hàm là \( \frac{y^2}{2} \).</p>
+  \[ \int xy \, dy = x \cdot \frac{y^2}{2} \]
+  <p>Bây giờ, ta thế cận từ \( y = 2x-1 \) đến \( y = 6-x \) vào (lấy giá trị tại cận trên trừ đi giá trị tại cận dưới):</p>
+  \[ \int_{2x-1}^{6-x} xy \, dy = \left[ x \cdot \frac{y^2}{2} \right]_{y=2x-1}^{y=6-x} \]
+  <p>Ta thay \( y \) bằng \( (6-x) \) và \( (2x-1) \):</p>
+  \[ = x \cdot \frac{(6-x)^2}{2} - x \cdot \frac{(2x-1)^2}{2} \]
+  <p>Rút nhân tử chung là \( \frac{x}{2} \) ra ngoài để dễ tính toán:</p>
+  \[ = \frac{x}{2} \Big[ (6-x)^2 - (2x-1)^2 \Big] \]
+
+  <h4>📍 Bước 4: Khai triển và rút gọn hằng đẳng thức</h4>
+  <p>Để tích phân tiếp, ta phải phá các ngoặc vuông này ra. Nhắc lại hằng đẳng thức đáng nhớ: \( (a-b)^2 = a^2 - 2ab + b^2 \).</p>
+  <p>1. Khai triển \( (6-x)^2 \):</p>
+  \[ (6-x)^2 = 6^2 - 2 \cdot 6 \cdot x + x^2 = 36 - 12x + x^2 \]
+  <p>2. Khai triển \( (2x-1)^2 \):</p>
+  \[ (2x-1)^2 = (2x)^2 - 2 \cdot (2x) \cdot 1 + 1^2 = 4x^2 - 4x + 1 \]
+  <p>3. Trừ hai biểu thức cho nhau (nhớ đổi dấu toàn bộ biểu thức thứ hai):</p>
+  \[ (6-x)^2 - (2x-1)^2 = (36 - 12x + x^2) - (4x^2 - 4x + 1) \]
+  \[ = 36 - 12x + x^2 - 4x^2 + 4x - 1 \]
+  <p>Nhóm các số hạng giống nhau lại:</p>
+  \[ = (x^2 - 4x^2) + (-12x + 4x) + (36 - 1) \]
+  \[ = -3x^2 - 8x + 35 \]
+  <p>Vậy biểu thức sau khi rút gọn là:</p>
+  \[ \frac{x}{2} \Big[ -3x^2 - 8x + 35 \Big] \]
+  <p>Nhân chữ \( x \) ở ngoài vào trong ngoặc để chuẩn bị tính nguyên hàm tiếp theo:</p>
+  \[ = \frac{1}{2} \Big( -3x^3 - 8x^2 + 35x \Big) \]
+
+  <h4>📍 Bước 5: Tính tích phân bên ngoài (theo biến \( x \))</h4>
+  <p>Giờ ta ráp biểu thức vừa rút gọn vào tích phân ngoài cùng (theo \( x \), cận từ 1 đến 2):</p>
+  \[ I = \int_{1}^{2} \frac{1}{2} \Big( -3x^3 - 8x^2 + 35x \Big) dx \]
+  <p>Đẩy hằng số \( \frac{1}{2} \) ra ngoài dấu tích phân cho gọn:</p>
+  \[ I = \frac{1}{2} \int_{1}^{2} \Big( -3x^3 - 8x^2 + 35x \Big) dx \]
+  <p>Tiếp tục dùng công thức nguyên hàm cơ bản \( \int x^n dx = \frac{x^{n+1}}{n+1} \):</p>
+  <ul>
+    <li>Nguyên hàm của \( -3x^3 \) là \( -3 \cdot \frac{x^4}{4} = -\frac{3x^4}{4} \)</li>
+    <li>Nguyên hàm của \( -8x^2 \) là \( -8 \cdot \frac{x^3}{3} = -\frac{8x^3}{3} \)</li>
+    <li>Nguyên hàm của \( 35x \) là \( 35 \cdot \frac{x^2}{2} = \frac{35x^2}{2} \)</li>
+  </ul>
+  <p>Ta được:</p>
+  \[ I = \frac{1}{2} \left[ -\frac{3x^4}{4} - \frac{8x^3}{3} + \frac{35x^2}{2} \right]_{1}^{2} \]
+
+  <h4>📍 Bước 6: Thay cận số vào để tìm kết quả cuối cùng</h4>
+  <p>Ta thay cận trên (\(x=2\)) vào biểu thức, rồi trừ đi giá trị khi thay cận dưới (\(x=1\)).</p>
+  <p><strong>1. Thế cận trên \( x = 2 \):</strong></p>
+  \[ -\frac{3(2)^4}{4} - \frac{8(2)^3}{3} + \frac{35(2)^2}{2} \]
+  \[ = -\frac{3 \cdot 16}{4} - \frac{8 \cdot 8}{3} + \frac{35 \cdot 4}{2} \]
+  \[ = -12 - \frac{64}{3} + 70 = 58 - \frac{64}{3} = \frac{174}{3} - \frac{64}{3} = \frac{110}{3} \]
+
+  <p><strong>2. Thế cận dưới \( x = 1 \):</strong></p>
+  \[ -\frac{3(1)^4}{4} - \frac{8(1)^3}{3} + \frac{35(1)^2}{2} \]
+  \[ = -\frac{3}{4} - \frac{8}{3} + \frac{35}{2} \]
+  <p>Quy đồng mẫu số chung là 12:</p>
+  \[ = -\frac{9}{12} - \frac{32}{12} + \frac{210}{12} = \frac{-9 - 32 + 210}{12} = \frac{169}{12} \]
+
+  <p><strong>3. Trừ hai kết quả cho nhau và nhân với \( \frac{1}{2} \):</strong></p>
+  \[ I = \frac{1}{2} \left( \frac{110}{3} - \frac{169}{12} \right) \]
+  <p>Lại quy đồng mẫu số chung là 12 cho phép trừ trong ngoặc (\( \frac{110}{3} = \frac{440}{12} \)):</p>
+  \[ I = \frac{1}{2} \left( \frac{440}{12} - \frac{169}{12} \right) \]
+  \[ I = \frac{1}{2} \left( \frac{271}{12} \right) = \frac{271}{24} \]
+
+  <div style="background:#eaf2f8; border:2px solid #2980b9; padding:15px; border-radius:8px; text-align:center; margin-top:20px;">
+    <h3 style="margin:0; color:#2c3e50;">KẾT LUẬN</h3>
+    <p style="font-size:18px; margin-top:10px;">Giá trị của tích phân kép là:</p>
+    <p style="font-size:24px; color:#c0392b; font-weight:bold; margin:10px 0;">\[ \mathbf{I = \frac{271}{24}} \]</p>
+    <p style="margin-bottom:0;"><em>(✓ Ý nghĩa: Nếu mặt cong \( z = xy \) đại diện cho mật độ khối lượng, thì con số này chính là tổng khối lượng của vật thể có đáy là hình thang \( D \). Kết quả đã được kiểm tra khớp hoàn toàn với đáp số!)</em></p>
+  </div>
+</div>
+  </div>
 </div></div>
+<script>
+    function toggleSolutionBox(btn) {
+        const content = btn.nextElementSibling;
+        const isOpen = content.classList.contains('is-open');
+        const icon = btn.querySelector('.sol-icon');
+        const text = btn.querySelector('.sol-text');
+        const arrow = btn.querySelector('.sol-arrow');
+        if (isOpen) {
+            content.classList.remove('is-open');
+            btn.classList.remove('is-open');
+            if (icon) icon.textContent = '📖';
+            if (text) text.textContent = 'Xem lời giải chi tiết (Bấm để mở)';
+            if (arrow) arrow.textContent = '▼';
+        } else {
+            content.classList.add('is-open');
+            btn.classList.add('is-open');
+            if (icon) icon.textContent = '🙈';
+            if (text) text.textContent = 'Thu gọn lời giải';
+            if (arrow) arrow.textContent = '▲';
+            if (window.MathJax && MathJax.typesetPromise) {
+                MathJax.typesetPromise([content]).catch(err => console.log(err));
+            }
+        }
+    }
+</script>
 </body>
 </html>

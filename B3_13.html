@@ -27,31 +27,132 @@
         .check { background: #eafaf1; border-left: 4px solid #27ae60; padding: 8px 14px; border-radius: 4px; margin-top: 10px; color: #1e8449; }
         .plot-container { display: flex; justify-content: center; margin-top: 20px; }
         .code-block { background: #282c34; color: #abb2bf; padding: 15px; border-radius: 5px; overflow-x: auto; font-family: monospace; font-size: 13px; margin-top: 10px; white-space: pre; }
-    </style>
+    
+        /* Nút Ẩn / Hiện Lời Giải Chi Tiết */
+        .solution-toggle-wrapper {
+            margin: 28px 0 16px 0;
+        }
+        .solution-toggle-btn {
+            width: 100%;
+            background: #f8fafc;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 13px 20px;
+            font-size: 15px;
+            font-weight: 700;
+            color: #0284c7;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            font-family: inherit;
+        }
+        .solution-toggle-btn:hover {
+            background: #f0f9ff;
+            border-color: #38bdf8;
+            color: #0369a1;
+        }
+        .solution-toggle-btn.is-open {
+            background: #e0f2fe;
+            border-color: #0284c7;
+            color: #0369a1;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+        .solution-collapsible-content {
+            display: none;
+            border: 1.5px solid #0284c7;
+            border-top: none;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+            padding: 20px 22px;
+            background: #ffffff;
+        }
+        .solution-collapsible-content.is-open {
+            display: block;
+            animation: fadeInSol 0.25s ease-in-out;
+        }
+        @keyframes fadeInSol {
+            from { opacity: 0; transform: translateY(-4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+</style>
 </head>
 <body>
     <div class="problem">
         <h2>Bài B3.13</h2>
         <div class="de-bai"><strong>Đề bài:</strong> Vẽ vật thể \(\Omega\): \(z=\sqrt{x^2+y^2},\;x^2+y^2+z^2=4,\;z\ge0\)</div>
-        <h3>&#9998; Lời giải</h3>
+        <div class="solution-toggle-wrapper">
+  <button type="button" class="solution-toggle-btn" onclick="toggleSolutionBox(this)">
+    <span><span class="sol-icon">📖</span> <span class="sol-text">Xem lời giải chi tiết (Bấm để mở)</span></span>
+    <span class="sol-arrow">▼</span>
+  </button>
+  <div class="solution-collapsible-content">
+<h3>&#9998; Lời giải</h3>
         <div class="solution">
-<p><strong>Vẽ và tính thể tích vật thể</strong> \(z=\sqrt{x^2+y^2}\), \(x^2+y^2+z^2=4\).</p>
-  <p><strong>Bước 1: Khảo sát vật thể.</strong><br>
-  Vật thể bị giới hạn phía dưới bởi mặt nón \(z=\sqrt{x^2+y^2}\) và phía trên bởi mặt cầu bán kính \(R=2\) tâm O. Đây là khối giống như hình chiếc "que kem".</p>
-  <p><strong>Bước 2: Đổi sang tọa độ cầu.</strong><br>
-  Sử dụng hệ tọa độ cầu \(( \rho, \phi, \theta )\): \(z = \rho\cos\phi\), \(\sqrt{x^2+y^2} = \rho\sin\phi\).<br>
-  Định thức Jacobi: \(J = \rho^2\sin\phi\).<br>
-  Biên nón: \(\rho\cos\phi = \rho\sin\phi \Rightarrow \tan\phi = 1 \Rightarrow \phi = \frac{\pi}{4}\).<br>
-  Mặt cầu: \(\rho = 2\). Góc xoay quanh trục z: \(0 \le \theta \le 2\pi\).</p>
-  <p><strong>Bước 3: Thiết lập và tính tích phân.</strong><br>
-  \[V = \int_0^{2\pi} d\theta \int_0^{\pi/4} d\phi \int_0^2 \rho^2\sin\phi \,d\rho = \left( \int_0^{2\pi} d\theta \right) \left( \int_0^{\pi/4} \sin\phi \,d\phi \right) \left( \int_0^2 \rho^2 \,d\rho \right)\]
-  Tính từng phần riêng biệt:
-  \[\int_0^{2\pi} d\theta = 2\pi\]
-  \[\int_0^{\pi/4} \sin\phi \,d\phi = \left[ -\cos\phi \right]_0^{\pi/4} = -\frac{\sqrt{2}}{2} - (-1) = 1 - \frac{\sqrt{2}}{2} = \frac{2-\sqrt{2}}{2}\]
-  \[\int_0^2 \rho^2 \,d\rho = \left[ \frac{\rho^3}{3} \right]_0^2 = \frac{8}{3}\]
-  Nhân lại với nhau:
-  \[V = 2\pi \cdot \frac{2-\sqrt{2}}{2} \cdot \frac{8}{3} = \frac{8\pi(2-\sqrt{2})}{3}\]</p>
-  <p style="color:#1a5276; font-weight:bold;">\(\boxed{V = \frac{8\pi(2-\sqrt{2})}{3}}\) ✓ Tính toán bằng tọa độ cầu từng bước rất rõ ràng.</p>
+<p>Chào các bạn! Hôm nay chúng ta sẽ cùng tính thể tích của một vật thể ba chiều (kí hiệu là \(\Omega\)) có hình dáng rất quen thuộc trong đời sống. Hãy cùng xem nó là gì nhé!</p>
+
+<p><strong>Bước 1: Hình dung hình dáng vật thể</strong></p>
+<p>Đề bài cho chúng ta hai phương trình bề mặt:</p>
+<ul>
+  <li>\(z=\sqrt{x^2+y^2}\): Đây là phương trình của một mặt nón ngửa lên trên (giống hệt vỏ ốc quế đựng kem), với đỉnh nhọn nằm ở gốc tọa độ.</li>
+  <li>\(x^2+y^2+z^2=4\): Chắc hẳn các bạn học sinh cấp 2 đều biết định lý Pytago đúng không? Đây là phương trình 3D mở rộng của Pytago, đại diện cho một mặt cầu có tâm ở gốc tọa độ và bán kính \(R = \sqrt{4} = 2\). Chú ý thêm điều kiện \(z \ge 0\) nghĩa là ta chỉ lấy nửa mặt cầu phía trên mặt đất.</li>
+</ul>
+<p>Vật thể \(\Omega\) của chúng ta là phần không gian bị giới hạn ở dưới bởi mặt nón và ở trên bởi mặt cầu. Hãy tưởng tượng bạn múc một viên kem hình cầu đặt lên trên một chiếc vỏ ốc quế hình nón. Vật thể của chúng ta chính xác là hình chiếc "cây kem ốc quế" đó!</p>
+
+<p><strong>Bước 2: Chuyển sang hệ tọa độ cầu</strong></p>
+<p>Để tính thể tích cây kem này bằng hệ tọa độ \(x, y, z\) bình thường thì cực kỳ khó. Vì vật thể có hình cầu và hình nón, hệ tọa độ cầu (dùng khoảng cách và các góc) là công cụ hoàn hảo nhất.</p>
+<p>Trong tọa độ cầu, một điểm được xác định bởi 3 thông số \(( \rho, \phi, \theta )\):</p>
+<ul>
+  <li>\(\rho\) (đọc là "rô"): là khoảng cách từ gốc tọa độ đến điểm đó. Vì cây kem của chúng ta bị giới hạn bởi mặt cầu bán kính 2, nên \(\rho\) sẽ đi từ gốc \(0\) đến vỏ ngoài cùng là \(2\). Do đó: \(0 \le \rho \le 2\).</li>
+  <li>\(\theta\) (đọc là "tê-ta"): là góc xoay quanh cây kem (trục \(z\)). Cây kem tròn đều nên góc quay trọn một vòng: \(0 \le \theta \le 2\pi\).</li>
+  <li>\(\phi\) (đọc là "phi"): là góc nghiêng từ đỉnh đầu (trục \(z\)) gật xuống. Trục \(z\) đứng thẳng là góc \(0\). Mặt nón \(z=\sqrt{x^2+y^2}\) có độ nghiêng góc bao nhiêu? Ta biết \(z = \rho\cos\phi\) và \(\sqrt{x^2+y^2} = \rho\sin\phi\). Cho hai vế bằng nhau: \(\rho\cos\phi = \rho\sin\phi\), chia hai vế cho \(\cos\phi\) ta được \(\tan\phi = 1\). Suy ra góc nghiêng của vỏ nón là \(\phi = \frac{\pi}{4}\) (tương đương \(45^\circ\)). Vật thể nằm bên trong nón nên góc \(\phi\) đi từ thẳng đứng (\(0\)) đến vỏ nón (\(\frac{\pi}{4}\)). Vậy \(0 \le \phi \le \frac{\pi}{4}\).</li>
+  <li><strong>Chú ý quan trọng:</strong> Khi đổi sang tọa độ cầu, "cục thể tích nhỏ xíu" \(dxdydz\) sẽ biến thành \(\rho^2\sin\phi \, d\rho \, d\phi \, d\theta\). Lượng \(\rho^2\sin\phi\) gọi là định thức Jacobian, nhớ đừng quên nhân nó vào nhé!</li>
+</ul>
+
+<p><strong>Bước 3: Thiết lập phép tính tích phân</strong></p>
+<p>Thể tích vật thể là tổng của tất cả các "cục thể tích nhỏ xíu" đó:</p>
+<p>\[V = \iiint_\Omega 1 \,dxdydz\]</p>
+<p>Lắp các giới hạn cận và Jacobian vào, ta có:</p>
+<p>\[V = \int_0^{2\pi} d\theta \int_0^{\pi/4} d\phi \int_0^2 \left( \rho^2\sin\phi \right) \,d\rho\]</p>
+
+<p>Vì các cận đều là những con số cố định, và biểu thức bên trong chỉ là phép nhân, ta có thể tách tích phân khổng lồ này thành 3 tích phân nhỏ tính độc lập rồi nhân lại với nhau cho dễ:</p>
+<p>\[V = \left( \int_0^{2\pi} 1 \,d\theta \right) \cdot \left( \int_0^{\pi/4} \sin\phi \,d\phi \right) \cdot \left( \int_0^2 \rho^2 \,d\rho \right)\]</p>
+
+<p><strong>Bước 4: Tính từng phần riêng lẻ</strong></p>
+<ol>
+  <li><strong>Tích phân theo \(\theta\):</strong>
+    \[\int_0^{2\pi} 1 \,d\theta = 2\pi - 0 = 2\pi\]
+  </li>
+  <li><strong>Tích phân theo \(\phi\):</strong>
+    Nguyên hàm của \(\sin\phi\) là \(-\cos\phi\).
+    \[\int_0^{\pi/4} \sin\phi \,d\phi = \left[ -\cos\phi \right]_0^{\pi/4}\]
+    Thay cận vào:
+    \[= \left( -\cos\frac{\pi}{4} \right) - \left( -\cos0 \right)\]
+    \[= \left( -\frac{\sqrt{2}}{2} \right) - (-1)\]
+    \[= 1 - \frac{\sqrt{2}}{2} = \frac{2-\sqrt{2}}{2}\]
+  </li>
+  <li><strong>Tích phân theo \(\rho\):</strong>
+    Nguyên hàm của \(\rho^2\) là \(\frac{\rho^3}{3}\).
+    \[\int_0^2 \rho^2 \,d\rho = \left[ \frac{\rho^3}{3} \right]_0^2 = \frac{2^3}{3} - \frac{0^3}{3} = \frac{8}{3}\]
+  </li>
+</ol>
+
+<p><strong>Bước 5: Nhân các kết quả lại</strong></p>
+<p>\[V = (2\pi) \cdot \left( \frac{2-\sqrt{2}}{2} \right) \cdot \left( \frac{8}{3} \right)\]</p>
+<p>Số 2 ở tử và mẫu triệt tiêu cho nhau, ta còn:</p>
+<p>\[V = \pi \cdot (2-\sqrt{2}) \cdot \frac{8}{3}\]</p>
+<p>Sắp xếp lại cho gọn đẹp:</p>
+<p>\[V = \frac{8\pi(2-\sqrt{2})}{3}\]</p>
+
+<div style="background:#e8f4f8; padding:15px; border-radius:8px; border-left: 5px solid #2980b9;">
+<strong>Mẹo kiểm tra ý nghĩa:</strong> Thể tích của cả nửa mặt cầu bán kính 2 là \(\frac{1}{2} \cdot \frac{4}{3} \pi (2^3) = \frac{16\pi}{3}\). Kết quả của chúng ta xấp xỉ \(\frac{8\pi(0.58)}{3} \approx 1.56\pi\), nhỏ hơn nhiều so với nửa mặt cầu, điều này rất hợp lý vì cây kem chỉ chiếm một phần lõi ở giữa nửa mặt cầu đó. Tọa độ cầu quả là một công cụ mạnh mẽ!
+</div>
+
+<p><strong>Kết luận: Thể tích vật thể "cây kem" là \( \mathbf{V = \dfrac{8\pi(2-\sqrt{2})}{3}} \).</strong></p>
+
 </div>
         <div class="answer-box">&#10003; Kết quả: Bài chỉ yêu cầu vẽ</div>
         <div class="check">Bài chỉ yêu cầu vẽ. Hình 3D hiển thị vùng giữa mặt nón (cam) và mặt cầu (xanh).</div>
@@ -63,5 +164,31 @@
         <h3>&#128187; Mã nguồn Python (tham khảo)</h3>
         <pre class="code-block"></pre>
     </div>
+  </div>
+</div><script>
+    function toggleSolutionBox(btn) {
+        const content = btn.nextElementSibling;
+        const isOpen = content.classList.contains('is-open');
+        const icon = btn.querySelector('.sol-icon');
+        const text = btn.querySelector('.sol-text');
+        const arrow = btn.querySelector('.sol-arrow');
+        if (isOpen) {
+            content.classList.remove('is-open');
+            btn.classList.remove('is-open');
+            if (icon) icon.textContent = '📖';
+            if (text) text.textContent = 'Xem lời giải chi tiết (Bấm để mở)';
+            if (arrow) arrow.textContent = '▼';
+        } else {
+            content.classList.add('is-open');
+            btn.classList.add('is-open');
+            if (icon) icon.textContent = '🙈';
+            if (text) text.textContent = 'Thu gọn lời giải';
+            if (arrow) arrow.textContent = '▲';
+            if (window.MathJax && MathJax.typesetPromise) {
+                MathJax.typesetPromise([content]).catch(err => console.log(err));
+            }
+        }
+    }
+</script>
 </body>
 </html>

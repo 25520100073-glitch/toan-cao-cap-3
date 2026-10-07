@@ -20,7 +20,58 @@
         .problem { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 40px; }
         .code-block { background: #282c34; color: #abb2bf; padding: 15px; border-radius: 5px; overflow-x: auto; font-family: monospace; font-size: 14px; }
         .plot-container { display: flex; justify-content: center; }
-    </style>
+    
+        /* Nút Ẩn / Hiện Lời Giải Chi Tiết */
+        .solution-toggle-wrapper {
+            margin: 28px 0 16px 0;
+        }
+        .solution-toggle-btn {
+            width: 100%;
+            background: #f8fafc;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 13px 20px;
+            font-size: 15px;
+            font-weight: 700;
+            color: #0284c7;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            font-family: inherit;
+        }
+        .solution-toggle-btn:hover {
+            background: #f0f9ff;
+            border-color: #38bdf8;
+            color: #0369a1;
+        }
+        .solution-toggle-btn.is-open {
+            background: #e0f2fe;
+            border-color: #0284c7;
+            color: #0369a1;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+        .solution-collapsible-content {
+            display: none;
+            border: 1.5px solid #0284c7;
+            border-top: none;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+            padding: 20px 22px;
+            background: #ffffff;
+        }
+        .solution-collapsible-content.is-open {
+            display: block;
+            animation: fadeInSol 0.25s ease-in-out;
+        }
+        @keyframes fadeInSol {
+            from { opacity: 0; transform: translateY(-4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+</style>
 </head>
 <body>
     <div class="problem">
@@ -35,20 +86,128 @@
         <h3>Mã Nguồn Tham Khảo (Cho AI khác)</h3>
         <pre class="code-block"><code>ans = sp.integrate(x*y, (x, 0, 1/y), (y, 1, 4))</code></pre>
     
+<div class="solution-toggle-wrapper">
+  <button type="button" class="solution-toggle-btn" onclick="toggleSolutionBox(this)">
+    <span><span class="sol-icon">📖</span> <span class="sol-text">Xem lời giải chi tiết (Bấm để mở)</span></span>
+    <span class="sol-arrow">▼</span>
+  </button>
+  <div class="solution-collapsible-content">
 <div style="background:#eaf4fb; border-left:5px solid #2980b9; padding:20px; margin-top:30px; border-radius:6px;">
   <h3 style="color:#1a5276;">Lời giải – Bài B1.18</h3>
-  <p><strong>Đề bài:</strong> Tính \(\iint_D xy\,dxdy\), D giới hạn bởi \(y=1\), \(y=4\), \(xy=1\), \(x=0\).</p>
+  <p><strong>Đề bài:</strong> Tính \(\iint_D xy \,dxdy\), với \(D\) là vùng được bao quanh (giới hạn) bởi các đường: \(y=1\), \(y=4\), \(xy=1\), và \(x=0\).</p>
 
-  <p><strong>Bước 1: Xác định miền D.</strong><br>
-  \(xy=1 \Rightarrow x=1/y\). Với \(1\le y\le 4\), \(x\) từ \(0\) đến \(1/y\).</p>
+  <div style="background:#fff; padding:15px; border-radius:5px; margin-bottom:15px; border: 1px solid #d6eaf8;">
+    <h4 style="color:#2980b9; margin-top:0;">Bước 1: Hiểu các ký hiệu và yêu cầu của bài toán</h4>
+    <ul>
+      <li>Ký hiệu \(\iint_D\) được gọi là <strong>tích phân kép</strong>. Em có thể tưởng tượng việc này giống như ta đang tính tổng khối lượng của một miếng bìa mỏng hình \(D\), mà tại mỗi điểm \((x, y)\) trên miếng bìa, độ nặng (mật độ) của nó là \(xy\).</li>
+      <li>\(dxdy\) chỉ đơn giản là diện tích của một mảnh cắt vô cùng nhỏ xíu trên miếng bìa đó.</li>
+      <li>Nhiệm vụ của chúng ta là phải "gom" hết tất cả các mảnh nhỏ đó lại trên toàn bộ vùng \(D\). Muốn gom được, ta phải biết chính xác hình dáng của \(D\) từ đâu đến đâu.</li>
+    </ul>
+  </div>
 
-  <p><strong>Bước 2: Tính tích phân.</strong></p>
-  \[I = \int_1^4\int_0^{1/y} xy\,dx\,dy = \int_1^4 y\cdot\left[\frac{x^2}{2}\right]_0^{1/y}dy = \int_1^4 y\cdot\frac{1}{2y^2}\,dy = \frac{1}{2}\int_1^4 \frac{1}{y}\,dy\]
-  \[= \frac{1}{2}\left[\ln y\right]_1^4 = \frac{1}{2}\ln 4 = \frac{1}{2}\cdot 2\ln 2 = \ln 2\]
+  <div style="background:#fff; padding:15px; border-radius:5px; margin-bottom:15px; border: 1px solid #d6eaf8;">
+    <h4 style="color:#2980b9; margin-top:0;">Bước 2: Vẽ và xác định giới hạn của vùng D (Tìm "cận")</h4>
+    <p>Để tính được, ta cần biết \(x\) chạy từ đâu đến đâu, và \(y\) chạy từ đâu đến đâu. Ta hãy xem xét 4 ranh giới của vùng \(D\):</p>
+    <ul>
+      <li>Đường \(y = 1\) và \(y = 4\): Đây là hai đường thẳng nằm ngang. Nó cho ta biết vùng \(D\) bị kẹp ở giữa chiều cao từ \(y = 1\) (dưới) lên đến \(y = 4\) (trên). Vậy ta có ngay: \(1 \le y \le 4\).</li>
+      <li>Đường \(x = 0\): Đây chính là trục dọc (trục tung \(Oy\)). Nó là bức tường chắn bên trái của vùng \(D\).</li>
+      <li>Đường \(xy = 1\): Đây là một đường cong (được gọi là đường hypebol). Vì ta đã biết \(y\) chạy từ \(1\) đến \(4\) (tức là \(y\) là số dương), ta có thể chia cả hai vế cho \(y\) để tìm ra \(x\):
+        \[ x = \frac{1}{y} \]
+      </li>
+    </ul>
+    
+    <div style="background:#fff3cd; border-left:4px solid #ffc107; padding:10px; margin:10px 0;">
+      <strong>💡 Mẹo nhỏ: Xác định cận trên và cận dưới cho \(x\)</strong><br>
+      Với bất kỳ một độ cao \(y\) nào đó nằm trong khoảng từ 1 đến 4, ta kẻ một đường nằm ngang từ trái sang phải.<br>
+      - Điểm bắt đầu (bên trái) luôn chạm vào trục dọc, tức là \(x = 0\).<br>
+      - Điểm kết thúc (bên phải) luôn chạm vào đường cong \(x = \frac{1}{y}\).<br>
+      Vì \(y\) dương (từ 1 đến 4) nên \(\frac{1}{y}\) luôn lớn hơn \(0\). Do đó, vùng \(D\) của ta sẽ có hoành độ \(x\) chạy từ \(0\) đến \(\frac{1}{y}\).
+    </div>
+    
+    <p><strong>Kết luận về vùng D:</strong><br>
+    \(y\) đi từ: \(1 \to 4\)<br>
+    \(x\) đi từ: \(0 \to \frac{1}{y}\)</p>
+  </div>
 
-  <p style="color:#1a5276; font-weight:bold;">\(\boxed{I = \ln 2}\) ✓ Khớp với đáp án \(\ln(2)\).</p>
+  <div style="background:#fff; padding:15px; border-radius:5px; margin-bottom:15px; border: 1px solid #d6eaf8;">
+    <h4 style="color:#2980b9; margin-top:0;">Bước 3: Ráp cận vào công thức tích phân kép</h4>
+    <p>Ta sẽ thiết lập phép tính (gọi là tích phân lặp). Ta tính theo biến \(x\) trước (vì cận của \(x\) chứa chữ \(y\)), rồi mới tính theo biến \(y\) sau (vì cận của \(y\) toàn là các con số cụ thể):</p>
+    \[ I = \int_{1}^{4} \left( \int_{0}^{\frac{1}{y}} xy \, dx \right) dy \]
+  </div>
+
+  <div style="background:#fff; padding:15px; border-radius:5px; margin-bottom:15px; border: 1px solid #d6eaf8;">
+    <h4 style="color:#2980b9; margin-top:0;">Bước 4: Tính tích phân bên trong (theo biến x)</h4>
+    <p>Ta chỉ tập trung vào phần bên trong ngoặc đơn:</p>
+    \[ \int_{0}^{\frac{1}{y}} xy \, dx \]
+    <p>Ở đây ta đang tính theo \(x\), nên chữ \(y\) được xem như là một con số bình thường (hằng số). Ta đưa \(y\) ra ngoài dấu tích phân:</p>
+    \[ = y \cdot \int_{0}^{\frac{1}{y}} x \, dx \]
+    <p><strong>Nhắc lại quy tắc:</strong> Nguyên hàm của \(x\) (tức là \(x^1\)) là \(\frac{x^2}{2}\). Ta áp dụng vào:</p>
+    \[ = y \cdot \left[ \frac{x^2}{2} \right]_{x=0}^{x=\frac{1}{y}} \]
+    <p>Thay cận trên \(x = \frac{1}{y}\) và cận dưới \(x = 0\) vào, rồi lấy kết quả trên trừ kết quả dưới:</p>
+    \[ = y \cdot \left( \frac{\left(\frac{1}{y}\right)^2}{2} - \frac{0^2}{2} \right) \]
+    <p>Bình phương phân số \(\frac{1}{y}\):</p>
+    \[ = y \cdot \left( \frac{\frac{1}{y^2}}{2} - 0 \right) \]
+    <p>Chia cho 2 tức là nhân với \(\frac{1}{2}\):</p>
+    \[ = y \cdot \left( \frac{1}{2y^2} \right) \]
+    <p>Rút gọn bớt một chữ \(y\) ở tử số và mẫu số:</p>
+    \[ = \frac{1}{2y} \]
+  </div>
+
+  <div style="background:#fff; padding:15px; border-radius:5px; margin-bottom:15px; border: 1px solid #d6eaf8;">
+    <h4 style="color:#2980b9; margin-top:0;">Bước 5: Tính tích phân bên ngoài (theo biến y)</h4>
+    <p>Giờ ta lấy kết quả vừa tìm được ở Bước 4 ráp vào tích phân bên ngoài (theo \(y\)):</p>
+    \[ I = \int_{1}^{4} \frac{1}{2y} \, dy \]
+    <p>Đưa số \(\frac{1}{2}\) ra ngoài cho dễ tính:</p>
+    \[ I = \frac{1}{2} \int_{1}^{4} \frac{1}{y} \, dy \]
+    <p><strong>Nhắc lại quy tắc:</strong> Nguyên hàm của \(\frac{1}{y}\) là hàm logarit tự nhiên \(\ln|y|\).</p>
+    \[ I = \frac{1}{2} \left[ \ln|y| \right]_{y=1}^{y=4} \]
+    <p>Thay cận trên (4) và cận dưới (1) vào:</p>
+    \[ I = \frac{1}{2} \left( \ln(4) - \ln(1) \right) \]
+    <p>Vì \(\ln(1) = 0\) (đây là tính chất cơ bản của logarit), phép tính trở thành:</p>
+    \[ I = \frac{1}{2} \left( \ln(4) - 0 \right) \]
+    \[ I = \frac{1}{2} \ln(4) \]
+    <p>Để rút gọn đẹp hơn, ta nhớ lại tính chất \(\ln(a^b) = b \cdot \ln(a)\). Ở đây \(4 = 2^2\), nên:</p>
+    \[ I = \frac{1}{2} \ln(2^2) \]
+    \[ I = \frac{1}{2} \cdot 2 \cdot \ln(2) \]
+    \[ I = 1 \cdot \ln(2) \]
+    \[ I = \ln(2) \]
+  </div>
+
+  <div style="background:#d4efdf; padding:15px; border-radius:5px; border: 1px solid #a9dfbf;">
+    <h4 style="color:#196f3d; margin-top:0;">Bước 6: Kết luận và kiểm tra</h4>
+    <p style="font-size:18px;"><strong>Vậy, kết quả cuối cùng của bài toán là: \(I = \ln(2)\)</strong></p>
+    <p><strong>Ý nghĩa bài toán:</strong> Nếu vùng \(D\) là một miếng bìa và mật độ khối lượng của nó thay đổi theo công thức \(xy\), thì tổng khối lượng của miếng bìa này đúng bằng \(\ln(2)\) (khoảng \(0.693\) đơn vị khối lượng).</p>
+    <p>Kết quả này đã được kiểm tra và hoàn toàn <strong>khớp với đáp án</strong> \(\ln(2)\) (hoặc \(\frac{\ln(4)}{2}\)) của đề bài đưa ra.</p>
+  </div>
+</div>
+  </div>
 </div>
 
 </div>
+<script>
+    function toggleSolutionBox(btn) {
+        const content = btn.nextElementSibling;
+        const isOpen = content.classList.contains('is-open');
+        const icon = btn.querySelector('.sol-icon');
+        const text = btn.querySelector('.sol-text');
+        const arrow = btn.querySelector('.sol-arrow');
+        if (isOpen) {
+            content.classList.remove('is-open');
+            btn.classList.remove('is-open');
+            if (icon) icon.textContent = '📖';
+            if (text) text.textContent = 'Xem lời giải chi tiết (Bấm để mở)';
+            if (arrow) arrow.textContent = '▼';
+        } else {
+            content.classList.add('is-open');
+            btn.classList.add('is-open');
+            if (icon) icon.textContent = '🙈';
+            if (text) text.textContent = 'Thu gọn lời giải';
+            if (arrow) arrow.textContent = '▲';
+            if (window.MathJax && MathJax.typesetPromise) {
+                MathJax.typesetPromise([content]).catch(err => console.log(err));
+            }
+        }
+    }
+</script>
 </body>
 </html>

@@ -20,7 +20,58 @@
         .problem { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 40px; }
         .code-block { background: #282c34; color: #abb2bf; padding: 15px; border-radius: 5px; overflow-x: auto; font-family: monospace; font-size: 14px; }
         .plot-container { display: flex; justify-content: center; }
-    </style>
+    
+        /* Nút Ẩn / Hiện Lời Giải Chi Tiết */
+        .solution-toggle-wrapper {
+            margin: 28px 0 16px 0;
+        }
+        .solution-toggle-btn {
+            width: 100%;
+            background: #f8fafc;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 13px 20px;
+            font-size: 15px;
+            font-weight: 700;
+            color: #0284c7;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            font-family: inherit;
+        }
+        .solution-toggle-btn:hover {
+            background: #f0f9ff;
+            border-color: #38bdf8;
+            color: #0369a1;
+        }
+        .solution-toggle-btn.is-open {
+            background: #e0f2fe;
+            border-color: #0284c7;
+            color: #0369a1;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+        .solution-collapsible-content {
+            display: none;
+            border: 1.5px solid #0284c7;
+            border-top: none;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+            padding: 20px 22px;
+            background: #ffffff;
+        }
+        .solution-collapsible-content.is-open {
+            display: block;
+            animation: fadeInSol 0.25s ease-in-out;
+        }
+        @keyframes fadeInSol {
+            from { opacity: 0; transform: translateY(-4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+</style>
 </head>
 <body>
     <div class="problem">
@@ -35,31 +86,123 @@
         <h3>Mã Nguồn Tham Khảo (Cho AI khác)</h3>
         <pre class="code-block"><code>ans = sp.integrate(x*y, (y, x**2, 2-x), (x, 0, 1))</code></pre>
     
+<div class="solution-toggle-wrapper">
+  <button type="button" class="solution-toggle-btn" onclick="toggleSolutionBox(this)">
+    <span><span class="sol-icon">📖</span> <span class="sol-text">Xem lời giải chi tiết (Bấm để mở)</span></span>
+    <span class="sol-arrow">▼</span>
+  </button>
+  <div class="solution-collapsible-content">
 <div style="background:#eaf4fb; border-left:5px solid #2980b9; padding:20px; margin-top:30px; border-radius:6px;">
-  <h3 style="color:#1a5276;">Lời giải – Bài B1.11</h3>
-  <p><strong>Đề bài:</strong> Tính \(\iint_D xy\,dxdy\), D giới hạn bởi \(y=x^2\), \(y=2-x\), trục \(Oy\), \(x \ge 0\).</p>
+  <h3 style="color:#1a5276;">Lời giải chi tiết từng bước – Bài B1.11</h3>
+  
+  <p><strong>Đề bài:</strong> Tính tích phân kép \(I = \iint_D xy \,dxdy\), với miền \(D\) bị giới hạn bởi các đường: \(y=x^2\), \(y=2-x\), trục \(Oy\) (tức là đường thẳng \(x=0\)), và điều kiện \(x \ge 0\).</p>
 
-  <p><strong>Bước 1: Xác định miền D.</strong><br>
-  Giao điểm \(y=x^2\) và \(y=2-x\): \(x=1\) (với \(x\ge 0\)).<br>
-  Giao điểm \(y=2-x\) với \(Oy\): \(x=0,y=2\).<br>
-  Giao điểm \(y=x^2\) với \(Oy\): \(x=0,y=0\).<br>
-  Miền D: \(0\le x \le 1\), \(x^2 \le y \le 2-x\).</p>
+  <p><em>Ý nghĩa của ký hiệu:</em> Ký hiệu \(\iint_D\) có nghĩa là chúng ta sẽ quét toàn bộ diện tích của vùng \(D\) trên mặt phẳng. Cụm \(dxdy\) cho biết ta sẽ tính tổng các diện tích rất nhỏ bé. Còn \(xy\) chính là "hàm số" mà chúng ta cần tính tổng giá trị của nó trên vùng \(D\) này.</p>
 
-  <p><strong>Bước 2: Tính tích phân.</strong></p>
-  \[I = \int_0^1\int_{x^2}^{2-x} xy\,dy\,dx = \int_0^1 x\cdot\frac{(2-x)^2-x^4}{2}\,dx\]
-  \[= \frac{1}{2}\int_0^1 x\left[(2-x)^2-x^4\right]dx\]
+  
+  <h4>Bước 1: Tìm các điểm giao nhau (góc của miền D)</h4>
+  <p>Chúng ta cần biết "mái nhà" và "đáy võng" gặp nhau ở đâu. Để làm điều này, ta giải phương trình hoành độ giao điểm (cho hai cái \(y\) bằng nhau):</p>
+  \[ x^2 = 2 - x \]
+  <p>Chuyển tất cả sang một vế để giải phương trình bậc 2:</p>
+  \[ x^2 + x - 2 = 0 \]
+  <p>Bấm máy tính hoặc nhẩm nghiệm, ta được hai kết quả:</p>
+  \[ x = 1 \]
+  \[ x = -2 \]
+  <p>Vì đề bài có điều kiện \(x \ge 0\), ta chỉ lấy <strong>\(x = 1\)</strong>. Tại \(x = 1\), ta thay vào hàm số tìm \(y\): \(y = 1^2 = 1\). Vậy điểm giao nhau bên phải là \((1, 1)\).</p>
+  <p>Với trục \(Oy\) (tức \(x=0\)), điểm bắt đầu của parabol là \((0, 0)\), và điểm bắt đầu của đường thẳng là \((0, 2)\).</p>
+  <p><strong>Kết luận bước 1:</strong> Vùng \(D\) của chúng ta chạy theo chiều ngang (trục \(Ox\)) từ \(x = 0\) đến \(x = 1\).</p>
 
-  <p>Khai triển:</p>
-  \[x(2-x)^2 = x(4-4x+x^2) = 4x-4x^2+x^3\]
-  \[I = \frac{1}{2}\int_0^1(4x-4x^2+x^3-x^5)\,dx = \frac{1}{2}\left[2x^2-\frac{4x^3}{3}+\frac{x^4}{4}-\frac{x^6}{6}\right]_0^1\]
-  \[= \frac{1}{2}\left(2-\frac{4}{3}+\frac{1}{4}-\frac{1}{6}\right)\]
+  <h4>Bước 2: Xác định trần và sàn (cận trên và cận dưới theo \(y\))</h4>
+  <p>Trong khoảng \(x\) từ \(0\) đến \(1\), đường nào nằm trên, đường nào nằm dưới? Hãy thử lấy một điểm ở giữa, ví dụ \(x = 0.5\):</p>
+  <ul>
+    <li>Đường parabol: \(y = (0.5)^2 = 0.25\)</li>
+    <li>Đường thẳng: \(y = 2 - 0.5 = 1.5\)</li>
+  </ul>
+  <p>Rõ ràng \(1.5 > 0.25\), vậy đường thẳng \(y = 2-x\) luôn nằm <strong>phía trên</strong> (làm cận trên), còn parabol \(y = x^2\) luôn nằm <strong>phía dưới</strong> (làm cận dưới).</p>
+  <p>Ta viết lại giới hạn của miền \(D\):</p>
+  \[ 0 \le x \le 1 \]
+  \[ x^2 \le y \le 2-x \]
 
-  <p>Quy đồng mẫu 12: \(2=\frac{24}{12}\), \(\frac{4}{3}=\frac{16}{12}\), \(\frac{1}{4}=\frac{3}{12}\), \(\frac{1}{6}=\frac{2}{12}\):</p>
-  \[= \frac{1}{2}\cdot\frac{24-16+3-2}{12} = \frac{1}{2}\cdot\frac{9}{12} = \frac{9}{24} = \frac{3}{8}\]
+  <h4>Bước 3: Lắp ráp vào công thức tích phân và tính lớp trong cùng (theo biến \(y\))</h4>
+  <p>Bây giờ ta chuyển tích phân kép thành 2 lớp tích phân đơn (tích phân lặp). Lớp bên ngoài là số cụ thể (biến \(x\)), lớp bên trong là hàm số (biến \(y\)):</p>
+  \[ I = \int_0^1 \left( \int_{x^2}^{2-x} xy \,dy \right) dx \]
+  <p>Ta tính phần bên trong ngoặc trước. Ở lớp này, \(x\) chỉ đóng vai trò như một hằng số (con số bình thường), ta chỉ tìm nguyên hàm theo \(y\). Nhắc lại công thức nguyên hàm cơ bản: \(\int y \,dy = \frac{y^2}{2}\).</p>
+  \[ \int_{x^2}^{2-x} xy \,dy = x \cdot \left[ \frac{y^2}{2} \right]_{x^2}^{2-x} \]
+  <p>Thế cận trên \((2-x)\) và cận dưới \((x^2)\) vào chữ \(y\):</p>
+  \[ = x \cdot \left( \frac{(2-x)^2}{2} - \frac{(x^2)^2}{2} \right) \]
+  <p>Rút gọn biểu thức (đặt số \(1/2\) ra ngoài cho đỡ rối):</p>
+  \[ = \frac{1}{2} x \cdot \left[ (2-x)^2 - x^4 \right] \]
 
-  <p style="color:#1a5276; font-weight:bold;">\(\boxed{I = \dfrac{3}{8}}\) ✓ Khớp với đáp án.</p>
+  <h4>Bước 4: Tính lớp bên ngoài (theo biến \(x\))</h4>
+  <p>Đưa kết quả vừa tính vào tích phân bên ngoài:</p>
+  \[ I = \int_0^1 \frac{1}{2} x \left[ (2-x)^2 - x^4 \right] dx \]
+  <p>Đưa hằng số \(1/2\) ra ngoài dấu tích phân để tính cho dễ:</p>
+  \[ I = \frac{1}{2} \int_0^1 x \left[ (2-x)^2 - x^4 \right] dx \]
+  <p>Bây giờ, ta cần phá ngoặc bằng cách khai triển hằng đẳng thức \((A-B)^2 = A^2 - 2AB + B^2\):</p>
+  \[ (2-x)^2 = 2^2 - 2 \cdot 2 \cdot x + x^2 = 4 - 4x + x^2 \]
+  <p>Thay vào biểu thức bên trong:</p>
+  \[ x \left[ 4 - 4x + x^2 - x^4 \right] \]
+  <p>Nhân phân phối chữ \(x\) vào từng số hạng bên trong:</p>
+  \[ = x \cdot 4 - x \cdot 4x + x \cdot x^2 - x \cdot x^4 \]
+  \[ = 4x - 4x^2 + x^3 - x^5 \]
+  <p>Bây giờ bài toán trở thành tính tích phân của một đa thức rất quen thuộc:</p>
+  \[ I = \frac{1}{2} \int_0^1 (4x - 4x^2 + x^3 - x^5) \,dx \]
+  <p>Áp dụng công thức nguyên hàm cơ bản \(\int x^n \,dx = \frac{x^{n+1}}{n+1}\) cho từng thành phần:</p>
+  \[ \int 4x \,dx = 4 \cdot \frac{x^2}{2} = 2x^2 \]
+  \[ \int 4x^2 \,dx = 4 \cdot \frac{x^3}{3} = \frac{4x^3}{3} \]
+  \[ \int x^3 \,dx = \frac{x^4}{4} \]
+  \[ \int x^5 \,dx = \frac{x^6}{6} \]
+  <p>Ghép lại ta có:</p>
+  \[ I = \frac{1}{2} \left[ 2x^2 - \frac{4x^3}{3} + \frac{x^4}{4} - \frac{x^6}{6} \right]_0^1 \]
+
+  <h4>Bước 5: Thế số để ra đáp án cuối cùng</h4>
+  <p>Khi thế cận dưới \(x=0\) vào, mọi số hạng đều bằng \(0\). Do đó ta chỉ cần thế cận trên \(x=1\):</p>
+  \[ I = \frac{1}{2} \left( 2(1)^2 - \frac{4(1)^3}{3} + \frac{(1)^4}{4} - \frac{(1)^6}{6} \right) \]
+  \[ = \frac{1}{2} \left( 2 - \frac{4}{3} + \frac{1}{4} - \frac{1}{6} \right) \]
+  <p>Để trừ các phân số, ta quy đồng mẫu số chung là \(12\):</p>
+  \[ 2 = \frac{24}{12} \]
+  \[ \frac{4}{3} = \frac{4 \cdot 4}{3 \cdot 4} = \frac{16}{12} \]
+  \[ \frac{1}{4} = \frac{1 \cdot 3}{4 \cdot 3} = \frac{3}{12} \]
+  \[ \frac{1}{6} = \frac{1 \cdot 2}{6 \cdot 2} = \frac{2}{12} \]
+  <p>Thực hiện phép tính trên tử số:</p>
+  \[ = \frac{1}{2} \left( \frac{24 - 16 + 3 - 2}{12} \right) \]
+  \[ = \frac{1}{2} \left( \frac{9}{12} \right) \]
+  <p>Rút gọn phân số \(\frac{9}{12}\) (chia cả tử và mẫu cho 3) được \(\frac{3}{4}\):</p>
+  \[ = \frac{1}{2} \cdot \frac{3}{4} \]
+  \[ = \frac{3}{8} \]
+
+  <p style="color:#1a5276; font-size: 1.1em;"><strong>Kết luận:</strong></p>
+  <p style="color:#1a5276; font-weight:bold;">\(\boxed{I = \dfrac{3}{8}}\)</p>
+  <p><strong>Kiểm tra và ý nghĩa bài toán:</strong> Kết quả là một số dương, điều này rất hợp lý vì trong góc phần tư thứ nhất (nơi \(x > 0, y > 0\)), hàm số \(f(x,y) = xy\) luôn mang giá trị dương. Việc tính ra \(3/8\) hoàn toàn khớp với đáp án gốc, khẳng định các bước suy luận và tính toán của chúng ta là chính xác 100%.</p>
+</div>
+  </div>
 </div>
 
 </div>
+<script>
+    function toggleSolutionBox(btn) {
+        const content = btn.nextElementSibling;
+        const isOpen = content.classList.contains('is-open');
+        const icon = btn.querySelector('.sol-icon');
+        const text = btn.querySelector('.sol-text');
+        const arrow = btn.querySelector('.sol-arrow');
+        if (isOpen) {
+            content.classList.remove('is-open');
+            btn.classList.remove('is-open');
+            if (icon) icon.textContent = '📖';
+            if (text) text.textContent = 'Xem lời giải chi tiết (Bấm để mở)';
+            if (arrow) arrow.textContent = '▼';
+        } else {
+            content.classList.add('is-open');
+            btn.classList.add('is-open');
+            if (icon) icon.textContent = '🙈';
+            if (text) text.textContent = 'Thu gọn lời giải';
+            if (arrow) arrow.textContent = '▲';
+            if (window.MathJax && MathJax.typesetPromise) {
+                MathJax.typesetPromise([content]).catch(err => console.log(err));
+            }
+        }
+    }
+</script>
 </body>
 </html>

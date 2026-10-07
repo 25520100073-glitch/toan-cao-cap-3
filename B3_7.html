@@ -27,26 +27,162 @@
         .check { background: #eafaf1; border-left: 4px solid #27ae60; padding: 8px 14px; border-radius: 4px; margin-top: 10px; color: #1e8449; }
         .plot-container { display: flex; justify-content: center; margin-top: 20px; }
         .code-block { background: #282c34; color: #abb2bf; padding: 15px; border-radius: 5px; overflow-x: auto; font-family: monospace; font-size: 13px; margin-top: 10px; white-space: pre; }
-    </style>
+    
+        /* Nút Ẩn / Hiện Lời Giải Chi Tiết */
+        .solution-toggle-wrapper {
+            margin: 28px 0 16px 0;
+        }
+        .solution-toggle-btn {
+            width: 100%;
+            background: #f8fafc;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 13px 20px;
+            font-size: 15px;
+            font-weight: 700;
+            color: #0284c7;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            font-family: inherit;
+        }
+        .solution-toggle-btn:hover {
+            background: #f0f9ff;
+            border-color: #38bdf8;
+            color: #0369a1;
+        }
+        .solution-toggle-btn.is-open {
+            background: #e0f2fe;
+            border-color: #0284c7;
+            color: #0369a1;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+        .solution-collapsible-content {
+            display: none;
+            border: 1.5px solid #0284c7;
+            border-top: none;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+            padding: 20px 22px;
+            background: #ffffff;
+        }
+        .solution-collapsible-content.is-open {
+            display: block;
+            animation: fadeInSol 0.25s ease-in-out;
+        }
+        @keyframes fadeInSol {
+            from { opacity: 0; transform: translateY(-4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+</style>
 </head>
 <body>
     <div class="problem">
         <h2>Bài B3.7</h2>
         <div class="de-bai"><strong>Đề bài:</strong> Thể tích vật thể giới hạn bởi \(z=1+x^2+y^2\) và \(x=0,\;y=0,\;z=0,\;x+y=1\)</div>
-        <h3>&#9998; Lời giải</h3>
+        <div class="solution-toggle-wrapper">
+  <button type="button" class="solution-toggle-btn" onclick="toggleSolutionBox(this)">
+    <span><span class="sol-icon">📖</span> <span class="sol-text">Xem lời giải chi tiết (Bấm để mở)</span></span>
+    <span class="sol-arrow">▼</span>
+  </button>
+  <div class="solution-collapsible-content">
+<h3>&#9998; Lời giải</h3>
         <div class="solution">
-  <p><strong>Bước 1: Xác định hình chiếu và cận tích phân.</strong><br>
-  - Vật thể bị giới hạn xung quanh bởi các mặt phẳng thẳng đứng \(x=0, y=0, x+y=1\). Hình chiếu xuống mặt phẳng \(Oxy\) là miền tam giác \(D: 0 \le x \le 1,\; 0 \le y \le 1-x\).<br>
-  - Chiều cao \(z\) đi từ mặt phẳng đáy \(z=0\) đến mặt paraboloid \(z = 1+x^2+y^2\).</p>
-  <p><strong>Bước 2: Thiết lập và tính tích phân theo \(z\) và \(y\).</strong></p>
-  \[V = \iiint_\Omega dxdydz = \int_0^1 dx \int_0^{1-x} dy \int_0^{1+x^2+y^2} dz = \int_0^1 dx \int_0^{1-x} (1+x^2+y^2)\,dy\]
-  <p>Lấy nguyên hàm theo biến \(y\) (coi \(x\) là hằng số):</p>
-  \[\int_0^{1-x} (1+x^2+y^2)\,dy = \left[ (1+x^2)y + \frac{y^3}{3} \right]_{y=0}^{y=1-x} = (1+x^2)(1-x) + \frac{(1-x)^3}{3}\]
-  <p><strong>Bước 3: Tính tích phân theo \(x\).</strong><br>
-  Ta khai triển \((1+x^2)(1-x) = 1 - x + x^2 - x^3\) và giữ nguyên \(\frac{(1-x)^3}{3}\):</p>
-  \[V = \int_0^1 \left( 1 - x + x^2 - x^3 + \frac{(1-x)^3}{3} \right) dx = \left[ x - \frac{x^2}{2} + \frac{x^3}{3} - \frac{x^4}{4} - \frac{(1-x)^4}{12} \right]_0^1\]
-  \[= \left( 1 - \frac{1}{2} + \frac{1}{3} - \frac{1}{4} - 0 \right) - \left( 0 - 0 + 0 - 0 - \frac{1}{12} \right) = \frac{12 - 6 + 4 - 3}{12} + \frac{1}{12} = \frac{7}{12} + \frac{1}{12} = \frac{8}{12} = \frac{2}{3}\]
-  <p style="color:#27ae60; font-weight:bold;">\(\boxed{V = \dfrac{2}{3}}\) ✓ Khớp hoàn toàn với đáp án!</p>
+  <h4>Bước 1: Hiểu đề bài và hình dung vật thể \(\Omega\) trong không gian 3 chiều</h4>
+  <p>Đề bài yêu cầu tính thể tích của một vật thể ba chiều (kí hiệu là \(\Omega\)). Hãy tưởng tượng vật thể này giống như một căn phòng hoặc một chiếc bánh đặc biệt:</p>
+  <ul>
+    <li><strong>Mặt sàn bên dưới:</strong> Là mặt phẳng nằm ngang \(z = 0\) (mặt phẳng tọa độ \(Oxy\)).</li>
+    <li><strong>Các bức tường thẳng đứng bao quanh:</strong>
+      <ul>
+        <li>Bức tường bên trái: Mặt phẳng \(x = 0\) (mặt phẳng tọa độ \(Oyz\)).</li>
+        <li>Bức tường phía sau: Mặt phẳng \(y = 0\) (mặt phẳng tọa độ \(Oxz\)).</li>
+        <li>Bức tường vát chéo phía trước: Mặt phẳng \(x + y = 1\).</li>
+      </ul>
+      Ba bức tường này cắm thẳng đứng xuống mặt sàn tạo thành một đáy là hình tam giác vuông tại gốc tọa độ \(O(0,0)\).
+    </li>
+    <li><strong>Mái nhà uốn cong ở trên:</strong> Là mặt paraboloid tròn xoay \(z = 1 + x^2 + y^2\). Đáy của chiếc chảo uốn cong này nhấc lên khỏi mặt đất một khoảng bằng \(1\) tại gốc tọa độ (điểm có tọa độ \((0,0,1)\)), sau đó cong vểnh cao dần lên khi đi ra xa.</li>
+  </ul>
+
+  
+  <h4>Bước 2: Xác định cận của các biến (từ ngoài vào trong)</h4>
+  <p>Để quét qua từng điểm của vật thể, ta đặt các cận theo thứ tự từ biến độc lập ở ngoài đến biến phụ thuộc ở trong:</p>
+  <ul>
+    <li><strong>Biến \(x\) (ngoài cùng):</strong> Nhìn vào đáy tam giác trên sàn, điểm bên trái nhất là gốc tọa độ \(x = 0\), điểm xa nhất về bên phải là giao điểm với trục hoành \(x = 1\). Do đó:
+      \[0 \le x \le 1\]
+    </li>
+    <li><strong>Biến \(y\) (ở giữa):</strong> Với mỗi giá trị \(x\) cố định, ta đi từ cạnh đáy nằm trên trục \(Ox\) (\(y = 0\)) thẳng lên đến mép tường vát chéo \(x + y = 1\). Rút \(y\) theo \(x\), ta được \(y = 1 - x\). Do đó:
+      \[0 \le y \le 1 - x\]
+    </li>
+    <li><strong>Biến \(z\) (trong cùng - chiều cao):</strong> Đi từ sàn nhà \(z = 0\) vươn thẳng lên chạm vào mái nhà cong \(z = 1 + x^2 + y^2\). Do đó:
+      \[0 \le z \le 1 + x^2 + y^2\]
+    </li>
+  </ul>
+
+  <h4>Bước 3: Thiết lập tích phân bội ba</h4>
+  <p>Thể tích \(V\) được tính bằng tích phân ba lớp lặp:</p>
+  \[V = \iiint_\Omega dxdydz = \int_0^1 dx \int_0^{1-x} dy \int_0^{1+x^2+y^2} dz\]
+
+  <h4>Bước 4: Tính lớp tích phân trong cùng (theo biến \(z\))</h4>
+  <p>Ta tính phần tích phân bên trong theo biến \(z\):</p>
+  \[\int_0^{1+x^2+y^2} dz = \Big[ z \Big]_{z=0}^{z=1+x^2+y^2}\]
+  <p>Thế cận trên trừ cận dưới:</p>
+  \[= (1 + x^2 + y^2) - 0 = 1 + x^2 + y^2\]
+  <p>Bây giờ tích phân ban đầu chỉ còn lại hai lớp theo \(x\) và \(y\):</p>
+  \[V = \int_0^1 dx \int_0^{1-x} (1 + x^2 + y^2) dy\]
+
+  <h4>Bước 5: Tính lớp tích phân ở giữa (theo biến \(y\))</h4>
+  <p>Khi tính nguyên hàm theo biến \(y\), ta xem \(x\) như một hằng số cố định (như một con số bình thường):</p>
+  <ul>
+    <li>Nguyên hàm của hằng số \((1+x^2)\) theo \(y\) là \((1+x^2)y\).</li>
+    <li>Nguyên hàm của lũy thừa \(y^2\) theo \(y\) là \(\frac{y^3}{3}\).</li>
+  </ul>
+  <p>Do đó, nguyên hàm theo \(y\) là:</p>
+  \[\int_0^{1-x} (1 + x^2 + y^2) dy = \left[ (1+x^2)y + \frac{y^3}{3} \right]_{y=0}^{y=1-x}\]
+  <p>Thế cận trên \(y = 1 - x\) vào biểu thức:</p>
+  \[= (1+x^2)(1-x) + \frac{(1-x)^3}{3}\]
+  <p>(Khi thế cận dưới \(y = 0\), cả hai số hạng đều bằng \(0\)).</p>
+  <p>Khai triển tích \((1+x^2)(1-x)\) bằng quy tắc nhân đa thức:</p>
+  \[(1+x^2)(1-x) = 1(1-x) + x^2(1-x)\]
+  \[= 1 - x + x^2 - x^3\]
+  <p>Vậy sau khi tính xong lớp tích phân thứ hai, ta thu được hàm số chỉ còn phụ thuộc vào biến \(x\):</p>
+  \[1 - x + x^2 - x^3 + \frac{(1-x)^3}{3}\]
+
+  <h4>Bước 6: Tính lớp tích phân ngoài cùng (theo biến \(x\))</h4>
+  <p>Đưa biểu thức trên vào tích phân theo biến \(x\) từ \(0\) đến \(1\):</p>
+  \[V = \int_0^1 \left( 1 - x + x^2 - x^3 + \frac{(1-x)^3}{3} \right) dx\]
+  <p>Áp dụng quy tắc nguyên hàm cơ bản \(\int x^n dx = \frac{x^{n+1}}{n+1}\) cho từng số hạng:</p>
+  <ul>
+    <li>Nguyên hàm của \(1\) là \(x\)</li>
+    <li>Nguyên hàm của \(x\) là \(\frac{x^2}{2}\)</li>
+    <li>Nguyên hàm của \(x^2\) là \(\frac{x^3}{3}\)</li>
+    <li>Nguyên hàm của \(x^3\) là \(\frac{x^4}{4}\)</li>
+    <li>Nguyên hàm của \(\frac{(1-x)^3}{3}\): chú ý có dấu trừ ở trước \(x\), nên nguyên hàm là \(-\frac{(1-x)^4}{3 \times 4} = -\frac{(1-x)^4}{12}\)</li>
+  </ul>
+  <p>Viết toàn bộ biểu thức nguyên hàm và đặt cận từ \(0\) đến \(1\):</p>
+  \[V = \left[ x - \frac{x^2}{2} + \frac{x^3}{3} - \frac{x^4}{4} - \frac{(1-x)^4}{12} \right]_0^1\]
+  <p><strong>Thế cận trên \(x = 1\):</strong></p>
+  \[= 1 - \frac{1^2}{2} + \frac{1^3}{3} - \frac{1^4}{4} - \frac{(1-1)^4}{12}\]
+  \[= 1 - \frac{1}{2} + \frac{1}{3} - \frac{1}{4} - 0\]
+  <p><strong>Thế cận dưới \(x = 0\):</strong></p>
+  \[= 0 - \frac{0^2}{2} + \frac{0^3}{3} - \frac{0^4}{4} - \frac{(1-0)^4}{12}\]
+  \[= 0 - 0 + 0 - 0 - \frac{1}{12} = -\frac{1}{12}\]
+  <p><strong>Lấy cận trên trừ cận dưới:</strong></p>
+  \[V = \left( 1 - \frac{1}{2} + \frac{1}{3} - \frac{1}{4} \right) - \left( -\frac{1}{12} \right)\]
+  \[= 1 - \frac{1}{2} + \frac{1}{3} - \frac{1}{4} + \frac{1}{12}\]
+  <p>Quy đồng mẫu số chung là \(12\):</p>
+  \[= \frac{12}{12} - \frac{6}{12} + \frac{4}{12} - \frac{3}{12} + \frac{1}{12}\]
+  \[= \frac{12 - 6 + 4 - 3 + 1}{12}\]
+  \[= \frac{8}{12}\]
+  <p>Rút gọn phân số bằng cách chia cả tử và mẫu cho \(4\):</p>
+  \[V = \frac{8 \div 4}{12 \div 4} = \frac{2}{3}\]
+
+  <h4>Bước 7: Kết luận và kiểm tra tính hợp lý</h4>
+  <p><strong>Ý nghĩa hình học:</strong> Đáy tam giác có diện tích \(S = \frac{1}{2} \times 1 \times 1 = 0.5\). Chiều cao thấp nhất của mái nhà là \(z = 1\) (tại gốc tọa độ) và cao nhất là \(z = 2\) (tại các đỉnh \((1,0)\) và \((0,1)\)). Thể tích khối lăng trụ đáy tam giác cao \(1\) là \(0.5\), và lăng trụ cao \(2\) là \(1.0\). Do đó thể tích khối uốn cong của chúng ta phải nằm giữa \(0.5\) và \(1.0\). Kết quả \(V = \frac{2}{3} \approx 0.67\) hoàn toàn chính xác và rất hợp lý!</p>
+  <p style="color:#27ae60; font-size:18px; font-weight:bold;">\(\boxed{V = \dfrac{2}{3}}\) ✓ Khớp hoàn toàn với đáp án!</p>
 </div>
         <div class="answer-box">&#10003; Kết quả: \(\dfrac{2}{3}\)</div>
         <div class="check">Kết quả tính toán: \(\frac{2}{3}\). Khớp đáp án đề: <strong>2/3</strong> ✓</div>
@@ -60,5 +196,31 @@
 x,y,z=sp.symbols('x y z')
 print(sp.integrate(1,(z,0,1+x**2+y**2),(y,0,1-x),(x,0,1)))</pre>
     </div>
+  </div>
+</div><script>
+    function toggleSolutionBox(btn) {
+        const content = btn.nextElementSibling;
+        const isOpen = content.classList.contains('is-open');
+        const icon = btn.querySelector('.sol-icon');
+        const text = btn.querySelector('.sol-text');
+        const arrow = btn.querySelector('.sol-arrow');
+        if (isOpen) {
+            content.classList.remove('is-open');
+            btn.classList.remove('is-open');
+            if (icon) icon.textContent = '📖';
+            if (text) text.textContent = 'Xem lời giải chi tiết (Bấm để mở)';
+            if (arrow) arrow.textContent = '▼';
+        } else {
+            content.classList.add('is-open');
+            btn.classList.add('is-open');
+            if (icon) icon.textContent = '🙈';
+            if (text) text.textContent = 'Thu gọn lời giải';
+            if (arrow) arrow.textContent = '▲';
+            if (window.MathJax && MathJax.typesetPromise) {
+                MathJax.typesetPromise([content]).catch(err => console.log(err));
+            }
+        }
+    }
+</script>
 </body>
 </html>

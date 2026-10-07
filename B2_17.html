@@ -20,7 +20,58 @@
         .problem { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 40px; }
         .code-block { background: #282c34; color: #abb2bf; padding: 15px; border-radius: 5px; overflow-x: auto; font-family: monospace; font-size: 14px; }
         .plot-container { display: flex; justify-content: center; }
-    </style>
+    
+        /* Nút Ẩn / Hiện Lời Giải Chi Tiết */
+        .solution-toggle-wrapper {
+            margin: 28px 0 16px 0;
+        }
+        .solution-toggle-btn {
+            width: 100%;
+            background: #f8fafc;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 13px 20px;
+            font-size: 15px;
+            font-weight: 700;
+            color: #0284c7;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            font-family: inherit;
+        }
+        .solution-toggle-btn:hover {
+            background: #f0f9ff;
+            border-color: #38bdf8;
+            color: #0369a1;
+        }
+        .solution-toggle-btn.is-open {
+            background: #e0f2fe;
+            border-color: #0284c7;
+            color: #0369a1;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+        .solution-collapsible-content {
+            display: none;
+            border: 1.5px solid #0284c7;
+            border-top: none;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+            padding: 20px 22px;
+            background: #ffffff;
+        }
+        .solution-collapsible-content.is-open {
+            display: block;
+            animation: fadeInSol 0.25s ease-in-out;
+        }
+        @keyframes fadeInSol {
+            from { opacity: 0; transform: translateY(-4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+</style>
 </head>
 <body>
     <div class="problem">
@@ -35,38 +86,128 @@
         <h3>Mã Nguồn Tham Khảo (Cho AI khác)</h3>
         <pre class="code-block"><code></code></pre>
     
+<div class="solution-toggle-wrapper">
+  <button type="button" class="solution-toggle-btn" onclick="toggleSolutionBox(this)">
+    <span><span class="sol-icon">📖</span> <span class="sol-text">Xem lời giải chi tiết (Bấm để mở)</span></span>
+    <span class="sol-arrow">▼</span>
+  </button>
+  <div class="solution-collapsible-content">
 <div style="background:#eaf4fb; border-left:5px solid #2980b9; padding:20px; margin-top:30px; border-radius:6px;">
-  <h3 style="color:#1a5276;">Lời giải - Bài B2.17</h3>
-  <p><strong>Đề bài đầy đủ:</strong> Tính \(I = \iint_D \frac{\ln(\sqrt{x^2+y^2}+2)}{(\sqrt{x^2+y^2}+2)\sqrt{x^2+y^2}} dxdy\)<br>
-  với miền \(D: (e-2)^2 \le x^2+y^2 \le (e^2-2)^2\).</p>
+  <h3 style="color:#1a5276;">Lời giải siêu chi tiết - Bài B2.17</h3>
   
-  <p><strong>Bước 1: Chuyển sang tọa độ cực.</strong><br>
-  Đặt \(x = r\cos\theta\), \(y = r\sin\theta\). Ta có \(\sqrt{x^2+y^2} = r\).<br>
-  Định thức Jacobi \(J = r\).<br>
-  Từ bất phương trình biên của \(D\), bán kính \(r\) thỏa mãn: \((e-2)^2 \le r^2 \le (e^2-2)^2\)<br>
-  Lấy căn bậc hai (vì \(r \ge 0\) và \(e \approx 2.718 > 2\)):<br>
-  \(e-2 \le r \le e^2-2\).<br>
-  Góc \(\theta\) quét trọn một vòng: \(0 \le \theta \le 2\pi\).</p>
+  <h4>1. Hiểu đề bài đang yêu cầu gì?</h4>
+  <p>Đề bài yêu cầu chúng ta tính một thứ gọi là "tích phân kép", ký hiệu là \(\iint_D\). Em cứ tưởng tượng điều này giống như việc mình tính "thể tích" của một khối hình, hoặc "khối lượng" của một miếng bánh phẳng (miền \(D\)) mà độ ngọt của bánh không đều nhau. Độ ngọt đó được cho bởi công thức rất dài này:</p>
+  \[f(x, y) = \frac{\ln(\sqrt{x^2+y^2}+2)}{(\sqrt{x^2+y^2}+2)\sqrt{x^2+y^2}}\]
+  <p>Dấu \(\iint\) có nghĩa là ta đang "cộng dồn" vô số những mẩu bánh tí hon \(dxdy\) (diện tích vô cùng nhỏ) trên toàn bộ miếng bánh \(D\).</p>
   
-  <p><strong>Bước 2: Thay vào tích phân lặp.</strong><br>
-  Hàm dưới dấu tích phân trở thành: \(\frac{\ln(r+2)}{(r+2)r}\).<br>
-  Khi nhân với định thức Jacobi \(r\), ta được biểu thức đơn giản hơn:
-  \[I = \int_0^{2\pi} d\theta \int_{e-2}^{e^2-2} \frac{\ln(r+2)}{(r+2)r} \cdot r \,dr = \int_0^{2\pi} d\theta \int_{e-2}^{e^2-2} \frac{\ln(r+2)}{r+2} \,dr\]
-  Tích phân theo \(\theta\) đơn giản bằng \(2\pi\):
-  \[I = 2\pi \int_{e-2}^{e^2-2} \frac{\ln(r+2)}{r+2} \,dr\]</p>
+  <h4>2. Hình dáng "miếng bánh" (Miền \(D\)) ra sao?</h4>
+  <p>Đề cho chúng ta điều kiện để xác định miếng bánh \(D\) là:</p>
+  \[(e-2)^2 \le x^2+y^2 \le (e^2-2)^2\]
+  <p>Em hãy nhớ lại, \(x^2 + y^2 = R^2\) chính là phương trình của một <strong>đường tròn</strong> tâm \(O(0,0)\) và có bán kính là \(R\).</p>
+  <ul>
+    <li>Phần \(x^2+y^2 \ge (e-2)^2\) nghĩa là chúng ta lấy phần bên ngoài hoặc nằm trên đường tròn bán kính \(R_1 = e - 2\). Chú ý \(e\) là một hằng số khoảng \(2.718\), nên \(e - 2 \approx 0.718 > 0\).</li>
+    <li>Phần \(x^2+y^2 \le (e^2-2)^2\) nghĩa là chúng ta lấy phần bên trong hoặc nằm trên đường tròn to hơn có bán kính \(R_2 = e^2 - 2\) (khoảng \(7.389 - 2 = 5.389\)).</li>
+  </ul>
+  <div style="background:#fff3cd; padding:10px; border-left:4px solid #ffc107; margin-bottom:15px;">
+    <strong>Mẹo:</strong> Miền \(D\) này giống y hệt một chiếc <strong>bánh rán vòng (donut)</strong> hay một chiếc đĩa CD! Nó là khoảng không gian nằm giữa hai vòng tròn đồng tâm. Do nó bao trọn một vòng xung quanh gốc tọa độ \(O\), miền này là một hình "vành khăn" hoàn chỉnh.
+  </div>
+
+  <h4>3. Tại sao lại cần dùng "tọa độ cực"?</h4>
+  <p>Nhìn vào đề bài, em thấy biểu thức xuất hiện toàn là \(\sqrt{x^2+y^2}\). Nếu để nguyên chữ \(x\) và \(y\), tính toán sẽ rất khó (giống như cố gọt táo bằng dao chặt thịt vậy). Vì vậy, trong toán học, cứ thấy đường tròn \(x^2+y^2\), ta sẽ dùng một "con dao" chuyên dụng hơn, gọi là <strong>Hệ tọa độ cực</strong>.</p>
+  <p>Trong hệ tọa độ cực, ta không dùng ngang \(x\), dọc \(y\) nữa, mà dùng:</p>
+  <ul>
+    <li><strong>\(r\) (bán kính):</strong> khoảng cách từ gốc \(O\) đến điểm đó. Khi đó, định lý Pytago cho ta: \(x^2 + y^2 = r^2\), hay \(\sqrt{x^2+y^2} = r\). Quá đẹp!</li>
+    <li><strong>\(\theta\) (góc):</strong> góc quay của điểm đó tính từ trục ngang. Do miền của ta là một vòng tròn hoàn chỉnh, góc sẽ quay từ \(0\) đến một vòng tròn đầy đủ, tức là \(2\pi\) (khoảng 360 độ).</li>
+  </ul>
+  <p>Tuy nhiên, khi đổi biến, diện tích của mẩu bánh nhỏ \(dxdy\) phải được nhân thêm một "hệ số bù đắp" gọi là <strong>Định thức Jacobi (J)</strong>. Đối với tọa độ cực, quy tắc luôn là:</p>
+  \[dxdy \Rightarrow r \, dr \, d\theta\]
   
-  <p><strong>Bước 3: Tính tích phân bằng phương pháp đổi biến.</strong><br>
-  Xét tích phân \(I_r = \int_{e-2}^{e^2-2} \frac{\ln(r+2)}{r+2} \,dr\).<br>
-  Đặt \(u = \ln(r+2) \Rightarrow du = \frac{1}{r+2} dr\).<br>
-  Đổi cận:<br>
-  - Khi \(r = e-2 \Rightarrow u = \ln(e-2+2) = \ln(e) = 1\).<br>
-  - Khi \(r = e^2-2 \Rightarrow u = \ln(e^2-2+2) = \ln(e^2) = 2\).<br>
-  Thay vào \(I_r\):
-  \[I_r = \int_1^2 u \,du = \left[ \frac{u^2}{2} \right]_1^2 = \frac{2^2}{2} - \frac{1^2}{2} = 2 - \frac{1}{2} = \frac{3}{2}\]
-  Nhân lại với phần góc:
-  \[I = 2\pi \cdot \frac{3}{2} = 3\pi\]</p>
+  <h4>4. Đi tìm "cận" (giới hạn của \(r\) và \(\theta\))</h4>
+  <p>Từ bất phương trình của miền \(D\):</p>
+  \[(e-2)^2 \le r^2 \le (e^2-2)^2\]
+  <p>Vì bán kính \(r\) luôn là số dương (\(r \ge 0\)), và ta biết \(e > 2\) (nên \(e-2 > 0\), \(e^2-2 > 0\)), ta có thể thoải mái lấy căn bậc hai các vế mà không lo bị đổi dấu hay âm:</p>
+  \[e-2 \le r \le e^2-2\]
+  <p>Và như đã phân tích, góc \(\theta\) quay trọn vòng nên:</p>
+  \[0 \le \theta \le 2\pi\]
   
-  <p style="color:#1a5276; font-weight:bold;">\(\boxed{I = 3\pi}\) ✓ Cảm ơn bạn đã cung cấp đề bài hoàn chỉnh!</p>
+  <h4>5. Lắp ghép vào bài toán</h4>
+  <p>Bây giờ ta thay chữ \(r\) vào chỗ của \(\sqrt{x^2+y^2}\) trong biểu thức ban đầu. Biểu thức cực kỳ cồng kềnh:</p>
+  \[\frac{\ln(\sqrt{x^2+y^2}+2)}{(\sqrt{x^2+y^2}+2)\sqrt{x^2+y^2}}\]
+  <p>Sẽ biến thành:</p>
+  \[\frac{\ln(r+2)}{(r+2)r}\]
+  <p>Tiếp theo, ta lập tích phân lặp (tính từ trong ra ngoài). Đừng quên nhân thêm chữ \(r\) của định thức Jacobi nhé!</p>
+  \[I = \int_{0}^{2\pi} d\theta \int_{e-2}^{e^2-2} \frac{\ln(r+2)}{(r+2)r} \cdot r \, dr\]
+  
+  <h4>6. Rút gọn và Tính toán từng bước</h4>
+  <p>Bước 6.1: Ở tích phân bên trong (theo \(r\)), em thấy trên tử và dưới mẫu đều có \(r\). Ta có thể triệt tiêu chúng cho nhau (rút gọn phân số):</p>
+  \[\frac{\ln(r+2)}{(r+2) \cdot r} \cdot r = \frac{\ln(r+2)}{r+2}\]
+  <p>Lúc này tích phân trở nên gọn gàng hơn hẳn:</p>
+  \[I = \int_{0}^{2\pi} d\theta \int_{e-2}^{e^2-2} \frac{\ln(r+2)}{r+2} \, dr\]
+  
+  <p>Bước 6.2: Ta thấy phần bên trong không hề chứa chữ \(\theta\) nào cả! Tức là nó chỉ là một con số đối với \(\theta\). Ta có thể tách riêng việc tính phần \(\theta\):</p>
+  \[\int_{0}^{2\pi} d\theta = 2\pi - 0 = 2\pi\]
+  <p>Nên bài toán giờ chỉ còn:</p>
+  \[I = 2\pi \cdot \int_{e-2}^{e^2-2} \frac{\ln(r+2)}{r+2} \, dr\]
+  
+  <h4>7. Xử lý "trùm cuối": Phương pháp Đổi biến số</h4>
+  <p>Để tính tích phân \(I_r = \int_{e-2}^{e^2-2} \frac{\ln(r+2)}{r+2} \, dr\), ta thấy có sự xuất hiện của hàm logarit tự nhiên (\(\ln\)) và đạo hàm của nó. Chú ý quy tắc đạo hàm: đạo hàm của \(\ln(u)\) là \(\frac{1}{u}\).</p>
+  <p>Nên ta dùng kỹ thuật "Đổi biến":</p>
+  <ul>
+    <li>Đặt một biến mới: \(u = \ln(r+2)\)</li>
+    <li>Lấy vi phân (đạo hàm 2 vế): \(du = \frac{1}{r+2} \, dr\)</li>
+  </ul>
+  <p>Chính xác! Cái cụm \(\frac{1}{r+2} \, dr\) đã bị tóm gọn thành \(du\).</p>
+  <p>Khi đổi biến, ta bắt buộc phải <strong>đổi cận</strong> (giới hạn mới cho \(u\)):</p>
+  <ul>
+    <li>Cận dưới: Khi \(r = e - 2\), thì \(u = \ln( (e-2) + 2 ) = \ln(e) = 1\) (vì \(e^1 = e\)).</li>
+    <li>Cận trên: Khi \(r = e^2 - 2\), thì \(u = \ln( (e^2-2) + 2 ) = \ln(e^2) = 2\) (đưa mũ 2 ra ngoài, \(\ln(e)=1\)).</li>
+  </ul>
+  <p>Bài toán phức tạp biến thành tích phân dễ nhất quả đất:</p>
+  \[I_r = \int_{1}^{2} u \, du\]
+  <p>Áp dụng công thức nguyên hàm cơ bản \(\int u^n \, du = \frac{u^{n+1}}{n+1}\):</p>
+  \[I_r = \left[ \frac{u^2}{2} \right]_{1}^{2}\]
+  <p>Thay cận trên và cận dưới vào rồi trừ đi nhau (Định lý Newton - Leibniz):</p>
+  \[I_r = \frac{2^2}{2} - \frac{1^2}{2}\]
+  \[I_r = \frac{4}{2} - \frac{1}{2}\]
+  \[I_r = \frac{3}{2}\]
+  
+  <h4>8. Kết hợp lại để ra đáp án cuối cùng</h4>
+  <p>Ta nhớ lại phần góc \(\theta\) đã tính ở bước 6 là \(2\pi\). Giờ ta nhân nó với kết quả phần \(r\):</p>
+  \[I = 2\pi \cdot \frac{3}{2}\]
+  \[I = \frac{2 \cdot 3}{2} \cdot \pi\]
+  \[I = 3\pi\]
+  
+  <p style="color:#1a5276; font-size:1.1em;"><strong>Kết luận:</strong> Giá trị của tích phân cần tính là \(\mathbf{I = 3\pi}\).</p>
+  <div style="background:#e8f8f5; padding:10px; border-left:4px solid #1abc9c;">
+    <strong>Ý nghĩa thực tế:</strong> Nếu có một vật thể hình vành khăn với bán kính từ \(e-2\) đến \(e^2-2\), và khối lượng riêng tại mỗi điểm được tính bởi công thức cồng kềnh ban đầu, thì tổng khối lượng của cả vật thể đó đúng bằng \(3\pi\) (khoảng 9,42). Toán học thật kỳ diệu khi biến những điều phức tạp thành một con số đẹp đẽ!
+  </div>
+</div>
+  </div>
 </div></div>
+<script>
+    function toggleSolutionBox(btn) {
+        const content = btn.nextElementSibling;
+        const isOpen = content.classList.contains('is-open');
+        const icon = btn.querySelector('.sol-icon');
+        const text = btn.querySelector('.sol-text');
+        const arrow = btn.querySelector('.sol-arrow');
+        if (isOpen) {
+            content.classList.remove('is-open');
+            btn.classList.remove('is-open');
+            if (icon) icon.textContent = '📖';
+            if (text) text.textContent = 'Xem lời giải chi tiết (Bấm để mở)';
+            if (arrow) arrow.textContent = '▼';
+        } else {
+            content.classList.add('is-open');
+            btn.classList.add('is-open');
+            if (icon) icon.textContent = '🙈';
+            if (text) text.textContent = 'Thu gọn lời giải';
+            if (arrow) arrow.textContent = '▲';
+            if (window.MathJax && MathJax.typesetPromise) {
+                MathJax.typesetPromise([content]).catch(err => console.log(err));
+            }
+        }
+    }
+</script>
 </body>
 </html>

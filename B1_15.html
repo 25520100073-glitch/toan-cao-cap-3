@@ -20,7 +20,58 @@
         .problem { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 40px; }
         .code-block { background: #282c34; color: #abb2bf; padding: 15px; border-radius: 5px; overflow-x: auto; font-family: monospace; font-size: 14px; }
         .plot-container { display: flex; justify-content: center; }
-    </style>
+    
+        /* Nút Ẩn / Hiện Lời Giải Chi Tiết */
+        .solution-toggle-wrapper {
+            margin: 28px 0 16px 0;
+        }
+        .solution-toggle-btn {
+            width: 100%;
+            background: #f8fafc;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 13px 20px;
+            font-size: 15px;
+            font-weight: 700;
+            color: #0284c7;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            font-family: inherit;
+        }
+        .solution-toggle-btn:hover {
+            background: #f0f9ff;
+            border-color: #38bdf8;
+            color: #0369a1;
+        }
+        .solution-toggle-btn.is-open {
+            background: #e0f2fe;
+            border-color: #0284c7;
+            color: #0369a1;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+        .solution-collapsible-content {
+            display: none;
+            border: 1.5px solid #0284c7;
+            border-top: none;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+            padding: 20px 22px;
+            background: #ffffff;
+        }
+        .solution-collapsible-content.is-open {
+            display: block;
+            animation: fadeInSol 0.25s ease-in-out;
+        }
+        @keyframes fadeInSol {
+            from { opacity: 0; transform: translateY(-4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+</style>
 </head>
 <body>
     <div class="problem">
@@ -35,32 +86,171 @@
         <h3>Mã Nguồn Tham Khảo (Cho AI khác)</h3>
         <pre class="code-block"><code># Vẽ miền giữa y=sqrt(2x) và y=sqrt(2x-x^2)</code></pre>
     
-<div style="background:#eaf4fb; border-left:5px solid #2980b9; padding:20px; margin-top:30px; border-radius:6px;">
-  <h3 style="color:#1a5276;">Lời giải – Bài B1.15</h3>
-  <p><strong>Đề bài:</strong> Đổi thứ tự tích phân \(\displaystyle\int_0^2 dx\int_{\sqrt{2x-x^2}}^{\sqrt{2x}} f(x,y)\,dy\).</p>
+<div class="solution-toggle-wrapper">
+  <button type="button" class="solution-toggle-btn" onclick="toggleSolutionBox(this)">
+    <span><span class="sol-icon">📖</span> <span class="sol-text">Xem lời giải chi tiết (Bấm để mở)</span></span>
+    <span class="sol-arrow">▼</span>
+  </button>
+  <div class="solution-collapsible-content">
+<div style="background:#eaf4fb; border-left:5px solid #2980b9; padding:20px; margin-top:30px; border-radius:6px; font-family: Arial, sans-serif; line-height: 1.8;">
+  <h3 style="color:#1a5276; border-bottom: 2px solid #2980b9; padding-bottom: 10px;">Lời giải Chi Tiết Dễ Hiểu – Bài B1.15</h3>
+  
+  <p><strong>Mục tiêu của bài toán:</strong> Đề bài yêu cầu chúng ta <em>đổi thứ tự tính tích phân</em> của biểu thức:<br>
+  \[ I = \int_0^2 dx \int_{\sqrt{2x-x^2}}^{\sqrt{2x}} f(x,y)\,dy \]
+  Ban đầu, tích phân này đang được tính theo biến \(y\) trước (từ dưới lên trên), rồi mới tính theo biến \(x\) sau (từ trái qua phải). Nhiệm vụ của chúng ta là viết lại nó sao cho tính theo biến \(x\) trước, rồi mới tới biến \(y\). 
+  </p>
 
-  <p><strong>Bước 1: Xác định miền D.</strong><br>
-  Điều kiện: \(0\le x\le 2\), \(\sqrt{2x-x^2} \le y \le \sqrt{2x}\).<br>
-  — Đường dưới: \(y = \sqrt{2x-x^2}\), tức \((x-1)^2+y^2=1\) (nửa trên đường tròn bán kính 1, tâm (1,0)).<br>
-  — Đường trên: \(y = \sqrt{2x}\), tức \(y^2=2x\) (parabol).</p>
+  <div style="background:#fff; padding:15px; border-radius:5px; border: 1px solid #ccc; margin-bottom: 20px;">
+      <h4 style="color:#c0392b; margin-top:0;">&#128269; Bước 1: Xác định và vẽ miền lấy tích phân (miền D)</h4>
+      <p>Trước khi đổi thứ tự, ta bắt buộc phải biết "mảnh đất" (miền D) mà ta đang tính tích phân có hình dáng như thế nào. Từ các cận của tích phân ban đầu, ta đọc ra được giới hạn của miền D:</p>
+      <ul>
+          <li>Biến \(x\) nằm ở vòng ngoài: \(\quad 0 \le x \le 2\)</li>
+          <li>Biến \(y\) nằm ở vòng trong, phụ thuộc vào \(x\): \(\quad \sqrt{2x-x^2} \le y \le \sqrt{2x}\)</li>
+      </ul>
+      
+      <p>Bây giờ, ta sẽ đi phân tích từng đường biên để xem chúng là hình gì nhé:</p>
+      
+      <strong>1. Phân tích đường biên trên (biên lớn hơn của \(y\)):</strong><br>
+      Ta có phương trình: 
+      \[ y = \sqrt{2x} \]
+      <p><em>Quy tắc sử dụng:</em> Bình phương hai vế để làm mất dấu căn. Do \(y\) là kết quả của một căn bậc hai nên \(y\) không thể âm (\(y \ge 0\)).</p>
+      Bình phương 2 vế ta được:
+      \[ y^2 = 2x \]
+      Đây chính là phương trình của một đường <strong>Parabol</strong> nằm ngang, đỉnh tại gốc tọa độ \((0,0)\) và mở ra phía bên phải (về hướng \(x\) dương). Bất phương trình \(y \le \sqrt{2x}\) (hay \(x \ge \frac{y^2}{2}\)) có nghĩa là miền D của chúng ta nằm ở <strong>bên phải</strong> đường Parabol này.
 
-  <p><strong>Bước 2: Phân tích theo chiều y.</strong><br>
-  Giao điểm: \(2x-x^2 = 2x \Rightarrow x^2=0 \Rightarrow x=0,y=0\).<br>
-  Giao điểm bên kia: \(y^2=2x\) và \((x-1)^2+y^2=1\): thay \(y^2=2x\):<br>
-  \((x-1)^2+2x=1 \Rightarrow x^2-2x+1+2x=1 \Rightarrow x^2=0 \Rightarrow x=0\).<br>
-  Vậy chỉ giao tại \((0,0)\).<br>
-  Khi \(x=2\): đường tròn cho \(y=0\), parabol cho \(y=2\). Miền D là vùng nằm ngoài đường tròn và dưới parabol.</p>
+      <br><br>
+      <strong>2. Phân tích đường biên dưới (biên nhỏ hơn của \(y\)):</strong><br>
+      Ta có phương trình:
+      \[ y = \sqrt{2x - x^2} \]
+      <p><em>Quy tắc sử dụng:</em> Tương tự, bình phương hai vế và gom nhóm để tạo thành phương trình đường tròn, hay còn gọi là hằng đẳng thức đáng nhớ \((a-b)^2 = a^2 - 2ab + b^2\).</p>
+      Bình phương 2 vế (với điều kiện \(y \ge 0\)):
+      \[ y^2 = 2x - x^2 \]
+      Chuyển toàn bộ \(x\) sang vế trái:
+      \[ x^2 - 2x + y^2 = 0 \]
+      Thêm \(1\) vào cả hai vế để tạo hằng đẳng thức:
+      \[ x^2 - 2x + 1 + y^2 = 1 \]
+      Viết gọn lại thành:
+      \[ (x - 1)^2 + y^2 = 1 \]
+      Đây chính là phương trình của một <strong>đường tròn</strong> có tâm \(I(1, 0)\) và bán kính \(R = 1\). Tuy nhiên, vì điều kiện ban đầu \(y \ge 0\), nên đây chỉ là <strong>nửa trên</strong> của đường tròn.
+      Bất phương trình \(y \ge \sqrt{2x - x^2}\) (hay \((x-1)^2 + y^2 \ge 1\)) có nghĩa là miền D nằm <strong>bên ngoài</strong> đường tròn này.
 
-  <p><strong>Đổi thứ tự theo y:</strong><br>
-  \(y\) từ \(0\) đến \(2\).<br>
-  — Với \(0\le y\le 1\): trên đường tròn \(x=1-\sqrt{1-y^2}\) hoặc \(x=1+\sqrt{1-y^2}\). Phần bên ngoài đường tròn và dưới parabol: \(0\le x\le 1-\sqrt{1-y^2}\) cộng \(1+\sqrt{1-y^2}\le x\le y^2/2\).<br>
-  — Với \(1\le y \le 2\): \(0\le x\le y^2/2\).</p>
+      <div style="background:#e8f8f5; border-left:4px solid #1abc9c; padding:10px; margin: 15px 0;">
+          <strong>Mô tả hình dáng miền D bằng lời:</strong><br>
+          Miền D bị kẹp giữa hoành độ \(x=0\) và \(x=2\). Nó nằm ở phía "bên phải" đường parabol \(y^2 = 2x\) và bị "khoét" mất một nửa đường tròn tâm \((1,0)\) ở phía dưới.
+      </div>
+  </div>
 
-  \[\int_0^1 dy\left[\int_0^{1-\sqrt{1-y^2}}f\,dx + \int_{1+\sqrt{1-y^2}}^{y^2/2}f\,dx\right] + \int_1^2 dy\int_0^{y^2/2}f\,dx\]
+  <div style="background:#fff; padding:15px; border-radius:5px; border: 1px solid #ccc; margin-bottom: 20px;">
+      <h4 style="color:#c0392b; margin-top:0;">&#128269; Bước 2: Tìm giao điểm để xác định chiều cao cực đại của miền D</h4>
+      <p>Vì mục tiêu là quét theo biến \(y\) trước (tức là xét từ \(y\) thấp nhất đến \(y\) cao nhất của miền D), ta cần biết \(y\) chạy trong khoảng nào.</p>
+      
+      <strong>Tìm giới hạn của y trên miền:</strong>
+      <p>Vì \(x\) chạy từ \(0\) đến \(2\), ta sẽ xem trên đoạn này \(y\) cao nhất và thấp nhất là bao nhiêu:</p>
+      <ul>
+          <li>Tại \(x = 0\): Parabol có \(y = \sqrt{0} = 0\), đường tròn có \(y = \sqrt{0} = 0\). (Điểm xuất phát chung là \((0,0)\)).</li>
+          <li>Tại \(x = 2\): 
+              <br>Thay \(x=2\) vào phương trình parabol: 
+              \[ y = \sqrt{2 \cdot 2} \]
+              \[ y = \sqrt{4} \]
+              \[ y = 2 \]
+              <br>Thay \(x=2\) vào phương trình đường tròn:
+              \[ y = \sqrt{2 \cdot 2 - 2^2} \]
+              \[ y = \sqrt{4 - 4} \]
+              \[ y = 0 \]
+          </li>
+      </ul>
+      <p>Như vậy, đỉnh cao nhất của miền D chính là điểm \((2, 2)\) nằm trên parabol. Đáy thấp nhất là trên trục hoành với \(y=0\). Vậy trên toàn bộ miền D, <strong>\(y\) sẽ chạy từ \(0\) đến \(2\)</strong>.</p>
+  </div>
 
-  <p style="color:#1a5276; font-weight:bold;">Đây là kết quả sau khi đổi thứ tự tích phân.</p>
+  <div style="background:#fff; padding:15px; border-radius:5px; border: 1px solid #ccc; margin-bottom: 20px;">
+      <h4 style="color:#c0392b; margin-top:0;">&#128269; Bước 3: Rút x theo y để đổi thứ tự</h4>
+      <p>Khi đổi thứ tự, ta sẽ lấy một đường thẳng song song với trục \(Ox\) (quét theo chiều ngang) để xem nó cắt miền D tại những đâu.</p>
+      <p>Ta biểu diễn lại các phương trình đường biên bằng cách rút \(x\) ra:</p>
+      <strong>Đường Parabol (Biên trái):</strong>
+      \[ y^2 = 2x \]
+      Chia cả hai vế cho 2:
+      \[ x = \frac{y^2}{2} \]
+      Đây luôn luôn là đường biên bên <strong>trái</strong> của miền D.
+      
+      <br><br>
+      <strong>Đường Tròn (Chướng ngại vật ở giữa):</strong>
+      \[ (x - 1)^2 + y^2 = 1 \]
+      Chuyển \(y^2\) sang vế phải:
+      \[ (x - 1)^2 = 1 - y^2 \]
+      Lấy căn bậc hai hai vế (vì là bình phương nên sẽ sinh ra 2 trường hợp, cộng và trừ):
+      \[ x - 1 = \pm\sqrt{1 - y^2} \]
+      Chuyển \(-1\) sang vế phải, ta được hai đường nhánh của nửa đường tròn:
+      \[ x = 1 - \sqrt{1 - y^2} \quad \text{(Nhánh bên trái)} \]
+      \[ x = 1 + \sqrt{1 - y^2} \quad \text{(Nhánh bên phải)} \]
+      <p>Lưu ý: Nửa đường tròn này chỉ tồn tại khi \(1 - y^2 \ge 0\), tức là \(y\) chỉ nằm trong khoảng từ \(0\) đến \(1\).</p>
+      
+      <br>
+      <strong>Đường thẳng giới hạn (Biên phải):</strong>
+      <p>Theo đề bài, \(x\) chạy tối đa đến \(2\), nên đường biên ngoài cùng bên phải luôn là đường thẳng dọc \(x = 2\).</p>
+  </div>
+
+  <div style="background:#fff; padding:15px; border-radius:5px; border: 1px solid #ccc; margin-bottom: 20px;">
+      <h4 style="color:#c0392b; margin-top:0;">&#128269; Bước 4: Viết tích phân mới (Cắt lớp miền D theo y)</h4>
+      <p>Vì sự xuất hiện của đường tròn cản đường từ \(y=0\) đến \(y=1\), miền D khi nhìn theo chiều ngang sẽ bị chia làm 2 phần rõ rệt. Ta phải tách tích phân làm hai khoảng của \(y\):</p>
+      
+      <strong>Khoảng 1: Khi \(y\) chạy từ \(0\) đến \(1\) (Khu vực có đường tròn khoét ở giữa)</strong>
+      <p>Nếu bạn cầm một cây gậy nằm ngang và quét từ trái sang phải tại khu vực này, cây gậy sẽ:</p>
+      <ol>
+          <li>Đi vào miền D từ Parabol: \( x = \frac{y^2}{2} \)</li>
+          <li>Đi ra khỏi miền D khi đụng nhánh trái đường tròn: \( x = 1 - \sqrt{1 - y^2} \)</li>
+          <li><em>Bị đứt quãng (do đoạn này nằm lọt thỏm bên trong đường tròn, không thuộc miền D)</em></li>
+          <li>Đi vào lại miền D từ nhánh phải đường tròn: \( x = 1 + \sqrt{1 - y^2} \)</li>
+          <li>Đi ra hoàn toàn ở giới hạn ngoài cùng bên phải: \( x = 2 \)</li>
+      </ol>
+      <p>Vì bị đứt làm đôi, ta sẽ có 2 đoạn tích phân cộng lại cho khu vực này:</p>
+      \[ \int_0^1 dy \left[ \int_{\frac{y^2}{2}}^{1 - \sqrt{1 - y^2}} f(x,y) dx + \int_{1 + \sqrt{1 - y^2}}^{2} f(x,y) dx \right] \]
+
+      <br>
+      <strong>Khoảng 2: Khi \(y\) chạy từ \(1\) đến \(2\) (Khu vực phía trên đường tròn)</strong>
+      <p>Lên tới độ cao này, đường tròn đã kết thúc (nó chỉ cao tối đa tới \(y=1\)). Nên mảnh đất lúc này hoàn toàn liền mạch không có chướng ngại vật. Quét cây gậy ngang, nó sẽ:</p>
+      <ol>
+          <li>Đi vào từ Parabol: \( x = \frac{y^2}{2} \)</li>
+          <li>Đi thẳng một mạch ra ngoài tại giới hạn phải: \( x = 2 \)</li>
+      </ol>
+      <p>Ta có tích phân cho khu vực này:</p>
+      \[ \int_1^2 dy \int_{\frac{y^2}{2}}^{2} f(x,y) dx \]
+  </div>
+
+  <div style="background:#d4edda; border-left:5px solid #28a745; padding:15px; border-radius:5px;">
+      <h4 style="color:#155724; margin-top:0;">&#9989; Kết luận và Kiểm tra</h4>
+      <p><strong>Kết luận:</strong> Gom tất cả các mảnh lại, ta có kết quả đổi thứ tự tích phân cuối cùng là:</p>
+      \[ I = \int_0^1 dy \left[ \int_{\frac{y^2}{2}}^{1 - \sqrt{1 - y^2}} f(x,y) dx + \int_{1 + \sqrt{1 - y^2}}^{2} f(x,y) dx \right] + \int_1^2 dy \int_{\frac{y^2}{2}}^{2} f(x,y) dx \]
+      <p><strong>Ý nghĩa của bài toán:</strong> Việc đổi thứ tự tích phân giúp ta hình dung hình học theo chiều ngang thay vì chiều dọc. Trong thực tế, nhiều hàm \(f(x,y)\) không thể tính được nguyên hàm theo \(y\) trước. Kỹ thuật "đổi góc nhìn" này chính là chìa khóa duy nhất để giải quyết các bài toán đó! Bằng cách chia cắt miền D thật cẩn thận, ta đảm bảo diện tích và giá trị tổng không bị sai lệch so với lúc ban đầu.</p>
+  </div>
+</div>
+  </div>
 </div>
 
 </div>
+<script>
+    function toggleSolutionBox(btn) {
+        const content = btn.nextElementSibling;
+        const isOpen = content.classList.contains('is-open');
+        const icon = btn.querySelector('.sol-icon');
+        const text = btn.querySelector('.sol-text');
+        const arrow = btn.querySelector('.sol-arrow');
+        if (isOpen) {
+            content.classList.remove('is-open');
+            btn.classList.remove('is-open');
+            if (icon) icon.textContent = '📖';
+            if (text) text.textContent = 'Xem lời giải chi tiết (Bấm để mở)';
+            if (arrow) arrow.textContent = '▼';
+        } else {
+            content.classList.add('is-open');
+            btn.classList.add('is-open');
+            if (icon) icon.textContent = '🙈';
+            if (text) text.textContent = 'Thu gọn lời giải';
+            if (arrow) arrow.textContent = '▲';
+            if (window.MathJax && MathJax.typesetPromise) {
+                MathJax.typesetPromise([content]).catch(err => console.log(err));
+            }
+        }
+    }
+</script>
 </body>
 </html>

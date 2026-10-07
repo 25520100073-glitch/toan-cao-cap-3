@@ -20,7 +20,58 @@
         .problem { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 40px; }
         .code-block { background: #282c34; color: #abb2bf; padding: 15px; border-radius: 5px; overflow-x: auto; font-family: monospace; }
         .plot-container { display: flex; justify-content: center; }
-    </style>
+    
+        /* Nút Ẩn / Hiện Lời Giải Chi Tiết */
+        .solution-toggle-wrapper {
+            margin: 28px 0 16px 0;
+        }
+        .solution-toggle-btn {
+            width: 100%;
+            background: #f8fafc;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 13px 20px;
+            font-size: 15px;
+            font-weight: 700;
+            color: #0284c7;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            font-family: inherit;
+        }
+        .solution-toggle-btn:hover {
+            background: #f0f9ff;
+            border-color: #38bdf8;
+            color: #0369a1;
+        }
+        .solution-toggle-btn.is-open {
+            background: #e0f2fe;
+            border-color: #0284c7;
+            color: #0369a1;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+        .solution-collapsible-content {
+            display: none;
+            border: 1.5px solid #0284c7;
+            border-top: none;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+            padding: 20px 22px;
+            background: #ffffff;
+        }
+        .solution-collapsible-content.is-open {
+            display: block;
+            animation: fadeInSol 0.25s ease-in-out;
+        }
+        @keyframes fadeInSol {
+            from { opacity: 0; transform: translateY(-4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+</style>
 </head>
 <body>
     <div class="problem">
@@ -45,22 +96,125 @@ fig.add_trace(go.Scatter(x=x_val, y=np.zeros_like(x_val), mode='lines', line=dic
 fig.add_trace(go.Scatter(x=x_val, y=x_val, mode='lines', fill='tonexty', name='Miền D'))
 fig.show()</code></pre>
     
+<div class="solution-toggle-wrapper">
+  <button type="button" class="solution-toggle-btn" onclick="toggleSolutionBox(this)">
+    <span><span class="sol-icon">📖</span> <span class="sol-text">Xem lời giải chi tiết (Bấm để mở)</span></span>
+    <span class="sol-arrow">▼</span>
+  </button>
+  <div class="solution-collapsible-content">
 <div style="background:#eaf4fb; border-left:5px solid #2980b9; padding:20px; margin-top:30px; border-radius:6px;">
   <h3 style="color:#1a5276;">Lời giải – Bài B1.3</h3>
-  <p><strong>Đề bài:</strong> Tính \(\int_0^1 \int_y^1 e^{x^2}\,dx\,dy\).</p>
+  <p><strong>Đề bài:</strong> Tính tích phân kép: \\[ I = \int_0^1 \int_y^1 e^{x^2} dx dy \\]</p>
 
-  <p><strong>Bước 1: Đổi thứ tự tích phân.</strong><br>
-  Miền D: \(0 \le y \le 1\), \(y \le x \le 1\) tương đương \(0 \le x \le 1\), \(0 \le y \le x\).</p>
+  <h4>1. Phân tích bài toán và lý do cần đổi thứ tự lấy tích phân</h4>
+  <ul>
+    <li>Bài toán yêu cầu chúng ta tính tích phân theo biến \( x \) trước (bên trong) và theo biến \( y \) sau (bên ngoài).</li>
+    <li>Tuy nhiên, hàm số \( e^{x^2} \) <strong>không có nguyên hàm là một hàm sơ cấp</strong>. Điều này có nghĩa là chúng ta không thể tính trực tiếp \(\int e^{x^2} dx\) bằng các công thức thông thường.</li>
+    <li>Vì vậy, để giải quyết, chúng ta bắt buộc phải <strong>đổi thứ tự lấy tích phân</strong>: tính theo \( y \) trước và theo \( x \) sau. Hy vọng rằng sau khi tích phân theo \( y \), biểu thức thu được sẽ giúp ta tính được tích phân theo \( x \).</li>
+  </ul>
 
-  <p><strong>Bước 2: Tính sau khi đổi thứ tự.</strong></p>
-  \[I = \int_0^1 \int_0^x e^{x^2}\,dy\,dx = \int_0^1 x\,e^{x^2}\,dx\]
+  <h4>2. Xác định và vẽ miền lấy tích phân \( D \)</h4>
+  <p>Từ các cận của tích phân ban đầu, ta có thể viết lại hệ bất phương trình xác định miền \( D \):</p>
+  <ul>
+    <li>Cận bên ngoài (theo \( y \)): \( 0 \le y \le 1 \)</li>
+    <li>Cận bên trong (theo \( x \)): \( y \le x \le 1 \)</li>
+  </ul>
+  <p>Như vậy, miền \( D \) được giới hạn bởi các đường thẳng:</p>
+  <ol>
+    <li>Đường \( y = 0 \) (trục hoành)</li>
+    <li>Đường \( y = 1 \)</li>
+    <li>Đường \( x = y \) (đường phân giác của góc phần tư thứ nhất)</li>
+    <li>Đường \( x = 1 \) (đường thẳng đứng song song với trục tung)</li>
+  </ol>
+  
+  <p><strong>Tìm tọa độ (hoành độ và tung độ) các giao điểm:</strong></p>
+  <ul>
+    <li>Giao điểm của \( x = y \) và \( x = 1 \): Thay \( x = 1 \) vào \( y = x \), ta được điểm \( (1, 1) \).</li>
+    <li>Giao điểm của \( x = y \) và \( y = 0 \): Thay \( y = 0 \) vào \( x = y \), ta được gốc tọa độ \( (0, 0) \).</li>
+    <li>Giao điểm của \( x = 1 \) và \( y = 0 \): Rõ ràng đây là điểm \( (1, 0) \).</li>
+  </ul>
 
-  <p>Đặt \(u = x^2 \Rightarrow du = 2x\,dx\):</p>
-  \[I = \frac{1}{2}\int_0^1 e^u\,du = \frac{1}{2}\left[e^u\right]_0^1 = \frac{1}{2}(e - 1)\]
+  
+  <h4>3. Đổi thứ tự lấy tích phân</h4>
+  <p>Bây giờ, chúng ta sẽ nhìn miền \( D \) theo hướng chiếu xuống trục \( Ox \) (để tính \( dy \) trước, \( dx \) sau):</p>
+  <ul>
+    <li><strong>Tìm cận của \( x \):</strong> Nhìn hình chiếu của tam giác \( D \) lên trục hoành \( Ox \), ta thấy \( x \) chạy từ điểm nhỏ nhất là \( 0 \) đến điểm lớn nhất là \( 1 \). Vậy ta có: \( 0 \le x \le 1 \).</li>
+    <li><strong>Tìm cận của \( y \) (với một giá trị \( x \) cố định):</strong> Kẻ một đường thẳng đứng song song với trục \( Oy \) cắt miền \( D \). Đường này sẽ đi vào miền \( D \) từ cạnh dưới (nằm trên trục hoành, tức là đường \( y = 0 \)) và đi ra khỏi miền \( D \) ở cạnh trên (chính là đường thẳng \( y = x \)). Do đó, y sẽ bị kẹp giữa: \( 0 \le y \le x \).</li>
+  </ul>
+  <p>Vậy, ta viết lại được miền \( D \) theo cách mới:</p>
+  \[ D = \{ (x,y) \mid 0 \le x \le 1, \, 0 \le y \le x \} \]
+  
+  <p>Tích phân \( I \) được viết lại với thứ tự mới là:</p>
+  \[ I = \int_0^1 \left( \int_0^x e^{x^2} dy \right) dx \]
 
-  <p style="color:#1a5276; font-weight:bold;">\(\boxed{I = \dfrac{e-1}{2}}\) ✓ Khớp với đáp án \(\frac{1}{2}(e-1)\).</p>
+  <h4>4. Tính toán tích phân</h4>
+  <p><strong>Bước 4.1: Tính tích phân bên trong (theo biến \( y \))</strong></p>
+  <p>Lúc này, ta xem \( x \) như một hằng số. Do đó \( e^{x^2} \) cũng là hằng số và có thể đưa ra ngoài dấu tích phân theo \( y \):</p>
+  \[ \int_0^x e^{x^2} dy = e^{x^2} \int_0^x 1 dy \]
+  \[ = e^{x^2} \left[ y \right]_0^x \]
+  \[ = e^{x^2} (x - 0) \]
+  \[ = x e^{x^2} \]
+
+  <p><strong>Bước 4.2: Tính tích phân bên ngoài (theo biến \( x \))</strong></p>
+  <p>Thế kết quả vừa tìm được vào tích phân bên ngoài, ta có:</p>
+  \[ I = \int_0^1 x e^{x^2} dx \]
+  
+  <p>Đến đây, ta dùng phương pháp <strong>đổi biến số</strong>:</p>
+  <ul>
+    <li>Đặt \( u = x^2 \).</li>
+    <li>Lấy vi phân hai vế: \( du = 2x dx \).</li>
+    <li>Suy ra: \( x dx = \frac{1}{2} du \).</li>
+  </ul>
+  
+  <p><strong>Đổi cận:</strong></p>
+  <ul>
+    <li>Khi \( x = 0 \) thì \( u = 0^2 = 0 \).</li>
+    <li>Khi \( x = 1 \) thì \( u = 1^2 = 1 \).</li>
+  </ul>
+  
+  <p>Thay tất cả vào \( I \), ta được:</p>
+  \[ I = \int_0^1 e^u \cdot \left( \frac{1}{2} du \right) \]
+  \[ I = \frac{1}{2} \int_0^1 e^u du \]
+  
+  <p>Sử dụng công thức nguyên hàm cơ bản \( \int e^u du = e^u \):</p>
+  \[ I = \frac{1}{2} \left[ e^u \right]_0^1 \]
+  \[ I = \frac{1}{2} (e^1 - e^0) \]
+  <p>Biết rằng \( e^0 = 1 \), ta có kết quả cuối cùng:</p>
+  \[ I = \frac{1}{2} (e - 1) \]
+
+  <p style="color:#1a5276; font-weight:bold; font-size: 1.1em;">\(\boxed{I = \frac{e-1}{2}}\)</p>
+  
+  <p><strong>Kiểm tra lại tính hợp lý:</strong><br>
+  Vì hàm số \( f(x,y) = e^{x^2} > 0 \) trên toàn bộ miền \( D \), nên tích phân của nó phải mang giá trị dương. Ta có \( e \approx 2.718 \), nên \( \frac{e-1}{2} \approx 0.859 > 0 \). Kết quả này hoàn toàn hợp lý với bản chất của bài toán.</p>
+</div>
+  </div>
 </div>
 
 </div>
+<script>
+    function toggleSolutionBox(btn) {
+        const content = btn.nextElementSibling;
+        const isOpen = content.classList.contains('is-open');
+        const icon = btn.querySelector('.sol-icon');
+        const text = btn.querySelector('.sol-text');
+        const arrow = btn.querySelector('.sol-arrow');
+        if (isOpen) {
+            content.classList.remove('is-open');
+            btn.classList.remove('is-open');
+            if (icon) icon.textContent = '📖';
+            if (text) text.textContent = 'Xem lời giải chi tiết (Bấm để mở)';
+            if (arrow) arrow.textContent = '▼';
+        } else {
+            content.classList.add('is-open');
+            btn.classList.add('is-open');
+            if (icon) icon.textContent = '🙈';
+            if (text) text.textContent = 'Thu gọn lời giải';
+            if (arrow) arrow.textContent = '▲';
+            if (window.MathJax && MathJax.typesetPromise) {
+                MathJax.typesetPromise([content]).catch(err => console.log(err));
+            }
+        }
+    }
+</script>
 </body>
 </html>

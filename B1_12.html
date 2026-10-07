@@ -20,7 +20,58 @@
         .problem { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 40px; }
         .code-block { background: #282c34; color: #abb2bf; padding: 15px; border-radius: 5px; overflow-x: auto; font-family: monospace; font-size: 14px; }
         .plot-container { display: flex; justify-content: center; }
-    </style>
+    
+        /* Nút Ẩn / Hiện Lời Giải Chi Tiết */
+        .solution-toggle-wrapper {
+            margin: 28px 0 16px 0;
+        }
+        .solution-toggle-btn {
+            width: 100%;
+            background: #f8fafc;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 13px 20px;
+            font-size: 15px;
+            font-weight: 700;
+            color: #0284c7;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            font-family: inherit;
+        }
+        .solution-toggle-btn:hover {
+            background: #f0f9ff;
+            border-color: #38bdf8;
+            color: #0369a1;
+        }
+        .solution-toggle-btn.is-open {
+            background: #e0f2fe;
+            border-color: #0284c7;
+            color: #0369a1;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+        .solution-collapsible-content {
+            display: none;
+            border: 1.5px solid #0284c7;
+            border-top: none;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+            padding: 20px 22px;
+            background: #ffffff;
+        }
+        .solution-collapsible-content.is-open {
+            display: block;
+            animation: fadeInSol 0.25s ease-in-out;
+        }
+        @keyframes fadeInSol {
+            from { opacity: 0; transform: translateY(-4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+</style>
 </head>
 <body>
     <div class="problem">
@@ -35,41 +86,180 @@
         <h3>Mã Nguồn Tham Khảo (Cho AI khác)</h3>
         <pre class="code-block"><code>ans = sp.integrate(x+y, (y, x**2, 2-x), (x, -2, 1))</code></pre>
     
+<div class="solution-toggle-wrapper">
+  <button type="button" class="solution-toggle-btn" onclick="toggleSolutionBox(this)">
+    <span><span class="sol-icon">📖</span> <span class="sol-text">Xem lời giải chi tiết (Bấm để mở)</span></span>
+    <span class="sol-arrow">▼</span>
+  </button>
+  <div class="solution-collapsible-content">
 <div style="background:#eaf4fb; border-left:5px solid #2980b9; padding:20px; margin-top:30px; border-radius:6px;">
-  <h3 style="color:#1a5276;">Lời giải – Bài B1.12</h3>
-  <p><strong>Đề bài:</strong> Tính \(\iint_D (x+y)\,dxdy\), D giới hạn bởi \(y=x^2\) và \(y=2-x\).</p>
+  <h3 style="color:#1a5276;">Lời giải chi tiết – Bài B1.12</h3>
+  <p><strong>Đề bài:</strong> Tính tích phân kép \(I = \iint_D (x+y)\,dxdy\), với miền \(D\) được giới hạn bởi hai đường \(y=x^2\) (đường parabol) và \(y=2-x\) (đường thẳng).</p>
 
-  <p><strong>Bước 1: Giao điểm.</strong><br>
-  \(x^2 = 2-x \Rightarrow x^2+x-2=0 \Rightarrow x=-2,\; x=1\).<br>
-  Trên \([-2,1]\): \(x^2 \le y \le 2-x\).</p>
+  <div style="background:#fff; border:1px solid #ddd; padding:15px; margin:15px 0; border-radius:5px;">
+    <h4 style="color:#2980b9; margin-top:0;">Bước 1: Hiểu bài toán và hình dáng miền \(D\)</h4>
+    <p>Ký hiệu \(\iint_D\) nghĩa là ta đang tính tổng tích lũy của hàm số \(f(x,y) = x+y\) trên toàn bộ vùng diện tích \(D\).</p>
+    <ul>
+      <li>Đường thứ nhất: \(y=x^2\) là một parabol bề lõm hướng lên trên, đỉnh tại gốc tọa độ \((0,0)\).</li>
+      <li>Đường thứ hai: \(y=2-x\) là một đường thẳng đi xuống từ trái sang phải, cắt trục tung tại \(y=2\).</li>
+    </ul>
+    <p>Vùng bị nhốt giữa hai đường này chính là miền \(D\).</p>
+  </div>
 
-  <p><strong>Bước 2: Tính tích phân.</strong></p>
-  \[I = \int_{-2}^{1}\int_{x^2}^{2-x}(x+y)\,dy\,dx\]
+  <div style="background:#fff; border:1px solid #ddd; padding:15px; margin:15px 0; border-radius:5px;">
+    <h4 style="color:#2980b9; margin-top:0;">Bước 2: Tìm hoành độ giao điểm để xác định cận của \(x\)</h4>
+    <p><strong>Vì sao phải làm bước này?</strong> Để biết miền \(D\) bắt đầu từ giá trị \(x\) nào và kết thúc ở giá trị \(x\) nào, ta cần tìm các điểm mà hai đường cắt nhau. Tại điểm cắt, giá trị \(y\) của chúng bằng nhau.</p>
+    <p>Ta lập phương trình hoành độ giao điểm bằng cách cho hai vế phải bằng nhau:</p>
+    \[x^2 = 2-x\]
+    <p>Chuyển tất cả sang một vế để giải phương trình bậc hai:</p>
+    \[x^2 + x - 2 = 0\]
+    <p>Ta có thể phân tích thành nhân tử (hoặc bấm máy tính). Nhận thấy tổng các hệ số \(1 + 1 - 2 = 0\), nên có một nghiệm \(x = 1\) và nghiệm kia là \(x = -2\):</p>
+    \[(x - 1)(x + 2) = 0\]
+    <p>Giải ra ta được hai nghiệm:</p>
+    \[x = -2\]
+    \[x = 1\]
+    <p>Vậy, vùng miền \(D\) trải dài theo trục ngang (trục \(Ox\)) từ \(x = -2\) (cận dưới) đến \(x = 1\) (cận trên).</p>
+  </div>
 
-  <p>Tích phân trong:</p>
-  \[\int_{x^2}^{2-x}(x+y)\,dy = \left[xy+\frac{y^2}{2}\right]_{x^2}^{2-x}\]
-  \[= x(2-x)+\frac{(2-x)^2}{2} - x\cdot x^2 - \frac{x^4}{2}\]
-  \[= 2x-x^2+\frac{4-4x+x^2}{2}-x^3-\frac{x^4}{2}\]
-  \[= 2x-x^2+2-2x+\frac{x^2}{2}-x^3-\frac{x^4}{2}\]
-  \[= 2-\frac{x^2}{2}-x^3-\frac{x^4}{2}\]
+  <div style="background:#fff; border:1px solid #ddd; padding:15px; margin:15px 0; border-radius:5px;">
+    <h4 style="color:#2980b9; margin-top:0;">Bước 3: Xác định cận của \(y\) (Đường nào nằm trên, đường nào nằm dưới?)</h4>
+    <p><strong>Vì sao phải làm bước này?</strong> Để tính tích phân kép theo thứ tự \(dy\) trước rồi \(dx\) sau, ta cần biết trên đoạn \(x\) từ \(-2\) đến \(1\), đường nào là trần nhà (cận trên của \(y\)) và đường nào là sàn nhà (cận dưới của \(y\)).</p>
+    <p>Hãy thử lấy một giá trị \(x\) bất kỳ nằm giữa \(-2\) và \(1\), ví dụ \(x = 0\):</p>
+    <ul>
+      <li>Với parabol \(y = x^2\), thay \(x=0\) ta được \(y = 0^2 = 0\).</li>
+      <li>Với đường thẳng \(y = 2-x\), thay \(x=0\) ta được \(y = 2-0 = 2\).</li>
+    </ul>
+    <p>Vì \(2 > 0\), nên trên toàn bộ khoảng từ \(-2\) đến \(1\), đường thẳng \(y = 2-x\) luôn nằm phía <strong>trên</strong> đường parabol \(y = x^2\).</p>
+    <p>Do đó, giới hạn của \(y\) là từ đường parabol (cận dưới) lên tới đường thẳng (cận trên):</p>
+    \[x^2 \le y \le 2-x\]
+    
+    <div style="background:#fff3cd; border-left:4px solid #ffc107; padding:10px; margin-top:10px;">
+      <strong>💡 Mẹo:</strong> Luôn luôn sắp xếp cận của tích phân theo nguyên tắc: Cận của tích phân bên ngoài cùng (tích phân cuối cùng sẽ tính) phải là <strong>các con số cụ thể</strong> (ở đây là \(-2\) đến \(1\)). Cận của tích phân bên trong có thể chứa biến (ở đây là \(x^2\) đến \(2-x\)).
+    </div>
+  </div>
 
-  <p>Tích phân ngoài:</p>
-  \[I = \int_{-2}^{1}\left(2-\frac{x^2}{2}-x^3-\frac{x^4}{2}\right)dx\]
-  \[= \left[2x-\frac{x^3}{6}-\frac{x^4}{4}-\frac{x^5}{10}\right]_{-2}^{1}\]
-  \[= \left(2-\frac{1}{6}-\frac{1}{4}-\frac{1}{10}\right)-\left(-4+\frac{8}{6}-4+\frac{32}{10}\right)\]
-  \[= \left(2-\frac{1}{6}-\frac{1}{4}-\frac{1}{10}\right)-\left(-8+\frac{4}{3}+\frac{16}{5}\right)\]
+  <div style="background:#fff; border:1px solid #ddd; padding:15px; margin:15px 0; border-radius:5px;">
+    <h4 style="color:#2980b9; margin-top:0;">Bước 4: Thiết lập và tính tích phân bên trong (theo biến \(y\))</h4>
+    <p>Viết lại biểu thức tích phân kép với các cận vừa tìm được:</p>
+    \[I = \int_{-2}^{1} \left( \int_{x^2}^{2-x} (x+y) \,dy \right) \,dx\]
+    <p>Ta sẽ tính phần ở trong ngoặc trước, tức là tính nguyên hàm theo biến \(y\). Lúc này, hãy coi \(x\) chỉ là một hằng số (giống như một con số bình thường).</p>
+    <p><strong>Nhắc lại quy tắc nguyên hàm cơ bản:</strong></p>
+    <ul>
+      <li>Nguyên hàm của một hằng số \(C\) theo biến \(y\) là \(C \cdot y\). Nên nguyên hàm của \(x\) là \(x \cdot y\).</li>
+      <li>Nguyên hàm của \(y^n\) là \(\frac{y^{n+1}}{n+1}\). Nên nguyên hàm của \(y^1\) là \(\frac{y^2}{2}\).</li>
+    </ul>
+    <p>Thực hiện lấy nguyên hàm theo \(y\):</p>
+    \[\int_{x^2}^{2-x} (x+y) \,dy = \left[ xy + \frac{y^2}{2} \right]_{y=x^2}^{y=2-x}\]
+    <p>Thay cận trên \(y = 2-x\) vào biểu thức trên:</p>
+    \[\text{Thay cận trên: } x(2-x) + \frac{(2-x)^2}{2}\]
+    <p>Thay cận dưới \(y = x^2\) vào biểu thức trên:</p>
+    \[\text{Thay cận dưới: } x(x^2) + \frac{(x^2)^2}{2}\]
+    <p>Lấy kết quả cận trên trừ đi kết quả cận dưới:</p>
+    \[= \left( x(2-x) + \frac{(2-x)^2}{2} \right) - \left( x(x^2) + \frac{(x^2)^2}{2} \right)\]
+    <p>Bây giờ ta khai triển từng cụm ra một cách cẩn thận. Chú ý hằng đẳng thức \((a-b)^2 = a^2 - 2ab + b^2\):</p>
+    \[= \left( 2x - x^2 + \frac{4 - 4x + x^2}{2} \right) - \left( x^3 + \frac{x^4}{2} \right)\]
+    <p>Tách phân số ở cụm đầu ra:</p>
+    \[= 2x - x^2 + \frac{4}{2} - \frac{4x}{2} + \frac{x^2}{2} - x^3 - \frac{x^4}{2}\]
+    <p>Rút gọn các phân số (\(\frac{4}{2} = 2\), \(\frac{4x}{2} = 2x\)):</p>
+    \[= 2x - x^2 + 2 - 2x + \frac{x^2}{2} - x^3 - \frac{x^4}{2}\]
+    <p>Triệt tiêu \(2x\) và \(-2x\):</p>
+    \[= - x^2 + 2 + \frac{x^2}{2} - x^3 - \frac{x^4}{2}\]
+    <p>Gom các số hạng chứa \(x^2\) lại (\(-x^2 + \frac{1}{2}x^2 = -\frac{1}{2}x^2\)):</p>
+    \[= 2 - \frac{x^2}{2} - x^3 - \frac{x^4}{2}\]
+    <p>Đây là biểu thức hoàn toàn chỉ còn biến \(x\), sẵn sàng cho bước tích phân bên ngoài.</p>
+  </div>
 
-  <p>Phần 1: mẫu chung 60: \(2=\frac{120}{60}\), \(\frac{1}{6}=\frac{10}{60}\), \(\frac{1}{4}=\frac{15}{60}\), \(\frac{1}{10}=\frac{6}{60}\):<br>
-  \(= \frac{120-10-15-6}{60} = \frac{89}{60}\)</p>
+  <div style="background:#fff; border:1px solid #ddd; padding:15px; margin:15px 0; border-radius:5px;">
+    <h4 style="color:#2980b9; margin-top:0;">Bước 5: Tính tích phân bên ngoài (theo biến \(x\))</h4>
+    <p>Đem kết quả vừa thu được thế vào tích phân bên ngoài, ta có tích phân một biến thông thường:</p>
+    \[I = \int_{-2}^{1} \left( 2 - \frac{x^2}{2} - x^3 - \frac{x^4}{2} \right) \,dx\]
+    <p>Tiếp tục áp dụng quy tắc nguyên hàm cơ bản \(\int x^n \,dx = \frac{x^{n+1}}{n+1}\):</p>
+    <ul>
+      <li>Nguyên hàm của \(2\) là \(2x\).</li>
+      <li>Nguyên hàm của \(\frac{x^2}{2}\) là \(\frac{1}{2} \cdot \frac{x^3}{3} = \frac{x^3}{6}\).</li>
+      <li>Nguyên hàm của \(x^3\) là \(\frac{x^4}{4}\).</li>
+      <li>Nguyên hàm của \(\frac{x^4}{2}\) là \(\frac{1}{2} \cdot \frac{x^5}{5} = \frac{x^5}{10}\).</li>
+    </ul>
+    <p>Áp dụng vào, ta có:</p>
+    \[I = \left[ 2x - \frac{x^3}{6} - \frac{x^4}{4} - \frac{x^5}{10} \right]_{-2}^{1}\]
+    <p>Lần lượt thay cận trên \(x = 1\) và cận dưới \(x = -2\) vào biểu thức:</p>
+    <p><strong>Thay cận trên (x = 1):</strong></p>
+    \[2(1) - \frac{1^3}{6} - \frac{1^4}{4} - \frac{1^5}{10}\]
+    \[= 2 - \frac{1}{6} - \frac{1}{4} - \frac{1}{10}\]
+    <p><strong>Thay cận dưới (x = -2):</strong></p>
+    <p>Chú ý dấu âm của x khi lũy thừa chẵn và lẻ!</p>
+    \[2(-2) - \frac{(-2)^3}{6} - \frac{(-2)^4}{4} - \frac{(-2)^5}{10}\]
+    <p>Tính từng số hạng:</p>
+    \[= -4 - \frac{-8}{6} - \frac{16}{4} - \frac{-32}{10}\]
+    <p>Rút gọn dấu và phân số (\(\frac{16}{4} = 4\)):</p>
+    \[= -4 + \frac{8}{6} - 4 + \frac{32}{10}\]
+    <p>Đơn giản hóa phân số (\(\frac{8}{6} = \frac{4}{3}\), \(\frac{32}{10} = \frac{16}{5}\)):</p>
+    \[= -8 + \frac{4}{3} + \frac{16}{5}\]
+    <p><strong>Lấy (Cận trên) trừ đi (Cận dưới):</strong></p>
+    \[I = \left( 2 - \frac{1}{6} - \frac{1}{4} - \frac{1}{10} \right) - \left( -8 + \frac{4}{3} + \frac{16}{5} \right)\]
+  </div>
 
-  <p>Phần 2: mẫu 15: \(-8=\frac{-120}{15}\), \(\frac{4}{3}=\frac{20}{15}\), \(\frac{16}{5}=\frac{48}{15}\):<br>
-  \(= \frac{-120+20+48}{15} = \frac{-52}{15}\)</p>
+  <div style="background:#fff; border:1px solid #ddd; padding:15px; margin:15px 0; border-radius:5px;">
+    <h4 style="color:#2980b9; margin-top:0;">Bước 6: Thực hiện cộng trừ phân số</h4>
+    <p>Để tránh sai sót, ta quy đồng và tính riêng từng ngoặc.</p>
+    <p><strong>Ngoặc 1:</strong> Mẫu số chung nhỏ nhất của \(6, 4, 10\) là \(60\).</p>
+    \[2 = \frac{120}{60},\quad \frac{1}{6} = \frac{10}{60},\quad \frac{1}{4} = \frac{15}{60},\quad \frac{1}{10} = \frac{6}{60}\]
+    <p>Thay vào ta được:</p>
+    \[\text{Ngoặc 1} = \frac{120}{60} - \frac{10}{60} - \frac{15}{60} - \frac{6}{60}\]
+    \[= \frac{120 - 10 - 15 - 6}{60} = \frac{89}{60}\]
+    
+    <p><strong>Ngoặc 2:</strong> Mẫu số chung nhỏ nhất của \(3\) và \(5\) là \(15\).</p>
+    \[-8 = \frac{-120}{15},\quad \frac{4}{3} = \frac{20}{15},\quad \frac{16}{5} = \frac{48}{15}\]
+    <p>Thay vào ta được:</p>
+    \[\text{Ngoặc 2} = \frac{-120}{15} + \frac{20}{15} + \frac{48}{15}\]
+    \[= \frac{-120 + 20 + 48}{15} = \frac{-52}{15}\]
 
-  \[I = \frac{89}{60} - \frac{-52}{15} = \frac{89}{60} + \frac{208}{60} = \frac{297}{60} = \frac{99}{20}\]
+    <p><strong>Ghép hai ngoặc lại:</strong></p>
+    \[I = \frac{89}{60} - \left( \frac{-52}{15} \right)\]
+    \[= \frac{89}{60} + \frac{52}{15}\]
+    <p>Quy đồng mẫu số chung là \(60\) (vì \(60 = 15 \times 4\)):</p>
+    \[\frac{52}{15} = \frac{52 \times 4}{15 \times 4} = \frac{208}{60}\]
+    \[I = \frac{89}{60} + \frac{208}{60} = \frac{297}{60}\]
+    <p>Rút gọn phân số bằng cách chia cả tử và mẫu cho \(3\) (vì tổng các chữ số \(2+9+7=18\) chia hết cho \(3\)):</p>
+    \[I = \frac{297 \div 3}{60 \div 3} = \frac{99}{20}\]
+  </div>
 
-  <p style="color:#1a5276; font-weight:bold;">\(\boxed{I = \dfrac{99}{20}}\) ✓ Khớp với đáp án.</p>
+  <div style="background:#e8f8f5; border-left:4px solid #1abc9c; padding:15px; margin-top:20px; border-radius:5px;">
+    <h4 style="color:#117a65; margin-top:0;">Bước 7: Kết luận và kiểm tra</h4>
+    <p style="color:#117a65; font-size:1.1em;"><strong>Kết luận:</strong> Giá trị của tích phân kép cần tìm là:</p>
+    \[\boxed{I = \dfrac{99}{20}}\]
+    <p><strong>Ý nghĩa bài toán:</strong> Nếu coi biểu thức \(f(x,y) = x+y\) là hàm mật độ khối lượng của một mảnh kim loại phẳng có hình dáng như miền \(D\), thì kết quả tích phân \(\frac{99}{20}\) (tương đương \(4.95\)) chính là tổng khối lượng của toàn bộ mảnh kim loại đó.</p>
+    <p>Kết quả hoàn toàn khớp với đáp án ở đầu đề bài, khẳng định các bước biến đổi đại số của chúng ta là chính xác!</p>
+  </div>
+</div>
+  </div>
 </div>
 
 </div>
+<script>
+    function toggleSolutionBox(btn) {
+        const content = btn.nextElementSibling;
+        const isOpen = content.classList.contains('is-open');
+        const icon = btn.querySelector('.sol-icon');
+        const text = btn.querySelector('.sol-text');
+        const arrow = btn.querySelector('.sol-arrow');
+        if (isOpen) {
+            content.classList.remove('is-open');
+            btn.classList.remove('is-open');
+            if (icon) icon.textContent = '📖';
+            if (text) text.textContent = 'Xem lời giải chi tiết (Bấm để mở)';
+            if (arrow) arrow.textContent = '▼';
+        } else {
+            content.classList.add('is-open');
+            btn.classList.add('is-open');
+            if (icon) icon.textContent = '🙈';
+            if (text) text.textContent = 'Thu gọn lời giải';
+            if (arrow) arrow.textContent = '▲';
+            if (window.MathJax && MathJax.typesetPromise) {
+                MathJax.typesetPromise([content]).catch(err => console.log(err));
+            }
+        }
+    }
+</script>
 </body>
 </html>

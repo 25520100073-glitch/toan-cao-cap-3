@@ -20,7 +20,58 @@
         .problem { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 40px; }
         .code-block { background: #282c34; color: #abb2bf; padding: 15px; border-radius: 5px; overflow-x: auto; font-family: monospace; }
         .plot-container { display: flex; justify-content: center; }
-    </style>
+    
+        /* Nút Ẩn / Hiện Lời Giải Chi Tiết */
+        .solution-toggle-wrapper {
+            margin: 28px 0 16px 0;
+        }
+        .solution-toggle-btn {
+            width: 100%;
+            background: #f8fafc;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 13px 20px;
+            font-size: 15px;
+            font-weight: 700;
+            color: #0284c7;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            font-family: inherit;
+        }
+        .solution-toggle-btn:hover {
+            background: #f0f9ff;
+            border-color: #38bdf8;
+            color: #0369a1;
+        }
+        .solution-toggle-btn.is-open {
+            background: #e0f2fe;
+            border-color: #0284c7;
+            color: #0369a1;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+        .solution-collapsible-content {
+            display: none;
+            border: 1.5px solid #0284c7;
+            border-top: none;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+            padding: 20px 22px;
+            background: #ffffff;
+        }
+        .solution-collapsible-content.is-open {
+            display: block;
+            animation: fadeInSol 0.25s ease-in-out;
+        }
+        @keyframes fadeInSol {
+            from { opacity: 0; transform: translateY(-4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+</style>
 </head>
 <body>
     <div class="problem">
@@ -45,31 +96,125 @@ fig.add_trace(go.Scatter(x=x_val, y=x_val**2, mode='lines', line=dict(width=0), 
 fig.add_trace(go.Scatter(x=x_val, y=np.full_like(x_val, 4), mode='lines', fill='tonexty', name='Miền D'))
 fig.show()</code></pre>
     
+<div class="solution-toggle-wrapper">
+  <button type="button" class="solution-toggle-btn" onclick="toggleSolutionBox(this)">
+    <span><span class="sol-icon">📖</span> <span class="sol-text">Xem lời giải chi tiết (Bấm để mở)</span></span>
+    <span class="sol-arrow">▼</span>
+  </button>
+  <div class="solution-collapsible-content">
 <div style="background:#eaf4fb; border-left:5px solid #2980b9; padding:20px; margin-top:30px; border-radius:6px;">
-  <h3 style="color:#1a5276;">Lời giải – Bài B1.2</h3>
-  <p><strong>Đề bài:</strong> Tính \(\iint_D (x^2 + y)\,dxdy\), với \(D\) giới hạn bởi \(y = 4\) và \(y = x^2\).</p>
+  <h3 style="color:#1a5276;">Lời giải chi tiết – Bài B1.2</h3>
+  <p><strong>Đề bài:</strong> Tính tích phân kép \( \iint_D (x^2 + y) dxdy \), với miền \( D \) được giới hạn bởi đường thẳng \( y = 4 \) và đường parabol \( y = x^2 \).</p>
 
-  <p><strong>Bước 1: Xác định miền D.</strong><br>
-  Giao điểm: \(x^2 = 4 \Rightarrow x = \pm 2\).<br>
-  Trên \([-2,2]\): \(x^2 \le y \le 4\).</p>
+  <h4>Bước 1: Hiểu ý nghĩa của bài toán và các ký hiệu</h4>
+  <ul>
+    <li>Ký hiệu \( \iint_D \) (tích phân kép) có nghĩa là chúng ta sẽ tính tổng (hoặc gom lại) các giá trị của biểu thức \( (x^2 + y) \) trên toàn bộ diện tích của một vùng phẳng có tên là miền \( D \).</li>
+    <li>Ký hiệu \( dxdy \) cho biết ta sẽ tính toán dựa trên hai biến số là \( x \) (chiều ngang) và \( y \) (chiều dọc).</li>
+    <li>Biểu thức \( (x^2 + y) \) là hàm số mà chúng ta cần tính. Bạn có thể tưởng tượng nó giống như chiều cao của một khối nằm trên vùng \( D \), và tích phân kép chính là việc tính thể tích của khối đó.</li>
+  </ul>
 
-  <p><strong>Bước 2: Tính tích phân.</strong></p>
-  \[I = \int_{-2}^{2} \int_{x^2}^{4} (x^2 + y)\,dy\,dx\]
+  <h4>Bước 2: Tìm giao điểm để xác định ranh giới (giới hạn) của miền D</h4>
+  <p>Để biết miền \( D \) nằm từ đâu đến đâu theo chiều ngang (trục \( x \)), ta cần tìm những điểm mà đường thẳng \( y = 4 \) và đường cong parabol \( y = x^2 \) cắt nhau. Ta làm điều này bằng cách giải phương trình hoành độ giao điểm (cho hai giá trị \( y \) bằng nhau):</p>
+  \[ x^2 = 4 \]
+  <p>Để giải phương trình này, ta lấy căn bậc hai của cả hai vế. Có hai con số mà khi bình phương lên bằng 4, đó là 2 và -2:</p>
+  \[ x = 2 \text{ hoặc } x = -2 \]
+  <p>Vậy, miền \( D \) trải dài trên trục \( x \) từ \( x = -2 \) đến \( x = 2 \).</p>
 
-  <p>Tích phân trong theo \(y\):</p>
-  \[\int_{x^2}^{4}(x^2+y)\,dy = \left[x^2 y + \frac{y^2}{2}\right]_{x^2}^{4} = \left(4x^2 + 8\right) - \left(x^4 + \frac{x^4}{2}\right)\]
-  \[= 4x^2 + 8 - \frac{3x^4}{2}\]
+  
+  <h4>Bước 3: Viết lại tích phân với các giới hạn (cận) rõ ràng</h4>
+  <p>Bây giờ, ta biến tích phân kép ban đầu thành hai tích phân đơn (tích phân 1 biến) lồng vào nhau. Cách làm như sau:</p>
+  <ul>
+    <li>Ta sẽ tính từ trong ra ngoài. Lớp tích phân bên <strong>trong</strong> sẽ quét theo chiều dọc (biến \( y \)), từ đường nằm dưới (\( y = x^2 \)) lên đường nằm trên (\( y = 4 \)).</li>
+    <li>Lớp tích phân bên <strong>ngoài</strong> sẽ quét theo chiều ngang (biến \( x \)), từ ranh giới trái (\( x = -2 \)) sang ranh giới phải (\( x = 2 \)).</li>
+  </ul>
+  <p>Tích phân kép của ta trở thành:</p>
+  \[ I = \int_{-2}^{2} \left[ \int_{x^2}^{4} (x^2 + y) dy \right] dx \]
 
-  <p>Tích phân ngoài (hàm chẵn trên \([-2,2]\)):</p>
-  \[I = 2\int_0^2 \left(4x^2 + 8 - \frac{3x^4}{2}\right)dx = 2\left[\frac{4x^3}{3} + 8x - \frac{3x^5}{10}\right]_0^2\]
-  \[= 2\left(\frac{32}{3} + 16 - \frac{96}{10}\right) = 2\left(\frac{32}{3} + 16 - \frac{48}{5}\right)\]
+  <h4>Bước 4: Tính tích phân bên trong (theo biến y)</h4>
+  <p>Ta tập trung vào phần bên trong ngoặc vuông. Lúc này, \( x \) được xem như là một <em>hằng số</em> (một con số bình thường không thay đổi), và ta chỉ lấy nguyên hàm theo biến \( y \):</p>
+  <ul>
+    <li>Nguyên hàm của \( x^2 \) (một số) theo \( y \) là: \( x^2 \cdot y \)</li>
+    <li>Nguyên hàm của \( y \) theo \( y \) (dùng quy tắc \( \int y^n dy = \frac{y^{n+1}}{n+1} \)) là: \( \frac{y^2}{2} \)</li>
+  </ul>
+  <p>Ghép lại, ta có biểu thức nguyên hàm bên trong:</p>
+  \[ \int (x^2 + y) dy = x^2 y + \frac{y^2}{2} \]
+  <p>Tiếp theo, ta thay các giới hạn (cận trên là 4, cận dưới là \( x^2 \)) vào vị trí của \( y \) (không thay vào \( x \)):</p>
+  <p>Thay giới hạn trên \( y = 4 \):</p>
+  \[ x^2(4) + \frac{4^2}{2} = 4x^2 + \frac{16}{2} = 4x^2 + 8 \]
+  <p>Thay giới hạn dưới \( y = x^2 \):</p>
+  \[ x^2(x^2) + \frac{(x^2)^2}{2} = x^4 + \frac{x^4}{2} \]
+  <p>Gộp lại để làm phép tính phân số (vì \( x^4 \) có thể hiểu là \( \frac{2x^4}{2} \)):</p>
+  \[ = \frac{2x^4}{2} + \frac{x^4}{2} = \frac{3x^4}{2} \]
+  <p>Bây giờ, ta lấy giá trị ở giới hạn trên trừ đi giá trị ở giới hạn dưới:</p>
+  \[ \text{Tích phân bên trong} = (4x^2 + 8) - \left( \frac{3x^4}{2} \right) \]
+  \[ = 4x^2 + 8 - \frac{3x^4}{2} \]
 
-  <p>Quy đồng mẫu 15:</p>
-  \[= 2\cdot\frac{160 + 240 - 144}{15} = 2\cdot\frac{256}{15} = \frac{512}{15}\]
+  <h4>Bước 5: Tính tích phân bên ngoài (theo biến x)</h4>
+  <p>Bây giờ ta đem kết quả vừa tìm được đi tính tích phân còn lại theo biến \( x \):</p>
+  \[ I = \int_{-2}^{2} \left( 4x^2 + 8 - \frac{3x^4}{2} \right) dx \]
+  <p>Lại dùng quy tắc tìm nguyên hàm cơ bản (\( \int x^n dx = \frac{x^{n+1}}{n+1} \)):</p>
+  <ul>
+    <li>Nguyên hàm của \( 4x^2 \) là \( 4 \cdot \frac{x^3}{3} = \frac{4x^3}{3} \)</li>
+    <li>Nguyên hàm của số \( 8 \) là \( 8x \)</li>
+    <li>Nguyên hàm của \( -\frac{3x^4}{2} \) là \( -\frac{3}{2} \cdot \frac{x^5}{5} = -\frac{3x^5}{10} \)</li>
+  </ul>
+  <p>Ta được biểu thức sau để thay số:</p>
+  \[ \left[ \frac{4x^3}{3} + 8x - \frac{3x^5}{10} \right]_{-2}^{2} \]
+  <p>Thay cận trên \( x = 2 \):</p>
+  \[ \frac{4(2^3)}{3} + 8(2) - \frac{3(2^5)}{10} \]
+  \[ = \frac{4 \cdot 8}{3} + 16 - \frac{3 \cdot 32}{10} \]
+  \[ = \frac{32}{3} + 16 - \frac{96}{10} \]
+  <p>Rút gọn phân số cuối: \( \frac{96}{10} = \frac{48}{5} \), vậy ta có:</p>
+  \[ = \frac{32}{3} + 16 - \frac{48}{5} \]
 
-  <p style="color:#1a5276; font-weight:bold;">\(\boxed{I = \dfrac{512}{15}}\) ✓ Khớp với đáp án.</p>
+  <p>Do tính chất đối xứng của hàm chẵn, khi thay \( x = -2 \) (cận dưới), các số hạng sẽ bị đổi dấu, nhưng vì ta dùng phép trừ (cận trên trừ cận dưới), nên kết quả sẽ chính xác gấp đôi giá trị khi thay cận trên (so với việc tính từ 0 đến 2). Do đó, để đơn giản, ta chỉ việc nhân đôi kết quả cận trên:</p>
+  \[ I = 2 \cdot \left( \frac{32}{3} + 16 - \frac{48}{5} \right) \]
+
+  <p>Quy đồng mẫu số chung là 15 cho các số hạng trong ngoặc:</p>
+  <ul>
+    <li>\( \frac{32}{3} = \frac{32 \cdot 5}{3 \cdot 5} = \frac{160}{15} \)</li>
+    <li>\( 16 = \frac{16 \cdot 15}{15} = \frac{240}{15} \)</li>
+    <li>\( \frac{48}{5} = \frac{48 \cdot 3}{5 \cdot 3} = \frac{144}{15} \)</li>
+  </ul>
+  <p>Cộng trừ các tử số lại với nhau:</p>
+  \[ I = 2 \cdot \left( \frac{160}{15} + \frac{240}{15} - \frac{144}{15} \right) \]
+  \[ I = 2 \cdot \left( \frac{160 + 240 - 144}{15} \right) \]
+  \[ I = 2 \cdot \left( \frac{400 - 144}{15} \right) \]
+  \[ I = 2 \cdot \frac{256}{15} \]
+  \[ I = \frac{512}{15} \]
+
+  <h4>Bước 6: Kết luận</h4>
+  <p><strong>Kết quả dương, điều này rất hợp lý</strong> vì hàm số \( (x^2 + y) \) luôn dương trong khu vực từ \( y = 0 \) đến \( y = 4 \), nên "thể tích" được tính ra phải là một số lớn hơn 0!</p>
+  <p style="color:#1a5276; font-weight:bold; font-size:1.2em;">\(\boxed{I = \dfrac{512}{15}}\) ✓ Bài toán đã được giải quyết xong hoàn toàn!</p>
+</div>
+  </div>
 </div>
 
 </div>
+<script>
+    function toggleSolutionBox(btn) {
+        const content = btn.nextElementSibling;
+        const isOpen = content.classList.contains('is-open');
+        const icon = btn.querySelector('.sol-icon');
+        const text = btn.querySelector('.sol-text');
+        const arrow = btn.querySelector('.sol-arrow');
+        if (isOpen) {
+            content.classList.remove('is-open');
+            btn.classList.remove('is-open');
+            if (icon) icon.textContent = '📖';
+            if (text) text.textContent = 'Xem lời giải chi tiết (Bấm để mở)';
+            if (arrow) arrow.textContent = '▼';
+        } else {
+            content.classList.add('is-open');
+            btn.classList.add('is-open');
+            if (icon) icon.textContent = '🙈';
+            if (text) text.textContent = 'Thu gọn lời giải';
+            if (arrow) arrow.textContent = '▲';
+            if (window.MathJax && MathJax.typesetPromise) {
+                MathJax.typesetPromise([content]).catch(err => console.log(err));
+            }
+        }
+    }
+</script>
 </body>
 </html>

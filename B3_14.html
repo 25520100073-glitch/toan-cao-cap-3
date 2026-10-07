@@ -27,26 +27,128 @@
         .check { background: #eafaf1; border-left: 4px solid #27ae60; padding: 8px 14px; border-radius: 4px; margin-top: 10px; color: #1e8449; }
         .plot-container { display: flex; justify-content: center; margin-top: 20px; }
         .code-block { background: #282c34; color: #abb2bf; padding: 15px; border-radius: 5px; overflow-x: auto; font-family: monospace; font-size: 13px; margin-top: 10px; white-space: pre; }
-    </style>
+    
+        /* Nút Ẩn / Hiện Lời Giải Chi Tiết */
+        .solution-toggle-wrapper {
+            margin: 28px 0 16px 0;
+        }
+        .solution-toggle-btn {
+            width: 100%;
+            background: #f8fafc;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 13px 20px;
+            font-size: 15px;
+            font-weight: 700;
+            color: #0284c7;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            font-family: inherit;
+        }
+        .solution-toggle-btn:hover {
+            background: #f0f9ff;
+            border-color: #38bdf8;
+            color: #0369a1;
+        }
+        .solution-toggle-btn.is-open {
+            background: #e0f2fe;
+            border-color: #0284c7;
+            color: #0369a1;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+        .solution-collapsible-content {
+            display: none;
+            border: 1.5px solid #0284c7;
+            border-top: none;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+            padding: 20px 22px;
+            background: #ffffff;
+        }
+        .solution-collapsible-content.is-open {
+            display: block;
+            animation: fadeInSol 0.25s ease-in-out;
+        }
+        @keyframes fadeInSol {
+            from { opacity: 0; transform: translateY(-4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+</style>
 </head>
 <body>
     <div class="problem">
         <h2>Bài B3.14</h2>
         <div class="de-bai"><strong>Đề bài:</strong> Vẽ vật thể \(\Omega\): \(z=4-x^2-y^2,\;x^2+y^2=1,\;Oxy\) (có hai vật thể)</div>
-        <h3>&#9998; Lời giải</h3>
+        <div class="solution-toggle-wrapper">
+  <button type="button" class="solution-toggle-btn" onclick="toggleSolutionBox(this)">
+    <span><span class="sol-icon">📖</span> <span class="sol-text">Xem lời giải chi tiết (Bấm để mở)</span></span>
+    <span class="sol-arrow">▼</span>
+  </button>
+  <div class="solution-collapsible-content">
+<h3>&#9998; Lời giải</h3>
         <div class="solution">
-  <p><strong>Đề bài yêu cầu:</strong> Vẽ và xác định vật thể \(\Omega\) giới hạn bởi paraboloid \(z=4-x^2-y^2\), mặt trụ \(x^2+y^2=1\) và mặt phẳng \(Oxy\) (\(z=0\)) — <em>chú ý có 2 vật thể thỏa mãn!</em></p>
-  <p><strong>Trường hợp 1: Vật thể \(\Omega_1\) nằm BÊN TRONG mặt trụ \(x^2+y^2 \le 1\).</strong><br>
-  - Hình chiếu xuống \(Oxy\) là hình tròn \(D_1: x^2+y^2 \le 1\) (tức \(0 \le r \le 1,\; 0 \le \theta \le 2\pi\)).<br>
-  - Chiều cao \(z\) đi từ \(z=0\) đến mặt paraboloid \(z = 4-r^2\).<br>
-  - Thể tích khối \(\Omega_1\):
-  \[V_1 = \int_0^{2\pi} d\theta \int_0^1 (4-r^2)r\,dr = 2\pi \left[ 2r^2 - \frac{r^4}{4} \right]_0^1 = 2\pi \left( 2 - \frac{1}{4} \right) = \frac{7\pi}{2}\]</p>
-  <p><strong>Trường hợp 2: Vật thể \(\Omega_2\) nằm BÊN NGOÀI mặt trụ \(x^2+y^2 \ge 1\) và BÊN TRONG paraboloid \(z = 4-x^2-y^2 \ge 0\).</strong><br>
-  - Mặt paraboloid \(z=4-x^2-y^2\) cắt mặt phẳng \(z=0\) tại đường tròn \(x^2+y^2=4\) (bán kính \(R=2\)).<br>
-  - Hình chiếu xuống \(Oxy\) là hình vành khăn \(D_2: 1 \le x^2+y^2 \le 4\) (tức \(1 \le r \le 2,\; 0 \le \theta \le 2\pi\)).<br>
-  - Thể tích khối \(\Omega_2\):
-  \[V_2 = \int_0^{2\pi} d\theta \int_1^2 (4-r^2)r\,dr = 2\pi \left[ 2r^2 - \frac{r^4}{4} \right]_1^2 = 2\pi \left[ (8 - 4) - \left(2 - \frac{1}{4}\right) \right] = 2\pi \cdot \frac{9}{4} = \frac{9\pi}{2}\]</p>
-  <p style="color:#27ae60; font-weight:bold;">\(\boxed{V_1 = \dfrac{7\pi}{2},\quad V_2 = \dfrac{9\pi}{2}}\) ✓ Trình bày đầy đủ cả 2 vật thể!</p>
+<p>Chào các bạn! Bài toán này rất thú vị vì nó đánh lừa chúng ta một chút. Đề bài yêu cầu vẽ và tính thể tích vật thể giới hạn bởi 3 mặt: một cái bát úp (\(z=4-x^2-y^2\)), một cái ống nước thẳng đứng (\(x^2+y^2=1\)) và mặt đất phẳng (\(z=0\)).</p>
+
+<p><strong>Bước 1: Tại sao lại có đến HAI vật thể?</strong></p>
+<p>Hãy tưởng tượng bạn úp một cái bát thật to xuống mặt bàn (đáy bát ở trên cao \(z=4\)). Cái bát úp này chạm mặt bàn tạo thành một vòng tròn lớn. Đường kính của vòng tròn này là bao nhiêu? Ta cho \(z=0\) thì \(x^2+y^2=4\), bán kính bằng 2.</p>
+<p>Bây giờ, bạn lấy một cái ống nước nhỏ hơn (bán kính bằng 1, \(x^2+y^2=1\)) cắm xuyên thẳng đứng từ mặt bàn lên. Rõ ràng ống nước nằm gọn bên dưới cái bát. Lúc này, không gian bị chia làm 2 phần thỏa mãn yêu cầu "bị kẹp giữa bát, ống và bàn":</p>
+<ul>
+  <li><strong>Vật thể 1 (\(\Omega_1\)):</strong> Nằm <strong>bên trong</strong> cái ống nước. Nó là một cái cột hình trụ bị nắp lõm cong cong của cái bát đậy lại ở trên.</li>
+  <li><strong>Vật thể 2 (\(\Omega_2\)):</strong> Nằm <strong>bên ngoài</strong> ống nước, nhưng vẫn ở bên dưới cái bát (như một chiếc nhẫn vòng quanh ống nước, hay mặt bánh donut bị cắt phẳng hai đầu).</li>
+</ul>
+<p>Chúng ta phải tính thể tích của cả 2 vật thể này!</p>
+
+<p><strong>Bước 2: Sử dụng Tọa độ cực chung cho cả 2 khối</strong></p>
+<p>Vì cả 2 khối đều có đáy là hình tròn hoặc vành tròn, tọa độ cực là lựa chọn tối ưu:</p>
+<ul>
+  <li>\(x = r\cos\theta\) và \(y = r\sin\theta\).</li>
+  <li>\(x^2+y^2 = r^2\).</li>
+  <li>\(dxdy = r \, dr \, d\theta\) (nhớ chữ \(r\) này nhé, nó là Jacobian).</li>
+</ul>
+<p>Trần của cả 2 khối đều là cái bát úp: \(z_{trên} = 4-x^2-y^2 = 4-r^2\).</p>
+<p>Đáy của cả 2 khối đều là mặt bàn: \(z_{dưới} = 0\).</p>
+<p>Vậy biểu thức tích phân của thể tích chung là: \(\iint_D (4-r^2) \cdot r \, dr \, d\theta\)</p>
+
+<p><strong>Bước 3: Tính thể tích khối bên trong ống (\(\Omega_1\))</strong></p>
+<p>Hình chiếu đáy của \(\Omega_1\) là hình tròn bên trong ống nước (\(x^2+y^2 \le 1\)).</p>
+<p>Do đó, \(r\) chạy từ \(0\) đến \(1\), và \(\theta\) chạy từ \(0\) đến \(2\pi\).</p>
+<p>\[V_1 = \int_0^{2\pi} d\theta \int_0^1 (4-r^2) \cdot r \, dr\]</p>
+<p>Nhân chữ \(r\) vào: \((4r - r^3)\).</p>
+<p>Tích phân của \(1\) theo \(d\theta\) là \(2\pi\):</p>
+<p>\[V_1 = 2\pi \cdot \int_0^1 (4r - r^3) \, dr\]</p>
+<p>Nguyên hàm: \(\int (4r) dr = 2r^2\) và \(\int (r^3) dr = \frac{r^4}{4}\).</p>
+<p>\[V_1 = 2\pi \cdot \left[ 2r^2 - \frac{r^4}{4} \right]_0^1\]</p>
+<p>Thay cận 1 và 0 vào:</p>
+<p>\[V_1 = 2\pi \cdot \left( 2(1)^2 - \frac{1^4}{4} - 0 \right)\]</p>
+<p>\[V_1 = 2\pi \cdot \left( 2 - \frac{1}{4} \right) = 2\pi \cdot \frac{7}{4} = \frac{7\pi}{2}\]</p>
+
+<p><strong>Bước 4: Tính thể tích khối bên ngoài ống (\(\Omega_2\))</strong></p>
+<p>Hình chiếu đáy của \(\Omega_2\) là phần vành khăn nằm ngoài ống nước (bán kính 1) nhưng vẫn nằm trong viền bát chạm đất (bán kính 2). Tức là \(1 \le x^2+y^2 \le 4\).</p>
+<p>Do đó, \(r\) chạy từ \(1\) đến \(2\), và \(\theta\) chạy từ \(0\) đến \(2\pi\).</p>
+<p>\[V_2 = \int_0^{2\pi} d\theta \int_1^2 (4-r^2) \cdot r \, dr\]</p>
+<p>Làm tương tự như trên, ta lấy nguyên hàm:</p>
+<p>\[V_2 = 2\pi \cdot \left[ 2r^2 - \frac{r^4}{4} \right]_1^2\]</p>
+<p>Thay cận 2 và cận 1 vào:</p>
+<p>\[V_2 = 2\pi \cdot \left( \left( 2(2)^2 - \frac{2^4}{4} \right) - \left( 2(1)^2 - \frac{1^4}{4} \right) \right)\]</p>
+<p>Tính toán biểu thức trong ngoặc:</p>
+<ul>
+  <li>Với cận 2: \(2(4) - \frac{16}{4} = 8 - 4 = 4\)</li>
+  <li>Với cận 1: \(2 - \frac{1}{4} = \frac{7}{4}\)</li>
+</ul>
+<p>\[V_2 = 2\pi \cdot \left( 4 - \frac{7}{4} \right)\]</p>
+<p>\[V_2 = 2\pi \cdot \left( \frac{16}{4} - \frac{7}{4} \right) = 2\pi \cdot \frac{9}{4} = \frac{9\pi}{2}\]</p>
+
+<div style="background:#e8f4f8; padding:15px; border-radius:8px; border-left: 5px solid #2980b9;">
+<strong>Mẹo kiểm tra ý nghĩa:</strong> Tổng thể tích của cả hai phần là phần không gian nằm hoàn toàn dưới cái bát khổng lồ. Tổng là \(V_1 + V_2 = \frac{7\pi}{2} + \frac{9\pi}{2} = \frac{16\pi}{2} = 8\pi\). Nếu ta tính trực tiếp thể tích cả cái bát bằng tích phân từ \(r=0\) đến \(2\): \(V = 2\pi [2r^2 - \frac{r^4}{4}]_0^2 = 2\pi (8 - 4) = 8\pi\). Phép cộng hoàn toàn khớp!
+</div>
+
+<p><strong>Kết luận:</strong> Có hai vật thể thỏa mãn. Thể tích lần lượt là \( \mathbf{V_1 = \dfrac{7\pi}{2}} \) và \( \mathbf{V_2 = \dfrac{9\pi}{2}} \).</p>
+
 </div>
         <div class="answer-box">&#10003; Kết quả: Bài chỉ yêu cầu vẽ</div>
         <div class="check">Bài chỉ yêu cầu vẽ (có hai vật thể). Hình 3D hiển thị cả hai.</div>
@@ -58,5 +160,31 @@
         <h3>&#128187; Mã nguồn Python (tham khảo)</h3>
         <pre class="code-block"></pre>
     </div>
+  </div>
+</div><script>
+    function toggleSolutionBox(btn) {
+        const content = btn.nextElementSibling;
+        const isOpen = content.classList.contains('is-open');
+        const icon = btn.querySelector('.sol-icon');
+        const text = btn.querySelector('.sol-text');
+        const arrow = btn.querySelector('.sol-arrow');
+        if (isOpen) {
+            content.classList.remove('is-open');
+            btn.classList.remove('is-open');
+            if (icon) icon.textContent = '📖';
+            if (text) text.textContent = 'Xem lời giải chi tiết (Bấm để mở)';
+            if (arrow) arrow.textContent = '▼';
+        } else {
+            content.classList.add('is-open');
+            btn.classList.add('is-open');
+            if (icon) icon.textContent = '🙈';
+            if (text) text.textContent = 'Thu gọn lời giải';
+            if (arrow) arrow.textContent = '▲';
+            if (window.MathJax && MathJax.typesetPromise) {
+                MathJax.typesetPromise([content]).catch(err => console.log(err));
+            }
+        }
+    }
+</script>
 </body>
 </html>

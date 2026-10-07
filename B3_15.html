@@ -27,31 +27,130 @@
         .check { background: #eafaf1; border-left: 4px solid #27ae60; padding: 8px 14px; border-radius: 4px; margin-top: 10px; color: #1e8449; }
         .plot-container { display: flex; justify-content: center; margin-top: 20px; }
         .code-block { background: #282c34; color: #abb2bf; padding: 15px; border-radius: 5px; overflow-x: auto; font-family: monospace; font-size: 13px; margin-top: 10px; white-space: pre; }
-    </style>
+    
+        /* Nút Ẩn / Hiện Lời Giải Chi Tiết */
+        .solution-toggle-wrapper {
+            margin: 28px 0 16px 0;
+        }
+        .solution-toggle-btn {
+            width: 100%;
+            background: #f8fafc;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 13px 20px;
+            font-size: 15px;
+            font-weight: 700;
+            color: #0284c7;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            font-family: inherit;
+        }
+        .solution-toggle-btn:hover {
+            background: #f0f9ff;
+            border-color: #38bdf8;
+            color: #0369a1;
+        }
+        .solution-toggle-btn.is-open {
+            background: #e0f2fe;
+            border-color: #0284c7;
+            color: #0369a1;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+        .solution-collapsible-content {
+            display: none;
+            border: 1.5px solid #0284c7;
+            border-top: none;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+            padding: 20px 22px;
+            background: #ffffff;
+        }
+        .solution-collapsible-content.is-open {
+            display: block;
+            animation: fadeInSol 0.25s ease-in-out;
+        }
+        @keyframes fadeInSol {
+            from { opacity: 0; transform: translateY(-4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+</style>
 </head>
 <body>
     <div class="problem">
         <h2>Bài B3.15</h2>
         <div class="de-bai"><strong>Đề bài:</strong> Vẽ vật thể \(\Omega\): \(z=\sqrt{x^2+y^2},\;x^2+y^2+z^2=1,\;x^2+y^2+z^2=4,\;z\ge0\)</div>
-        <h3>&#9998; Lời giải</h3>
+        <div class="solution-toggle-wrapper">
+  <button type="button" class="solution-toggle-btn" onclick="toggleSolutionBox(this)">
+    <span><span class="sol-icon">📖</span> <span class="sol-text">Xem lời giải chi tiết (Bấm để mở)</span></span>
+    <span class="sol-arrow">▼</span>
+  </button>
+  <div class="solution-collapsible-content">
+<h3>&#9998; Lời giải</h3>
         <div class="solution">
-<p><strong>Vẽ và tính thể tích vật thể</strong> \(z=\sqrt{x^2+y^2}\), \(x^2+y^2+z^2=1\), \(x^2+y^2+z^2=4\), \(z \ge 0\).</p>
-  <p><strong>Bước 1: Khảo sát không gian vật thể.</strong><br>
-  Vật thể nằm trong phần không gian bị giới hạn bởi mặt nón \(z=\sqrt{x^2+y^2}\) (phần không gian bên trong nón, ứng với góc từ trục z lan ra là \(\pi/4\)). Đồng thời nó bị kẹp giữa mặt cầu nhỏ bán kính \(R=1\) và mặt cầu lớn bán kính \(R=2\).</p>
-  <p><strong>Bước 2: Ứng dụng tọa độ cầu.</strong><br>
-  Các biến tọa độ cầu \(( \rho, \phi, \theta )\):<br>
-  - Bán kính \(\rho\) chạy giữa 2 mặt cầu: \(1 \le \rho \le 2\).<br>
-  - Góc từ trục z quét đến mặt nón: \(0 \le \phi \le \pi/4\).<br>
-  - Góc xoay trọn vòng quanh trục z: \(0 \le \theta \le 2\pi\).<br>
-  Định thức Jacobi là \(\rho^2\sin\phi\).</p>
-  <p><strong>Bước 3: Tính toán tích phân lặp.</strong><br>
-  \[V = \int_0^{2\pi} d\theta \int_0^{\pi/4} \sin\phi \,d\phi \int_1^2 \rho^2 \,d\rho\]
-  Tính phần góc \(\theta\): \(\int_0^{2\pi} d\theta = 2\pi\).<br>
-  Tính phần góc \(\phi\): \(\int_0^{\pi/4} \sin\phi \,d\phi = \left[ -\cos\phi \right]_0^{\pi/4} = -\frac{\sqrt{2}}{2} + 1 = \frac{2-\sqrt{2}}{2}\).<br>
-  Tính phần bán kính \(\rho\): \(\int_1^2 \rho^2 \,d\rho = \left[ \frac{\rho^3}{3} \right]_1^2 = \frac{8}{3} - \frac{1}{3} = \frac{7}{3}\).<br>
-  Nhân cả 3 giá trị lại:
-  \[V = 2\pi \cdot \frac{2-\sqrt{2}}{2} \cdot \frac{7}{3} = \frac{7\pi(2-\sqrt{2})}{3}\]</p>
-  <p style="color:#1a5276; font-weight:bold;">\(\boxed{V = \frac{7\pi(2-\sqrt{2})}{3}}\) ✓ Mọi phép tính đều tường minh tuyệt đối.</p>
+<p>Chào các bạn! Bài toán cuối cùng này trông có vẻ phức tạp với 4 phương trình, nhưng thực ra lại vẽ nên một vật thể cực kỳ đẹp mắt. Hãy cùng phân tích từ từ nhé!</p>
+
+<p><strong>Bước 1: Giải mã các phương trình để tìm hình dáng vật thể</strong></p>
+<p>Chúng ta có 4 điều kiện giới hạn vật thể \(\Omega\):</p>
+<ul>
+  <li>\(z \ge 0\): Chỉ lấy phần không gian phía trên mặt đất (bán cầu Bắc).</li>
+  <li>\(z=\sqrt{x^2+y^2}\): Đây là một chiếc nón ngửa, đỉnh ở gốc tọa độ. Phần bên trong nón (chứa trục \(z\)) có \(z \ge \sqrt{x^2+y^2}\).</li>
+  <li>\(x^2+y^2+z^2=1\): Mặt cầu nhỏ có tâm ở gốc tọa độ, bán kính \(R_1 = \sqrt{1} = 1\).</li>
+  <li>\(x^2+y^2+z^2=4\): Mặt cầu lớn có tâm ở gốc tọa độ, bán kính \(R_2 = \sqrt{4} = 2\).</li>
+</ul>
+<p>Vật thể của chúng ta bị "kẹp" giữa mặt cầu nhỏ và mặt cầu lớn (giống như phần vỏ của một quả dưa hấu dày 1 đơn vị), đồng thời lại nằm lọt thỏm bên trong chiếc nón ngửa. Hình dáng của nó giống như <strong>phần nắp cong của một chiếc cốc dày</strong> hoặc <strong>một miếng dưa hấu được cắt theo hình nón</strong>!</p>
+
+<p><strong>Bước 2: Sử dụng vũ khí bí mật: Tọa độ cầu</strong></p>
+<p>Vì vật thể liên quan chặt chẽ đến các mặt cầu và hình nón từ tâm tỏa ra, dùng tọa độ cầu \(( \rho, \phi, \theta )\) sẽ giải bài này trong chớp mắt!</p>
+<ul>
+  <li>\(\rho\) (khoảng cách từ tâm): Vật thể kẹp giữa mặt cầu bán kính 1 và mặt cầu bán kính 2, do đó \(1 \le \rho \le 2\). Nhờ tọa độ cầu, điều kiện phức tạp biến thành một khoảng đơn giản!</li>
+  <li>\(\theta\) (góc quay quanh trục đứng): Hình nón và mặt cầu đều tròn vo, quay đủ một vòng tròn nên \(0 \le \theta \le 2\pi\).</li>
+  <li>\(\phi\) (góc ngả từ trục đứng xuống): Trục \(z\) đứng thẳng là góc \(0\). Mặt nón \(z=\sqrt{x^2+y^2}\) chính là \(\rho\cos\phi = \rho\sin\phi \Rightarrow \tan\phi = 1\), tức là góc \(\phi = \frac{\pi}{4}\) (hay \(45^\circ\)). Vật thể nằm trong nón nên góc ngả từ \(0\) đến mặt nón. Vậy \(0 \le \phi \le \frac{\pi}{4}\).</li>
+  <li><strong>Lưu ý bắt buộc:</strong> Yếu tố thể tích khi chuyển sang tọa độ cầu phải nhân thêm định thức Jacobian là \(\rho^2\sin\phi\).</li>
+</ul>
+
+<p><strong>Bước 3: Viết công thức và tách tích phân</strong></p>
+<p>Thể tích \(V\) được tính bằng tích phân 3 lớp trên vùng tọa độ mới:</p>
+<p>\[V = \int_0^{2\pi} d\theta \int_0^{\pi/4} d\phi \int_1^2 \left( \rho^2\sin\phi \right) \,d\rho\]</p>
+
+<p>Vì các cận (giới hạn) đều là số và các biến trong hàm có thể tách rời, ta biến tích phân khổng lồ này thành tích của 3 tích phân nhỏ:</p>
+<p>\[V = \left( \int_0^{2\pi} 1 \,d\theta \right) \cdot \left( \int_0^{\pi/4} \sin\phi \,d\phi \right) \cdot \left( \int_1^2 \rho^2 \,d\rho \right)\]</p>
+
+<p><strong>Bước 4: Xử lý gọn từng tích phân nhỏ</strong></p>
+<ol>
+  <li><strong>Tích phân của \(\theta\):</strong>
+    \[\int_0^{2\pi} 1 \,d\theta = 2\pi - 0 = 2\pi\]
+  </li>
+  <li><strong>Tích phân của \(\phi\):</strong>
+    Nguyên hàm của \(\sin\phi\) là \(-\cos\phi\).
+    \[\int_0^{\pi/4} \sin\phi \,d\phi = \left[ -\cos\phi \right]_0^{\pi/4}\]
+    \[= \left( -\cos\frac{\pi}{4} \right) - \left( -\cos0 \right)\]
+    \[= -\frac{\sqrt{2}}{2} - (-1) = 1 - \frac{\sqrt{2}}{2} = \frac{2-\sqrt{2}}{2}\]
+  </li>
+  <li><strong>Tích phân của \(\rho\):</strong>
+    Nguyên hàm của \(\rho^2\) là \(\frac{\rho^3}{3}\).
+    \[\int_1^2 \rho^2 \,d\rho = \left[ \frac{\rho^3}{3} \right]_1^2\]
+    \[= \frac{2^3}{3} - \frac{1^3}{3} = \frac{8}{3} - \frac{1}{3} = \frac{7}{3}\]
+  </li>
+</ol>
+
+<p><strong>Bước 5: Ra đòn quyết định</strong></p>
+<p>Nhân cả 3 kết quả vừa tính được lại với nhau:</p>
+<p>\[V = (2\pi) \cdot \left( \frac{2-\sqrt{2}}{2} \right) \cdot \left( \frac{7}{3} \right)\]</p>
+<p>Rút gọn số 2 ở tử và mẫu, đưa số 7 lên trước:</p>
+<p>\[V = \pi \cdot (2-\sqrt{2}) \cdot \frac{7}{3}\]</p>
+<p>\[V = \frac{7\pi(2-\sqrt{2})}{3}\]</p>
+
+<div style="background:#e8f4f8; padding:15px; border-radius:8px; border-left: 5px solid #2980b9;">
+<strong>Mẹo kiểm tra ý nghĩa:</strong> Khối này thực chất là "khối chóp nón cầu" lớn (bán kính 2) trừ đi "khối chóp nón cầu" nhỏ (bán kính 1). Ở bài B3.13, khối chóp lớn có thể tích là \(\frac{8\pi(2-\sqrt{2})}{3}\). Tương tự, khối nhỏ (bán kính 1) sẽ có thể tích là \(\frac{1\pi(2-\sqrt{2})}{3}\). Trừ đi ta được \(\frac{8-1}{3}\pi(2-\sqrt{2}) = \frac{7\pi(2-\sqrt{2})}{3}\). Hoàn toàn chính xác và logic!
+</div>
+
+<p><strong>Kết luận: Thể tích vật thể là \( \mathbf{V = \dfrac{7\pi(2-\sqrt{2})}{3}} \).</strong></p>
+
 </div>
         <div class="answer-box">&#10003; Kết quả: Bài chỉ yêu cầu vẽ</div>
         <div class="check">Bài chỉ yêu cầu vẽ. Hình 3D hiển thị đầy đủ mặt nón, hai mặt cầu và vật thể kẹp giữa chúng.</div>
@@ -63,5 +162,31 @@
         <h3>&#128187; Mã nguồn Python (tham khảo)</h3>
         <pre class="code-block"></pre>
     </div>
+  </div>
+</div><script>
+    function toggleSolutionBox(btn) {
+        const content = btn.nextElementSibling;
+        const isOpen = content.classList.contains('is-open');
+        const icon = btn.querySelector('.sol-icon');
+        const text = btn.querySelector('.sol-text');
+        const arrow = btn.querySelector('.sol-arrow');
+        if (isOpen) {
+            content.classList.remove('is-open');
+            btn.classList.remove('is-open');
+            if (icon) icon.textContent = '📖';
+            if (text) text.textContent = 'Xem lời giải chi tiết (Bấm để mở)';
+            if (arrow) arrow.textContent = '▼';
+        } else {
+            content.classList.add('is-open');
+            btn.classList.add('is-open');
+            if (icon) icon.textContent = '🙈';
+            if (text) text.textContent = 'Thu gọn lời giải';
+            if (arrow) arrow.textContent = '▲';
+            if (window.MathJax && MathJax.typesetPromise) {
+                MathJax.typesetPromise([content]).catch(err => console.log(err));
+            }
+        }
+    }
+</script>
 </body>
 </html>

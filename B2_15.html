@@ -20,7 +20,58 @@
         .problem { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 40px; }
         .code-block { background: #282c34; color: #abb2bf; padding: 15px; border-radius: 5px; overflow-x: auto; font-family: monospace; font-size: 14px; }
         .plot-container { display: flex; justify-content: center; }
-    </style>
+    
+        /* Nút Ẩn / Hiện Lời Giải Chi Tiết */
+        .solution-toggle-wrapper {
+            margin: 28px 0 16px 0;
+        }
+        .solution-toggle-btn {
+            width: 100%;
+            background: #f8fafc;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 13px 20px;
+            font-size: 15px;
+            font-weight: 700;
+            color: #0284c7;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            font-family: inherit;
+        }
+        .solution-toggle-btn:hover {
+            background: #f0f9ff;
+            border-color: #38bdf8;
+            color: #0369a1;
+        }
+        .solution-toggle-btn.is-open {
+            background: #e0f2fe;
+            border-color: #0284c7;
+            color: #0369a1;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+        .solution-collapsible-content {
+            display: none;
+            border: 1.5px solid #0284c7;
+            border-top: none;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+            padding: 20px 22px;
+            background: #ffffff;
+        }
+        .solution-collapsible-content.is-open {
+            display: block;
+            animation: fadeInSol 0.25s ease-in-out;
+        }
+        @keyframes fadeInSol {
+            from { opacity: 0; transform: translateY(-4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+</style>
 </head>
 <body>
     <div class="problem">
@@ -35,22 +86,136 @@
         <h3>Mã Nguồn Tham Khảo (Cho AI khác)</h3>
         <pre class="code-block"><code></code></pre>
     
-<div style="background:#eaf4fb; border-left:5px solid #2980b9; padding:20px; margin-top:30px; border-radius:6px;">
-  <h3 style="color:#1a5276;">Lời giải – Bài B2.15</h3>
-  <p><strong>Đề bài:</strong> Tính \(\iint_D y^2\,dxdy\), \(D\) nằm giữa \(x^2+y^2=2x\) và \(x^2+y^2=4\).</p>
-  <p><strong>Bước 1: Xác định miền D.</strong><br>
-  Miền \(D\) là phần mặt phẳng nằm trong hình tròn \(x^2+y^2 \le 4\) và nằm ngoài hình tròn \(x^2+y^2 \le 2x\).<br>
-  Ta có thể tính \(I = I_1 - I_2\).</p>
-  <p><strong>Bước 2: Tính \(I_1\) trên \(D_1: x^2+y^2 \le 4\).</strong></p>
-  \[I_1 = \int_0^{2\pi} \int_0^2 (r\sin\theta)^2 r\,dr\,d\theta = \pi \cdot \left[\frac{r^4}{4}\right]_0^2 = 4\pi\]
-  <p><strong>Bước 3: Tính \(I_2\) trên \(D_2: x^2+y^2 \le 2x\) (hay \(r \le 2\cos\theta\)).</strong></p>
-  \[I_2 = \int_{-\pi/2}^{\pi/2} \int_0^{2\cos\theta} r^3\sin^2\theta\,dr\,d\theta = \int_{-\pi/2}^{\pi/2} \sin^2\theta \left[\frac{r^4}{4}\right]_0^{2\cos\theta} d\theta = 4 \int_{-\pi/2}^{\pi/2} \sin^2\theta\cos^4\theta\,d\theta\]
-  \[= 8 \int_0^{\pi/2} (\cos^4\theta - \cos^6\theta)\,d\theta = 8 \left(\frac{3\pi}{16} - \frac{5\pi}{32}\right) = 8 \left(\frac{\pi}{32}\right) = \frac{\pi}{4}\]
-  <p><strong>Bước 4: Kết luận.</strong></p>
-  \[I = 4\pi - \frac{\pi}{4} = \frac{15\pi}{4}\]
-  <p style="color:#1a5276; font-weight:bold;">\(\boxed{I = \dfrac{15\pi}{4}}\) ✓ Khớp với đáp án.</p>
+<div class="solution-toggle-wrapper">
+  <button type="button" class="solution-toggle-btn" onclick="toggleSolutionBox(this)">
+    <span><span class="sol-icon">📖</span> <span class="sol-text">Xem lời giải chi tiết (Bấm để mở)</span></span>
+    <span class="sol-arrow">▼</span>
+  </button>
+  <div class="solution-collapsible-content">
+<div style="background:#eaf4fb; border-left:5px solid #2980b9; padding:20px; margin-top:30px; border-radius:6px; font-size:16px;">
+  <h3 style="color:#1a5276;">Lời giải chi tiết – Bài B2.15</h3>
+  
+  <p><strong>Đề bài:</strong> Tính \(\iint_D y^2\,dxdy\), với \(D\) là phần mặt phẳng nằm giữa hai đường cong \(x^2+y^2=2x\) và \(x^2+y^2=4\).</p>
+
+  <h4>1. Hiểu đề bài và các ký hiệu toán học</h4>
+  <ul>
+    <li>Ký hiệu \(\iint_D\) gọi là <strong>tích phân kép</strong>. Em cứ tưởng tượng nó giống như việc ta đi gom góp, cộng dồn vô số những mẩu giá trị rất rất nhỏ bé trên một bề mặt (gọi là miền \(D\)).</li>
+    <li>Biểu thức \(y^2\) là hàm số ta cần tính. Em có thể nghĩ nó như "độ dày" hoặc "mật độ" tại mỗi điểm trên bề mặt đó.</li>
+    <li>Ký hiệu \(dxdy\) tượng trưng cho một mẩu diện tích hình chữ nhật cực kỳ nhỏ trên mặt phẳng tọa độ Oxy.</li>
+    <li>Nhiệm vụ của chúng ta là cộng dồn "mật độ" \(y^2\) trên toàn bộ vùng đất \(D\).</li>
+  </ul>
+
+  <h4>2. Phân tích vùng đất \(D\) (Miền lấy tích phân)</h4>
+  <p>Vùng đất \(D\) bị kẹp giữa hai đường cong. Ta cần xem chúng là những hình gì:</p>
+  <ol>
+    <li><strong>Đường thứ nhất: \(x^2+y^2=4\)</strong>
+      <br>Đây là phương trình của một <strong>đường tròn</strong> có tâm nằm ngay tại gốc tọa độ \(O(0, 0)\), bán kính \(R = \sqrt{4} = 2\). Nó là một vòng tròn lớn.
+    </li>
+    <li><strong>Đường thứ hai: \(x^2+y^2=2x\)</strong>
+      <br>Ta chuyển số hạng sang một bên để nhìn rõ hơn: 
+      \[x^2 - 2x + y^2 = 0\]
+      Thêm \(1\) vào cả hai vế để tạo thành hằng đẳng thức (bình phương của một tổng/hiệu):
+      \[x^2 - 2x + 1 + y^2 = 1\]
+      \[(x-1)^2 + y^2 = 1^2\]
+      Đây cũng là một <strong>đường tròn</strong>, nhưng tâm của nó nằm ở điểm \((1, 0)\) trên trục ngang (trục x), và bán kính nhỏ hơn, chỉ bằng \(r = 1\). Đường tròn nhỏ này nằm gọn bên trong nửa bên phải của đường tròn lớn.
+    </li>
+  </ol>
+  <p>Vậy, miền \(D\) "nằm giữa" hai đường tròn này chính là phần diện tích bên <strong>trong</strong> đường tròn lớn, nhưng đã bị <strong>khoét mất</strong> phần đường tròn nhỏ. Ta gọi phần lớn là \(D_1\) và phần nhỏ bị khoét là \(D_2\). Để tính tổng số, ta sẽ tính tích phân trên toàn bộ hình tròn lớn, rồi <strong>trừ đi</strong> tích phân phần hình tròn nhỏ.</p>
+
+  <div style="background:#fff3cd; padding:10px; border-left:4px solid #ffc107; margin-bottom:15px;">
+    <strong>💡 Mẹo:</strong> Thay vì tính toán trực tiếp trên một hình dáng phức tạp (bị khoét lỗ), ta dùng phép trừ: <strong>Tổng giá trị = Giá trị trên hình lớn - Giá trị trên lỗ hổng</strong>.
+  </div>
+
+  <h4>3. Phương pháp Đổi biến sang tọa độ cực</h4>
+  <p>Vì cả hai hình đều là hình tròn, việc dùng tọa độ \((x, y)\) thông thường sẽ gặp nhiều biểu thức chứa căn bậc hai rất phức tạp. Ta chuyển sang <strong>tọa độ cực</strong>, một công cụ tuyệt vời để trị các hình tròn!</p>
+  <ul>
+    <li>Ta đặt \(x = r\cos\theta\) và \(y = r\sin\theta\).</li>
+    <li>Trong đó \(r\) là khoảng cách từ gốc tọa độ đến điểm ta xét, còn \(\theta\) là góc quét (giống như kim đồng hồ).</li>
+    <li>Quy tắc bất di bất dịch khi đổi biến này: \(x^2 + y^2 = r^2\).</li>
+    <li>Và đừng quên nhân thêm "cước phí đổi hệ tọa độ" là \(r\) vào biểu thức: \(dxdy = r\,dr\,d\theta\).</li>
+  </ul>
+
+  <h4>4. Tính tích phân trên hình tròn lớn (\(I_1\))</h4>
+  <p>Hình tròn lớn \(D_1\) có tâm \(O\), bán kính \(2\). Góc quét đủ một vòng tròn là từ \(0\) đến \(2\pi\) (tức \(360^\circ\)), và bán kính \(r\) chạy từ tâm (\(0\)) ra mép ngoài (\(2\)).</p>
+  <p>Công thức cần tính là: \(y^2\,dxdy\). Thay đổi biến vào:</p>
+  \[ y^2 = (r\sin\theta)^2 = r^2\sin^2\theta \]
+  \[ dxdy = r\,dr\,d\theta \]
+  <p>Lắp ráp lại, ta tính phần lớn (\(I_1\)):</p>
+  \[ I_1 = \int_0^{2\pi} \int_0^2 (r^2\sin^2\theta) \cdot r\,dr\,d\theta \]
+  \[ I_1 = \int_0^{2\pi} \int_0^2 r^3\sin^2\theta\,dr\,d\theta \]
+  <p>Tách riêng phần chữ \(r\) và phần chữ \(\theta\) ra tính cho dễ:</p>
+  \[ \text{Phần theo r: } \int_0^2 r^3\,dr = \left[ \frac{r^4}{4} \right]_0^2 = \frac{2^4}{4} - \frac{0^4}{4} = \frac{16}{4} = 4 \]
+  \[ \text{Phần theo }\theta\text{: } \int_0^{2\pi} \sin^2\theta\,d\theta \]
+  <p>Dùng công thức hạ bậc lượng giác \(\sin^2\theta = \frac{1 - \cos(2\theta)}{2}\):</p>
+  \[ \int_0^{2\pi} \frac{1 - \cos(2\theta)}{2} d\theta = \left[ \frac{\theta}{2} - \frac{\sin(2\theta)}{4} \right]_0^{2\pi} = \left( \frac{2\pi}{2} - 0 \right) - (0 - 0) = \pi \]
+  <p>Nhân hai kết quả lại:</p>
+  \[ I_1 = 4 \times \pi = 4\pi \]
+
+  <h4>5. Tính tích phân trên hình tròn nhỏ bị khoét (\(I_2\))</h4>
+  <p>Đường tròn nhỏ có phương trình \(x^2+y^2 = 2x\). Đổi sang tọa độ cực:</p>
+  \[ r^2 = 2(r\cos\theta) \]
+  <p>Chia hai vế cho \(r\) (vì ta xét \(r \neq 0\)), ta được mép ngoài của đường tròn nhỏ là \(r = 2\cos\theta\). Vì \(r\) là độ dài (phải \(\ge 0\)), nên \(\cos\theta \ge 0\), tức là góc \(\theta\) chỉ được quét từ \(-\frac{\pi}{2}\) đến \(\frac{\pi}{2}\) (tương đương nửa phải của mặt phẳng).</p>
+  <p>Ta lặp lại quy trình tính như trên, nhưng thay đổi giới hạn của \(r\) và \(\theta\):</p>
+  \[ I_2 = \int_{-\pi/2}^{\pi/2} \int_0^{2\cos\theta} (r^2\sin^2\theta) \cdot r\,dr\,d\theta \]
+  \[ I_2 = \int_{-\pi/2}^{\pi/2} \sin^2\theta \left( \int_0^{2\cos\theta} r^3\,dr \right) d\theta \]
+  <p>Tính phần ngoặc có \(r\) trước:</p>
+  \[ \int_0^{2\cos\theta} r^3\,dr = \left[ \frac{r^4}{4} \right]_0^{2\cos\theta} = \frac{(2\cos\theta)^4}{4} = \frac{16\cos^4\theta}{4} = 4\cos^4\theta \]
+  <p>Đem kết quả này lắp lại vào tích phân góc \(\theta\):</p>
+  \[ I_2 = \int_{-\pi/2}^{\pi/2} \sin^2\theta \cdot (4\cos^4\theta)\,d\theta = 4 \int_{-\pi/2}^{\pi/2} \sin^2\theta\cos^4\theta\,d\theta \]
+  <p>Vì hàm bên trong là hàm chẵn (mũ chẵn, góc âm dương ra kết quả như nhau), ta có thể tính một nửa từ \(0\) đến \(\frac{\pi}{2}\) rồi nhân đôi lên:</p>
+  \[ I_2 = 4 \times 2 \int_0^{\pi/2} \sin^2\theta\cos^4\theta\,d\theta = 8 \int_0^{\pi/2} \sin^2\theta\cos^4\theta\,d\theta \]
+  <p>Để tính nhanh, ta có công thức đặc biệt (hoặc biến đổi \(\sin^2\theta = 1 - \cos^2\theta\)):</p>
+  \[ I_2 = 8 \int_0^{\pi/2} (1 - \cos^2\theta)\cos^4\theta\,d\theta \]
+  \[ I_2 = 8 \int_0^{\pi/2} (\cos^4\theta - \cos^6\theta)\,d\theta \]
+  <p>Sử dụng công thức truy hồi (tích phân Wallis) cho hàm cos: \(\int_0^{\pi/2}\cos^4\theta d\theta = \frac{3\pi}{16}\) và \(\int_0^{\pi/2}\cos^6\theta d\theta = \frac{5\pi}{32}\).</p>
+  <p>Thay số vào tính toán từng bước:</p>
+  \[ I_2 = 8 \left( \frac{3\pi}{16} - \frac{5\pi}{32} \right) \]
+  <p>Quy đồng mẫu số chung là 32:</p>
+  \[ I_2 = 8 \left( \frac{6\pi}{32} - \frac{5\pi}{32} \right) \]
+  \[ I_2 = 8 \left( \frac{1\pi}{32} \right) \]
+  \[ I_2 = \frac{8\pi}{32} = \frac{\pi}{4} \]
+
+  <h4>6. Tính kết quả cuối cùng</h4>
+  <p>Giờ ta lấy tổng phần lớn trừ đi phần lỗ bị khoét:</p>
+  \[ I = I_1 - I_2 \]
+  \[ I = 4\pi - \frac{\pi}{4} \]
+  <p>Quy đồng mẫu số:</p>
+  \[ I = \frac{16\pi}{4} - \frac{\pi}{4} = \frac{15\pi}{4} \]
+  
+  <p style="color:#1a5276; font-size:18px;"><strong>KẾT LUẬN:</strong></p>
+  <p>Giá trị của tích phân cần tìm là: <strong style="color:#c0392b;">\(\boxed{I = \dfrac{15\pi}{4}}\)</strong></p>
+  <div style="background:#e8f8f5; border-left:4px solid #1abc9c; padding:10px; margin-top:10px;">
+    <strong>🌟 Ý nghĩa thực tế:</strong> Con số \(\frac{15\pi}{4}\) này đại diện cho một đại lượng vật lý. Ví dụ, nếu miền \(D\) là một miếng kim loại mỏng hình vành khuyết, và \(y^2\) là sự phân bố khối lượng (càng xa trục ngang x thì càng nặng), thì kết quả này chính là "Mô-men quán tính" của miếng kim loại đó đối với trục x. Việc giải toán không chỉ là tìm ra con số vô tri, mà là cách chúng ta đo lường thế giới thực!
+  </div>
+</div>
+  </div>
 </div>
 
 </div>
+<script>
+    function toggleSolutionBox(btn) {
+        const content = btn.nextElementSibling;
+        const isOpen = content.classList.contains('is-open');
+        const icon = btn.querySelector('.sol-icon');
+        const text = btn.querySelector('.sol-text');
+        const arrow = btn.querySelector('.sol-arrow');
+        if (isOpen) {
+            content.classList.remove('is-open');
+            btn.classList.remove('is-open');
+            if (icon) icon.textContent = '📖';
+            if (text) text.textContent = 'Xem lời giải chi tiết (Bấm để mở)';
+            if (arrow) arrow.textContent = '▼';
+        } else {
+            content.classList.add('is-open');
+            btn.classList.add('is-open');
+            if (icon) icon.textContent = '🙈';
+            if (text) text.textContent = 'Thu gọn lời giải';
+            if (arrow) arrow.textContent = '▲';
+            if (window.MathJax && MathJax.typesetPromise) {
+                MathJax.typesetPromise([content]).catch(err => console.log(err));
+            }
+        }
+    }
+</script>
 </body>
 </html>

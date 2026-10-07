@@ -20,7 +20,58 @@
         .problem { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 40px; }
         .code-block { background: #282c34; color: #abb2bf; padding: 15px; border-radius: 5px; overflow-x: auto; font-family: monospace; font-size: 14px; }
         .plot-container { display: flex; justify-content: center; }
-    </style>
+    
+        /* Nút Ẩn / Hiện Lời Giải Chi Tiết */
+        .solution-toggle-wrapper {
+            margin: 28px 0 16px 0;
+        }
+        .solution-toggle-btn {
+            width: 100%;
+            background: #f8fafc;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 13px 20px;
+            font-size: 15px;
+            font-weight: 700;
+            color: #0284c7;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            font-family: inherit;
+        }
+        .solution-toggle-btn:hover {
+            background: #f0f9ff;
+            border-color: #38bdf8;
+            color: #0369a1;
+        }
+        .solution-toggle-btn.is-open {
+            background: #e0f2fe;
+            border-color: #0284c7;
+            color: #0369a1;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+        .solution-collapsible-content {
+            display: none;
+            border: 1.5px solid #0284c7;
+            border-top: none;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+            padding: 20px 22px;
+            background: #ffffff;
+        }
+        .solution-collapsible-content.is-open {
+            display: block;
+            animation: fadeInSol 0.25s ease-in-out;
+        }
+        @keyframes fadeInSol {
+            from { opacity: 0; transform: translateY(-4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+</style>
 </head>
 <body>
     <div class="problem">
@@ -35,31 +86,102 @@
         <h3>Mã Nguồn Tham Khảo (Cho AI khác)</h3>
         <pre class="code-block"><code>ans = sp.integrate(x-y, (x, 1-y, y+1), (y, 0, 1))</code></pre>
     
+<div class="solution-toggle-wrapper">
+  <button type="button" class="solution-toggle-btn" onclick="toggleSolutionBox(this)">
+    <span><span class="sol-icon">📖</span> <span class="sol-text">Xem lời giải chi tiết (Bấm để mở)</span></span>
+    <span class="sol-arrow">▼</span>
+  </button>
+  <div class="solution-collapsible-content">
 <div style="background:#eaf4fb; border-left:5px solid #2980b9; padding:20px; margin-top:30px; border-radius:6px;">
-  <h3 style="color:#1a5276;">Lời giải – Bài B1.8</h3>
-  <p><strong>Đề bài:</strong> Tính \(\iint_D (x-y)\,dxdy\) với \(D\) là tam giác \(A(1,0)\), \(B(2,1)\), \(C(0,1)\).</p>
+  <h3 style="color:#1a5276;">Lời giải chi tiết và siêu dễ hiểu – Bài B1.8</h3>
+  
+  <p><strong>Đề bài yêu cầu chúng ta làm gì?</strong><br>
+  Chúng ta cần tính một tích phân kép: \(I = \iint_D (x-y)dxdy\).<br>
+  Ký hiệu \(\iint_D\) có nghĩa là chúng ta sẽ cộng dồn (tích phân) giá trị của biểu thức \((x-y)\) trên toàn bộ một vùng diện tích trên mặt phẳng, vùng này được gọi là miền \(D\). Ở đây, \(D\) là một hình tam giác tạo bởi 3 điểm \(A(1,0)\), \(B(2,1)\) và \(C(0,1)\).</p>
 
-  <p><strong>Bước 1: Tìm phương trình các cạnh.</strong><br>
-  — Cạnh AB: qua \((1,0)\) và \((2,1)\): \(y = x-1\), tức \(x = y+1\).<br>
-  — Cạnh AC: qua \((1,0)\) và \((0,1)\): \(y = -x+1\), tức \(x = 1-y\).<br>
-  — Cạnh BC: qua \((2,1)\) và \((0,1)\): \(y = 1\).<br>
-  Miền D lấy theo \(y\) từ \(0\) đến \(1\), với \(x\) từ \(1-y\) đến \(y+1\).</p>
+  <h4>Bước 1: Xác định hình dáng và các đường biên của miền \(D\)</h4>
+  <p>Để tính được tích phân, chúng ta phải biết miền \(D\) bị giới hạn bởi các đường thẳng nào. Ta sẽ tìm phương trình của 3 cạnh tam giác \(ABC\):</p>
+  <ul>
+    <li><strong>Cạnh AC:</strong> Đi qua hai điểm \(A(1,0)\) và \(C(0,1)\). Dựa vào công thức phương trình đường thẳng qua 2 điểm hoặc quan sát nhanh, ta thấy tổng hoành độ và tung độ của cả hai điểm đều bằng 1 (\(1+0=1\) và \(0+1=1\)). Do đó phương trình đường thẳng là: \(x + y = 1\), suy ra \(x = 1 - y\).</li>
+    <li><strong>Cạnh AB:</strong> Đi qua \(A(1,0)\) và \(B(2,1)\). Độ dốc của đường thẳng (hệ số góc) là \(\frac{y_B - y_A}{x_B - x_A} = \frac{1-0}{2-1} = 1\). Suy ra phương trình là \(y - 0 = 1 \cdot (x - 1) \Rightarrow y = x - 1\). Chuyển vế để biểu diễn \(x\) theo \(y\) ta được: \(x = y + 1\).</li>
+    <li><strong>Cạnh BC:</strong> Đi qua \(C(0,1)\) và \(B(2,1)\). Cả hai điểm đều có tung độ \(y = 1\). Nên phương trình đơn giản là đường thẳng nằm ngang \(y = 1\).</li>
+  </ul>
 
-  <p><strong>Bước 2: Tính tích phân.</strong></p>
-  \[I = \int_0^1 \int_{1-y}^{1+y} (x-y)\,dx\,dy\]
+  
+  <h4>Bước 2: Thiết lập biểu thức tích phân kép</h4>
+  <p>Dựa vào các phân tích trên, ta chuyển tích phân kép thành 2 tích phân đơn (tích phân lặp). Ta đưa cận của x (phức tạp hơn, có chứa y) vào bên trong, và cận của y (là những con số cố định) ra bên ngoài:</p>
+  \[I = \int_{0}^{1} \left[ \int_{1-y}^{y+1} (x - y) \,dx \right] \,dy\]
+  <p>Chúng ta sẽ tính từ trong ra ngoài: Tính tích phân theo biến \(x\) trước (lúc này ta coi \(y\) như một con số bình thường), sau đó mới tính tiếp theo biến \(y\).</p>
 
-  <p>Tích phân trong theo \(x\):</p>
-  \[\int_{1-y}^{1+y}(x-y)\,dx = \left[\frac{x^2}{2}-yx\right]_{1-y}^{1+y}\]
-  \[= \left(\frac{(1+y)^2}{2} - y(1+y)\right) - \left(\frac{(1-y)^2}{2} - y(1-y)\right)\]
-  \[= \frac{(1+y)^2-(1-y)^2}{2} - y\left[(1+y)-(1-y)\right]\]
-  \[= \frac{4y}{2} - y\cdot 2y = 2y - 2y^2\]
+  <h4>Bước 3: Tính phần tích phân bên trong (theo biến \(x\))</h4>
+  <p>Tính nguyên hàm của biểu thức \((x-y)\) theo biến \(x\):</p>
+  <ul>
+    <li>Nguyên hàm của \(x\) là \(\frac{x^2}{2}\)</li>
+    <li>Nguyên hàm của \(-y\) (nhớ là đang coi \(y\) như hằng số) là \(-y \cdot x\)</li>
+  </ul>
+  <p>Biểu thức ta có là:</p>
+  \[ \int (x - y) \,dx = \frac{x^2}{2} - yx \]
+  <p>Bây giờ ta thay các giới hạn (cận) của \(x\) (từ cận dưới \(x = 1-y\) đến cận trên \(x = y+1\)) vào:</p>
+  \[ \left[ \frac{x^2}{2} - yx \right]_{x=1-y}^{x=y+1} \]
+  <p>Thay giới hạn trên (\(x = y+1\)) vào biểu thức:</p>
+  \[ \frac{(y+1)^2}{2} - y(y+1) \]
+  <p>Thay giới hạn dưới (\(x = 1-y\)) vào biểu thức:</p>
+  \[ \frac{(1-y)^2}{2} - y(1-y) \]
+  <p>Lấy kết quả của giới hạn trên trừ đi kết quả của giới hạn dưới, ta nhóm các thành phần giống nhau lại để trừ cho dễ:</p>
+  \[ \text{Phần bình phương: } \frac{(y+1)^2}{2} - \frac{(1-y)^2}{2} = \frac{(y^2 + 2y + 1) - (y^2 - 2y + 1)}{2} = \frac{4y}{2} = 2y \]
+  \[ \text{Phần còn lại: } - y(y+1) - \left[ - y(1-y) \right] = -y(y+1) + y(1-y) = -y^2 - y + y - y^2 = -2y^2 \]
+  <p>Cộng hai phần trên lại, kết quả của toàn bộ ngoặc vuông bên trong là:</p>
+  \[ 2y - 2y^2 \]
 
-  <p>Tích phân ngoài:</p>
-  \[I = \int_0^1 (2y-2y^2)\,dy = \left[y^2 - \frac{2y^3}{3}\right]_0^1 = 1 - \frac{2}{3} = \frac{1}{3}\]
+  <h4>Bước 4: Tính tích phân bên ngoài (theo biến \(y\))</h4>
+  <p>Giờ bài toán chỉ còn là một tích phân bậc trung học phổ thông bình thường theo biến \(y\):</p>
+  \[ I = \int_{0}^{1} (2y - 2y^2) \,dy \]
+  <p>Chúng ta lại tìm nguyên hàm của từng số hạng:</p>
+  <ul>
+    <li>Nguyên hàm của \(2y\) là \(2 \cdot \frac{y^2}{2} = y^2\)</li>
+    <li>Nguyên hàm của \(-2y^2\) là \(-2 \cdot \frac{y^3}{3} = -\frac{2y^3}{3}\)</li>
+  </ul>
+  <p>Thay cận từ \(y=0\) đến \(y=1\):</p>
+  \[ I = \left[ y^2 - \frac{2y^3}{3} \right]_{0}^{1} \]
+  <p>Tại \(y=1\):</p>
+  \[ (1)^2 - \frac{2(1)^3}{3} = 1 - \frac{2}{3} = \frac{1}{3} \]
+  <p>Tại \(y=0\): giá trị bằng \(0^2 - \frac{2(0)^3}{3} = 0\).</p>
+  <p>Lấy giá trị tại 1 trừ đi giá trị tại 0: \(\frac{1}{3} - 0 = \frac{1}{3}\).</p>
 
-  <p style="color:#1a5276; font-weight:bold;">\(\boxed{I = \dfrac{1}{3}}\) ✓ Khớp với đáp án.</p>
+  <h4>Kết luận</h4>
+  <p style="color:#1a5276; font-weight:bold; font-size: 1.1em;">
+    \(\boxed{I = \dfrac{1}{3}}\) ✓ Khớp với đáp án.
+  </p>
+  <p><strong>Ý nghĩa kiểm tra lại:</strong> Kết quả là một số dương (\(\frac{1}{3}\)). Điều này hoàn toàn hợp lý, vì trong vùng tam giác \(D\) này (hoành độ \(x\) trải từ \(0\) đến \(2\), còn tung độ \(y\) chỉ từ \(0\) đến \(1\)), phần lớn diện tích có \(x > y\), nên đại lượng \((x-y)\) thường mang dấu dương, làm cho tổng tích lũy (tích phân) cũng mang kết quả dương.</p>
+</div>
+  </div>
 </div>
 
 </div>
+<script>
+    function toggleSolutionBox(btn) {
+        const content = btn.nextElementSibling;
+        const isOpen = content.classList.contains('is-open');
+        const icon = btn.querySelector('.sol-icon');
+        const text = btn.querySelector('.sol-text');
+        const arrow = btn.querySelector('.sol-arrow');
+        if (isOpen) {
+            content.classList.remove('is-open');
+            btn.classList.remove('is-open');
+            if (icon) icon.textContent = '📖';
+            if (text) text.textContent = 'Xem lời giải chi tiết (Bấm để mở)';
+            if (arrow) arrow.textContent = '▼';
+        } else {
+            content.classList.add('is-open');
+            btn.classList.add('is-open');
+            if (icon) icon.textContent = '🙈';
+            if (text) text.textContent = 'Thu gọn lời giải';
+            if (arrow) arrow.textContent = '▲';
+            if (window.MathJax && MathJax.typesetPromise) {
+                MathJax.typesetPromise([content]).catch(err => console.log(err));
+            }
+        }
+    }
+</script>
 </body>
 </html>

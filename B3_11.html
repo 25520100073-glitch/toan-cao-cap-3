@@ -27,24 +27,128 @@
         .check { background: #eafaf1; border-left: 4px solid #27ae60; padding: 8px 14px; border-radius: 4px; margin-top: 10px; color: #1e8449; }
         .plot-container { display: flex; justify-content: center; margin-top: 20px; }
         .code-block { background: #282c34; color: #abb2bf; padding: 15px; border-radius: 5px; overflow-x: auto; font-family: monospace; font-size: 13px; margin-top: 10px; white-space: pre; }
-    </style>
+    
+        /* Nút Ẩn / Hiện Lời Giải Chi Tiết */
+        .solution-toggle-wrapper {
+            margin: 28px 0 16px 0;
+        }
+        .solution-toggle-btn {
+            width: 100%;
+            background: #f8fafc;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 13px 20px;
+            font-size: 15px;
+            font-weight: 700;
+            color: #0284c7;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            font-family: inherit;
+        }
+        .solution-toggle-btn:hover {
+            background: #f0f9ff;
+            border-color: #38bdf8;
+            color: #0369a1;
+        }
+        .solution-toggle-btn.is-open {
+            background: #e0f2fe;
+            border-color: #0284c7;
+            color: #0369a1;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+        .solution-collapsible-content {
+            display: none;
+            border: 1.5px solid #0284c7;
+            border-top: none;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+            padding: 20px 22px;
+            background: #ffffff;
+        }
+        .solution-collapsible-content.is-open {
+            display: block;
+            animation: fadeInSol 0.25s ease-in-out;
+        }
+        @keyframes fadeInSol {
+            from { opacity: 0; transform: translateY(-4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+</style>
 </head>
 <body>
     <div class="problem">
         <h2>Bài B3.11</h2>
         <div class="de-bai"><strong>Đề bài:</strong> Vẽ vật thể \(\Omega\): \(z=2+x^2+y^2,\;x^2+y^2=1,\;Oxy\)</div>
-        <h3>&#9998; Lời giải</h3>
+        <div class="solution-toggle-wrapper">
+  <button type="button" class="solution-toggle-btn" onclick="toggleSolutionBox(this)">
+    <span><span class="sol-icon">📖</span> <span class="sol-text">Xem lời giải chi tiết (Bấm để mở)</span></span>
+    <span class="sol-arrow">▼</span>
+  </button>
+  <div class="solution-collapsible-content">
+<h3>&#9998; Lời giải</h3>
         <div class="solution">
-<p><strong>Vẽ và tính thể tích vật thể</strong> \(z=2+x^2+y^2\), \(x^2+y^2=1\), mặt Oxy (\(z=0\)).</p>
-  <p><strong>Bước 1: Xác định miền giới hạn.</strong><br>
-  Khối này được giới hạn xung quanh bởi mặt trụ tròn thẳng đứng \(x^2+y^2=1\). Đáy dưới là mặt phẳng \(z=0\), nắp trên là mặt paraboloid \(z=2+x^2+y^2\). Hình chiếu xuống mặt Oxy chính là hình tròn đơn vị \(D: x^2+y^2 \le 1\).</p>
-  <p><strong>Bước 2: Thiết lập tích phân.</strong><br>
-  \[V = \iiint_\Omega 1 \,dxdydz = \iint_D \left( \int_0^{2+x^2+y^2} dz \right) dxdy = \iint_D (2+x^2+y^2) \,dxdy\]</p>
-  <p><strong>Bước 3: Tọa độ cực và tính toán.</strong><br>
-  Chuyển sang tọa độ cực với \(0 \le r \le 1\) và \(0 \le \theta \le 2\pi\):
-  \[V = \int_0^{2\pi} d\theta \int_0^1 (2+r^2) r \,dr = 2\pi \int_0^1 (2r + r^3) \,dr\]
-  \[= 2\pi \left[ r^2 + \frac{r^4}{4} \right]_0^1 = 2\pi \left( 1 + \frac{1}{4} \right) = 2\pi \cdot \frac{5}{4} = \frac{5\pi}{2}\]</p>
-  <p style="color:#1a5276; font-weight:bold;">\(\boxed{V = \frac{5\pi}{2}}\) ✓ Các bước được trình bày logic và mạch lạc.</p>
+<p>Chào các bạn! Ở bài này chúng ta có nhiệm vụ tính thể tích của một vật thể ba chiều (kí hiệu là \(\Omega\)). Hãy cùng xem hình dáng của nó như thế nào nhé.</p>
+
+<p><strong>Bước 1: Phân tích hình dáng vật thể</strong></p>
+<p>Đề bài cho chúng ta 3 bề mặt giới hạn vật thể:</p>
+<ul>
+  <li>\(x^2+y^2=1\): Đây là phương trình của một cái ống nước thẳng đứng (hình trụ) có bán kính bằng \(1\). Nó bao bọc xung quanh vật thể.</li>
+  <li>Mặt \(Oxy\) hay còn gọi là mặt phẳng \(z=0\): Đây chính là mặt đất phẳng lì, tạo thành "đáy dưới" của vật thể.</li>
+  <li>\(z=2+x^2+y^2\): Đây là hình một cái bát ngửa lên (paraboloid) lơ lửng trên không. Điểm thấp nhất của cái bát nằm ở độ cao \(z=2\). Nó tạo thành "cái nắp" đậy phía trên vật thể.</li>
+</ul>
+<p>Tổng hợp lại, vật thể của chúng ta giống như một cốc nước hình trụ, nhưng cái nắp bên trên bị lõm xuống dạng cái bát. Hình chiếu của khối này thẳng xuống mặt đất là một hình tròn đặc nằm trong mặt phẳng \(Oxy\). Hình tròn này có phương trình \(D: x^2+y^2 \le 1\).</p>
+
+<p><strong>Bước 2: Viết công thức tính thể tích</strong></p>
+<p>Để tính thể tích \(V\), ta tính "chiều cao" của vật thể tại mỗi điểm trên đáy, rồi cộng dồn lại trên toàn bộ hình tròn đáy \(D\).</p>
+<p>Theo công thức tích phân bội 3, thể tích là:</p>
+<p>\[V = \iiint_\Omega 1 \,dxdydz\]</p>
+<p>Ở mỗi một điểm \((x,y)\) nằm trên đáy \(D\), độ cao \(z\) chạy từ mặt đất (\(z=0\)) lên tới chạm cái nắp bát (\(z=2+x^2+y^2\)). Do đó ta tách được tích phân thành:</p>
+<p>\[V = \iint_D \left( \int_0^{2+x^2+y^2} 1 \,dz \right) dxdy\]</p>
+<p>Tích phân của số 1 theo \(dz\) chính là đoạn từ 0 đến \(2+x^2+y^2\), nên kết quả là chiều cao đó luôn:</p>
+<p>\[V = \iint_D (2+x^2+y^2) \,dxdy\]</p>
+
+<p><strong>Bước 3: Sử dụng tọa độ cực để giải tích phân</strong></p>
+<p>Bởi vì đáy \(D\) là một hình tròn (\(x^2+y^2 \le 1\)), tính toán bằng \(x, y\) bình thường sẽ gặp khó khăn với các căn bậc hai. Ta đổi sang tọa độ cực cho dễ tính:</p>
+<ul>
+  <li>Đặt \(x = r\cos\theta\) và \(y = r\sin\theta\). Từ đây ta luôn có công thức đẹp: \(x^2+y^2 = r^2\).</li>
+  <li>Bán kính \(r\) tính từ tâm ra đến mép vòng tròn nên chạy từ \(0\) đến \(1\).</li>
+  <li>Góc quay \(\theta\) quét một vòng tròn đầy đủ nên chạy từ \(0\) đến \(2\pi\).</li>
+  <li>Và đừng quên, diện tích bé tí xíu \(dxdy\) khi chuyển sang hệ mới phải nhân thêm một chữ \(r\) (đây là định thức Jacobian), nên thành \(r \,dr \,d\theta\).</li>
+</ul>
+
+<p>Thay các thông tin này vào tích phân, ta được:</p>
+<p>\[V = \int_0^{2\pi} d\theta \int_0^1 \left( 2 + r^2 \right) \cdot r \,dr\]</p>
+
+<p><strong>Bước 4: Tính toán kết quả</strong></p>
+<p>Nhân chữ \(r\) bên ngoài vào trong ngoặc:</p>
+<p>\[V = \int_0^{2\pi} d\theta \int_0^1 \left( 2r + r^3 \right) \,dr\]</p>
+<p>Ta thấy biểu thức bên trong không có chứa góc \(\theta\). Do đó tích phân theo \(\theta\) chỉ là \(2\pi - 0 = 2\pi\). Ta mang ra ngoài luôn:</p>
+<p>\[V = 2\pi \cdot \int_0^1 \left( 2r + r^3 \right) \,dr\]</p>
+<p>Tiếp theo, ta tìm nguyên hàm theo \(r\) (dùng quy tắc \(\int r^n dr = \frac{r^{n+1}}{n+1}\)):</p>
+<ul>
+  <li>Nguyên hàm của \(2r\) là \(r^2\).</li>
+  <li>Nguyên hàm của \(r^3\) là \(\frac{r^4}{4}\).</li>
+</ul>
+<p>Kết hợp lại, ta được:</p>
+<p>\[V = 2\pi \cdot \left[ r^2 + \frac{r^4}{4} \right]_0^1\]</p>
+<p>Thay cận \(1\) và \(0\) vào biểu thức trong ngoặc vuông:</p>
+<p>\[V = 2\pi \cdot \left( \left( 1^2 + \frac{1^4}{4} \right) - \left( 0^2 + \frac{0^4}{4} \right) \right)\]</p>
+<p>\[V = 2\pi \cdot \left( 1 + \frac{1}{4} \right)\]</p>
+<p>\[V = 2\pi \cdot \left( \frac{5}{4} \right)\]</p>
+<p>Rút gọn số 2 ở trên và số 4 ở dưới mẫu:</p>
+<p>\[V = \frac{5\pi}{2}\]</p>
+
+<div style="background:#e8f4f8; padding:15px; border-radius:8px; border-left: 5px solid #2980b9;">
+<strong>Mẹo kiểm tra ý nghĩa:</strong> Vật thể này có thể chia làm 2 phần: phần ống trụ bên dưới cao 2 có thể tích là \(\pi \cdot r^2 \cdot h = \pi \cdot 1^2 \cdot 2 = 2\pi\); và phần cái nắp lõm ở trên cao 1 đơn vị, thể tích bằng một nửa khối trụ bao quanh nó là \(\frac{1}{2} \cdot \pi \cdot 1^2 \cdot 1 = \frac{\pi}{2}\). Tổng thể tích là \(2\pi + \frac{\pi}{2} = \frac{5\pi}{2}\). Quá chuẩn xác!
+</div>
+
+<p><strong>Kết luận: Thể tích vật thể cần tìm là \( \mathbf{V = \dfrac{5\pi}{2}} \).</strong></p>
+
 </div>
         <div class="answer-box">&#10003; Kết quả: Bài chỉ yêu cầu vẽ</div>
         <div class="check">Bài chỉ yêu cầu vẽ. Hình 3D bên trên hiển thị đầy đủ các mặt giới hạn.</div>
@@ -56,5 +160,31 @@
         <h3>&#128187; Mã nguồn Python (tham khảo)</h3>
         <pre class="code-block"></pre>
     </div>
+  </div>
+</div><script>
+    function toggleSolutionBox(btn) {
+        const content = btn.nextElementSibling;
+        const isOpen = content.classList.contains('is-open');
+        const icon = btn.querySelector('.sol-icon');
+        const text = btn.querySelector('.sol-text');
+        const arrow = btn.querySelector('.sol-arrow');
+        if (isOpen) {
+            content.classList.remove('is-open');
+            btn.classList.remove('is-open');
+            if (icon) icon.textContent = '📖';
+            if (text) text.textContent = 'Xem lời giải chi tiết (Bấm để mở)';
+            if (arrow) arrow.textContent = '▼';
+        } else {
+            content.classList.add('is-open');
+            btn.classList.add('is-open');
+            if (icon) icon.textContent = '🙈';
+            if (text) text.textContent = 'Thu gọn lời giải';
+            if (arrow) arrow.textContent = '▲';
+            if (window.MathJax && MathJax.typesetPromise) {
+                MathJax.typesetPromise([content]).catch(err => console.log(err));
+            }
+        }
+    }
+</script>
 </body>
 </html>

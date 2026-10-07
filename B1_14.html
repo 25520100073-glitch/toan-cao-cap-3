@@ -20,7 +20,58 @@
         .problem { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 40px; }
         .code-block { background: #282c34; color: #abb2bf; padding: 15px; border-radius: 5px; overflow-x: auto; font-family: monospace; font-size: 14px; }
         .plot-container { display: flex; justify-content: center; }
-    </style>
+    
+        /* Nút Ẩn / Hiện Lời Giải Chi Tiết */
+        .solution-toggle-wrapper {
+            margin: 28px 0 16px 0;
+        }
+        .solution-toggle-btn {
+            width: 100%;
+            background: #f8fafc;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 13px 20px;
+            font-size: 15px;
+            font-weight: 700;
+            color: #0284c7;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            font-family: inherit;
+        }
+        .solution-toggle-btn:hover {
+            background: #f0f9ff;
+            border-color: #38bdf8;
+            color: #0369a1;
+        }
+        .solution-toggle-btn.is-open {
+            background: #e0f2fe;
+            border-color: #0284c7;
+            color: #0369a1;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+        .solution-collapsible-content {
+            display: none;
+            border: 1.5px solid #0284c7;
+            border-top: none;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+            padding: 20px 22px;
+            background: #ffffff;
+        }
+        .solution-collapsible-content.is-open {
+            display: block;
+            animation: fadeInSol 0.25s ease-in-out;
+        }
+        @keyframes fadeInSol {
+            from { opacity: 0; transform: translateY(-4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+</style>
 </head>
 <body>
     <div class="problem">
@@ -35,25 +86,113 @@
         <h3>Mã Nguồn Tham Khảo (Cho AI khác)</h3>
         <pre class="code-block"><code># Vẽ nửa đường tròn trên</code></pre>
     
+<div class="solution-toggle-wrapper">
+  <button type="button" class="solution-toggle-btn" onclick="toggleSolutionBox(this)">
+    <span><span class="sol-icon">📖</span> <span class="sol-text">Xem lời giải chi tiết (Bấm để mở)</span></span>
+    <span class="sol-arrow">▼</span>
+  </button>
+  <div class="solution-collapsible-content">
 <div style="background:#eaf4fb; border-left:5px solid #2980b9; padding:20px; margin-top:30px; border-radius:6px;">
   <h3 style="color:#1a5276;">Lời giải – Bài B1.14</h3>
-  <p><strong>Đề bài:</strong> Đổi thứ tự tích phân \(\displaystyle\int_0^2 dx\int_0^{\sqrt{2x-x^2}} f(x,y)\,dy\).</p>
+  <p><strong>Đề bài:</strong> Đổi thứ tự tính tích phân \(\displaystyle I = \int_0^2 dx\int_0^{\sqrt{2x-x^2}} f(x,y)\,dy\).</p>
 
-  <p><strong>Bước 1: Xác định miền D.</strong><br>
-  Điều kiện: \(0 \le x \le 2\), \(0 \le y \le \sqrt{2x-x^2}\).<br>
-  Đường trên: \(y = \sqrt{2x-x^2}\) tức \(y^2 = 2x-x^2\), hay \((x-1)^2+y^2=1\).<br>
-  Đây là nửa trên (\(y\ge 0\)) của đường tròn tâm \((1,0)\), bán kính \(1\).</p>
+  <h4>Bước 1: Xác định và vẽ miền lấy tích phân \(D\)</h4>
+  <p>Ta đang làm gì? Từ biểu thức tích phân ban đầu, ta sẽ "đọc" ra các điều kiện của biến \(x\) và \(y\). Nhờ đó, ta hình dung được miền \(D\) trên hệ trục tọa độ \(Oxy\).</p>
+  <ul>
+    <li>Biến nằm ngoài (có vi phân \(dx\)): chạy từ hằng số đến hằng số. Ta có:
+      <br>\(0 \le x \le 2\).</li>
+    <li>Biến nằm trong (có vi phân \(dy\)): chạy từ hàm của \(x\) đến hàm của \(x\). Ta có:
+      <br>\(0 \le y \le \sqrt{2x-x^2}\).</li>
+  </ul>
+  <p>Vậy, miền \(D\) bị giới hạn bởi các đường sau:</p>
+  <ul>
+    <li>Đường thẳng \(x = 0\) (trục tung \(Oy\)).</li>
+    <li>Đường thẳng \(x = 2\) (đường song song với trục tung).</li>
+    <li>Đường thẳng \(y = 0\) (trục hoành \(Ox\), vì là cận dưới của \(y\)).</li>
+    <li>Đường cong \(y = \sqrt{2x-x^2}\) (là cận trên của \(y\)).</li>
+  </ul>
 
-  <p><strong>Bước 2: Đổi thứ tự.</strong><br>
-  \(y\) chạy từ \(0\) đến \(1\). Với \(y\) cố định, từ \((x-1)^2 = 1-y^2\):<br>
-  \(x = 1 \pm \sqrt{1-y^2}\).<br>
-  Vì \(x\ge 0\), \(x\) chạy từ \(1-\sqrt{1-y^2}\) đến \(1+\sqrt{1-y^2}\).</p>
+  <h4>Bước 2: Tìm hiểu hình dáng của đường cong \(y = \sqrt{2x-x^2}\)</h4>
+  <p>Ta đang làm gì? Việc để nguyên căn bậc hai rất khó hình dung, nên ta sẽ bình phương hai vế để đưa về dạng quen thuộc (đường tròn, parabol, v.v...).</p>
+  <p>Vì \(y = \sqrt{2x-x^2}\) mang dấu căn, nên ta phải có điều kiện \(y \ge 0\). (Điều này phù hợp vì cận dưới của \(y\) đã là \(0\)).</p>
+  <p>Ta bình phương hai vế (từng bước một):</p>
+  \[y^2 = 2x - x^2\]
+  <p>Chuyển tất cả các hạng tử chứa \(x\) sang vế trái để gom nhóm:</p>
+  \[x^2 - 2x + y^2 = 0\]
+  <p>Nhắc lại quy tắc hằng đẳng thức: \((A - B)^2 = A^2 - 2AB + B^2\). Ta thêm bớt \(1\) ở vế trái để tạo thành hằng đẳng thức hoàn chỉnh:</p>
+  \[x^2 - 2x + 1 - 1 + y^2 = 0\]
+  \[(x - 1)^2 - 1 + y^2 = 0\]
+  \[(x - 1)^2 + y^2 = 1\]
+  <p>Đây chính là phương trình của một <strong>đường tròn</strong> có tâm \(I(1, 0)\) và bán kính \(R = 1\).</p>
+  <p>Kết hợp với điều kiện \(y \ge 0\), ta kết luận đường cong \(y = \sqrt{2x-x^2}\) là <strong>nửa trên của đường tròn</strong> tâm \(I(1, 0)\), bán kính \(R = 1\).</p>
+  <p>Mô tả hình dáng miền \(D\): Nửa đường tròn này nằm trên trục hoành \(Ox\). Nó xuất phát từ gốc tọa độ \((0,0)\), đi qua điểm cao nhất là \((1,1)\), và kết thúc tại điểm \((2,0)\). Toàn bộ vùng nằm bên trong nửa đường tròn này chính là miền \(D\).</p>
 
-  \[\int_0^1 dy\int_{1-\sqrt{1-y^2}}^{1+\sqrt{1-y^2}} f(x,y)\,dx\]
+  <div style="background:#fff3cd; padding:15px; border-radius:6px; margin-bottom:15px;">
+    <strong>💡 Mẹo:</strong> Khi thấy \(y = \sqrt{\text{biểu thức bậc 2 của } x}\), ta luôn nghĩ đến việc bình phương lên rồi đưa về dạng \((x-a)^2 + (y-b)^2 = R^2\) để tìm tâm và bán kính đường tròn.
+  </div>
 
-  <p style="color:#1a5276; font-weight:bold;">Đây là kết quả sau khi đổi thứ tự tích phân.</p>
+  <h4>Bước 3: Đổi thứ tự tính tích phân (Cho \(y\) chạy trước, \(x\) chạy sau)</h4>
+  <p>Ta đang làm gì? Ban đầu đề cho \(x\) chạy từ hằng số đến hằng số (ngoài), \(y\) chạy theo \(x\) (trong). Giờ ta phải làm ngược lại: \(y\) sẽ nằm ngoài (chạy từ hằng số đến hằng số), và \(x\) sẽ nằm trong (chạy theo \(y\)).</p>
+  
+  <p><strong>Tìm cận của \(y\):</strong></p>
+  <p>Quan sát hình dáng miền \(D\) (nửa trên đường tròn tâm \(I(1,0)\) bán kính \(1\)): điểm thấp nhất của miền \(D\) nằm trên trục hoành (tức \(y = 0\)), điểm cao nhất của miền \(D\) là đỉnh của nửa đường tròn (tại \(x = 1\), thì \(y = 1\)).</p>
+  <p>Vậy biến \(y\) sẽ chạy trong khoảng:</p>
+  \[0 \le y \le 1\]
+
+  <p><strong>Tìm cận của \(x\):</strong></p>
+  <p>Với một giá trị \(y\) cố định (kẻ một đường thẳng nằm ngang cắt miền \(D\)), ta xem \(x\) chạy từ đâu đến đâu. Đường thẳng này sẽ cắt đường tròn tại hai điểm (trái và phải).</p>
+  <p>Ta cần rút \(x\) theo \(y\) từ phương trình đường tròn: \((x - 1)^2 + y^2 = 1\).</p>
+  <p>Chuyển \(y^2\) sang vế phải:</p>
+  \[(x - 1)^2 = 1 - y^2\]
+  <p>Lấy căn bậc hai hai vế (nhớ có dấu \(\pm\)):</p>
+  \[x - 1 = \pm\sqrt{1 - y^2}\]
+  <p>Chuyển \(-1\) sang vế phải:</p>
+  \[x = 1 \pm \sqrt{1 - y^2}\]
+  <p>Ta thu được hai nghiệm, tương ứng với hai nhánh của nửa đường tròn (nhánh bên trái và nhánh bên phải):</p>
+  <ul>
+    <li>Nhánh bên trái (giá trị \(x\) nhỏ hơn): \(x = 1 - \sqrt{1 - y^2}\). Đây sẽ là cận dưới của \(x\).</li>
+    <li>Nhánh bên phải (giá trị \(x\) lớn hơn): \(x = 1 + \sqrt{1 - y^2}\). Đây sẽ là cận trên của \(x\).</li>
+  </ul>
+  <p>Do đó, với mỗi \(y \in [0, 1]\), biến \(x\) sẽ chạy trong giới hạn:</p>
+  \[1 - \sqrt{1 - y^2} \le x \le 1 + \sqrt{1 - y^2}\]
+
+  <h4>Bước 4: Ráp vào biểu thức tích phân mới</h4>
+  <p>Tích phân lớp ngoài bây giờ là \(dy\) (với cận hằng số từ \(0\) đến \(1\)). Tích phân lớp trong là \(dx\) (với cận là hàm theo \(y\) vừa tìm được).</p>
+  <p>Ta có biểu thức tích phân sau khi đổi thứ tự là:</p>
+  \[I = \int_0^1 dy \int_{1-\sqrt{1-y^2}}^{1+\sqrt{1-y^2}} f(x,y)\,dx\]
+
+  <p style="color:#1a5276; font-weight:bold; font-size:1.1em; text-align:center;">Kết luận: \(\displaystyle \int_0^2 dx\int_0^{\sqrt{2x-x^2}} f(x,y)\,dy = \int_0^1 dy \int_{1-\sqrt{1-y^2}}^{1+\sqrt{1-y^2}} f(x,y)\,dx\)</p>
+  
+  <p><strong>Kiểm tra/Ý nghĩa:</strong> Việc đổi thứ tự tích phân rất hữu ích khi hàm \(f(x,y)\) khó hoặc không thể tính nguyên hàm theo \(y\) trước (như \(\sin(y^2)\)), nhưng lại dễ dàng tính được nếu ta lấy nguyên hàm theo \(x\) trước. Kết quả này đảm bảo rằng ta vẫn đang tính tổng trên cùng một diện tích, chỉ khác là thay vì quét theo chiều dọc (cố định x, chạy y) thì bây giờ ta quét theo chiều ngang (cố định y, chạy x).</p>
+</div>
+  </div>
 </div>
 
 </div>
+<script>
+    function toggleSolutionBox(btn) {
+        const content = btn.nextElementSibling;
+        const isOpen = content.classList.contains('is-open');
+        const icon = btn.querySelector('.sol-icon');
+        const text = btn.querySelector('.sol-text');
+        const arrow = btn.querySelector('.sol-arrow');
+        if (isOpen) {
+            content.classList.remove('is-open');
+            btn.classList.remove('is-open');
+            if (icon) icon.textContent = '📖';
+            if (text) text.textContent = 'Xem lời giải chi tiết (Bấm để mở)';
+            if (arrow) arrow.textContent = '▼';
+        } else {
+            content.classList.add('is-open');
+            btn.classList.add('is-open');
+            if (icon) icon.textContent = '🙈';
+            if (text) text.textContent = 'Thu gọn lời giải';
+            if (arrow) arrow.textContent = '▲';
+            if (window.MathJax && MathJax.typesetPromise) {
+                MathJax.typesetPromise([content]).catch(err => console.log(err));
+            }
+        }
+    }
+</script>
 </body>
 </html>

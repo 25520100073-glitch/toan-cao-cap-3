@@ -20,7 +20,58 @@
         .problem { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 40px; }
         .code-block { background: #282c34; color: #abb2bf; padding: 15px; border-radius: 5px; overflow-x: auto; font-family: monospace; font-size: 14px; }
         .plot-container { display: flex; justify-content: center; }
-    </style>
+    
+        /* Nút Ẩn / Hiện Lời Giải Chi Tiết */
+        .solution-toggle-wrapper {
+            margin: 28px 0 16px 0;
+        }
+        .solution-toggle-btn {
+            width: 100%;
+            background: #f8fafc;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 13px 20px;
+            font-size: 15px;
+            font-weight: 700;
+            color: #0284c7;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            font-family: inherit;
+        }
+        .solution-toggle-btn:hover {
+            background: #f0f9ff;
+            border-color: #38bdf8;
+            color: #0369a1;
+        }
+        .solution-toggle-btn.is-open {
+            background: #e0f2fe;
+            border-color: #0284c7;
+            color: #0369a1;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+        .solution-collapsible-content {
+            display: none;
+            border: 1.5px solid #0284c7;
+            border-top: none;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+            padding: 20px 22px;
+            background: #ffffff;
+        }
+        .solution-collapsible-content.is-open {
+            display: block;
+            animation: fadeInSol 0.25s ease-in-out;
+        }
+        @keyframes fadeInSol {
+            from { opacity: 0; transform: translateY(-4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+</style>
 </head>
 <body>
     <div class="problem">
@@ -35,18 +86,116 @@
         <h3>Mã Nguồn Tham Khảo (Cho AI khác)</h3>
         <pre class="code-block"><code></code></pre>
     
-<div style="background:#eaf4fb; border-left:5px solid #2980b9; padding:20px; margin-top:30px; border-radius:6px;">
-  <h3 style="color:#1a5276;">Lời giải – Bài B2.12</h3>
-  <p><strong>Đề bài:</strong> Tính \(\iint_D \sqrt{(x^2+y^2)^3}\,dxdy\), \(D\): \(x^2+y^2 \le 2y\).</p>
-  <p><strong>Bước 1: Tọa độ cực.</strong><br>
-  \(r^2 \le 2r\sin\theta \Rightarrow 0 \le r \le 2\sin\theta\). Miền \(D\) có \(0 \le \theta \le \pi\).</p>
-  <p><strong>Bước 2: Tính tích phân.</strong></p>
-  \[I = \int_0^\pi \int_0^{2\sin\theta} r^3 \cdot r\,dr\,d\theta = \int_0^\pi \left[\frac{r^5}{5}\right]_0^{2\sin\theta} d\theta = \frac{32}{5} \int_0^\pi \sin^5\theta\,d\theta\]
-  \[\int_0^\pi \sin^5\theta\,d\theta = 2 \int_0^{\pi/2} \sin^5\theta\,d\theta = 2 \left(\frac{4!!}{5!!}\right) = 2 \left(\frac{4 \cdot 2}{5 \cdot 3 \cdot 1}\right) = \frac{16}{15}\]
-  \[I = \frac{32}{5} \cdot \frac{16}{15} = \frac{512}{75}\]
-  <p style="color:#1a5276; font-weight:bold;">\(\boxed{I = \dfrac{512}{75}}\) ✓ Khớp với đáp án.</p>
+<div class="solution-toggle-wrapper">
+  <button type="button" class="solution-toggle-btn" onclick="toggleSolutionBox(this)">
+    <span><span class="sol-icon">📖</span> <span class="sol-text">Xem lời giải chi tiết (Bấm để mở)</span></span>
+    <span class="sol-arrow">▼</span>
+  </button>
+  <div class="solution-collapsible-content">
+<div style="background:#eaf4fb; border-left:5px solid #2980b9; padding:20px; margin-top:30px; border-radius:6px; line-height: 1.8;">
+  <h3 style="color:#1a5276;">Lời giải chi tiết – Bài B2.12</h3>
+  
+  <p><strong>Đề bài:</strong> Hãy tính giá trị của biểu thức \(\iint_D \sqrt{(x^2+y^2)^3}\,dxdy\) trên một vùng (miền) \(D\) được quy định bởi điều kiện \(x^2+y^2 \le 2y\).</p>
+  
+  <h4>1. Ký hiệu \(\iint_D\) nghĩa là gì?</h4>
+  <p>Tưởng tượng bạn có một miếng bánh hình phẳng nằm trên mặt bàn (miếng bánh này gọi là <strong>miền \(D\)</strong>). Ký hiệu \(\iint_D\) yêu cầu chúng ta gom (cộng gộp) tất cả những "thể tích" nhỏ xíu nằm phía trên từng điểm của miếng bánh đó. Hàm số bên trong \(\sqrt{(x^2+y^2)^3}\) giống như chiều cao của lớp kem phủ ở trên. \(\,dxdy\) là diện tích của một mẩu bánh bé xíu.</p>
+
+  <h4>2. Tìm hiểu miền \(D\) hình dáng ra sao?</h4>
+  <p>Điều kiện của \(D\) là: \(x^2+y^2 \le 2y\). Ta hãy biến đổi nó một chút để dễ nhìn hơn nhé:</p>
+  <ul>
+    <li>Chuyển \(2y\) sang vế trái: \(x^2 + y^2 - 2y \le 0\)</li>
+    <li>Ta thêm 1 vào cả 2 vế để tạo thành hằng đẳng thức đáng nhớ \((y-1)^2 = y^2 - 2y + 1\):
+        \[x^2 + (y^2 - 2y + 1) \le 1\]
+    </li>
+    <li>Suy ra: \[x^2 + (y-1)^2 \le 1\]</li>
+  </ul>
+  
+  <h4>3. Tại sao lại cần "Đổi biến sang tọa độ cực"?</h4>
+  <p>Do hàm số có cụm \(x^2+y^2\) và miền \(D\) là một hình tròn, nếu tính theo \(x, y\) bình thường (tọa độ Đề-các) thì sẽ phải giải các căn bậc hai rất phức tạp. Ta dùng <strong>tọa độ cực</strong> (chuyển qua góc \(\theta\) và khoảng cách \(r\)) để tính toán dễ hơn.</p>
+  <ul>
+    <li>Đặt \(x = r\cos\theta\) (hoành độ theo bán kính r và góc \(\theta\))</li>
+    <li>Đặt \(y = r\sin\theta\) (tung độ theo bán kính r và góc \(\theta\))</li>
+    <li>Khi đó, luôn có quy tắc vàng: \(x^2 + y^2 = r^2\)</li>
+    <li>Và "diện tích mẩu bánh bé xíu" \(dxdy\) khi chuyển sang hệ mới sẽ phải nhân thêm một hệ số bù (gọi là Jacobian), đó là \(r\). Nên \(dxdy\) biến thành \(r\,dr\,d\theta\).</li>
+  </ul>
+
+  <h4>4. Tìm giới hạn (cận) mới cho \(r\) và \(\theta\)</h4>
+  <ol>
+    <li><strong>Giới hạn của \(r\) (khoảng cách từ gốc O):</strong>
+      <p>Thay \(x^2+y^2 = r^2\) và \(y = r\sin\theta\) vào điều kiện ban đầu của hình tròn \(x^2+y^2 \le 2y\), ta được:</p>
+      \[r^2 \le 2(r\sin\theta)\]
+      <p>Chia cả hai vế cho \(r\) (vì khoảng cách \(r \ge 0\)):</p>
+      \[r \le 2\sin\theta\]
+      <p>Vậy bán kính \(r\) chạy từ \(0\) đến \(2\sin\theta\).</p>
+    </li>
+    <li><strong>Giới hạn của \(\theta\) (góc quay):</strong>
+      <p>Vì bán kính \(r\) không thể âm (\(r \ge 0\)), nên biểu thức \(2\sin\theta \ge 0\), tức là \(\sin\theta \ge 0\). Trên mặt phẳng, \(\sin\theta \ge 0\) khi góc \(\theta\) nằm ở nửa trên. Do đó, \(\theta\) quét từ góc \(0\) (bên phải) đến góc \(\pi\) (bên trái, hay 180 độ).</p>
+      <p>Vậy: \(0 \le \theta \le \pi\).</p>
+    </li>
+  </ol>
+
+  <h4>5. Lắp vào và tính Tích phân</h4>
+  <p>Bây giờ ta chuyển bài toán ban đầu về hệ mới:</p>
+  <ul>
+    <li>Hàm số: \(\sqrt{(x^2+y^2)^3} = \sqrt{(r^2)^3} = \sqrt{r^6} = r^3\) (vì \(r \ge 0\)).</li>
+    <li>Phần diện tích: \(dxdy \to r\,dr\,d\theta\)</li>
+  </ul>
+  <p>Biểu thức cần tính \(I\) trở thành:</p>
+  \[I = \int_0^\pi \left( \int_0^{2\sin\theta} (r^3) \cdot r \,dr \right) d\theta\]
+  \[I = \int_0^\pi \left( \int_0^{2\sin\theta} r^4 \,dr \right) d\theta\]
+  
+  <p><strong>Bước 5.1: Tính phần bên trong (theo \(r\)) trước</strong></p>
+  <p>Theo quy tắc tìm nguyên hàm (ngược của đạo hàm): nguyên hàm của \(r^4\) là \(\frac{r^5}{5}\). Ta thay cận \(r = 2\sin\theta\) và \(r = 0\) vào:</p>
+  \[ \int_0^{2\sin\theta} r^4 \,dr = \left[ \frac{r^5}{5} \right]_{0}^{2\sin\theta} = \frac{(2\sin\theta)^5}{5} - \frac{0^5}{5} \]
+  \[ = \frac{32\sin^5\theta}{5} = \frac{32}{5}\sin^5\theta \]
+
+  <p><strong>Bước 5.2: Tính phần bên ngoài (theo \(\theta\))</strong></p>
+  <p>Ta mang kết quả trên lắp vào tích phân gốc:</p>
+  \[I = \int_0^\pi \frac{32}{5}\sin^5\theta \,d\theta = \frac{32}{5} \int_0^\pi \sin^5\theta \,d\theta\]
+  <p>Ở đây, hàm \(\sin\theta\) đối xứng nhau qua góc \(\pi/2\) (tức là đồ thị từ 0 đến \(\pi\) có 2 nửa giống hệt nhau), nên ta có thể tách làm đôi cho dễ tính (đây là một quy tắc đặc biệt của lượng giác):</p>
+  \[\int_0^\pi \sin^5\theta \,d\theta = 2 \times \int_0^{\pi/2} \sin^5\theta \,d\theta\]
+  <p>Để tính tích phân từ \(0\) đến \(\pi/2\) của hàm \(\sin^n\theta\), các nhà toán học có công thức tính nhẩm nhanh gọi là <strong>công thức Wallis</strong>. Với số mũ \(n=5\) (là số lẻ), công thức là lấy các số chẵn nhỏ hơn 5 nhân với nhau, chia cho các số lẻ từ 5 trở xuống:</p>
+  \[ \int_0^{\pi/2} \sin^5\theta \,d\theta = \frac{4 \cdot 2}{5 \cdot 3 \cdot 1} = \frac{8}{15} \]
+  <p>Thế vào công thức trên cùng:</p>
+  \[ \int_0^\pi \sin^5\theta \,d\theta = 2 \times \frac{8}{15} = \frac{16}{15} \]
+  
+  <p><strong>Bước 5.3: Hoàn thành</strong></p>
+  <p>Giờ chỉ cần nhân với hệ số \(\frac{32}{5}\) ban đầu nữa là xong:</p>
+  \[I = \frac{32}{5} \times \frac{16}{15} = \frac{512}{75}\]
+
+  <p style="color:#1a5276; font-size:18px; font-weight:bold; margin-top:20px;">
+    <strong>KẾT LUẬN: \(\boxed{I = \frac{512}{75}}\)</strong>
+  </p>
+  <p><em>Ý nghĩa của kết quả:</em> Con số \(\frac{512}{75}\) (khoảng 6.82) chính là "khối lượng" hoặc "thể tích" tạo bởi hàm số khi quét toàn bộ bề mặt của miếng bánh hình tròn \(D\). Nó đã khớp hoàn toàn với đáp án chuẩn!</p>
+</div>
+  </div>
 </div>
 
 </div>
+<script>
+    function toggleSolutionBox(btn) {
+        const content = btn.nextElementSibling;
+        const isOpen = content.classList.contains('is-open');
+        const icon = btn.querySelector('.sol-icon');
+        const text = btn.querySelector('.sol-text');
+        const arrow = btn.querySelector('.sol-arrow');
+        if (isOpen) {
+            content.classList.remove('is-open');
+            btn.classList.remove('is-open');
+            if (icon) icon.textContent = '📖';
+            if (text) text.textContent = 'Xem lời giải chi tiết (Bấm để mở)';
+            if (arrow) arrow.textContent = '▼';
+        } else {
+            content.classList.add('is-open');
+            btn.classList.add('is-open');
+            if (icon) icon.textContent = '🙈';
+            if (text) text.textContent = 'Thu gọn lời giải';
+            if (arrow) arrow.textContent = '▲';
+            if (window.MathJax && MathJax.typesetPromise) {
+                MathJax.typesetPromise([content]).catch(err => console.log(err));
+            }
+        }
+    }
+</script>
 </body>
 </html>

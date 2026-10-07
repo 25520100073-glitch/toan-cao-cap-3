@@ -20,7 +20,58 @@
         .problem { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 40px; }
         .code-block { background: #282c34; color: #abb2bf; padding: 15px; border-radius: 5px; overflow-x: auto; font-family: monospace; font-size: 14px; }
         .plot-container { display: flex; justify-content: center; }
-    </style>
+    
+        /* Nút Ẩn / Hiện Lời Giải Chi Tiết */
+        .solution-toggle-wrapper {
+            margin: 28px 0 16px 0;
+        }
+        .solution-toggle-btn {
+            width: 100%;
+            background: #f8fafc;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 13px 20px;
+            font-size: 15px;
+            font-weight: 700;
+            color: #0284c7;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            font-family: inherit;
+        }
+        .solution-toggle-btn:hover {
+            background: #f0f9ff;
+            border-color: #38bdf8;
+            color: #0369a1;
+        }
+        .solution-toggle-btn.is-open {
+            background: #e0f2fe;
+            border-color: #0284c7;
+            color: #0369a1;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+        .solution-collapsible-content {
+            display: none;
+            border: 1.5px solid #0284c7;
+            border-top: none;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+            padding: 20px 22px;
+            background: #ffffff;
+        }
+        .solution-collapsible-content.is-open {
+            display: block;
+            animation: fadeInSol 0.25s ease-in-out;
+        }
+        @keyframes fadeInSol {
+            from { opacity: 0; transform: translateY(-4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+</style>
 </head>
 <body>
     <div class="problem">
@@ -35,22 +86,108 @@
         <h3>Mã Nguồn Tham Khảo (Cho AI khác)</h3>
         <pre class="code-block"><code></code></pre>
     
+<div class="solution-toggle-wrapper">
+  <button type="button" class="solution-toggle-btn" onclick="toggleSolutionBox(this)">
+    <span><span class="sol-icon">📖</span> <span class="sol-text">Xem lời giải chi tiết (Bấm để mở)</span></span>
+    <span class="sol-arrow">▼</span>
+  </button>
+  <div class="solution-collapsible-content">
 <div style="background:#eaf4fb; border-left:5px solid #2980b9; padding:20px; margin-top:30px; border-radius:6px;">
-  <h3 style="color:#1a5276;">Lời giải – Bài B2.6</h3>
-  <p><strong>Đề bài:</strong> Tính \(\iint_D xy\,dxdy\), \(D\) giới hạn bởi \(y=-x\) và \(x^2+y^2=2x\) (phần diện tích nhỏ hơn).</p>
-  <p><strong>Bước 1: Xác định miền D.</strong><br>
-  Đường tròn \((x-1)^2+y^2=1\) có tọa độ cực là \(r = 2\cos\theta\).<br>
-  Đường thẳng \(y=-x\) cắt đường tròn tại điểm tạo góc \(\theta = -\pi/4\).<br>
-  Miền nhỏ hơn nằm bên dưới đường thẳng, tức là góc \(-\pi/2 \le \theta \le -\pi/4\).</p>
-  <p><strong>Bước 2: Tính tích phân bằng tọa độ cực.</strong></p>
-  \[I = \int_{-\pi/2}^{-\pi/4} \int_0^{2\cos\theta} (r\cos\theta)(r\sin\theta)\,r\,dr\,d\theta = \int_{-\pi/2}^{-\pi/4} \cos\theta\sin\theta \left[\frac{r^4}{4}\right]_0^{2\cos\theta} d\theta\]
-  \[= 4 \int_{-\pi/2}^{-\pi/4} \cos^5\theta\sin\theta\,d\theta\]
-  <p>Đặt \(u = \cos\theta \Rightarrow du = -\sin\theta\,d\theta\).<br>
-  Tại \(\theta = -\pi/2, u = 0\). Tại \(\theta = -\pi/4, u = \frac{\sqrt{2}}{2}\).</p>
-  \[I = 4 \int_0^{\sqrt{2}/2} u^5\,(-du) = -4 \left[\frac{u^6}{6}\right]_0^{\sqrt{2}/2} = -\frac{4}{6} \left(\frac{1}{\sqrt{2}}\right)^6 = -\frac{2}{3} \cdot \frac{1}{8} = -\frac{2}{24} = -\frac{1}{12}\]
-  <p style="color:#1a5276; font-weight:bold;">\(\boxed{I = -\dfrac{1}{12}}\) ✓ Khớp với đáp án.</p>
+  <h3 style="color:#1a5276;">Lời giải chi tiết – Bài B2.6</h3>
+  <p><strong>Đề bài:</strong> Tính \( \iint_D xy \,dxdy \), với miền \( D \) là phần diện tích nhỏ hơn nằm giữa đường thẳng \( y = -x \) và đường tròn \( x^2+y^2 = 2x \).</p>
+  
+  <h4>Bước 1: Hình dung hình dạng của hai đối tượng</h4>
+  <ul>
+    <li><strong>Đường tròn:</strong> Phương trình \( x^2+y^2 = 2x \), chuyển vế và thêm 1 vào 2 vế ta có \( x^2 - 2x + 1 + y^2 = 1 \), tương đương \( (x-1)^2 + y^2 = 1 \). Đây là hình tròn tâm \( (1,0) \) (nằm trên trục hoành), bán kính bằng 1, đi qua gốc tọa độ O.</li>
+    <li><strong>Đường thẳng:</strong> \( y = -x \) là đường chéo nghiêng dốc xuống, chia góc phần tư thứ hai và thứ tư ra làm đôi.</li>
+    <li>Đường chéo này sẽ phạt đứt một phần của hình tròn ở bên dưới. Phần diện tích bị phạt đứt đó rất nhỏ, nằm tọt xuống góc phần tư thứ tư, và đề bài yêu cầu ta tính trên diện tích <strong>nhỏ hơn</strong> đó.</li>
+  </ul>
+
+  <h4>Bước 2: Tìm biên giới bằng tọa độ cực</h4>
+  <p>Thay \( x = r \cos\theta \), \( y = r \sin\theta \) và nhớ cục gạch \( dxdy = r \,dr \,d\theta \).</p>
+  
+  <p><strong>Tìm đường bao ngoài (giới hạn r):</strong></p>
+  <p>Từ \( x^2+y^2 = 2x \), thay thành \( r^2 = 2(r\cos\theta) \). Rút gọn ta được độ dài đường chiếu: \( 0 \le r \le 2\cos\theta \).</p>
+  
+  <p><strong>Tìm góc quét (giới hạn \(\theta\)):</strong></p>
+  <ul>
+    <li>Phần nhỏ hơn nằm phía dưới nửa đường tròn, góc bị chặn bởi đường thẳng \( y = -x \).</li>
+    <li>Tia \( y = -x \) nằm ngang góc \( -45^\circ \) (hay \( -\frac{\pi}{4} \)).</li>
+    <li>Biên dưới cùng của hình tròn tiếp xúc với trục tung ở góc hướng xuống dưới chân (\( -90^\circ \) hay \( -\frac{\pi}{2} \)).</li>
+    <li>Vậy tia quét sẽ đi từ vị trí thẳng đứng chĩa xuống \( -\frac{\pi}{2} \) quét lên trên đến đường chéo \( -\frac{\pi}{4} \).</li>
+  </ul>
+  \[ -\frac{\pi}{2} \le \theta \le -\frac{\pi}{4} \]
+
+  <h4>Bước 3: Lập và tính toán tích phân</h4>
+  <p>Thay biểu thức \( xy \) thành \( (r \cos\theta)(r \sin\theta) \). Gắn thêm chữ \( r \) định thức Jacobi, ta được phần lõi là \( r^3 \sin\theta \cos\theta \).</p>
+  \[ I = \int_{-\pi/2}^{-\pi/4} \left( \int_0^{2\cos\theta} (r^3 \sin\theta \cos\theta) \,dr \right) d\theta \]
+  
+  <p>Xem góc là hằng số, đưa ra trước tích phân của \( r \):</p>
+  \[ I = \int_{-\pi/2}^{-\pi/4} \sin\theta \cos\theta \left( \int_0^{2\cos\theta} r^3 \,dr \right) d\theta \]
+  
+  <p><em>Tính phần lõi \( r \):</em> Nguyên hàm của \( r^3 \) là \( \frac{r^4}{4} \).</p>
+  \[ \int_0^{2\cos\theta} r^3 \,dr = \left[ \frac{r^4}{4} \right]_0^{2\cos\theta} \]
+  \[ = \frac{(2\cos\theta)^4}{4} - 0 = \frac{16\cos^4\theta}{4} = 4\cos^4\theta \]
+
+  <p>Đem kết quả này ráp ra vòng ngoài:</p>
+  \[ I = \int_{-\pi/2}^{-\pi/4} \sin\theta \cos\theta \cdot (4\cos^4\theta) \,d\theta \]
+  <p>Gộp \(\cos\theta\) vào với \(\cos^4\theta\) để tạo thành mũ 5:</p>
+  \[ I = 4 \int_{-\pi/2}^{-\pi/4} \cos^5\theta \sin\theta \,d\theta \]
+
+  <p><em>Dùng phương pháp thế biến:</em> Ta đặt \( u = \cos\theta \) vì ngoài rìa đang có \(\sin\theta\) rình rập.</p>
+  <p>Đạo hàm: \( du = -\sin\theta \,d\theta \Rightarrow \sin\theta \,d\theta = -du \).</p>
+  
+  <p>Lập lại điểm đầu điểm cuối:</p>
+  <ul>
+    <li>Tại \(\theta = -\frac{\pi}{2}\): \( u = \cos(-\frac{\pi}{2}) = 0 \).</li>
+    <li>Tại \(\theta = -\frac{\pi}{4}\): \( u = \cos(-\frac{\pi}{4}) = \frac{\sqrt{2}}{2} \).</li>
+  </ul>
+  
+  <p>Viết lại toàn bộ bài toán bằng chữ \( u \):</p>
+  \[ I = 4 \int_0^{\sqrt{2}/2} u^5 (-du) = -4 \int_0^{\sqrt{2}/2} u^5 \,du \]
+  
+  <p>Nguyên hàm của \( u^5 \) là \( \frac{u^6}{6} \):</p>
+  \[ I = -4 \left[ \frac{u^6}{6} \right]_0^{\sqrt{2}/2} \]
+  \[ = -\frac{4}{6} \left( \left(\frac{\sqrt{2}}{2}\right)^6 - 0 \right) \]
+  
+  <p>Thực hiện nhẩm phép lũy thừa bậc 6 thật chậm:</p>
+  \[ \left(\frac{\sqrt{2}}{2}\right)^6 = \frac{(\sqrt{2})^6}{2^6} = \frac{8}{64} = \frac{1}{8} \]
+  
+  <p>Cuối cùng:</p>
+  \[ I = -\frac{4}{6} \cdot \frac{1}{8} = -\frac{4}{48} = -\frac{1}{12} \]
+
+  <h4>Bước 4: Kết luận</h4>
+  <p style="color:#1a5276; font-weight:bold; font-size:18px;">\(\boxed{I = -\dfrac{1}{12}}\)</p>
+  <p><strong>Ý nghĩa bài toán:</strong> Việc hàm số là tích của \( x \) dương và \( y \) âm (vì miền D nằm ở góc phần tư thứ 4) đã lý giải một cách trực quan tại sao kết quả thu được lại mang dấu âm. Một mảnh cắt rất hẹp sinh ra một thể tích có sức chứa bé xíu \(-1/12\).</p>
+</div>
+  </div>
 </div>
 
 </div>
+<script>
+    function toggleSolutionBox(btn) {
+        const content = btn.nextElementSibling;
+        const isOpen = content.classList.contains('is-open');
+        const icon = btn.querySelector('.sol-icon');
+        const text = btn.querySelector('.sol-text');
+        const arrow = btn.querySelector('.sol-arrow');
+        if (isOpen) {
+            content.classList.remove('is-open');
+            btn.classList.remove('is-open');
+            if (icon) icon.textContent = '📖';
+            if (text) text.textContent = 'Xem lời giải chi tiết (Bấm để mở)';
+            if (arrow) arrow.textContent = '▼';
+        } else {
+            content.classList.add('is-open');
+            btn.classList.add('is-open');
+            if (icon) icon.textContent = '🙈';
+            if (text) text.textContent = 'Thu gọn lời giải';
+            if (arrow) arrow.textContent = '▲';
+            if (window.MathJax && MathJax.typesetPromise) {
+                MathJax.typesetPromise([content]).catch(err => console.log(err));
+            }
+        }
+    }
+</script>
 </body>
 </html>

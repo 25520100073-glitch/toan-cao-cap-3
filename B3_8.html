@@ -27,26 +27,141 @@
         .check { background: #eafaf1; border-left: 4px solid #27ae60; padding: 8px 14px; border-radius: 4px; margin-top: 10px; color: #1e8449; }
         .plot-container { display: flex; justify-content: center; margin-top: 20px; }
         .code-block { background: #282c34; color: #abb2bf; padding: 15px; border-radius: 5px; overflow-x: auto; font-family: monospace; font-size: 13px; margin-top: 10px; white-space: pre; }
-    </style>
+    
+        /* Nút Ẩn / Hiện Lời Giải Chi Tiết */
+        .solution-toggle-wrapper {
+            margin: 28px 0 16px 0;
+        }
+        .solution-toggle-btn {
+            width: 100%;
+            background: #f8fafc;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 13px 20px;
+            font-size: 15px;
+            font-weight: 700;
+            color: #0284c7;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            font-family: inherit;
+        }
+        .solution-toggle-btn:hover {
+            background: #f0f9ff;
+            border-color: #38bdf8;
+            color: #0369a1;
+        }
+        .solution-toggle-btn.is-open {
+            background: #e0f2fe;
+            border-color: #0284c7;
+            color: #0369a1;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+        .solution-collapsible-content {
+            display: none;
+            border: 1.5px solid #0284c7;
+            border-top: none;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+            padding: 20px 22px;
+            background: #ffffff;
+        }
+        .solution-collapsible-content.is-open {
+            display: block;
+            animation: fadeInSol 0.25s ease-in-out;
+        }
+        @keyframes fadeInSol {
+            from { opacity: 0; transform: translateY(-4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+</style>
 </head>
 <body>
     <div class="problem">
         <h2>Bài B3.8</h2>
         <div class="de-bai"><strong>Đề bài:</strong> Thể tích vật thể: \(y=x^2,\;y=4x^2,\;y=1,\;z=0,\;z=1\)</div>
-        <h3>&#9998; Lời giải</h3>
+        <div class="solution-toggle-wrapper">
+  <button type="button" class="solution-toggle-btn" onclick="toggleSolutionBox(this)">
+    <span><span class="sol-icon">📖</span> <span class="sol-text">Xem lời giải chi tiết (Bấm để mở)</span></span>
+    <span class="sol-arrow">▼</span>
+  </button>
+  <div class="solution-collapsible-content">
+<h3>&#9998; Lời giải</h3>
         <div class="solution">
-  <p><strong>Bước 1: Phân tích hình học của vật thể \(\Omega\).</strong><br>
-  - Vật thể là một khối trụ đứng có đáy dưới là \(z=0\), nắp trên là \(z=1\) (chiều cao \(h = 1 - 0 = 1\)).<br>
-  - Các mặt bên là hai mặt trụ parabol \(y = x^2\), \(y = 4x^2\) và mặt phẳng \(y = 1\).<br>
-  - Do hình chiếu \(D\) trên mặt phẳng \(Oxy\) đối xứng qua trục \(Oy\), ta xét phần \(x \ge 0\) rồi nhân đôi.</p>
-  <p><strong>Bước 2: Tính thể tích bằng cách quét ngang theo biến \(y\).</strong><br>
-  Với \(x \ge 0\) và \(0 \le y \le 1\):<br>
-  - Đường bên trong: \(y = 4x^2 \Rightarrow x = \frac{\sqrt{y}}{2}\).<br>
-  - Đường bên ngoài: \(y = x^2 \Rightarrow x = \sqrt{y}\).<br>
-  Khi đó với mỗi \(y \in [0, 1]\), \(x\) chạy từ \(\frac{\sqrt{y}}{2}\) đến \(\sqrt{y}\) (không cần phải tách làm 2 tích phân!).</p>
-  \[V = 2 \int_0^1 dy \int_{\sqrt{y}/2}^{\sqrt{y}} dx \int_0^1 dz = 2 \int_0^1 \left( \sqrt{y} - \frac{\sqrt{y}}{2} \right) \cdot 1\,dy\]
-  \[= 2 \int_0^1 \frac{1}{2} y^{1/2}\,dy = \int_0^1 y^{1/2}\,dy = \left[ \frac{2}{3} y^{3/2} \right]_0^1 = \frac{2}{3}\]
-  <p style="color:#27ae60; font-weight:bold;">\(\boxed{V = \dfrac{2}{3}}\) ✓ Khớp hoàn toàn với đáp án!</p>
+  <h4>Bước 1: Hiểu đề bài và phân tích hình học của vật thể \(\Omega\)</h4>
+  <p>Đề bài yêu cầu tính thể tích của vật thể được bao quanh bởi các mặt: \(y = x^2\), \(y = 4x^2\), \(y = 1\), \(z = 0\), \(z = 1\). Hãy cùng bóc tách từng phần:</p>
+  <ul>
+    <li><strong>Khối trụ thẳng đứng:</strong> Vật thể này có sàn đáy là mặt phẳng \(z = 0\) và nắp trần là mặt phẳng \(z = 1\). Chiều cao thẳng đứng của vật thể cố định là:
+      \[h = 1 - 0 = 1\]
+      Vì tất cả các mặt bên đều là các bức tường thẳng đứng vuông góc với mặt sàn, thể tích của khối hình đơn giản bằng <strong>diện tích đáy</strong> nhân với <strong>chiều cao</strong> (\(h = 1\)).
+    </li>
+    <li><strong>Các bức tường bên:</strong>
+      <ul>
+        <li>Tường chắn phía trên: Đường thẳng \(y = 1\).</li>
+        <li>Tường cong hẹp: Mặt parabol \(y = 4x^2\).</li>
+        <li>Tường cong rộng: Mặt parabol \(y = x^2\).</li>
+      </ul>
+    </li>
+  </ul>
+
+  
+  <h4>Bước 2: Tìm cận của các biến trên nửa miền đối xứng (\(x \ge 0\))</h4>
+  <p>Để việc lấy tích phân không bị chia thành nhiều mảnh, ta quét theo chiều ngang bằng cách chọn biến \(y\) làm biến chạy trước:</p>
+  <ul>
+    <li><strong>Biến \(y\) (ngoài cùng):</strong> Điểm thấp nhất của hai parabol gặp nhau tại gốc tọa độ \(y = 0\), đường chặn trên cùng là \(y = 1\). Do đó:
+      \[0 \le y \le 1\]
+    </li>
+    <li><strong>Biến \(x\) (ở giữa):</strong> Với mỗi đường nằm ngang tại độ cao \(y\) cố định, ta đi từ đường biên trong ra đường biên ngoài:
+      <ul>
+        <li>Đường biên trong (bên trái): Từ \(y = 4x^2 \Rightarrow x^2 = \frac{y}{4} \Rightarrow x = \frac{\sqrt{y}}{2}\) (vì ta đang xét \(x \ge 0\)).</li>
+        <li>Đường biên ngoài (bên phải): Từ \(y = x^2 \Rightarrow x = \sqrt{y}\) (vì \(x \ge 0\)).</li>
+      </ul>
+      Do đó:
+      \[\frac{\sqrt{y}}{2} \le x \le \sqrt{y}\]
+    </li>
+    <li><strong>Biến \(z\) (trong cùng - chiều cao):</strong> Đi từ sàn lên nắp:
+      \[0 \le z \le 1\]
+    </li>
+  </ul>
+
+  <h4>Bước 3: Thiết lập công thức tích phân</h4>
+  <p>Thể tích toàn phần bằng \(2\) lần thể tích nửa bên phải:</p>
+  \[V = 2 \times \int_0^1 dy \int_{\frac{\sqrt{y}}{2}}^{\sqrt{y}} dx \int_0^1 dz\]
+
+  <h4>Bước 4: Tính tích phân lớp trong cùng (theo biến \(z\))</h4>
+  <p>Lấy nguyên hàm của \(1\) theo biến \(z\):</p>
+  \[\int_0^1 dz = \Big[ z \Big]_0^1 = 1 - 0 = 1\]
+  <p>Tích phân rút gọn còn:</p>
+  \[V = 2 \times \int_0^1 dy \int_{\frac{\sqrt{y}}{2}}^{\sqrt{y}} 1 \, dx\]
+
+  <h4>Bước 5: Tính tích phân lớp ở giữa (theo biến \(x\))</h4>
+  <p>Lấy nguyên hàm của \(1\) theo biến \(x\):</p>
+  \[\int_{\frac{\sqrt{y}}{2}}^{\sqrt{y}} dx = \Big[ x \Big]_{\frac{\sqrt{y}}{2}}^{\sqrt{y}} = \sqrt{y} - \frac{\sqrt{y}}{2}\]
+  <p>Trừ hai căn thức đồng dạng:</p>
+  \[\sqrt{y} - \frac{1}{2}\sqrt{y} = \left( 1 - \frac{1}{2} \right)\sqrt{y} = \frac{1}{2}\sqrt{y} = \frac{1}{2}y^{1/2}\]
+
+  <h4>Bước 6: Tính tích phân lớp ngoài cùng (theo biến \(y\))</h4>
+  <p>Ráp kết quả vào tích phân ngoài cùng:</p>
+  \[V = 2 \times \int_0^1 \frac{1}{2}y^{1/2} dy\]
+  <p>Số \(2\) ở ngoài nhân với hệ số \(\frac{1}{2}\) triệt tiêu thành \(1\):</p>
+  \[V = \int_0^1 y^{1/2} dy\]
+  <p>Áp dụng công thức nguyên hàm cơ bản \(\int y^n dy = \frac{y^{n+1}}{n+1}\) với \(n = \frac{1}{2}\):</p>
+  <ul>
+    <li>Số mũ mới: \(\frac{1}{2} + 1 = \frac{3}{2}\)</li>
+    <li>Chia cho \(\frac{3}{2}\) tương đương với nhân với nghịch đảo là \(\frac{2}{3}\)</li>
+  </ul>
+  \[\int y^{1/2} dy = \left[ \frac{2}{3} y^{3/2} \right]_0^1\]
+  <p>Thế cận từ \(0\) đến \(1\):</p>
+  \[V = \frac{2}{3} \times (1)^{3/2} - \frac{2}{3} \times (0)^{3/2}\]
+  \[V = \frac{2}{3} \times 1 - 0 = \frac{2}{3}\]
+
+  <h4>Bước 7: Kết luận và kiểm tra tính hợp lý</h4>
+  <p><strong>Ý nghĩa kết quả:</strong> Miền đáy kẹp giữa hai parabol trong hình vuông đơn vị có diện tích bằng đúng \(\frac{2}{3}\). Nhân với chiều cao \(h = 1\) của khối trụ cho ra thể tích đúng bằng \(\frac{2}{3}\).</p>
+  <p style="color:#27ae60; font-size:18px; font-weight:bold;">\(\boxed{V = \dfrac{2}{3}}\) ✓ Khớp hoàn toàn với đáp án!</p>
 </div>
         <div class="answer-box">&#10003; Kết quả: \(\dfrac{2}{3}\)</div>
         <div class="check">Kết quả: \(\dfrac{2}{3}\). Khớp đáp án đề: <strong>2/3</strong> ✓</div>
@@ -58,5 +173,31 @@
         <h3>&#128187; Mã nguồn Python (tham khảo)</h3>
         <pre class="code-block"># V = 2*[int_0^{1/2} 3x^2 dx + int_{1/2}^1 (1-x^2) dx] = 2/3</pre>
     </div>
+  </div>
+</div><script>
+    function toggleSolutionBox(btn) {
+        const content = btn.nextElementSibling;
+        const isOpen = content.classList.contains('is-open');
+        const icon = btn.querySelector('.sol-icon');
+        const text = btn.querySelector('.sol-text');
+        const arrow = btn.querySelector('.sol-arrow');
+        if (isOpen) {
+            content.classList.remove('is-open');
+            btn.classList.remove('is-open');
+            if (icon) icon.textContent = '📖';
+            if (text) text.textContent = 'Xem lời giải chi tiết (Bấm để mở)';
+            if (arrow) arrow.textContent = '▼';
+        } else {
+            content.classList.add('is-open');
+            btn.classList.add('is-open');
+            if (icon) icon.textContent = '🙈';
+            if (text) text.textContent = 'Thu gọn lời giải';
+            if (arrow) arrow.textContent = '▲';
+            if (window.MathJax && MathJax.typesetPromise) {
+                MathJax.typesetPromise([content]).catch(err => console.log(err));
+            }
+        }
+    }
+</script>
 </body>
 </html>

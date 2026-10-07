@@ -27,22 +27,112 @@
         .check { background: #eafaf1; border-left: 4px solid #27ae60; padding: 8px 14px; border-radius: 4px; margin-top: 10px; color: #1e8449; }
         .plot-container { display: flex; justify-content: center; margin-top: 20px; }
         .code-block { background: #282c34; color: #abb2bf; padding: 15px; border-radius: 5px; overflow-x: auto; font-family: monospace; font-size: 13px; margin-top: 10px; white-space: pre; }
-    </style>
+    
+        /* Nút Ẩn / Hiện Lời Giải Chi Tiết */
+        .solution-toggle-wrapper {
+            margin: 28px 0 16px 0;
+        }
+        .solution-toggle-btn {
+            width: 100%;
+            background: #f8fafc;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 13px 20px;
+            font-size: 15px;
+            font-weight: 700;
+            color: #0284c7;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            font-family: inherit;
+        }
+        .solution-toggle-btn:hover {
+            background: #f0f9ff;
+            border-color: #38bdf8;
+            color: #0369a1;
+        }
+        .solution-toggle-btn.is-open {
+            background: #e0f2fe;
+            border-color: #0284c7;
+            color: #0369a1;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+        .solution-collapsible-content {
+            display: none;
+            border: 1.5px solid #0284c7;
+            border-top: none;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+            padding: 20px 22px;
+            background: #ffffff;
+        }
+        .solution-collapsible-content.is-open {
+            display: block;
+            animation: fadeInSol 0.25s ease-in-out;
+        }
+        @keyframes fadeInSol {
+            from { opacity: 0; transform: translateY(-4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+</style>
 </head>
 <body>
     <div class="problem">
         <h2>Bài B3.9</h2>
         <div class="de-bai"><strong>Đề bài:</strong> \(\iiint_\Omega z^2\,dxdydz\), \(\Omega\): \((x-a)^2+(y-b)^2\le R^2,\;h\le z\le k\)</div>
-        <h3>&#9998; Lời giải</h3>
+        <div class="solution-toggle-wrapper">
+  <button type="button" class="solution-toggle-btn" onclick="toggleSolutionBox(this)">
+    <span><span class="sol-icon">📖</span> <span class="sol-text">Xem lời giải chi tiết (Bấm để mở)</span></span>
+    <span class="sol-arrow">▼</span>
+  </button>
+  <div class="solution-collapsible-content">
+<h3>&#9998; Lời giải</h3>
         <div class="solution">
-<ol>
-  <li>Miền \(\Omega\): hình trụ \((x-a)^2+(y-b)^2\le R^2,\;h\le z\le k\).</li>
-  <li>Hàm tích phân \(z^2\) không phụ thuộc \(x,y\) nên:
-  \[I = \iiint_\Omega z^2\,dV = \left(\iint_D 1\,dxdy\right)\cdot\int_h^k z^2\,dz\]</li>
-  <li>Diện tích đáy: \(\iint_D dxdy = \pi R^2\).</li>
-  <li>\(\displaystyle\int_h^k z^2\,dz = \frac{k^3-h^3}{3}\)</li>
-  <li>\[I = \pi R^2\cdot\frac{k^3-h^3}{3} = \frac{\pi R^2}{3}(k^3-h^3)\]</li>
-</ol>
+<p>Chào các bạn, chúng ta cùng giải bài toán tính tích phân bội ba này nhé. Hãy cứ hình dung tích phân bội ba giống như việc tính "tổng" của một đại lượng (ở đây là hàm số \(f(x,y,z) = z^2\)) trên toàn bộ một không gian ba chiều, được gọi là miền \(\Omega\).</p>
+<p><strong>Bước 1: Phân tích miền không gian \(\Omega\)</strong></p>
+<p>Đề bài cho miền \(\Omega\) được giới hạn bởi hai điều kiện:</p>
+<ul>
+  <li>\((x-a)^2+(y-b)^2\le R^2\): Đây là phương trình của một hình trụ tròn thẳng đứng. Tâm của hình tròn đáy nằm ở tọa độ \((a, b)\), và bán kính của nó là \(R\).</li>
+  <li>\(h\le z\le k\): Điều kiện này cho biết vật thể của chúng ta bị giới hạn ở độ cao từ mức \(z = h\) (đáy dưới) đến mức \(z = k\) (đáy trên).</li>
+</ul>
+<p>Như vậy, miền \(\Omega\) của chúng ta là một khối trụ tròn xoay đặc, thẳng đứng, có diện tích đáy không đổi từ dưới lên trên.</p>
+
+<p><strong>Bước 2: Phân tách tích phân</strong></p>
+<p>Bài toán yêu cầu tính tích phân:</p>
+<p>\[I = \iiint_\Omega z^2\,dxdydz\]</p>
+<p>Ký hiệu \(\iiint_\Omega\) nghĩa là ta sẽ quét toàn bộ khối trụ \(\Omega\). Ta nhận thấy hàm số cần lấy tích phân là \(z^2\) chỉ phụ thuộc vào biến \(z\), hoàn toàn không chứa \(x\) hay \(y\). Đồng thời, giới hạn của biến \(z\) (từ \(h\) đến \(k\)) hoàn toàn độc lập với các biến \(x\) và \(y\). Do đó, ta có thể tách tích phân bội ba này thành tích của hai phần: một phần là tích phân kép theo \(x, y\) (trên hình tròn đáy \(D\)), và một phần là tích phân đơn theo \(z\).</p>
+<p>\[I = \left(\iint_D 1\,dxdy\right) \cdot \left(\int_h^k z^2\,dz\right)\]</p>
+<p>Trong đó, \(D\) là hình tròn đáy có phương trình \((x-a)^2+(y-b)^2\le R^2\).</p>
+
+<p><strong>Bước 3: Tính diện tích mặt đáy (tích phân thứ nhất)</strong></p>
+<p>Tích phân kép \(\iint_D 1\,dxdy\) thực chất chính là công thức tính diện tích của miền \(D\).</p>
+<p>Vì \(D\) là một hình tròn có bán kính \(R\), ta áp dụng công thức tính diện tích hình tròn cơ bản học từ cấp 2:</p>
+<p>\[\iint_D 1\,dxdy = \pi \cdot R^2\]</p>
+
+<p><strong>Bước 4: Tính phần theo biến \(z\) (tích phân thứ hai)</strong></p>
+<p>Ta cần tính tích phân:</p>
+<p>\[\int_h^k z^2\,dz\]</p>
+<p>Áp dụng quy tắc tìm nguyên hàm cơ bản của hàm lũy thừa: \(\int z^n dz = \frac{z^{n+1}}{n+1}\). Với \(n=2\), ta có nguyên hàm của \(z^2\) là \(\frac{z^3}{3}\).</p>
+<p>Thay hai cận \(z=k\) (cận trên) và \(z=h\) (cận dưới) vào theo công thức Newton-Leibniz:</p>
+<p>\[\int_h^k z^2\,dz = \left. \left( \frac{z^3}{3} \right) \right|_h^k\]</p>
+<p>\[= \frac{k^3}{3} - \frac{h^3}{3}\]</p>
+<p>\[= \frac{k^3-h^3}{3}\]</p>
+
+<p><strong>Bước 5: Kết hợp kết quả lại</strong></p>
+<p>Nhân hai kết quả vừa tìm được với nhau:</p>
+<p>\[I = \left( \pi R^2 \right) \cdot \left( \frac{k^3-h^3}{3} \right)\]</p>
+<p>\[I = \frac{\pi R^2}{3}(k^3-h^3)\]</p>
+
+<div style="background:#e8f4f8; padding:15px; border-radius:8px; border-left: 5px solid #2980b9;">
+<strong>Mẹo kiểm tra ý nghĩa:</strong> Nếu ta thay hàm \(z^2\) bằng hàm \(1\), ta sẽ tính thể tích hình trụ, ra \(\pi R^2 (k-h)\), rất hợp lý! Khi hàm số là \(z^2\), ta có thể hiểu nó giống như việc tính mô men quán tính hoặc một đại lượng vật lý đặc trưng phụ thuộc vào bình phương độ cao.
+</div>
+
+<p><strong>Kết luận: Giá trị của tích phân cần tính là \( \dfrac{\pi R^2}{3}(k^3-h^3) \).</strong></p>
+
 </div>
         <div class="answer-box">&#10003; Kết quả: \(\dfrac{\pi R^2}{3}(k^3-h^3)\)</div>
         <div class="check">Kết quả: \(\dfrac{\pi R^2}{3}(k^3-h^3)\). Khớp đáp án đề ✓</div>
@@ -54,5 +144,31 @@
         <h3>&#128187; Mã nguồn Python (tham khảo)</h3>
         <pre class="code-block"># I = pi*R^2 * (k^3 - h^3) / 3</pre>
     </div>
+  </div>
+</div><script>
+    function toggleSolutionBox(btn) {
+        const content = btn.nextElementSibling;
+        const isOpen = content.classList.contains('is-open');
+        const icon = btn.querySelector('.sol-icon');
+        const text = btn.querySelector('.sol-text');
+        const arrow = btn.querySelector('.sol-arrow');
+        if (isOpen) {
+            content.classList.remove('is-open');
+            btn.classList.remove('is-open');
+            if (icon) icon.textContent = '📖';
+            if (text) text.textContent = 'Xem lời giải chi tiết (Bấm để mở)';
+            if (arrow) arrow.textContent = '▼';
+        } else {
+            content.classList.add('is-open');
+            btn.classList.add('is-open');
+            if (icon) icon.textContent = '🙈';
+            if (text) text.textContent = 'Thu gọn lời giải';
+            if (arrow) arrow.textContent = '▲';
+            if (window.MathJax && MathJax.typesetPromise) {
+                MathJax.typesetPromise([content]).catch(err => console.log(err));
+            }
+        }
+    }
+</script>
 </body>
 </html>

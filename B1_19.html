@@ -20,7 +20,58 @@
         .problem { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 40px; }
         .code-block { background: #282c34; color: #abb2bf; padding: 15px; border-radius: 5px; overflow-x: auto; font-family: monospace; font-size: 14px; }
         .plot-container { display: flex; justify-content: center; }
-    </style>
+    
+        /* Nút Ẩn / Hiện Lời Giải Chi Tiết */
+        .solution-toggle-wrapper {
+            margin: 28px 0 16px 0;
+        }
+        .solution-toggle-btn {
+            width: 100%;
+            background: #f8fafc;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 13px 20px;
+            font-size: 15px;
+            font-weight: 700;
+            color: #0284c7;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            font-family: inherit;
+        }
+        .solution-toggle-btn:hover {
+            background: #f0f9ff;
+            border-color: #38bdf8;
+            color: #0369a1;
+        }
+        .solution-toggle-btn.is-open {
+            background: #e0f2fe;
+            border-color: #0284c7;
+            color: #0369a1;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+        .solution-collapsible-content {
+            display: none;
+            border: 1.5px solid #0284c7;
+            border-top: none;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+            padding: 20px 22px;
+            background: #ffffff;
+        }
+        .solution-collapsible-content.is-open {
+            display: block;
+            animation: fadeInSol 0.25s ease-in-out;
+        }
+        @keyframes fadeInSol {
+            from { opacity: 0; transform: translateY(-4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+</style>
 </head>
 <body>
     <div class="problem">
@@ -35,44 +86,218 @@
         <h3>Mã Nguồn Tham Khảo (Cho AI khác)</h3>
         <pre class="code-block"><code>Tính chia miền y >= x^2 và y < x^2</code></pre>
     
+<div class="solution-toggle-wrapper">
+  <button type="button" class="solution-toggle-btn" onclick="toggleSolutionBox(this)">
+    <span><span class="sol-icon">📖</span> <span class="sol-text">Xem lời giải chi tiết (Bấm để mở)</span></span>
+    <span class="sol-arrow">▼</span>
+  </button>
+  <div class="solution-collapsible-content">
 <div style="background:#eaf4fb; border-left:5px solid #2980b9; padding:20px; margin-top:30px; border-radius:6px;">
-  <h3 style="color:#1a5276;">Lời giải – Bài B1.19</h3>
-  <p><strong>Đề bài:</strong> Tính \(\iint_D \sqrt{|x^2-y|}\,dxdy\), D là hình chữ nhật \(-1\le x\le 1\), \(0\le y\le 2\).</p>
+  <h3 style="color:#1a5276;">Lời giải chi tiết – Bài B1.19</h3>
+  <p><strong>Đề bài:</strong> Tính tích phân kép \(I = \iint_D \sqrt{|x^2-y|}\,dxdy\), với miền \(D\) là hình chữ nhật giới hạn bởi \(-1 \le x \le 1\) và \(0 \le y \le 2\).</p>
 
-  <p><strong>Bước 1: Phân vùng theo dấu của \(x^2-y\).</strong><br>
-  \(x^2-y=0 \Leftrightarrow y=x^2\) (parabol).<br>
-  — Vùng \(D_1\): \(y < x^2\) → \(\sqrt{x^2-y}\).<br>
-  — Vùng \(D_2\): \(y > x^2\) → \(\sqrt{y-x^2}\).</p>
+  <div style="background:#fff; border:1px solid #ddd; padding:15px; margin-bottom:15px; border-radius:5px;">
+    <h4 style="color:#2980b9; margin-top:0;">Bước 1: Hiểu ý nghĩa của các ký hiệu và mô tả miền D</h4>
+    <p>
+      - Ký hiệu \(\iint_D\) có nghĩa là chúng ta đang tính tổng một đại lượng (ở đây là biểu thức dưới dấu tích phân) trên toàn bộ một vùng diện tích \(D\) nằm trên mặt phẳng tọa độ Oxy.<br>
+      - Miền \(D\) được định nghĩa bởi hai điều kiện: \(-1 \le x \le 1\) (nghĩa là phần mặt phẳng từ điểm \(x = -1\) đến điểm \(x = 1\) theo chiều ngang) và \(0 \le y \le 2\) (phần mặt phẳng từ \(y = 0\) đến \(y = 2\) theo chiều dọc).<br>
+      - <strong>Hình dáng miền D:</strong> Kết hợp lại, \(D\) là một hình chữ nhật nằm cân xứng qua trục tung (trục \(Oy\)), với chiều rộng bằng 2 (từ \(-1\) đến \(1\)) và chiều cao bằng 2 (từ \(0\) đến \(2\)).
+    </p>
+  </div>
 
-  <p><strong>Bước 2: Lợi dụng tính chẵn của \(x\).</strong></p>
-  \[I = 2\int_0^1\left[\int_0^{x^2}\sqrt{x^2-y}\,dy + \int_{x^2}^2\sqrt{y-x^2}\,dy\right]dx\]
+  <div style="background:#fff; border:1px solid #ddd; padding:15px; margin-bottom:15px; border-radius:5px;">
+    <h4 style="color:#2980b9; margin-top:0;">Bước 2: Phá dấu giá trị tuyệt đối bằng cách chia miền</h4>
+    <p>
+      Biểu thức cần tính tích phân chứa dấu giá trị tuyệt đối \(|x^2 - y|\). Để tính được tích phân, ta <strong>bắt buộc</strong> phải phá bỏ dấu giá trị tuyệt đối này. Vì vậy, ta cần biết khi nào biểu thức bên trong lớn hơn hoặc bằng 0, và khi nào nhỏ hơn 0.
+    </p>
+    <ul>
+      <li>Đầu tiên, ta tìm ranh giới bằng cách cho biểu thức bên trong bằng 0: \(x^2 - y = 0 \Leftrightarrow y = x^2\). Đây là phương trình của một đường cong Parabol ngửa lên trên, đi qua gốc tọa độ \((0,0)\).</li>
+      <li>Đường Parabol này cắt ngang qua hình chữ nhật \(D\), chia nó thành 2 vùng phân biệt:
+        <ul>
+          <li><strong>Vùng \(D_1\) (nằm phía trên Parabol):</strong> là những điểm thỏa mãn \(y > x^2\). Khi đó \(x^2 - y < 0\), nên ta phải đổi dấu khi phá trị tuyệt đối: \(|x^2 - y| = -(x^2 - y) = y - x^2\).</li>
+          <li><strong>Vùng \(D_2\) (nằm phía dưới Parabol):</strong> là những điểm thỏa mãn \(y < x^2\). Khi đó \(x^2 - y > 0\), nên giữ nguyên dấu: \(|x^2 - y| = x^2 - y\).</li>
+        </ul>
+      </li>
+    </ul>
+    <div style="background:#fff3cd; padding:10px; border-radius:5px; border-left:4px solid #ffc107; margin-top:10px;">
+      💡 <em>Mẹo xét dấu siêu tốc:</em> Hãy lấy thử một điểm bất kỳ dễ tính nằm trong hình chữ nhật, ví dụ điểm có tọa độ \((x=0, y=1)\). Thay vào biểu thức ta có \(0^2 - 1 = -1 < 0\). Điểm này nằm phía trên đường đồ thị \(y=x^2\), suy ra toàn bộ vùng phía trên đồ thị sẽ làm cho biểu thức mang dấu âm!
+    </div>
+  </div>
 
-  <p>Tích phân con 1 (đặt \(u=x^2-y\), \(du=-dy\)):</p>
-  \[\int_0^{x^2}\sqrt{x^2-y}\,dy = \left[-\frac{2}{3}(x^2-y)^{3/2}\right]_0^{x^2} = \frac{2}{3}x^3\]
+  <div style="background:#fff; border:1px solid #ddd; padding:15px; margin-bottom:15px; border-radius:5px;">
+    <h4 style="color:#2980b9; margin-top:0;">Bước 3: Tận dụng tính đối xứng để tính toán nhanh gấp đôi</h4>
+    <p>
+      Hãy quan sát kỹ: Hàm số \(f(x, y) = \sqrt{|x^2 - y|}\) là một hàm <strong>chẵn</strong> đối với biến \(x\). Nghĩa là, nếu ta thay \(x\) bằng \(-x\), thì biểu thức hoàn toàn không thay đổi (vì \((-x)^2 = x^2\)). <br>
+      Đồng thời, miền \(D\) (chạy từ \(x = -1\) đến \(x = 1\)) cũng hoàn toàn đối xứng hai bên qua trục tung (trục \(Oy\)).<br>
+      Nhờ hai điều này, ta chỉ cần tính tích phân trên nửa bên phải của hình chữ nhật (từ \(x = 0\) đến \(x = 1\)), sau đó <strong>nhân đôi kết quả lên</strong>. Điều này giúp ta né được việc phải thay các số âm phức tạp vào tính toán, hạn chế sai sót.
+    </p>
+    <p>Lúc này, ở nửa bên phải (từ \(x=0\) đến \(x=1\)), với một vị trí \(x\) cố định:</p>
+    <ol>
+      <li>Biến \(y\) sẽ chạy từ mép dưới là \(y = 0\) lên đến ranh giới parabol \(y = x^2\) (đây chính là vùng \(D_2\), nằm dưới Parabol). Lúc này biểu thức dưới căn là \((x^2 - y)\).</li>
+      <li>Biến \(y\) tiếp tục chạy từ ranh giới parabol \(y = x^2\) lên đến mép trên cùng là \(y = 2\) (đây là vùng \(D_1\), nằm trên Parabol). Lúc này biểu thức dưới căn là \((y - x^2)\).</li>
+    </ol>
+    <p>Ta viết lại bài toán bằng công thức tích phân (viết tách thành 2 phần nhỏ, tính theo biến \(y\) trước, theo biến \(x\) sau):</p>
+    \[I = 2 \int_0^1 \left( \int_0^{x^2} \sqrt{x^2 - y} \,dy + \int_{x^2}^2 \sqrt{y - x^2} \,dy \right) dx\]
+  </div>
 
-  <p>Tích phân con 2 (đặt \(u=y-x^2\)):</p>
-  \[\int_{x^2}^2\sqrt{y-x^2}\,dy = \left[\frac{2}{3}(y-x^2)^{3/2}\right]_{x^2}^2 = \frac{2}{3}(2-x^2)^{3/2}\]
+  <div style="background:#fff; border:1px solid #ddd; padding:15px; margin-bottom:15px; border-radius:5px;">
+    <h4 style="color:#2980b9; margin-top:0;">Bước 4: Tính các cụm tích phân bên trong (theo biến y)</h4>
+    <p>Bây giờ ta sẽ xử lý từng tích phân nhỏ theo biến \(y\). Ở bước này, hãy nhớ kỹ: ta xem \(x\) như là một con số cố định (hằng số).</p>
+    
+    <p><strong>👉 Cụm 1: Tính \(\int_0^{x^2} \sqrt{x^2 - y} \,dy\)</strong></p>
+    <p>
+      Ta dùng phương pháp <strong>đổi biến số</strong>: Đặt \(u = x^2 - y\).<br>
+      Lấy đạo hàm hai vế theo biến \(y\) (vì \(x\) là hằng số nên \(x^2\) đạo hàm bằng \(0\)), ta được \(du = -dy\), suy ra \(dy = -du\).<br>
+      Tiếp theo là <strong>đổi cận</strong>:<br>
+      - Cận dưới: Khi \(y = 0\) thì \(u = x^2 - 0 = x^2\).<br>
+      - Cận trên: Khi \(y = x^2\) thì \(u = x^2 - x^2 = 0\).
+    </p>
+    <p>Ráp tất cả vào công thức tích phân, ta có:</p>
+    \[\int_{x^2}^0 \sqrt{u} \,(-du)\]
+    <p>Dấu trừ \((-)\) ở vi phân \(du\) rất hữu ích, ta dùng nó để lật ngược 2 cận lại cho đúng chiều từ nhỏ đến lớn (tức là từ \(0\) đến \(x^2\)):</p>
+    \[= \int_0^{x^2} u^{1/2} \,du\]
+    <p>Sử dụng công thức nguyên hàm cơ bản \(\int u^n du = \frac{u^{n+1}}{n+1}\), với \(n = 1/2\):</p>
+    \[= \left[ \frac{u^{3/2}}{3/2} \right]_0^{x^2}\]
+    \[= \frac{2}{3} \left[ u^{3/2} \right]_0^{x^2}\]
+    <p>Thay cận trên và cận dưới vào:</p>
+    \[= \frac{2}{3} \left( (x^2)^{3/2} - 0^{3/2} \right)\]
+    \[= \frac{2}{3} (x^3 - 0)\]
+    \[= \frac{2}{3} x^3\]
 
-  \[I = 2\int_0^1\left[\frac{2}{3}x^3+\frac{2}{3}(2-x^2)^{3/2}\right]dx\]
-  \[= \frac{4}{3}\int_0^1 x^3\,dx + \frac{4}{3}\int_0^1(2-x^2)^{3/2}\,dx\]
+    <p><strong>👉 Cụm 2: Tính \(\int_{x^2}^2 \sqrt{y - x^2} \,dy\)</strong></p>
+    <p>
+      Làm hoàn toàn tương tự, ta đặt \(v = y - x^2\).<br>
+      Lấy đạo hàm theo biến \(y\), ta có \(dv = dy\) (không có dấu trừ vì \(y\) mang dấu dương).<br>
+      Đổi cận:<br>
+      - Cận dưới: Khi \(y = x^2\) thì \(v = x^2 - x^2 = 0\).<br>
+      - Cận trên: Khi \(y = 2\) thì \(v = 2 - x^2\).
+    </p>
+    <p>Ráp vào tích phân, ta được:</p>
+    \[= \int_0^{2-x^2} \sqrt{v} \,dv\]
+    \[= \int_0^{2-x^2} v^{1/2} \,dv\]
+    <p>Lấy nguyên hàm như trên:</p>
+    \[= \left[ \frac{v^{3/2}}{3/2} \right]_0^{2-x^2}\]
+    \[= \frac{2}{3} \left[ v^{3/2} \right]_0^{2-x^2}\]
+    <p>Thay cận vào:</p>
+    \[= \frac{2}{3} \left( (2 - x^2)^{3/2} - 0^{3/2} \right)\]
+    \[= \frac{2}{3} (2 - x^2)^{3/2}\]
+  </div>
 
-  <p>Phần 1: \(\frac{4}{3}\cdot\frac{1}{4}=\frac{1}{3}\).</p>
+  <div style="background:#fff; border:1px solid #ddd; padding:15px; margin-bottom:15px; border-radius:5px;">
+    <h4 style="color:#2980b9; margin-top:0;">Bước 5: Giải quyết tích phân ngoài cùng (theo biến x)</h4>
+    <p>Đến đây, ta ghép 2 kết quả vừa tính xong trở lại vào biểu thức tích phân lớn ban đầu:</p>
+    \[I = 2 \int_0^1 \left( \frac{2}{3} x^3 + \frac{2}{3} (2 - x^2)^{3/2} \right) dx\]
+    <p>Ta nhân số \(2\) ở ngoài vào trong ngoặc, đồng thời rút luôn phân số \(\frac{4}{3}\) làm nhân tử chung đưa ra ngoài cho dễ nhìn:</p>
+    \[I = \frac{4}{3} \int_0^1 x^3 \,dx + \frac{4}{3} \int_0^1 (2 - x^2)^{3/2} \,dx\]
+    <p>Để cho đơn giản, ta sẽ tính riêng biệt 2 phần này rồi cộng lại sau.</p>
+    
+    <p><strong>🔹 Phần 1: \(\frac{4}{3} \int_0^1 x^3 \,dx\)</strong></p>
+    <p>Đây là bài toán nguyên hàm cơ bản (áp dụng \(\int x^n dx = \frac{x^{n+1}}{n+1}\)):</p>
+    \[= \frac{4}{3} \left[ \frac{x^4}{4} \right]_0^1\]
+    <p>Thay số vào:</p>
+    \[= \frac{4}{3} \left( \frac{1^4}{4} - \frac{0^4}{4} \right)\]
+    \[= \frac{4}{3} \cdot \frac{1}{4}\]
+    \[= \frac{1}{3}\]
 
-  <p>Phần 2: đặt \(x=\sqrt{2}\sin t\), \(dx=\sqrt{2}\cos t\,dt\), khi \(x=0\to t=0\), \(x=1\to t=\arcsin(1/\sqrt{2})=\pi/4\):<br>
-  \((2-x^2)^{3/2} = (2\cos^2 t)^{3/2} = 2\sqrt{2}\cos^3 t\)</p>
-  \[\int_0^1(2-x^2)^{3/2}dx = \int_0^{\pi/4}2\sqrt{2}\cos^3 t\cdot\sqrt{2}\cos t\,dt = 4\int_0^{\pi/4}\cos^4 t\,dt\]
+    <p><strong>🔹 Phần 2: \(\frac{4}{3} \int_0^1 (2 - x^2)^{3/2} \,dx\)</strong></p>
+    <p>
+      Phần này nhìn hơi đáng sợ vì có cụm dạng căn bậc hai của \((a^2 - x^2)\) với \(a = \sqrt{2}\). Cách tốt nhất để xử lý là dùng <strong>phương pháp đổi biến lượng giác</strong>.<br>
+      Ta đặt \(x = \sqrt{2}\sin t\). (Tại sao lại phải có \(\sqrt{2}\)? Vì khi ta bình phương lên, ta sẽ được \(x^2 = 2\sin^2 t\). Lúc đó cụm \(2 - x^2 = 2 - 2\sin^2 t\), ta sẽ rút được số \(2\) ra ngoài làm nhân tử chung).<br>
+      Lấy vi phân (đạo hàm 2 vế): \(dx = \sqrt{2}\cos t \,dt\).<br>
+      Tiến hành đổi cận cho biến mới \(t\):<br>
+      - Cận dưới: Khi \(x = 0 \Rightarrow \sqrt{2}\sin t = 0 \Rightarrow \sin t = 0 \Rightarrow t = 0\).<br>
+      - Cận trên: Khi \(x = 1 \Rightarrow \sqrt{2}\sin t = 1 \Rightarrow \sin t = \frac{1}{\sqrt{2}} \Rightarrow t = \frac{\pi}{4}\) (đây chính là góc 45 độ).
+    </p>
+    <p>Bây giờ, ta cẩn thận biến đổi cụm \((2 - x^2)^{3/2}\) theo biến mới \(t\):</p>
+    \[(2 - x^2)^{3/2} = (2 - 2\sin^2 t)^{3/2}\]
+    <p>Rút số 2 ra ngoài:</p>
+    \[= \left( 2(1 - \sin^2 t) \right)^{3/2}\]
+    <p>Áp dụng công thức lượng giác nền tảng \(1 - \sin^2 t = \cos^2 t\):</p>
+    \[= (2\cos^2 t)^{3/2}\]
+    <p>Tách mũ ra cho từng thành phần:</p>
+    \[= 2^{3/2} \cdot (\cos^2 t)^{3/2}\]
+    \[= 2\sqrt{2} \cdot \cos^3 t\]
+    
+    <p>Giờ ta ráp hết vào tích phân, và <strong>nhớ đừng quên</strong> cái đuôi \(dx\) nay đã biến thành \(\sqrt{2}\cos t \,dt\):</p>
+    \[\int_0^1 (2 - x^2)^{3/2} \,dx = \int_0^{\pi/4} (2\sqrt{2}\cos^3 t) \cdot (\sqrt{2}\cos t) \,dt\]
+    <p>Nhân các hệ số là số với nhau: \(2\sqrt{2} \cdot \sqrt{2} = 2 \cdot 2 = 4\).<br>
+    Nhân các hàm lượng giác với nhau: \(\cos^3 t \cdot \cos t = \cos^4 t\). Ta được:</p>
+    \[= 4 \int_0^{\pi/4} \cos^4 t \,dt\]
 
-  <p>Dùng công thức: \(\cos^4 t = \frac{3+4\cos 2t+\cos 4t}{8}\):</p>
-  \[4\int_0^{\pi/4}\cos^4 t\,dt = 4\left[\frac{3t}{8}+\frac{\sin 2t}{4}+\frac{\sin 4t}{32}\right]_0^{\pi/4}\]
-  \[= 4\left(\frac{3\pi}{32}+\frac{1}{4}+0\right) = \frac{3\pi}{8}+1\]
+    <p>Để tính tích phân của \(\cos^4 t\), ta phải dùng <strong>công thức hạ bậc</strong> (giảm số mũ xuống để lấy nguyên hàm).<br>
+    Công thức hạ bậc cho cosin bậc 4 là: \(\cos^4 t = \frac{3 + 4\cos 2t + \cos 4t}{8}\).<br>
+    Thay vào tích phân ta có:</p>
+    \[= 4 \int_0^{\pi/4} \frac{3 + 4\cos 2t + \cos 4t}{8} \,dt\]
+    <p>Rút gọn số \(4\) ở ngoài với số \(8\) ở dưới mẫu số:</p>
+    \[= \frac{1}{2} \int_0^{\pi/4} (3 + 4\cos 2t + \cos 4t) \,dt\]
+    <p>Đến đây, ta lấy nguyên hàm từng thành phần một (nhớ quy tắc \(\int \cos(at)dt = \frac{\sin(at)}{a}\)):</p>
+    \[= \frac{1}{2} \left[ 3t + 4 \cdot \frac{\sin 2t}{2} + \frac{\sin 4t}{4} \right]_0^{\pi/4}\]
+    \[= \frac{1}{2} \left[ 3t + 2\sin 2t + \frac{\sin 4t}{4} \right]_0^{\pi/4}\]
+    <p>Bây giờ ta thay cận trên \(t = \frac{\pi}{4}\) vào toàn bộ biểu thức trong ngoặc vuông (cận dưới \(t=0\) thay vào toàn bằng 0 nên ta bỏ qua):</p>
+    \[= \frac{1}{2} \left( 3 \cdot \frac{\pi}{4} + 2\sin\left(2 \cdot \frac{\pi}{4}\right) + \frac{\sin\left(4 \cdot \frac{\pi}{4}\right)}{4} \right)\]
+    \[= \frac{1}{2} \left( \frac{3\pi}{4} + 2\sin\left(\frac{\pi}{2}\right) + \frac{\sin(\pi)}{4} \right)\]
+    <p>Biết rằng \(\sin(\frac{\pi}{2}) = 1\) và \(\sin(\pi) = 0\), ta điền số vào:</p>
+    \[= \frac{1}{2} \left( \frac{3\pi}{4} + 2(1) + 0 \right)\]
+    \[= \frac{1}{2} \left( \frac{3\pi}{4} + 2 \right)\]
+    <p>Nhân phân phối \(\frac{1}{2}\) vào trong ngoặc:</p>
+    \[= \frac{3\pi}{8} + 1\]
+    <p>Cuối cùng, đừng quên nhân lại số \(\frac{4}{3}\) ban đầu của Phần 2:</p>
+    \[\text{Giá trị phần 2} = \frac{4}{3} \left( \frac{3\pi}{8} + 1 \right)\]
+    \[= \frac{4}{3} \cdot \frac{3\pi}{8} + \frac{4}{3} \cdot 1\]
+    \[= \frac{\pi}{2} + \frac{4}{3}\]
+  </div>
 
-  \[I = \frac{1}{3}+\frac{4}{3}\left(\frac{3\pi}{8}+1\right) = \frac{1}{3}+\frac{\pi}{2}+\frac{4}{3} = \frac{5}{3}+\frac{\pi}{2}\]
-
-  <p>Số thập phân: \(\frac{5}{3}+\frac{\pi}{2} \approx 1.667+1.571 = 3.238\).</p>
-
-  <p style="color:#1a5276; font-weight:bold;">\(\boxed{I = \dfrac{5}{3}+\dfrac{\pi}{2} \approx 3.238}\) ✓ Khớp với đáp án \(5/3+\pi/2\).</p>
+  <div style="background:#fff; border:1px solid #ddd; padding:15px; border-radius:5px;">
+    <h4 style="color:#2980b9; margin-top:0;">Bước 6: Kết luận và kiểm tra</h4>
+    <p>Ta chỉ việc cộng kết quả của hai phần lại để ra đáp án cuối cùng:</p>
+    \[I = (\text{Kết quả phần 1}) + (\text{Kết quả phần 2})\]
+    \[I = \frac{1}{3} + \left( \frac{\pi}{2} + \frac{4}{3} \right)\]
+    <p>Gộp hai phân số lại với nhau: \(\frac{1}{3} + \frac{4}{3} = \frac{5}{3}\).</p>
+    \[I = \frac{5}{3} + \frac{\pi}{2}\]
+    <p>Nếu ta bấm máy tính đổi ra số thập phân để dễ hình dung độ lớn:</p>
+    \[\frac{5}{3} \approx 1.6667\]
+    \[\frac{\pi}{2} \approx 1.5708\]
+    \[I \approx 1.6667 + 1.5708 = 3.2375\]
+    
+    <div style="background:#e8f8f5; border-left:4px solid #1abc9c; padding:10px; margin-top:15px; border-radius:4px;">
+      <strong>&#10004; Kiểm tra và ý nghĩa bài toán:</strong><br>
+      Việc tính tích phân kép này thực chất là việc tìm "thể tích" của một hình khối trong không gian. Hình khối này có mặt đáy là hình chữ nhật \(D\), và cái "mái nhà" che bên trên được tạo bởi mặt cong \(z = \sqrt{|x^2-y|}\). Do chiều cao \(z\) luôn là một số không âm (vì có dấu căn bậc hai), nên thể tích tìm được bắt buộc phải là một số dương. Kết quả \(3.2375\) là một số dương hợp lý và khớp hoàn hảo với đáp án tham khảo của đề bài.
+    </div>
+    
+    <p style="text-align:center; font-size:24px; color:#1a5276; margin-top:20px; padding:15px; border:2px dashed #1a5276; display:inline-block; border-radius:8px;">
+      <strong>Kết luận:</strong> \(\boxed{I = \frac{5}{3} + \frac{\pi}{2} \approx 3.238}\)
+    </p>
+  </div>
+</div>
+  </div>
 </div>
 
+
 </div>
+<script>
+    function toggleSolutionBox(btn) {
+        const content = btn.nextElementSibling;
+        const isOpen = content.classList.contains('is-open');
+        const icon = btn.querySelector('.sol-icon');
+        const text = btn.querySelector('.sol-text');
+        const arrow = btn.querySelector('.sol-arrow');
+        if (isOpen) {
+            content.classList.remove('is-open');
+            btn.classList.remove('is-open');
+            if (icon) icon.textContent = '📖';
+            if (text) text.textContent = 'Xem lời giải chi tiết (Bấm để mở)';
+            if (arrow) arrow.textContent = '▼';
+        } else {
+            content.classList.add('is-open');
+            btn.classList.add('is-open');
+            if (icon) icon.textContent = '🙈';
+            if (text) text.textContent = 'Thu gọn lời giải';
+            if (arrow) arrow.textContent = '▲';
+            if (window.MathJax && MathJax.typesetPromise) {
+                MathJax.typesetPromise([content]).catch(err => console.log(err));
+            }
+        }
+    }
+</script>
 </body>
 </html>

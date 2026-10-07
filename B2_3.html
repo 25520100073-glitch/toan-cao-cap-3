@@ -20,7 +20,58 @@
         .problem { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 40px; }
         .code-block { background: #282c34; color: #abb2bf; padding: 15px; border-radius: 5px; overflow-x: auto; font-family: monospace; font-size: 14px; }
         .plot-container { display: flex; justify-content: center; }
-    </style>
+    
+        /* Nút Ẩn / Hiện Lời Giải Chi Tiết */
+        .solution-toggle-wrapper {
+            margin: 28px 0 16px 0;
+        }
+        .solution-toggle-btn {
+            width: 100%;
+            background: #f8fafc;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 13px 20px;
+            font-size: 15px;
+            font-weight: 700;
+            color: #0284c7;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            font-family: inherit;
+        }
+        .solution-toggle-btn:hover {
+            background: #f0f9ff;
+            border-color: #38bdf8;
+            color: #0369a1;
+        }
+        .solution-toggle-btn.is-open {
+            background: #e0f2fe;
+            border-color: #0284c7;
+            color: #0369a1;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+        .solution-collapsible-content {
+            display: none;
+            border: 1.5px solid #0284c7;
+            border-top: none;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+            padding: 20px 22px;
+            background: #ffffff;
+        }
+        .solution-collapsible-content.is-open {
+            display: block;
+            animation: fadeInSol 0.25s ease-in-out;
+        }
+        @keyframes fadeInSol {
+            from { opacity: 0; transform: translateY(-4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+</style>
 </head>
 <body>
     <div class="problem">
@@ -35,19 +86,104 @@
         <h3>Mã Nguồn Tham Khảo (Cho AI khác)</h3>
         <pre class="code-block"><code></code></pre>
     
+<div class="solution-toggle-wrapper">
+  <button type="button" class="solution-toggle-btn" onclick="toggleSolutionBox(this)">
+    <span><span class="sol-icon">📖</span> <span class="sol-text">Xem lời giải chi tiết (Bấm để mở)</span></span>
+    <span class="sol-arrow">▼</span>
+  </button>
+  <div class="solution-collapsible-content">
 <div style="background:#eaf4fb; border-left:5px solid #2980b9; padding:20px; margin-top:30px; border-radius:6px;">
-  <h3 style="color:#1a5276;">Lời giải – Bài B2.3</h3>
-  <p><strong>Đề bài:</strong> Tính \(\iint_D y^2\,dxdy\), với \(D\): \(x^2+y^2 \le 2,\; x \ge 0\).</p>
-  <p><strong>Bước 1: Chuyển sang tọa độ cực.</strong><br>
-  \(x = r\cos\theta\), \(y = r\sin\theta\).<br>
-  Miền \(D\) là nửa hình tròn bên phải trục tung: \(0 \le r \le \sqrt{2}\), \(-\frac{\pi}{2} \le \theta \le \frac{\pi}{2}\).</p>
-  <p><strong>Bước 2: Tính tích phân.</strong></p>
-  \[I = \int_{-\pi/2}^{\pi/2} \int_0^{\sqrt{2}} (r\sin\theta)^2\,r\,dr\,d\theta = \int_{-\pi/2}^{\pi/2} \sin^2\theta\,d\theta \cdot \int_0^{\sqrt{2}} r^3\,dr\]
-  \[= \left[\frac{\theta}{2} - \frac{\sin 2\theta}{4}\right]_{-\pi/2}^{\pi/2} \cdot \left[\frac{r^4}{4}\right]_0^{\sqrt{2}}\]
-  \[= \left(\frac{\pi}{4} - \left(-\frac{\pi}{4}\right)\right) \cdot \frac{4}{4} = \frac{\pi}{2} \cdot 1 = \frac{\pi}{2}\]
-  <p style="color:#1a5276; font-weight:bold;">\(\boxed{I = \dfrac{\pi}{2}}\) ✓ Khớp với đáp án.</p>
+  <h3 style="color:#1a5276;">Lời giải chi tiết – Bài B2.3</h3>
+  <p><strong>Đề bài:</strong> Tính tích phân kép \( \iint_D y^2 \,dxdy \), với miền \( D \): \( x^2+y^2 \le 2 \), \( x \ge 0 \).</p>
+  
+  <h4>Bước 1: Phân tích miền D để hình dung bức tranh</h4>
+  <ul>
+    <li>Biểu thức \( x^2+y^2 \le 2 \) mô tả một hình tròn đặc, có tâm tại \( (0,0) \) và bán kính là \( R = \sqrt{2} \) (vì \( R^2 = 2 \)).</li>
+    <li>Điều kiện \( x \ge 0 \) nghĩa là ta chỉ được phép lấy phần có tọa độ \( x \) dương. Tức là ta dùng con dao dọc theo trục tung (trục y) cắt đôi hình tròn, và lấy nửa hình tròn nằm bên phải.</li>
+  </ul>
+  <p><em>Mô tả hình dáng miền D:</em> Là một chiếc bánh hình bán nguyệt (nửa hình tròn), nằm hoàn toàn ở phía bên phải của trục tung.</p>
+
+  
+  <h4>Bước 2: Thay áo mới bằng tọa độ cực</h4>
+  <p>Để đổi qua tọa độ cực, ta gọi:</p>
+  <p>
+  \( x = r \cos\theta \)<br>
+  \( y = r \sin\theta \)
+  </p>
+  <p>Nhớ thay thế bộ đếm diện tích \( dxdy \) bằng \( r \,dr \,d\theta \) (trong đó \( r \) là hệ số bù góc hay còn gọi là Jacobian).</p>
+  
+  <p><strong>Bắt đầu tìm điểm đầu và điểm cuối (cận) cho \( r \) và \(\theta\):</strong></p>
+  <ol>
+    <li>Với \( r \): Tính từ tâm ra tới bờ ngoài của hình tròn, bán kính đi từ \( 0 \) đến lớn nhất là \( \sqrt{2} \). Do đó: \( 0 \le r \le \sqrt{2} \).</li>
+    <li>Với \( \theta \): Hình bán nguyệt nằm bên phải trục dọc, nghĩa là quét từ điểm thấp nhất dưới cùng (góc \( -90^\circ \) hay \( -\frac{\pi}{2} \)) lên điểm cao nhất trên đỉnh (góc \( +90^\circ \) hay \( \frac{\pi}{2} \)). Do đó: \( -\frac{\pi}{2} \le \theta \le \frac{\pi}{2} \).</li>
+  </ol>
+
+  <h4>Bước 3: Thực hiện tính toán đại số</h4>
+  <p>Thay hàm số \( y^2 \) bằng tọa độ cực:</p>
+  \[ y^2 = (r \sin\theta)^2 = r^2 \sin^2\theta \]
+  
+  <p>Gắn tất cả vào tích phân đôi, ta được:</p>
+  \[ I = \int_{-\pi/2}^{\pi/2} \left( \int_0^{\sqrt{2}} (r^2 \sin^2\theta) \cdot r \,dr \right) d\theta \]
+  
+  <p>Nhân gộp chữ r lại với nhau (\( r^2 \cdot r = r^3 \)) và tách rời thành 2 cụm độc lập (do giới hạn đều là các con số):</p>
+  \[ I = \left( \int_{-\pi/2}^{\pi/2} \sin^2\theta \,d\theta \right) \cdot \left( \int_0^{\sqrt{2}} r^3 \,dr \right) \]
+
+  <p><strong>Tính cụm bán kính \( r \):</strong></p>
+  <p><em>Nhắc quy tắc:</em> Nguyên hàm của \( r^3 \) là \( \frac{r^4}{4} \).</p>
+  \[ \int_0^{\sqrt{2}} r^3 \,dr = \left[ \frac{r^4}{4} \right]_0^{\sqrt{2}} \]
+  \[ = \frac{(\sqrt{2})^4}{4} - \frac{0^4}{4} \]
+  \[ = \frac{4}{4} - 0 = 1 \]
+
+  <p><strong>Tính cụm góc \( \theta \):</strong></p>
+  <p><em>Nhắc quy tắc hạ bậc:</em> Muốn giải quyết mũ 2 của sin, ta dùng công thức biến đổi lượng giác hạ bậc: \( \sin^2\theta = \frac{1 - \cos(2\theta)}{2} = \frac{1}{2} - \frac{\cos(2\theta)}{2} \).</p>
+  <p>Nguyên hàm của \( \frac{1}{2} \) là \( \frac{\theta}{2} \), nguyên hàm của \( \cos(2\theta) \) là \( \frac{\sin(2\theta)}{2} \).</p>
+  
+  \[ \int_{-\pi/2}^{\pi/2} \sin^2\theta \,d\theta = \left[ \frac{\theta}{2} - \frac{\sin(2\theta)}{4} \right]_{-\pi/2}^{\pi/2} \]
+  
+  <p>Thế giới hạn trên là \( \frac{\pi}{2} \) vào:</p>
+  \[ \frac{\pi/2}{2} - \frac{\sin(\pi)}{4} = \frac{\pi}{4} - 0 = \frac{\pi}{4} \]
+  
+  <p>Thế giới hạn dưới là \( -\frac{\pi}{2} \) vào:</p>
+  \[ \frac{-\pi/2}{2} - \frac{\sin(-\pi)}{4} = -\frac{\pi}{4} - 0 = -\frac{\pi}{4} \]
+  
+  <p>Trừ hai phần cho nhau (trên trừ dưới):</p>
+  \[ \frac{\pi}{4} - \left( -\frac{\pi}{4} \right) = \frac{\pi}{4} + \frac{\pi}{4} = \frac{2\pi}{4} = \frac{\pi}{2} \]
+
+  <p><strong>Gộp kết quả:</strong></p>
+  \[ I = 1 \cdot \frac{\pi}{2} = \frac{\pi}{2} \]
+
+  <h4>Bước 4: Kết luận</h4>
+  <p style="color:#1a5276; font-weight:bold; font-size:18px;">\(\boxed{I = \dfrac{\pi}{2}}\)</p>
+  <p><strong>Ý nghĩa bài toán:</strong> Bài toán nhắc chúng ta rằng diện tích hình tròn có tính đối xứng rất cao, và thủ thuật hạ bậc lượng giác tuy là kiến thức lớp 10, nhưng luôn là "chìa khóa vàng" giúp phá giải những biểu thức tích phân chứa bình phương của lượng giác một cách chính xác nhất.</p>
+</div>
+  </div>
 </div>
 
 </div>
+<script>
+    function toggleSolutionBox(btn) {
+        const content = btn.nextElementSibling;
+        const isOpen = content.classList.contains('is-open');
+        const icon = btn.querySelector('.sol-icon');
+        const text = btn.querySelector('.sol-text');
+        const arrow = btn.querySelector('.sol-arrow');
+        if (isOpen) {
+            content.classList.remove('is-open');
+            btn.classList.remove('is-open');
+            if (icon) icon.textContent = '📖';
+            if (text) text.textContent = 'Xem lời giải chi tiết (Bấm để mở)';
+            if (arrow) arrow.textContent = '▼';
+        } else {
+            content.classList.add('is-open');
+            btn.classList.add('is-open');
+            if (icon) icon.textContent = '🙈';
+            if (text) text.textContent = 'Thu gọn lời giải';
+            if (arrow) arrow.textContent = '▲';
+            if (window.MathJax && MathJax.typesetPromise) {
+                MathJax.typesetPromise([content]).catch(err => console.log(err));
+            }
+        }
+    }
+</script>
 </body>
 </html>

@@ -20,7 +20,58 @@
         .problem { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 40px; }
         .code-block { background: #282c34; color: #abb2bf; padding: 15px; border-radius: 5px; overflow-x: auto; font-family: monospace; font-size: 14px; }
         .plot-container { display: flex; justify-content: center; }
-    </style>
+    
+        /* Nút Ẩn / Hiện Lời Giải Chi Tiết */
+        .solution-toggle-wrapper {
+            margin: 28px 0 16px 0;
+        }
+        .solution-toggle-btn {
+            width: 100%;
+            background: #f8fafc;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 13px 20px;
+            font-size: 15px;
+            font-weight: 700;
+            color: #0284c7;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            font-family: inherit;
+        }
+        .solution-toggle-btn:hover {
+            background: #f0f9ff;
+            border-color: #38bdf8;
+            color: #0369a1;
+        }
+        .solution-toggle-btn.is-open {
+            background: #e0f2fe;
+            border-color: #0284c7;
+            color: #0369a1;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+        .solution-collapsible-content {
+            display: none;
+            border: 1.5px solid #0284c7;
+            border-top: none;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+            padding: 20px 22px;
+            background: #ffffff;
+        }
+        .solution-collapsible-content.is-open {
+            display: block;
+            animation: fadeInSol 0.25s ease-in-out;
+        }
+        @keyframes fadeInSol {
+            from { opacity: 0; transform: translateY(-4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+</style>
 </head>
 <body>
     <div class="problem">
@@ -35,17 +86,95 @@
         <h3>Mã Nguồn Tham Khảo (Cho AI khác)</h3>
         <pre class="code-block"><code></code></pre>
     
+<div class="solution-toggle-wrapper">
+  <button type="button" class="solution-toggle-btn" onclick="toggleSolutionBox(this)">
+    <span><span class="sol-icon">📖</span> <span class="sol-text">Xem lời giải chi tiết (Bấm để mở)</span></span>
+    <span class="sol-arrow">▼</span>
+  </button>
+  <div class="solution-collapsible-content">
 <div style="background:#eaf4fb; border-left:5px solid #2980b9; padding:20px; margin-top:30px; border-radius:6px;">
-  <h3 style="color:#1a5276;">Lời giải – Bài B2.7</h3>
-  <p><strong>Đề bài:</strong> Tính \(\iint_D (\sqrt{x^2+y^2}+1)\,dxdy\), \(D\) là hình tròn đơn vị \(x^2+y^2 \le 1\).</p>
-  <p><strong>Bước 1: Chuyển sang tọa độ cực.</strong><br>
-  Miền \(D\): \(0 \le r \le 1\) và \(0 \le \theta \le 2\pi\).</p>
-  <p><strong>Bước 2: Tính tích phân.</strong></p>
-  \[I = \int_0^{2\pi} \int_0^1 (r+1)\,r\,dr\,d\theta = \int_0^{2\pi} d\theta \int_0^1 (r^2+r)\,dr\]
-  \[= 2\pi \left[\frac{r^3}{3} + \frac{r^2}{2}\right]_0^1 = 2\pi \left(\frac{1}{3} + \frac{1}{2}\right) = 2\pi \cdot \frac{5}{6} = \frac{5\pi}{3}\]
-  <p style="color:#1a5276; font-weight:bold;">\(\boxed{I = \dfrac{5\pi}{3}}\) ✓ Khớp với đáp án.</p>
+  <h3 style="color:#1a5276;">Lời giải chi tiết – Bài B2.7</h3>
+  <p><strong>Đề bài:</strong> Tính tích phân \( \iint_D (\sqrt{x^2+y^2}+1) \,dxdy \), với \( D \) là hình tròn đơn vị có phương trình \( x^2+y^2 \le 1 \).</p>
+  
+  <h4>Bước 1: Chẩn đoán nhanh</h4>
+  <ul>
+    <li>Biểu thức \( \sqrt{x^2+y^2} \) nhìn thoạt qua có vẻ rắc rối vì chứa dấu căn.</li>
+    <li>Miền \( D \) là "hình tròn đơn vị", nghĩa là hình tròn có tâm ngay tại gốc \( O(0,0) \) và bán kính nhỏ gọn bằng \( 1 \).</li>
+    <li>Mối liên hệ giữa cái khó trong hàm số và hình dáng tròn trịa của miền D gợi ý ta lập tức biến hình thành tọa độ cực để xóa sổ dấu căn.</li>
+  </ul>
+  <p><em>Mô tả hình dáng:</em> Miền \( D \) là hình đĩa bay hoàn hảo, quét đủ một vòng tròn 360 độ quanh gốc tọa độ.</p>
+
+  
+  <h4>Bước 2: Sử dụng công cụ tọa độ cực</h4>
+  <p>Cứ như thường lệ, ta hô khẩu quyết: \( x = r \cos\theta \), \( y = r \sin\theta \) và \( dxdy = r \,dr \,d\theta \).</p>
+  
+  <p><strong>Kiểm soát biên giới cho \( r \) và \(\theta\):</strong></p>
+  <ol>
+    <li>Hình tròn bán kính 1 tâm gốc tọa độ nên khoảng cách từ tâm kéo dãn ra rìa là: \( 0 \le r \le 1 \).</li>
+    <li>Vì vẽ kín một vòng mặt trăng tròn trĩnh, góc phải quay đủ một chu kỳ trọn vẹn: \( 0 \le \theta \le 2\pi \).</li>
+  </ol>
+
+  <h4>Bước 3: Lắp ráp vào máy tính (tích phân)</h4>
+  <p>Phần ruột của biểu thức chứa \( \sqrt{x^2+y^2} + 1 \). Mà \( \sqrt{x^2+y^2} = r \), nên biểu thức trở thành \( (r + 1) \).</p>
+  <p>Ghép cái ruột này với định thức Jacobi \( r \) và đuôi \( dr \,d\theta \):</p>
+  \[ I = \int_0^{2\pi} \left( \int_0^1 (r + 1) \cdot r \,dr \right) d\theta \]
+  
+  <p>Nhân tung cái ngoặc tròn bên trong ra:</p>
+  \[ (r + 1) \cdot r = r^2 + r \]
+  
+  <p>Vì các con số biên (cận) đều là cố định tĩnh, ta có thể tách mảng \(\theta\) và mảng \(r\) thành hai cục riêng rẽ nhân nhau cho sạch sẽ:</p>
+  \[ I = \left( \int_0^{2\pi} 1 \,d\theta \right) \cdot \left( \int_0^1 (r^2 + r) \,dr \right) \]
+
+  <p><em>Giải quyết cục góc \( \theta \) trước (rất nhẹ nhàng):</em></p>
+  <p>Nguyên hàm của số 1 là \(\theta\).</p>
+  \[ \int_0^{2\pi} 1 \,d\theta = \left[ \theta \right]_0^{2\pi} = 2\pi - 0 = 2\pi \]
+
+  <p><em>Xử lý cục bán kính \( r \):</em></p>
+  <p>Nguyên hàm của \( r^2 \) là \( \frac{r^3}{3} \). Nguyên hàm của \( r \) là \( \frac{r^2}{2} \).</p>
+  \[ \int_0^1 (r^2 + r) \,dr = \left[ \frac{r^3}{3} + \frac{r^2}{2} \right]_0^1 \]
+  <p>Chỗ nào có \(r\), thế số 1 vào phần cận trên; thế số 0 vào phần cận dưới (rồi phần dưới mất trắng do bằng 0):</p>
+  \[ = \left( \frac{1^3}{3} + \frac{1^2}{2} \right) - 0 \]
+  \[ = \frac{1}{3} + \frac{1}{2} \]
+  <p>Quy đồng mẫu số chung là 6 (tử bên trái nhân 2, tử bên phải nhân 3):</p>
+  \[ = \frac{2}{6} + \frac{3}{6} = \frac{5}{6} \]
+
+  <p><em>Lắp hai cục lại làm một:</em></p>
+  \[ I = (2\pi) \cdot \left( \frac{5}{6} \right) \]
+  <p>Lấy 2 triệt tiêu với 6 dưới mẫu, còn lại 3:</p>
+  \[ I = \frac{5\pi}{3} \]
+
+  <h4>Bước 4: Kết luận</h4>
+  <p style="color:#1a5276; font-weight:bold; font-size:18px;">\(\boxed{I = \dfrac{5\pi}{3}}\)</p>
+  <p><strong>Ý nghĩa bài toán:</strong> Dù đối mặt với dấu căn thức gai góc bậc hai, sự chuyển mình uyển chuyển qua hệ trục tọa độ tròn xoay đã "lột trần" bài toán về một dạng đơn thuần là cộng phân số cấp 1. Kết quả đẹp mắt là minh chứng cho việc chọn đúng đồ nghề làm việc.</p>
+</div>
+  </div>
 </div>
 
 </div>
+<script>
+    function toggleSolutionBox(btn) {
+        const content = btn.nextElementSibling;
+        const isOpen = content.classList.contains('is-open');
+        const icon = btn.querySelector('.sol-icon');
+        const text = btn.querySelector('.sol-text');
+        const arrow = btn.querySelector('.sol-arrow');
+        if (isOpen) {
+            content.classList.remove('is-open');
+            btn.classList.remove('is-open');
+            if (icon) icon.textContent = '📖';
+            if (text) text.textContent = 'Xem lời giải chi tiết (Bấm để mở)';
+            if (arrow) arrow.textContent = '▼';
+        } else {
+            content.classList.add('is-open');
+            btn.classList.add('is-open');
+            if (icon) icon.textContent = '🙈';
+            if (text) text.textContent = 'Thu gọn lời giải';
+            if (arrow) arrow.textContent = '▲';
+            if (window.MathJax && MathJax.typesetPromise) {
+                MathJax.typesetPromise([content]).catch(err => console.log(err));
+            }
+        }
+    }
+</script>
 </body>
 </html>

@@ -20,7 +20,58 @@
         .problem { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 40px; }
         .code-block { background: #282c34; color: #abb2bf; padding: 15px; border-radius: 5px; overflow-x: auto; font-family: monospace; font-size: 14px; }
         .plot-container { display: flex; justify-content: center; }
-    </style>
+    
+        /* Nút Ẩn / Hiện Lời Giải Chi Tiết */
+        .solution-toggle-wrapper {
+            margin: 28px 0 16px 0;
+        }
+        .solution-toggle-btn {
+            width: 100%;
+            background: #f8fafc;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 13px 20px;
+            font-size: 15px;
+            font-weight: 700;
+            color: #0284c7;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            font-family: inherit;
+        }
+        .solution-toggle-btn:hover {
+            background: #f0f9ff;
+            border-color: #38bdf8;
+            color: #0369a1;
+        }
+        .solution-toggle-btn.is-open {
+            background: #e0f2fe;
+            border-color: #0284c7;
+            color: #0369a1;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+        .solution-collapsible-content {
+            display: none;
+            border: 1.5px solid #0284c7;
+            border-top: none;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+            padding: 20px 22px;
+            background: #ffffff;
+        }
+        .solution-collapsible-content.is-open {
+            display: block;
+            animation: fadeInSol 0.25s ease-in-out;
+        }
+        @keyframes fadeInSol {
+            from { opacity: 0; transform: translateY(-4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+</style>
 </head>
 <body>
     <div class="problem">
@@ -43,30 +94,117 @@ fig.add_trace(go.Scatter(x=x_val, y=np.sqrt(2 - x_val**2), mode='lines', fill='t
 fig.update_yaxes(scaleanchor="x", scaleratio=1)
 fig.show()</code></pre>
     
+<div class="solution-toggle-wrapper">
+  <button type="button" class="solution-toggle-btn" onclick="toggleSolutionBox(this)">
+    <span><span class="sol-icon">📖</span> <span class="sol-text">Xem lời giải chi tiết (Bấm để mở)</span></span>
+    <span class="sol-arrow">▼</span>
+  </button>
+  <div class="solution-collapsible-content">
 <div style="background:#eaf4fb; border-left:5px solid #2980b9; padding:20px; margin-top:30px; border-radius:6px;">
-  <h3 style="color:#1a5276;">Lời giải – Bài B1.5</h3>
-  <p><strong>Đề bài:</strong> Đổi thứ tự tích phân \(\displaystyle\int_0^1 dx\int_{\sqrt{x}}^{\sqrt{2-x^2}} f(x,y)\,dy\).</p>
+  <h3 style="color:#1a5276;">Lời giải chi tiết – Bài B1.5</h3>
+  <p><strong>Đề bài:</strong> Đổi thứ tự tính tích phân: \( \displaystyle\int_0^1 dx\int_{\sqrt{x}}^{\sqrt{2-x^2}} f(x,y)\,dy \).</p>
 
-  <p><strong>Bước 1: Xác định miền D.</strong><br>
-  Điều kiện: \(0 \le x \le 1\) và \(\sqrt{x} \le y \le \sqrt{2-x^2}\).<br>
-  — Đường dưới: \(y = \sqrt{x}\), tức \(x = y^2\) (parabol).<br>
-  — Đường trên: \(y = \sqrt{2-x^2}\), tức \(x^2+y^2 = 2\) (cung tròn bán kính \(\sqrt{2}\)).</p>
+  <h4>Bước 1: Hiểu ý nghĩa của đề bài và xác định miền D</h4>
+  <p>Đầu tiên, chúng ta cùng đọc biểu thức tích phân ban đầu để xem miền D (vùng diện tích cần tính) được giới hạn như thế nào nhé!</p>
+  <ul>
+    <li>
+      Tích phân bên ngoài là \( \displaystyle\int_0^1 dx \), có nghĩa là biến \( x \) sẽ chạy từ \( 0 \) đến \( 1 \).<br>
+      Ta viết: \( 0 \le x \le 1 \).
+    </li>
+    <li>
+      Tích phân bên trong là \( \displaystyle\int_{\sqrt{x}}^{\sqrt{2-x^2}} f(x,y)\,dy \), có nghĩa là với mỗi giá trị \( x \) cố định, biến \( y \) sẽ chạy từ đường cong bên dưới đến đường cong bên trên.<br>
+      Ta viết: \( \sqrt{x} \le y \le \sqrt{2-x^2} \).
+    </li>
+  </ul>
+  
+  <p>Vậy, hai "bờ rào" trên và dưới của miền D là:</p>
+  <ul>
+    <li><strong>Đường bên dưới:</strong> \( y = \sqrt{x} \).<br>
+      Để dễ hình dung hơn, ta bình phương hai vế (vì \( x \ge 0 \) và \( y \ge 0 \)), ta được: \( y^2 = x \), hay \( x = y^2 \).<br>
+      Đây là một nhánh của đường parabol.
+    </li>
+    <li><strong>Đường bên trên:</strong> \( y = \sqrt{2-x^2} \).<br>
+      Bình phương hai vế, ta được: \( y^2 = 2 - x^2 \).<br>
+      Chuyển vế, ta có: \( x^2 + y^2 = 2 \).<br>
+      Đây là phương trình của một đường tròn có tâm tại gốc tọa độ \( (0;0) \) và bán kính \( R = \sqrt{2} \). Do \( y \ge 0 \) nên đây là nửa trên của đường tròn.
+    </li>
+  </ul>
 
-  <p><strong>Giao điểm:</strong> \(y = \sqrt{x}\) và \(x^2+y^2=2\):<br>
-  \(x^2 + x = 2 \Rightarrow (x+2)(x-1)=0 \Rightarrow x=1, y=1\).<br>
-  Tại \(x=0\): \(y=0\) (parabol) và \(y=\sqrt{2}\) (cung tròn).<br>
-  Miền D nằm giữa parabol \(y = \sqrt{x}\) và cung tròn \(x^2+y^2=2\).</p>
+  
+  <h4>Bước 2: Tìm hoành độ giao điểm</h4>
+  <p>Để biết parabol và đường tròn cắt nhau ở đâu, ta cho hai biểu thức của \( y \) bằng nhau:</p>
+  \[ \sqrt{x} = \sqrt{2-x^2} \]
+  <p>Bình phương hai vế để mất dấu căn:</p>
+  \[ x = 2 - x^2 \]
+  <p>Chuyển tất cả các số hạng về một vế để tạo thành phương trình bậc 2:</p>
+  \[ x^2 + x - 2 = 0 \]
+  <p>Phân tích đa thức thành nhân tử, ta được:</p>
+  \[ (x-1)(x+2) = 0 \]
+  <p>Phương trình này có hai nghiệm là \( x = 1 \) và \( x = -2 \). Tuy nhiên, vì điều kiện ban đầu của bài toán là \( 0 \le x \le 1 \), nên ta chỉ lấy nghiệm \( x = 1 \).</p>
+  <p>Thay \( x = 1 \) vào phương trình đường dưới \( y = \sqrt{x} \), ta tính được:</p>
+  \[ y = \sqrt{1} = 1 \]
+  <p>Vậy hai đường cong giao nhau tại điểm có tọa độ \( (1; 1) \).</p>
 
-  <p><strong>Bước 2: Đổi thứ tự – tích phân theo \(x\) trước.</strong><br>
-  Với \(y\) cố định, \(y\) chạy từ \(0\) đến \(\sqrt{2}\).<br>
-  — Phần 1: \(0 \le y \le 1\): \(x\) từ \(y^2\) đến \(\sqrt{2-y^2}\).<br>
-  — Phần 2: \(1 \le y \le \sqrt{2}\): \(x\) từ \(0\) đến \(\sqrt{2-y^2}\).</p>
+  <h4>Bước 3: Đổi thứ tự tính tích phân (tính theo x trước, y sau)</h4>
+  <p>Khi đổi thứ tự, ta sẽ nhìn miền D theo hướng nằm ngang: từ dưới lên trên (theo trục \( y \)), rồi từ trái sang phải (theo trục \( x \)).</p>
+  <p>Quan sát trên trục \( y \), điểm thấp nhất của miền D là gốc tọa độ \( (0;0) \) nên \( y \) bắt đầu từ \( 0 \). Điểm cao nhất nằm trên đường tròn tại \( x = 0 \), khi đó \( y = \sqrt{2 - 0^2} = \sqrt{2} \).</p>
+  <p>Khi quét từ \( y = 0 \) lên \( y = \sqrt{2} \), ta thấy "bờ rào" bên phải bị gãy khúc tại điểm giao nhau \( (1; 1) \). Do đó, ta phải chia miền D thành 2 phần:</p>
+  
+  <ol>
+    <li>
+      <strong>Phần thứ nhất (phía dưới, khi \( 0 \le y \le 1 \)):</strong>
+      <p>Nếu ta kẻ một đường ngang ở độ cao này, đi từ trái sang phải:</p>
+      <ul>
+        <li>Điểm bắt đầu luôn nằm trên trục \( Oy \): tức là \( x = 0 \).</li>
+        <li>Điểm kết thúc chạm vào đường parabol: từ \( y = \sqrt{x} \), ta suy ra \( x = y^2 \).</li>
+      </ul>
+      <p>Vậy giới hạn của \( x \) ở phần này là: \( 0 \le x \le y^2 \).</p>
+    </li>
+    <li>
+      <strong>Phần thứ hai (phía trên, khi \( 1 \le y \le \sqrt{2} \)):</strong>
+      <p>Kẻ đường ngang ở độ cao này, đi từ trái sang phải:</p>
+      <ul>
+        <li>Điểm bắt đầu vẫn nằm trên trục \( Oy \): tức là \( x = 0 \).</li>
+        <li>Điểm kết thúc chạm vào đường tròn: từ \( x^2 + y^2 = 2 \), ta suy ra \( x^2 = 2 - y^2 \), do \( x \ge 0 \) nên \( x = \sqrt{2 - y^2} \).</li>
+      </ul>
+      <p>Vậy giới hạn của \( x \) ở phần này là: \( 0 \le x \le \sqrt{2 - y^2} \).</p>
+    </li>
+  </ol>
 
-  \[\int_0^1 dy\int_{y^2}^{\sqrt{2-y^2}} f(x,y)\,dx + \int_1^{\sqrt{2}} dy\int_0^{\sqrt{2-y^2}} f(x,y)\,dx\]
+  <h4>Bước 4: Viết kết quả cuối cùng</h4>
+  <p>Vì miền D bị chia làm hai phần, tích phân mới của chúng ta cũng phải là tổng của hai tích phân nhỏ:</p>
+  \[ \int_0^1 dy \int_0^{y^2} f(x,y)\,dx + \int_1^{\sqrt{2}} dy \int_0^{\sqrt{2-y^2}} f(x,y)\,dx \]
 
-  <p style="color:#1a5276; font-weight:bold;">Đây là kết quả sau khi đổi thứ tự tích phân.</p>
+  <p style="color:#1a5276; font-weight:bold;">Kết luận: Chúng ta đã hoàn thành việc đổi thứ tự tích phân! Việc chia nhỏ miền tính toán thế này giúp các cận của tích phân trở nên rõ ràng và chính xác (kết quả trên hoàn toàn hợp lý với hình dạng của miền D).</p>
+</div>
+  </div>
 </div>
 
 </div>
+<script>
+    function toggleSolutionBox(btn) {
+        const content = btn.nextElementSibling;
+        const isOpen = content.classList.contains('is-open');
+        const icon = btn.querySelector('.sol-icon');
+        const text = btn.querySelector('.sol-text');
+        const arrow = btn.querySelector('.sol-arrow');
+        if (isOpen) {
+            content.classList.remove('is-open');
+            btn.classList.remove('is-open');
+            if (icon) icon.textContent = '📖';
+            if (text) text.textContent = 'Xem lời giải chi tiết (Bấm để mở)';
+            if (arrow) arrow.textContent = '▼';
+        } else {
+            content.classList.add('is-open');
+            btn.classList.add('is-open');
+            if (icon) icon.textContent = '🙈';
+            if (text) text.textContent = 'Thu gọn lời giải';
+            if (arrow) arrow.textContent = '▲';
+            if (window.MathJax && MathJax.typesetPromise) {
+                MathJax.typesetPromise([content]).catch(err => console.log(err));
+            }
+        }
+    }
+</script>
 </body>
 </html>

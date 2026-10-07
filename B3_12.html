@@ -27,24 +27,116 @@
         .check { background: #eafaf1; border-left: 4px solid #27ae60; padding: 8px 14px; border-radius: 4px; margin-top: 10px; color: #1e8449; }
         .plot-container { display: flex; justify-content: center; margin-top: 20px; }
         .code-block { background: #282c34; color: #abb2bf; padding: 15px; border-radius: 5px; overflow-x: auto; font-family: monospace; font-size: 13px; margin-top: 10px; white-space: pre; }
-    </style>
+    
+        /* Nút Ẩn / Hiện Lời Giải Chi Tiết */
+        .solution-toggle-wrapper {
+            margin: 28px 0 16px 0;
+        }
+        .solution-toggle-btn {
+            width: 100%;
+            background: #f8fafc;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 13px 20px;
+            font-size: 15px;
+            font-weight: 700;
+            color: #0284c7;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            font-family: inherit;
+        }
+        .solution-toggle-btn:hover {
+            background: #f0f9ff;
+            border-color: #38bdf8;
+            color: #0369a1;
+        }
+        .solution-toggle-btn.is-open {
+            background: #e0f2fe;
+            border-color: #0284c7;
+            color: #0369a1;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+        .solution-collapsible-content {
+            display: none;
+            border: 1.5px solid #0284c7;
+            border-top: none;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+            padding: 20px 22px;
+            background: #ffffff;
+        }
+        .solution-collapsible-content.is-open {
+            display: block;
+            animation: fadeInSol 0.25s ease-in-out;
+        }
+        @keyframes fadeInSol {
+            from { opacity: 0; transform: translateY(-4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+</style>
 </head>
 <body>
     <div class="problem">
         <h2>Bài B3.12</h2>
         <div class="de-bai"><strong>Đề bài:</strong> Vẽ vật thể \(\Omega\): \(z=\sqrt{x^2+y^2},\;z=1,\;z=2\)</div>
-        <h3>&#9998; Lời giải</h3>
+        <div class="solution-toggle-wrapper">
+  <button type="button" class="solution-toggle-btn" onclick="toggleSolutionBox(this)">
+    <span><span class="sol-icon">📖</span> <span class="sol-text">Xem lời giải chi tiết (Bấm để mở)</span></span>
+    <span class="sol-arrow">▼</span>
+  </button>
+  <div class="solution-collapsible-content">
+<h3>&#9998; Lời giải</h3>
         <div class="solution">
-<p><strong>Vẽ và tính thể tích vật thể</strong> giới hạn bởi mặt nón \(z=\sqrt{x^2+y^2}\) và các mặt phẳng \(z=1\), \(z=2\).</p>
-  <p><strong>Bước 1: Xác định thiết diện.</strong><br>
-  Vật thể này là một phần của khối nón chóp. Cắt vật thể bởi một mặt phẳng ngang ở độ cao \(z\) (với \(1 \le z \le 2\)), ta thu được một hình tròn. Phương trình biên của hình tròn là \(x^2+y^2=z^2\), nghĩa là bán kính của nó chính là \(r = z\).</p>
-  <p><strong>Bước 2: Tính diện tích mặt cắt.</strong><br>
-  Diện tích của hình tròn tại độ cao \(z\) là \(S(z) = \pi r^2 = \pi z^2\).</p>
-  <p><strong>Bước 3: Lấy tích phân theo z.</strong><br>
-  Thể tích khối được tính bằng tích phân của diện tích thiết diện theo chiều cao:
-  \[V = \int_1^2 S(z) \,dz = \int_1^2 \pi z^2 \,dz\]
-  \[= \pi \left[ \frac{z^3}{3} \right]_1^2 = \frac{\pi}{3} (2^3 - 1^3) = \frac{\pi}{3} (8 - 1) = \frac{7\pi}{3}\]</p>
-  <p style="color:#1a5276; font-weight:bold;">\(\boxed{V = \frac{7\pi}{3}}\) ✓ Trình bày phương pháp mặt cắt (Cavalieri) cực kì chi tiết.</p>
+<p>Chào các bạn! Hôm nay chúng ta sẽ cùng giải quyết bài toán tính thể tích của một vật thể \(\Omega\). Bài này có một cách giải rất hay gọi là "phương pháp cắt lát". Hãy cùng tưởng tượng nhé!</p>
+
+<p><strong>Bước 1: Phân tích hình dáng vật thể</strong></p>
+<p>Đề bài cho vật thể bị giới hạn bởi 3 bề mặt:</p>
+<ul>
+  <li>\(z=\sqrt{x^2+y^2}\): Bình phương hai vế ta được \(z^2 = x^2+y^2\) (với \(z \ge 0\)). Đây là phương trình của một mặt nón ngửa lên trên, đỉnh nón nằm ở gốc tọa độ.</li>
+  <li>\(z=1\): Đây là một mặt phẳng nằm ngang ở độ cao 1. Nó cắt phần dưới của nón.</li>
+  <li>\(z=2\): Đây là một mặt phẳng nằm ngang khác ở độ cao 2. Nó cắt phần trên của nón.</li>
+</ul>
+<p>Vật thể của chúng ta chính là phần khối nón nằm lơ lửng giữa hai mặt phẳng \(z=1\) và \(z=2\). Hình dáng của nó giống như một cái chụp đèn hay một cái thùng rác hình nón cụt (đáy nhỏ ở dưới, nắp to ở trên).</p>
+
+<p><strong>Bước 2: Tính diện tích của một "lát cắt"</strong></p>
+<p>Thay vì tính trực tiếp cả khối phức tạp, ta dùng dao cắt khối nón cụt này theo phương nằm ngang (song song với mặt đất) ở một độ cao \(z\) bất kỳ (\(z\) nằm từ 1 đến 2).</p>
+<p>Mỗi nhát cắt như vậy sẽ tạo ra một bề mặt gọi là "thiết diện". Vì đây là hình nón tròn xoay, mặt cắt ngang chắc chắn là một hình tròn.</p>
+<p>Câu hỏi là: Hình tròn ở độ cao \(z\) có bán kính bao nhiêu?</p>
+<p>Nhìn vào phương trình mặt nón \(z=\sqrt{x^2+y^2}\), ta thấy \(x^2+y^2\) chính là bình phương bán kính của hình tròn (\(r^2\)). Vậy \(z = \sqrt{r^2} = r\). Nghĩa là ở độ cao \(z\) nào thì hình tròn có bán kính \(r\) bằng đúng \(z\).</p>
+<p>Diện tích của hình tròn ở độ cao \(z\) (kí hiệu là \(S(z)\)) theo công thức diện tích hình tròn là:</p>
+<p>\[S(z) = \pi \cdot r^2\]</p>
+<p>Thay \(r = z\) vào, ta được:</p>
+<p>\[S(z) = \pi \cdot z^2\]</p>
+
+<p><strong>Bước 3: Lấy tích phân để tính tổng thể tích</strong></p>
+<p>Theo nguyên lý Cavalieri, thể tích \(V\) của cả khối chính là tổng diện tích của vô số các lát cắt mỏng xếp chồng lên nhau từ dưới lên trên. Trong toán học, việc "cộng dồn vô số lát cắt" chính là phép tính tích phân.</p>
+<p>Khối nón cụt của chúng ta bắt đầu từ độ cao \(z=1\) và kết thúc ở \(z=2\), nên ta lấy tích phân từ 1 đến 2:</p>
+<p>\[V = \int_1^2 S(z) \,dz\]</p>
+<p>Thay công thức \(S(z)\) vừa tìm được vào:</p>
+<p>\[V = \int_1^2 \pi \cdot z^2 \,dz\]</p>
+
+<p><strong>Bước 4: Tính toán kết quả</strong></p>
+<p>Hằng số \(\pi\) ta có thể đưa ra ngoài dấu tích phân:</p>
+<p>\[V = \pi \cdot \int_1^2 z^2 \,dz\]</p>
+<p>Tìm nguyên hàm của \(z^2\). Áp dụng quy tắc cơ bản \(\int z^n dz = \frac{z^{n+1}}{n+1}\) với \(n=2\), ta được nguyên hàm là \(\frac{z^3}{3}\).</p>
+<p>Theo công thức Newton-Leibniz, ta thay cận trên (2) và cận dưới (1) vào:</p>
+<p>\[V = \pi \cdot \left[ \frac{z^3}{3} \right]_1^2\]</p>
+<p>\[V = \pi \cdot \left( \frac{2^3}{3} - \frac{1^3}{3} \right)\]</p>
+<p>\[V = \pi \cdot \left( \frac{8}{3} - \frac{1}{3} \right)\]</p>
+<p>\[V = \pi \cdot \left( \frac{7}{3} \right)\]</p>
+<p>\[V = \frac{7\pi}{3}\]</p>
+
+<div style="background:#e8f4f8; padding:15px; border-radius:8px; border-left: 5px solid #2980b9;">
+<strong>Mẹo kiểm tra ý nghĩa:</strong> Thể tích hình nón là \(\frac{1}{3} \cdot \pi r^2 h\). Khối nón cụt của ta là hình nón lớn (đỉnh O, đáy \(z=2\), bán kính \(r=2\)) trừ đi hình nón nhỏ (đỉnh O, đáy \(z=1\), bán kính \(r=1\)). Nón lớn có thể tích \(\frac{1}{3} \pi (2^2) \cdot 2 = \frac{8\pi}{3}\). Nón nhỏ có thể tích \(\frac{1}{3} \pi (1^2) \cdot 1 = \frac{\pi}{3}\). Trừ đi ta được \(\frac{8\pi}{3} - \frac{\pi}{3} = \frac{7\pi}{3}\). Khớp hoàn toàn với phép tính tích phân mặt cắt!
+</div>
+
+<p><strong>Kết luận: Thể tích vật thể nón cụt là \( \mathbf{V = \dfrac{7\pi}{3}} \).</strong></p>
+
 </div>
         <div class="answer-box">&#10003; Kết quả: Bài chỉ yêu cầu vẽ</div>
         <div class="check">Bài chỉ yêu cầu vẽ. Hình 3D hiển thị mặt nón bị cắt giữa z=1 và z=2.</div>
@@ -56,5 +148,31 @@
         <h3>&#128187; Mã nguồn Python (tham khảo)</h3>
         <pre class="code-block"></pre>
     </div>
+  </div>
+</div><script>
+    function toggleSolutionBox(btn) {
+        const content = btn.nextElementSibling;
+        const isOpen = content.classList.contains('is-open');
+        const icon = btn.querySelector('.sol-icon');
+        const text = btn.querySelector('.sol-text');
+        const arrow = btn.querySelector('.sol-arrow');
+        if (isOpen) {
+            content.classList.remove('is-open');
+            btn.classList.remove('is-open');
+            if (icon) icon.textContent = '📖';
+            if (text) text.textContent = 'Xem lời giải chi tiết (Bấm để mở)';
+            if (arrow) arrow.textContent = '▼';
+        } else {
+            content.classList.add('is-open');
+            btn.classList.add('is-open');
+            if (icon) icon.textContent = '🙈';
+            if (text) text.textContent = 'Thu gọn lời giải';
+            if (arrow) arrow.textContent = '▲';
+            if (window.MathJax && MathJax.typesetPromise) {
+                MathJax.typesetPromise([content]).catch(err => console.log(err));
+            }
+        }
+    }
+</script>
 </body>
 </html>

@@ -20,7 +20,58 @@
         .problem { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 40px; }
         .code-block { background: #282c34; color: #abb2bf; padding: 15px; border-radius: 5px; overflow-x: auto; font-family: monospace; }
         .plot-container { display: flex; justify-content: center; }
-    </style>
+    
+        /* Nút Ẩn / Hiện Lời Giải Chi Tiết */
+        .solution-toggle-wrapper {
+            margin: 28px 0 16px 0;
+        }
+        .solution-toggle-btn {
+            width: 100%;
+            background: #f8fafc;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 13px 20px;
+            font-size: 15px;
+            font-weight: 700;
+            color: #0284c7;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            font-family: inherit;
+        }
+        .solution-toggle-btn:hover {
+            background: #f0f9ff;
+            border-color: #38bdf8;
+            color: #0369a1;
+        }
+        .solution-toggle-btn.is-open {
+            background: #e0f2fe;
+            border-color: #0284c7;
+            color: #0369a1;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+        .solution-collapsible-content {
+            display: none;
+            border: 1.5px solid #0284c7;
+            border-top: none;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+            padding: 20px 22px;
+            background: #ffffff;
+        }
+        .solution-collapsible-content.is-open {
+            display: block;
+            animation: fadeInSol 0.25s ease-in-out;
+        }
+        @keyframes fadeInSol {
+            from { opacity: 0; transform: translateY(-4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+</style>
 </head>
 <body>
     <div class="problem">
@@ -45,32 +96,125 @@ fig.add_trace(go.Scatter(x=x_val, y=x_val**2, mode='lines', line=dict(width=0), 
 fig.add_trace(go.Scatter(x=x_val, y=x_val, mode='lines', fill='tonexty', name='Miền D'))
 fig.show()</code></pre>
     
+<div class="solution-toggle-wrapper">
+  <button type="button" class="solution-toggle-btn" onclick="toggleSolutionBox(this)">
+    <span><span class="sol-icon">📖</span> <span class="sol-text">Xem lời giải chi tiết (Bấm để mở)</span></span>
+    <span class="sol-arrow">▼</span>
+  </button>
+  <div class="solution-collapsible-content">
 <div style="background:#eaf4fb; border-left:5px solid #2980b9; padding:20px; margin-top:30px; border-radius:6px;">
-  <h3 style="color:#1a5276;">Lời giải – Bài B1.1</h3>
-  <p><strong>Đề bài:</strong> Tính \(\iint_D (x^2 + xy^3)\,dxdy\), với \(D\) giới hạn bởi \(y = x\) và \(y = x^2\).</p>
+  <h3 style="color:#1a5276;">Lời giải chi tiết – Bài B1.1</h3>
+  <p><strong>Đề bài:</strong> Tính tích phân kép \(I = \iint_D (x^2 + xy^3) dxdy\), với \(D\) là miền phẳng được giới hạn bởi đường thẳng \(y = x\) và parabol \(y = x^2\).</p>
 
-  <p><strong>Bước 1: Xác định miền D.</strong><br>
-  Giao điểm: \(x = x^2 \Rightarrow x(x-1)=0 \Rightarrow x=0,\; x=1\).<br>
-  Trên \([0,1]\): \(x^2 \le y \le x\).</p>
+  <h4>Bước 1: Hiểu các ký hiệu và yêu cầu bài toán</h4>
+  <ul>
+    <li>Ký hiệu \(\iint_D\) gọi là <em>tích phân kép</em>. Em có thể tưởng tượng nó giống như việc ta đi tính tổng khối lượng của một miếng bìa mỏng có hình dạng là miền \(D\), với độ dày (hay mật độ) tại mỗi điểm \((x,y)\) là hàm số bên trong \(f(x,y) = x^2 + xy^3\).</li>
+    <li>Ký hiệu \(dxdy\) cho biết ta sẽ lấy tích phân theo hai biến số là \(x\) và \(y\).</li>
+    <li>Miền \(D\) là hình dạng miếng bìa của chúng ta, nó nằm giữa hai đường cong: đường thẳng \(y = x\) và đường cong parabol \(y = x^2\).</li>
+  </ul>
 
-  <p><strong>Bước 2: Tính tích phân.</strong></p>
-  \[I = \int_0^1 \int_{x^2}^{x} (x^2 + xy^3)\,dy\,dx\]
+  <h4>Bước 2: Tìm giao điểm để xác định ranh giới (hoành độ giao điểm)</h4>
+  <p>Để biết miếng bìa \(D\) bắt đầu từ đâu và kết thúc ở đâu theo trục \(x\), ta cần tìm xem hai đường \(y = x\) và \(y = x^2\) cắt nhau tại những điểm nào. Ta làm điều này bằng cách cho hai giá trị của \(y\) bằng nhau:</p>
+  \[x^2 = x\]
+  <p>Chuyển tất cả về một vế để giải phương trình:</p>
+  \[x^2 - x = 0\]
+  <p>Đặt nhân tử chung là \(x\):</p>
+  \[x(x - 1) = 0\]
+  <p>Một tích bằng 0 khi một trong các thừa số bằng 0. Vậy ta có hai trường hợp:</p>
+  <ul>
+    <li>\(x = 0\)</li>
+    <li>\(x - 1 = 0 \Rightarrow x = 1\)</li>
+  </ul>
+  <p>Vậy, hai đường cong này cắt nhau tại \(x = 0\) và \(x = 1\). Đây chính là giới hạn trái và phải của miền \(D\). Tức là \(x\) sẽ chạy từ \(0\) đến \(1\).</p>
 
-  <p>Tích phân trong theo \(y\):</p>
-  \[\int_{x^2}^{x}(x^2 + xy^3)\,dy = \left[x^2 y + x\frac{y^4}{4}\right]_{y=x^2}^{y=x}\]
-  \[= \left(x^3 + \frac{x^5}{4}\right) - \left(x^4 + \frac{x^9}{4}\right) = x^3 - x^4 + \frac{x^5}{4} - \frac{x^9}{4}\]
+  
+  <h4>Bước 3: Thiết lập tích phân lặp</h4>
+  <p>Bây giờ ta có thể viết tích phân kép \(\iint_D\) thành hai tích phân đơn (tích phân lặp). Ta tính theo \(y\) trước (từ đường dưới lên đường trên), rồi tính theo \(x\) sau (từ trái qua phải):</p>
+  \[I = \int_{0}^{1} \left( \int_{x^2}^{x} (x^2 + xy^3) dy \right) dx\]
+  
+  <h4>Bước 4: Tính lớp tích phân bên trong (theo biến y)</h4>
+  <p>Ta chỉ tập trung vào phần bên trong ngoặc:</p>
+  \[I_{trong} = \int_{x^2}^{x} (x^2 + xy^3) dy\]
+  <p>Khi lấy nguyên hàm theo \(y\), ta xem \(x\) như là một hằng số (một con số bình thường không thay đổi). Nhắc lại quy tắc lấy nguyên hàm cơ bản:</p>
+  <ul>
+    <li>Nguyên hàm của một hằng số \(C\) theo \(y\) là \(C \cdot y\). Vậy nguyên hàm của \(x^2\) là \(x^2 \cdot y\).</li>
+    <li>Nguyên hàm của \(y^n\) là \(\frac{y^{n+1}}{n+1}\). Vậy nguyên hàm của \(y^3\) là \(\frac{y^4}{4}\).</li>
+  </ul>
+  <p>Do đó, nguyên hàm của hàm số là:</p>
+  \[F(x, y) = x^2 \cdot y + x \cdot \frac{y^4}{4}\]
+  <p>Bây giờ, ta thế hai cận (cận trên là \(y=x\), cận dưới là \(y=x^2\)) vào \(F(x,y)\) rồi trừ cho nhau:</p>
+  <p><strong>Thế cận trên \(y = x\):</strong></p>
+  \[F(x, x) = x^2 \cdot (x) + x \cdot \frac{(x)^4}{4}\]
+  \[= x^3 + \frac{x^5}{4}\]
+  <p><strong>Thế cận dưới \(y = x^2\):</strong></p>
+  \[F(x, x^2) = x^2 \cdot (x^2) + x \cdot \frac{(x^2)^4}{4}\]
+  \[= x^4 + x \cdot \frac{x^8}{4}\]
+  \[= x^4 + \frac{x^9}{4}\]
+  <p><strong>Lấy cận trên trừ cận dưới:</strong></p>
+  \[I_{trong} = \left( x^3 + \frac{x^5}{4} \right) - \left( x^4 + \frac{x^9}{4} \right)\]
+  \[I_{trong} = x^3 - x^4 + \frac{x^5}{4} - \frac{x^9}{4}\]
 
-  <p>Tích phân ngoài theo \(x\):</p>
-  \[I = \int_0^1 \left(x^3 - x^4 + \frac{x^5}{4} - \frac{x^9}{4}\right)dx\]
-  \[= \left[\frac{x^4}{4} - \frac{x^5}{5} + \frac{x^6}{24} - \frac{x^{10}}{40}\right]_0^1\]
-  \[= \frac{1}{4} - \frac{1}{5} + \frac{1}{24} - \frac{1}{40}\]
+  <h4>Bước 5: Tính lớp tích phân bên ngoài (theo biến x)</h4>
+  <p>Bây giờ, ta đem kết quả vừa tìm được bỏ vào tích phân bên ngoài theo biến \(x\):</p>
+  \[I = \int_{0}^{1} \left( x^3 - x^4 + \frac{x^5}{4} - \frac{x^9}{4} \right) dx\]
+  <p>Lại dùng quy tắc nguyên hàm lũy thừa \(\int x^n dx = \frac{x^{n+1}}{n+1}\):</p>
+  <ul>
+    <li>Nguyên hàm của \(x^3\) là \(\frac{x^4}{4}\)</li>
+    <li>Nguyên hàm của \(x^4\) là \(\frac{x^5}{5}\)</li>
+    <li>Nguyên hàm của \(\frac{x^5}{4}\) là \(\frac{1}{4} \cdot \frac{x^6}{6} = \frac{x^6}{24}\)</li>
+    <li>Nguyên hàm của \(\frac{x^9}{4}\) là \(\frac{1}{4} \cdot \frac{x^{10}}{10} = \frac{x^{10}}{40}\)</li>
+  </ul>
+  <p>Biểu thức nguyên hàm hoàn chỉnh là:</p>
+  \[G(x) = \frac{x^4}{4} - \frac{x^5}{5} + \frac{x^6}{24} - \frac{x^{10}}{40}\]
+  <p>Thế cận từ \(0\) đến \(1\). Khi thế \(x = 0\), tất cả các số hạng đều bằng \(0\). Do đó ta chỉ cần thế \(x = 1\):</p>
+  \[I = \frac{1^4}{4} - \frac{1^5}{5} + \frac{1^6}{24} - \frac{1^{10}}{40}\]
+  \[I = \frac{1}{4} - \frac{1}{5} + \frac{1}{24} - \frac{1}{40}\]
+  <p>Tiến hành quy đồng mẫu số. Bội chung nhỏ nhất của 4, 5, 24 và 40 là 120:</p>
+  \[\frac{1}{4} = \frac{1 \times 30}{4 \times 30} = \frac{30}{120}\]
+  \[\frac{1}{5} = \frac{1 \times 24}{5 \times 24} = \frac{24}{120}\]
+  \[\frac{1}{24} = \frac{1 \times 5}{24 \times 5} = \frac{5}{120}\]
+  \[\frac{1}{40} = \frac{1 \times 3}{40 \times 3} = \frac{3}{120}\]
+  <p>Thực hiện phép tính cộng trừ ở tử số:</p>
+  \[I = \frac{30}{120} - \frac{24}{120} + \frac{5}{120} - \frac{3}{120}\]
+  \[I = \frac{30 - 24 + 5 - 3}{120}\]
+  \[I = \frac{6 + 5 - 3}{120}\]
+  \[I = \frac{11 - 3}{120}\]
+  \[I = \frac{8}{120}\]
+  <p>Rút gọn phân số bằng cách chia cả tử và mẫu cho 8:</p>
+  \[I = \frac{8 \div 8}{120 \div 8} = \frac{1}{15}\]
 
-  <p>Quy đồng mẫu số chung là 120:</p>
-  \[= \frac{30}{120} - \frac{24}{120} + \frac{5}{120} - \frac{3}{120} = \frac{8}{120} = \frac{1}{15}\]
-
-  <p style="color:#1a5276; font-weight:bold;">\(\boxed{I = \dfrac{1}{15}}\) ✓ Khớp với đáp án.</p>
+  <h4>Bước 6: Kết luận</h4>
+  <p><strong>Kết quả dương, hợp lý</strong> vì trong toàn bộ miền \(D\) (nơi \(x\) và \(y\) đều từ 0 đến 1), biểu thức \(x^2 + xy^3\) luôn lớn hơn hoặc bằng 0.</p>
+  <p style="color:#1a5276; font-size:18px;"><strong>Vậy đáp án cuối cùng là: \(\mathbf{\boxed{I = \dfrac{1}{15}}}\)</strong></p>
+</div>
+  </div>
 </div>
 
 </div>
+<script>
+    function toggleSolutionBox(btn) {
+        const content = btn.nextElementSibling;
+        const isOpen = content.classList.contains('is-open');
+        const icon = btn.querySelector('.sol-icon');
+        const text = btn.querySelector('.sol-text');
+        const arrow = btn.querySelector('.sol-arrow');
+        if (isOpen) {
+            content.classList.remove('is-open');
+            btn.classList.remove('is-open');
+            if (icon) icon.textContent = '📖';
+            if (text) text.textContent = 'Xem lời giải chi tiết (Bấm để mở)';
+            if (arrow) arrow.textContent = '▼';
+        } else {
+            content.classList.add('is-open');
+            btn.classList.add('is-open');
+            if (icon) icon.textContent = '🙈';
+            if (text) text.textContent = 'Thu gọn lời giải';
+            if (arrow) arrow.textContent = '▲';
+            if (window.MathJax && MathJax.typesetPromise) {
+                MathJax.typesetPromise([content]).catch(err => console.log(err));
+            }
+        }
+    }
+</script>
 </body>
 </html>

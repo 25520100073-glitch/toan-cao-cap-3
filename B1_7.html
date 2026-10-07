@@ -20,7 +20,58 @@
         .problem { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 40px; }
         .code-block { background: #282c34; color: #abb2bf; padding: 15px; border-radius: 5px; overflow-x: auto; font-family: monospace; font-size: 14px; }
         .plot-container { display: flex; justify-content: center; }
-    </style>
+    
+        /* Nút Ẩn / Hiện Lời Giải Chi Tiết */
+        .solution-toggle-wrapper {
+            margin: 28px 0 16px 0;
+        }
+        .solution-toggle-btn {
+            width: 100%;
+            background: #f8fafc;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 13px 20px;
+            font-size: 15px;
+            font-weight: 700;
+            color: #0284c7;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            font-family: inherit;
+        }
+        .solution-toggle-btn:hover {
+            background: #f0f9ff;
+            border-color: #38bdf8;
+            color: #0369a1;
+        }
+        .solution-toggle-btn.is-open {
+            background: #e0f2fe;
+            border-color: #0284c7;
+            color: #0369a1;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+        .solution-collapsible-content {
+            display: none;
+            border: 1.5px solid #0284c7;
+            border-top: none;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+            padding: 20px 22px;
+            background: #ffffff;
+        }
+        .solution-collapsible-content.is-open {
+            display: block;
+            animation: fadeInSol 0.25s ease-in-out;
+        }
+        @keyframes fadeInSol {
+            from { opacity: 0; transform: translateY(-4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+</style>
 </head>
 <body>
     <div class="problem">
@@ -46,37 +97,151 @@ fig.add_trace(go.Scatter(x=x_val, y=np.zeros_like(x_val), mode='lines', line=dic
 fig.add_trace(go.Scatter(x=x_val, y=3 - x_val**2, mode='lines', fill='tonexty', name='Miền D'))
 fig.show()</code></pre>
     
+<div class="solution-toggle-wrapper">
+  <button type="button" class="solution-toggle-btn" onclick="toggleSolutionBox(this)">
+    <span><span class="sol-icon">📖</span> <span class="sol-text">Xem lời giải chi tiết (Bấm để mở)</span></span>
+    <span class="sol-arrow">▼</span>
+  </button>
+  <div class="solution-collapsible-content">
 <div style="background:#eaf4fb; border-left:5px solid #2980b9; padding:20px; margin-top:30px; border-radius:6px;">
-  <h3 style="color:#1a5276;">Lời giải – Bài B1.7</h3>
-  <p><strong>Đề bài:</strong> Tính \(\iint_D x^2 y\,dxdy\), với \(D\) giới hạn bởi parabol \(y = 3 - x^2\) và trục \(Ox\).</p>
+  <h3 style="color:#1a5276;">Lời giải chi tiết – Bài B1.7</h3>
+  <p><strong>Đề bài:</strong> Tính tích phân kép \(\iint_D x^2 y\,dxdy\), với \(D\) là miền phẳng giới hạn bởi đường cong parabol \(y = 3 - x^2\) và trục hoành \(Ox\).</p>
 
-  <p><strong>Bước 1: Xác định miền D.</strong><br>
-  Parabol \(y = 3-x^2\) cắt trục \(Ox\) tại \(3-x^2=0 \Rightarrow x = \pm\sqrt{3}\).<br>
-  Miền D: \(-\sqrt{3} \le x \le \sqrt{3}\), \(0 \le y \le 3-x^2\).</p>
+  
+  <h4>Bước 1: Tìm hoành độ giao điểm (xác định giới hạn của x)</h4>
+  <p>Để biết cái "mái vòm" này rộng từ đâu đến đâu theo chiều ngang, ta cần tìm xem parabol cắt mặt đất (trục \(Ox\)) tại điểm nào. Trục \(Ox\) có phương trình là \(y = 0\).</p>
+  <p>Ta xét phương trình hoành độ giao điểm (cho hai cái \(y\) bằng nhau):</p>
+  \[ 3 - x^2 = 0 \]
+  <p>Giải phương trình này từng bước:</p>
+  \[ 3 = x^2 \]
+  \[ x = \sqrt{3} \quad \text{hoặc} \quad x = -\sqrt{3} \]
+  <p>Vậy, vùng biến thiên của \(x\) (chiều rộng của miền) là từ \(x = -\sqrt{3}\) ở bên trái đến \(x = \sqrt{3}\) ở bên phải.</p>
+  <p>Ta viết: \(-\sqrt{3} \le x \le \sqrt{3}\).</p>
 
-  <p><strong>Bước 2: Tính tích phân.</strong></p>
-  \[I = \int_{-\sqrt{3}}^{\sqrt{3}} \int_0^{3-x^2} x^2 y\,dy\,dx\]
+  <h4>Bước 2: Xác định đường trên và đường dưới (xác định giới hạn của y)</h4>
+  <p>Bây giờ ta hãy tưởng tượng mình đang đứng tại một vị trí \(x\) bất kỳ (ví dụ \(x=0\)). Ta nhìn lên và nhìn xuống để xem giới hạn trên và dưới là gì.</p>
+  <ul>
+    <li>Đường ranh giới phía dưới là trục hoành, nên \(y\) bắt đầu từ \(0\).</li>
+    <li>Đường ranh giới phía trên là đường vòm parabol, nên \(y\) kết thúc ở \(3 - x^2\).</li>
+  </ul>
+  <p>Lưu ý kiểm tra: Lấy thử \(x = 0\) (nằm giữa \(-\sqrt{3}\) và \(\sqrt{3}\)), ta có \(y = 3 - 0^2 = 3 > 0\). Vậy phần parabol này quả thực nằm phía <strong>trên</strong> trục hoành.</p>
+  <p>Do đó, tại một vị trí \(x\) bất kỳ, \(y\) sẽ chạy từ \(0\) đến \(3 - x^2\).</p>
+  <p>Ta viết: \(0 \le y \le 3 - x^2\).</p>
 
-  <p>Tích phân trong theo \(y\):</p>
-  \[\int_0^{3-x^2} x^2 y\,dy = x^2\cdot\frac{(3-x^2)^2}{2}\]
+  <h4>Bước 3: Chuyển tích phân kép thành tích phân lặp</h4>
+  <p>Bây giờ ta thay các cận (giới hạn) vừa tìm được vào công thức tích phân kép. Quy tắc là: cận của \(x\) (là các số cụ thể) sẽ nằm ở bên ngoài, còn cận của \(y\) (có chứa biến \(x\)) sẽ nằm ở bên trong.</p>
+  \[ I = \int_{-\sqrt{3}}^{\sqrt{3}} \left( \int_{0}^{3-x^2} x^2 y \,dy \right) dx \]
+  <p>Điều này có nghĩa là: ta sẽ tính tích phân bên trong (theo biến \(y\)) trước, coi \(x\) giống như một hằng số. Sau khi có kết quả, ta mới tính tiếp tích phân bên ngoài (theo biến \(x\)).</p>
 
-  <p>Vì \(x^2(3-x^2)^2\) là hàm chẵn:</p>
-  \[I = 2\int_0^{\sqrt{3}} \frac{x^2(3-x^2)^2}{2}\,dx = \int_0^{\sqrt{3}} x^2(3-x^2)^2\,dx\]
+  <h4>Bước 4: Tính tích phân lớp bên trong (theo biến y)</h4>
+  <p>Ta xét phần bên trong:</p>
+  \[ \int_{0}^{3-x^2} x^2 y \,dy \]
+  <p>Vì ta đang tính theo \(dy\) nên \(x^2\) được coi là hằng số, ta có thể giữ nguyên nó. Áp dụng quy tắc tính nguyên hàm cơ bản \(\int y^n \,dy = \frac{y^{n+1}}{n+1}\), ở đây \(n=1\):</p>
+  \[ \int y \,dy = \frac{y^2}{2} \]
+  <p>Vậy nguyên hàm của cả cụm là:</p>
+  \[ x^2 \cdot \frac{y^2}{2} \]
+  <p>Thế cận trên \(y = 3-x^2\) và cận dưới \(y = 0\) vào:</p>
+  \[ \left[ x^2 \cdot \frac{y^2}{2} \right]_{y=0}^{y=3-x^2} \]
+  <p>Thay giá trị cận trên trừ đi cận dưới:</p>
+  \[ = \left( x^2 \cdot \frac{(3-x^2)^2}{2} \right) - \left( x^2 \cdot \frac{0^2}{2} \right) \]
+  \[ = x^2 \cdot \frac{(3-x^2)^2}{2} - 0 \]
+  \[ = \frac{x^2(3-x^2)^2}{2} \]
 
-  <p>Khai triển: \(x^2(3-x^2)^2 = x^2(9-6x^2+x^4) = 9x^2 - 6x^4 + x^6\)</p>
-  \[I = \int_0^{\sqrt{3}} (9x^2 - 6x^4 + x^6)\,dx = \left[3x^3 - \frac{6x^5}{5} + \frac{x^7}{7}\right]_0^{\sqrt{3}}\]
+  <h4>Bước 5: Khai triển biểu thức để dễ tính toán</h4>
+  <p>Trước khi đưa biểu thức này vào tích phân ngoài, ta nên nhân bung nó ra cho dễ. Ta sẽ dùng hằng đẳng thức đáng nhớ \((a - b)^2 = a^2 - 2ab + b^2\):</p>
+  \[ (3 - x^2)^2 = 3^2 - 2 \cdot 3 \cdot x^2 + (x^2)^2 \]
+  \[ = 9 - 6x^2 + x^4 \]
+  <p>Bây giờ nhân thêm \(x^2\) vào cụm này (chưa xét đến mẫu số 2 vội):</p>
+  \[ x^2 \cdot (9 - 6x^2 + x^4) \]
+  \[ = x^2 \cdot 9 - x^2 \cdot 6x^2 + x^2 \cdot x^4 \]
+  <p>Nhắc lại quy tắc nhân lũy thừa: \(x^m \cdot x^n = x^{m+n}\). Áp dụng vào:</p>
+  \[ = 9x^2 - 6x^4 + x^6 \]
+  <p>Vậy biểu thức cần tích phân trở thành:</p>
+  \[ \frac{9x^2 - 6x^4 + x^6}{2} \]
 
-  <p>Với \(x = \sqrt{3}\): \(x^3 = 3\sqrt{3}\), \(x^5 = 9\sqrt{3}\), \(x^7 = 27\sqrt{3}\):</p>
-  \[I = 3\cdot3\sqrt{3} - \frac{6\cdot9\sqrt{3}}{5} + \frac{27\sqrt{3}}{7}\]
-  \[= 9\sqrt{3} - \frac{54\sqrt{3}}{5} + \frac{27\sqrt{3}}{7}\]
-  \[= \sqrt{3}\left(9 - \frac{54}{5} + \frac{27}{7}\right)\]
+  <h4>Bước 6: Tính tích phân lớp bên ngoài (theo biến x)</h4>
+  <p>Bây giờ ta tính phần tích phân ngoài cùng:</p>
+  \[ I = \int_{-\sqrt{3}}^{\sqrt{3}} \frac{1}{2} (9x^2 - 6x^4 + x^6) \,dx \]
+  <p>Số \(\frac{1}{2}\) là hằng số, ta rút nó ra ngoài dấu tích phân cho gọn:</p>
+  \[ I = \frac{1}{2} \int_{-\sqrt{3}}^{\sqrt{3}} (9x^2 - 6x^4 + x^6) \,dx \]
+  
+  <p><em>Mẹo nhỏ:</em> Ta thấy hàm số bên trong \(f(x) = 9x^2 - 6x^4 + x^6\) chứa toàn mũ chẵn (2, 4, 6), nên đây là một "hàm chẵn". Khi tích phân một hàm chẵn trên một đoạn đối xứng (từ \(-a\) đến \(a\)), ta có thể tính từ \(0\) đến \(a\) rồi nhân đôi lên. Điều này giúp ta tránh phải thay số âm phức tạp.</p>
+  \[ \int_{-a}^{a} f(x) \,dx = 2 \int_{0}^{a} f(x) \,dx \]
+  <p>Áp dụng vào bài của ta, số 2 nhân vào sẽ triệt tiêu số \(\frac{1}{2}\) ở bên ngoài:</p>
+  \[ I = \frac{1}{2} \cdot 2 \cdot \int_{0}^{\sqrt{3}} (9x^2 - 6x^4 + x^6) \,dx \]
+  \[ I = \int_{0}^{\sqrt{3}} (9x^2 - 6x^4 + x^6) \,dx \]
 
-  <p>Quy đồng mẫu 35: \(9 = \frac{315}{35}\), \(\frac{54}{5}=\frac{378}{35}\), \(\frac{27}{7}=\frac{135}{35}\):</p>
-  \[= \sqrt{3}\cdot\frac{315-378+135}{35} = \sqrt{3}\cdot\frac{72}{35} = \frac{72\sqrt{3}}{35}\]
+  <p>Áp dụng công thức nguyên hàm cơ bản \(\int x^n \,dx = \frac{x^{n+1}}{n+1}\):</p>
+  <ul>
+    <li>Nguyên hàm của \(9x^2\) là \(9 \cdot \frac{x^3}{3} = 3x^3\)</li>
+    <li>Nguyên hàm của \(-6x^4\) là \(-6 \cdot \frac{x^5}{5} = -\frac{6x^5}{5}\)</li>
+    <li>Nguyên hàm của \(x^6\) là \(\frac{x^7}{7}\)</li>
+  </ul>
+  <p>Gộp lại, ta có:</p>
+  \[ I = \left[ 3x^3 - \frac{6x^5}{5} + \frac{x^7}{7} \right]_{0}^{\sqrt{3}} \]
 
-  <p style="color:#1a5276; font-weight:bold;">\(\boxed{I = \dfrac{72\sqrt{3}}{35}}\) ✓ Khớp với đáp án.</p>
+  <h4>Bước 7: Thay cận và tính toán số học</h4>
+  <p>Thay cận trên \(x = \sqrt{3}\) vào biểu thức, sau đó thay cận dưới \(x = 0\) (khi thay \(x = 0\) thì toàn bộ biểu thức bằng 0 nên ta không cần viết ra).</p>
+  <p>Để thay dễ dàng, hãy tính trước các lũy thừa của \(\sqrt{3}\):</p>
+  <ul>
+    <li>\(x^3 = (\sqrt{3})^3 = \sqrt{3} \cdot \sqrt{3} \cdot \sqrt{3} = 3\sqrt{3}\)</li>
+    <li>\(x^5 = (\sqrt{3})^5 = (\sqrt{3})^4 \cdot \sqrt{3} = 9\sqrt{3}\)</li>
+    <li>\(x^7 = (\sqrt{3})^7 = (\sqrt{3})^6 \cdot \sqrt{3} = 27\sqrt{3}\)</li>
+  </ul>
+  
+  <p>Lắp các giá trị này vào:</p>
+  \[ I = 3(3\sqrt{3}) - \frac{6(9\sqrt{3})}{5} + \frac{27\sqrt{3}}{7} \]
+  <p>Thực hiện các phép nhân:</p>
+  \[ I = 9\sqrt{3} - \frac{54\sqrt{3}}{5} + \frac{27\sqrt{3}}{7} \]
+  <p>Tất cả đều có \(\sqrt{3}\), nên ta rút \(\sqrt{3}\) ra làm thừa số chung:</p>
+  \[ I = \sqrt{3} \left( 9 - \frac{54}{5} + \frac{27}{7} \right) \]
+  <p>Bây giờ cần quy đồng mẫu số phần trong ngoặc. Mẫu chung của 5 và 7 là \(5 \cdot 7 = 35\).</p>
+  <ul>
+    <li>Phân số thứ nhất: \(9 = \frac{9 \cdot 35}{35} = \frac{315}{35}\)</li>
+    <li>Phân số thứ hai: \(\frac{54}{5} = \frac{54 \cdot 7}{5 \cdot 7} = \frac{378}{35}\)</li>
+    <li>Phân số thứ ba: \(\frac{27}{7} = \frac{27 \cdot 5}{7 \cdot 5} = \frac{135}{35}\)</li>
+  </ul>
+  <p>Thực hiện phép cộng trừ tử số:</p>
+  \[ \frac{315}{35} - \frac{378}{35} + \frac{135}{35} \]
+  \[ = \frac{315 - 378 + 135}{35} \]
+  <p>Tính từng bước: \(315 - 378 = -63\). Rồi cộng tiếp: \(-63 + 135 = 72\).</p>
+  \[ = \frac{72}{35} \]
+  
+  <p>Nhân lại với \(\sqrt{3}\) ở ngoài:</p>
+  \[ I = \sqrt{3} \cdot \frac{72}{35} = \frac{72\sqrt{3}}{35} \]
+
+  <h4>Kết luận</h4>
+  <p style="color:#1a5276; font-weight:bold;">\(\boxed{I = \frac{72\sqrt{3}}{35}}\)</p>
+  <p><strong>Kiểm tra lại tính hợp lý:</strong> Kết quả là một số dương (khoảng 3.56). Điều này là hoàn toàn hợp lý! Vì trên toàn bộ miền D, hoành độ \(x\) và tung độ \(y\) đều tạo ra giá trị \(x^2 \cdot y \ge 0\) (do \(x^2\) luôn không âm, và \(y\) đi từ 0 đến phần vòm trên nên cũng không âm). Tích phân của một hàm số không âm luôn cho kết quả không âm.</p>
+</div>
+  </div>
 </div>
 
 </div>
+<script>
+    function toggleSolutionBox(btn) {
+        const content = btn.nextElementSibling;
+        const isOpen = content.classList.contains('is-open');
+        const icon = btn.querySelector('.sol-icon');
+        const text = btn.querySelector('.sol-text');
+        const arrow = btn.querySelector('.sol-arrow');
+        if (isOpen) {
+            content.classList.remove('is-open');
+            btn.classList.remove('is-open');
+            if (icon) icon.textContent = '📖';
+            if (text) text.textContent = 'Xem lời giải chi tiết (Bấm để mở)';
+            if (arrow) arrow.textContent = '▼';
+        } else {
+            content.classList.add('is-open');
+            btn.classList.add('is-open');
+            if (icon) icon.textContent = '🙈';
+            if (text) text.textContent = 'Thu gọn lời giải';
+            if (arrow) arrow.textContent = '▲';
+            if (window.MathJax && MathJax.typesetPromise) {
+                MathJax.typesetPromise([content]).catch(err => console.log(err));
+            }
+        }
+    }
+</script>
 </body>
 </html>
