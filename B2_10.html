@@ -93,67 +93,23 @@
   </button>
   <div class="solution-collapsible-content">
 <div style="background:#eaf4fb; border-left:5px solid #2980b9; padding:20px; margin-top:30px; border-radius:6px;">
-  <h3 style="color:#1a5276;">Lời giải chi tiết – Bài B2.10</h3>
-  <p><strong>Đề bài:</strong> Tính tích phân \( \iint_D (x^2+y^2+1)^2 \,dxdy \), với miền \( D \) nằm giữa hai đường tròn \( x^2+y^2=1 \) và \( x^2+y^2=9 \), lấy phần \( x \ge 0, y \ge 0 \).</p>
-  
-  <h4>Bước 1: Hình dung không gian làm việc D</h4>
-  <ul>
-    <li>Hai phương trình đường tròn cho ta giới hạn bán kính \( R^2=1 \) (tức \( R=1 \)) và \( R^2=9 \) (tức \( R=3 \)). Vùng nằm giữa chúng là hình vành khăn.</li>
-    <li>Điều kiện \( x \ge 0 \) và \( y \ge 0 \) buộc chúng ta chỉ được phép làm việc ở góc phần tư thứ nhất (phía trên bên phải).</li>
-  </ul>
-  <p><em>Mô tả hình dáng:</em> Miền \( D \) là một phần tư (1/4) của chiếc vành khăn, nằm trọn vẹn ở góc bên phải, phía trên.</p>
-
-  <h4>Bước 2: Gói ghém bằng tọa độ cực</h4>
-  <p>Ta thay biến: \( x^2+y^2 = r^2 \) và \( dxdy = r \,dr \,d\theta \).</p>
-  
-  <p><strong>Tìm cận (ranh giới):</strong></p>
-  <ol>
-    <li>Với \( r \): Tính từ bờ trong ra bờ ngoài, bán kính từ 1 đến 3. Nên \( 1 \le r \le 3 \).</li>
-    <li>Với \(\theta\): Góc phần tư thứ nhất nên quét từ tia nằm ngang dưới (\( 0^\circ \)) đến tia thẳng đứng trên (\( 90^\circ \) hay \( \frac{\pi}{2} \)). Do đó: \( 0 \le \theta \le \frac{\pi}{2} \).</li>
-  </ol>
-
-  <h4>Bước 3: Bắt tay vào tính toán</h4>
-  <p>Thay cụm biểu thức trong ngoặc thành \( (r^2 + 1) \). Vậy đề bài ban đầu biến thành:</p>
-  \[ I = \int_0^{\pi/2} \left( \int_1^3 (r^2+1)^2 \cdot r \,dr \right) d\theta \]
-  
-  <p>Tách rời hai phần góc và bán kính (vì cận là các hằng số không dính líu đến nhau):</p>
-  \[ I = \left( \int_0^{\pi/2} 1 \,d\theta \right) \cdot \left( \int_1^3 (r^2+1)^2 \cdot r \,dr \right) \]
-
-  <p><em>Tính phần góc (siêu dễ):</em></p>
-  \[ \int_0^{\pi/2} 1 \,d\theta = \frac{\pi}{2} \]
-
-  <p><em>Tính phần bán kính (cần chút khéo léo):</em></p>
-  \[ I_r = \int_1^3 (r^2+1)^2 \cdot r \,dr \]
-  <p>Để không phải khai triển bình phương lằng nhằng, ta dùng chiêu <strong>đổi biến số</strong>:</p>
-  <p>Đặt ruột \( u = r^2 + 1 \). Lấy đạo hàm hai bên: \( du = 2r \,dr \). Suy ra \( r \,dr = \frac{du}{2} \).</p>
-  
-  <p>Đổi cận (điểm đầu cuối) cho bạn \( u \):</p>
-  <ul>
-    <li>Khi \( r = 1 \Rightarrow u = 1^2 + 1 = 2 \).</li>
-    <li>Khi \( r = 3 \Rightarrow u = 3^2 + 1 = 10 \).</li>
-  </ul>
-  
-  <p>Tích phân trở thành giao diện mới, thân thiện hơn:</p>
-  \[ I_r = \int_2^{10} u^2 \cdot \frac{du}{2} = \frac{1}{2} \int_2^{10} u^2 \,du \]
-  
-  <p>Nguyên hàm của \( u^2 \) là \( \frac{u^3}{3} \):</p>
-  \[ I_r = \frac{1}{2} \left[ \frac{u^3}{3} \right]_2^{10} \]
-  
-  <p>Thế số vào:</p>
-  \[ I_r = \frac{1}{2} \left( \frac{10^3}{3} - \frac{2^3}{3} \right) = \frac{1}{2} \left( \frac{1000}{3} - \frac{8}{3} \right) \]
-  \[ = \frac{1}{2} \cdot \frac{992}{3} = \frac{992}{6} \]
-  <p>Rút gọn cho 2: \( \frac{992}{6} = \frac{496}{3} \).</p>
-
-  <p><em>Ráp 2 phần lại:</em></p>
-  \[ I = \frac{\pi}{2} \cdot \frac{496}{3} = \frac{496\pi}{6} = \frac{248\pi}{3} \]
-
-  <h4>Bước 4: Kết luận</h4>
-  <p style="color:#1a5276; font-weight:bold; font-size:18px;">\(\boxed{I = \dfrac{248\pi}{3}}\)</p>
-  <p><strong>Ý nghĩa bài toán:</strong> Bằng cách kết hợp đổi biến sang tọa độ cực để làm phẳng hình vành khăn, rồi lại đổi biến lần hai \( (u = r^2+1) \) để thu gọn hàm số, những biểu thức cồng kềnh đã sụp đổ hoàn toàn trước các bước giải tuần tự, mạch lạc.</p>
+  <h3 style="color:#1a5276;">Lời giải – Bài B2.10</h3>
+  <p><strong>Đề bài:</strong> Tính \(\iint_D (x^2+y^2+1)^2\,dxdy\), \(D\) nằm giữa \(x^2+y^2=1\) và \(x^2+y^2=9\), \(x, y \ge 0\).</p>
+  <p><strong>Bước 1: Chuyển sang tọa độ cực.</strong><br>
+  Miền \(D\) là 1/4 hình vành khăn: \(1 \le r \le 3\), \(0 \le \theta \le \frac{\pi}{2}\).</p>
+  <p><strong>Bước 2: Tính tích phân.</strong></p>
+  \[I = \int_0^{\pi/2} \int_1^3 (r^2+1)^2 \cdot r\,dr\,d\theta = \frac{\pi}{2} \int_1^3 (r^2+1)^2 r\,dr\]
+  <p>Đặt \(u = r^2+1 \Rightarrow du = 2r\,dr\). Khi \(r=1, u=2\). Khi \(r=3, u=10\).</p>
+  \[I = \frac{\pi}{2} \int_2^{10} u^2 \frac{du}{2} = \frac{\pi}{4} \left[\frac{u^3}{3}\right]_2^{10} = \frac{\pi}{12} (1000 - 8) = \frac{992\pi}{12} = \frac{248\pi}{3}\]
+  <p style="color:#1a5276; font-weight:bold;">\(\boxed{I = \dfrac{248\pi}{3}}\) ✓ Khớp với đáp án.</p>
 </div>
   </div>
 </div>
 
+
+<div style="margin-top: 35px; padding: 12px 16px; border-top: 1px dashed #cbd5e1; text-align: center; color: #94a3b8; font-size: 11.5px; line-height: 1.6;">
+  <em>* Tài liệu và mô phỏng được tạo với sự hỗ trợ của AI, có thể còn tồn tại sai sót. Rất mong nhận được đóng góp ý kiến từ thầy cô và các bạn.</em>
+</div>
 </div>
 <script>
     function toggleSolutionBox(btn) {
@@ -180,9 +136,5 @@
         }
     }
 </script>
-
-<div style="margin-top: 40px; padding: 12px 16px; border-top: 1px dashed #cbd5e1; text-align: center; color: #94a3b8; font-size: 11.5px; line-height: 1.6;">
-  <em>* Tài liệu và mô phỏng được tạo với sự hỗ trợ của AI, có thể còn tồn tại sai sót. Rất mong nhận được đóng góp ý kiến từ thầy cô và các bạn.</em>
-</div>
 </body>
 </html>

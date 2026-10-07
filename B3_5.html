@@ -92,76 +92,27 @@
   <div class="solution-collapsible-content">
 <h3>&#9998; Lời giải</h3>
         <div class="solution">
-  <h4>Bước 1: Hình dung vật thể và dùng "phép thuật" đối xứng</h4>
-  <p>Đề bài yêu cầu tính \(\iiint_\Omega (x^2+y^2+z^2) \, dxdydz\) trên vật thể \(\Omega: |x| + |y| + |z| \le a\).</p>
-  <p>Biểu thức có dấu giá trị tuyệt đối \(|\cdot|\) cho thấy vật thể này cực kỳ cân đối. Nó giống như một viên kim cương (khối bát diện đều) gồm 8 phần giống hệt nhau ghép lại, mỗi phần nằm ở một "góc phần tám" của không gian.</p>
-  <p>Hàm số cần tính là \(x^2+y^2+z^2\). Bất kể \(x, y, z\) âm hay dương thì bình phương lên cũng thành dương. Do đó, "khối lượng" ở cả 8 phần là như nhau!</p>
-  <p><strong>Mẹo:</strong> Thay vì tính cả khối to, ta chỉ cần tính <strong>1 phần nhỏ</strong> ở góc phần tám thứ nhất (nơi \(x, y, z\) đều dương) rồi <strong>nhân 8</strong> lên.</p>
-  <p>Phần nhỏ này gọi là \(\Omega_1\), có các giới hạn rất dễ chịu (bỏ được dấu giá trị tuyệt đối):</p>
-  <p>\(x \ge 0\), \(y \ge 0\), \(z \ge 0\), và \(x + y + z \le a\).</p>
-  \[ I = 8 \cdot \iiint_{\Omega_1} (x^2+y^2+z^2) \, dxdydz \]
-
-  <h4>Bước 2: Chơi chiêu "Bình đẳng" giữa các biến</h4>
-  <p>Nhìn vào hàm \(x^2+y^2+z^2\) và điều kiện \(x+y+z \le a\), ta thấy ba biến \(x, y, z\) đóng vai trò y chang nhau (bình đẳng). Do đó:</p>
-  \[ \iiint_{\Omega_1} x^2 \, dV = \iiint_{\Omega_1} y^2 \, dV = \iiint_{\Omega_1} z^2 \, dV \]
-  <p>(Trong đó \(dV\) viết tắt cho \(dxdydz\)).</p>
-  <p>Vậy thay vì tính một lúc cả cụm \((x^2+y^2+z^2)\), ta chỉ cần tính cho một mình \(z^2\), rồi <strong>nhân 3</strong> lên!</p>
-  \[ I = 8 \cdot 3 \cdot \iiint_{\Omega_1} z^2 \, dxdydz = 24 \iiint_{\Omega_1} z^2 \, dxdydz \]
-
-  <h4>Bước 3: Xác định cận cho phần \(\Omega_1\)</h4>
-  <p>Từ \(x+y+z \le a\), ta xếp các cận từ ngoài vào trong như sau:</p>
-  <ul>
-    <li>Chiều \(z\) ngoài cùng: đi từ mặt đất \(0\) lên cao nhất là \(a\) (khi \(x=y=0\)). Vậy \(0 \le z \le a\).</li>
-    <li>Chiều \(x\) ở giữa: đi từ \(0\) đến giới hạn tạo bởi phương trình khi đã biết \(z\) (cho \(y=0\)). Vậy \(0 \le x \le a-z\).</li>
-    <li>Chiều \(y\) trong cùng: đi từ \(0\) đến \(a-x-z\). Vậy \(0 \le y \le a-z-x\).</li>
-  </ul>
-  <p>Thiết lập tích phân lặp (đưa 24 ra ngoài):</p>
-  \[ I = 24 \int_0^a \left( \int_0^{a-z} \left( \int_0^{a-z-x} z^2 \, dy \right) dx \right) dz \]
-  <p>Đưa chữ \(z^2\) ra khỏi lớp của \(x\) và \(y\) cho đỡ vướng mắt:</p>
-  \[ I = 24 \int_0^a z^2 \left( \int_0^{a-z} \left( \int_0^{a-z-x} 1 \, dy \right) dx \right) dz \]
-
-  <h4>Bước 4: Tính lớp trong cùng (theo \(y\))</h4>
-  <p>Nguyên hàm của \(1 \, dy\) đơn giản là \(y\).</p>
-  \[ \int_0^{a-z-x} 1 \, dy = [y]_0^{a-z-x} = (a-z-x) - 0 = a-z-x \]
-
-  <h4>Bước 5: Tính lớp giữa (theo \(x\))</h4>
-  <p>Ráp kết quả vừa tính vào lớp của \(x\):</p>
-  \[ \int_0^{a-z} (a-z-x) \, dx \]
-  <p>Trong ngoặc có dạng hằng số trừ đi biến \(x\). Nguyên hàm của \((C - x)\) là \(-\frac{(C - x)^2}{2}\) (với \(C\) là cụm \(a-z\)).</p>
-  \[ = \left[ -\frac{(a-z-x)^2}{2} \right]_{x=0}^{x=a-z} \]
-  <p>Thay cận trên \(x = a-z\):</p>
-  \[ = -\frac{(a-z-(a-z))^2}{2} = -\frac{0^2}{2} = 0 \]
-  <p>Thay cận dưới \(x = 0\) (và trừ đi nó):</p>
-  \[ - \left( -\frac{(a-z-0)^2}{2} \right) = \frac{(a-z)^2}{2} \]
-
-  <h4>Bước 6: Tính lớp ngoài cùng (theo \(z\))</h4>
-  <p>Ráp vào lớp ngoài cùng (nhớ đem theo 24 và \(z^2\)):</p>
-  \[ I = 24 \int_0^a z^2 \cdot \frac{(a-z)^2}{2} \, dz \]
-  <p>Đưa số 2 dưới mẫu ra ngoài, ta còn \(24/2 = 12\). Đồng thời khai triển hằng đẳng thức \((a-z)^2 = a^2 - 2az + z^2\):</p>
-  \[ I = 12 \int_0^a z^2 (a^2 - 2az + z^2) \, dz \]
-  <p>Nhân phân phối \(z^2\) vào trong ngoặc:</p>
-  \[ = 12 \int_0^a (a^2 z^2 - 2az^3 + z^4) \, dz \]
-  <p>Bây giờ tính nguyên hàm từng cái theo \(z\) (áp dụng \(\int z^n \, dz = \frac{z^{n+1}}{n+1}\)):</p>
-  \[ = 12 \left[ a^2 \frac{z^3}{3} - 2a \frac{z^4}{4} + \frac{z^5}{5} \right]_0^a \]
-  <p>Thay cận trên \(z=a\) vào (cận dưới bằng 0 rồi):</p>
-  \[ = 12 \left( a^2 \frac{a^3}{3} - 2a \frac{a^4}{4} + \frac{a^5}{5} \right) \]
-  \[ = 12 \left( \frac{a^5}{3} - \frac{2a^5}{4} + \frac{a^5}{5} \right) \]
-  <p>Rút \(a^5\) ra làm nhân tử chung, phân số giữa rút gọn \(\frac{2}{4} = \frac{1}{2}\):</p>
-  \[ = 12 a^5 \left( \frac{1}{3} - \frac{1}{2} + \frac{1}{5} \right) \]
-  <p>Quy đồng mẫu số chung là 30:</p>
-  \[ = 12 a^5 \left( \frac{10}{30} - \frac{15}{30} + \frac{6}{30} \right) \]
-  \[ = 12 a^5 \left( \frac{10 - 15 + 6}{30} \right) \]
-  \[ = 12 a^5 \cdot \frac{1}{30} \]
-  <p>Rút gọn phân số \(\frac{12}{30}\) (chia cả tử và mẫu cho 6) ta được \(\frac{2}{5}\).</p>
-  \[ I = \frac{2a^5}{5} \]
-
-  <h4>Kết luận và Ý nghĩa</h4>
-  <p style="color:#27ae60; font-weight:bold;">\(\boxed{I = \dfrac{2a^5}{5}}\) ✓</p>
-  <p><strong>Ý nghĩa:</strong> Bằng cách tinh mắt nhận ra tính đối xứng hoàn hảo của vật thể và hàm số, ta đã hô biến một bài toán tính toán cồng kềnh với dấu giá trị tuyệt đối thành một tích phân đơn giản trên một góc nhỏ rồi nhân lên. Đây là một "nước đi" rất phổ biến và hữu ích trong toán học!</p>
+  <p><strong>Bước 1: Khai thác tính đối xứng của khối bát diện đều \(\Omega: |x|+|y|+|z| \le a\).</strong><br>
+  - Miền \(\Omega\) đối xứng hoàn toàn qua cả 3 mặt phẳng tọa độ (chia thành 8 góc phần tám bằng nhau), và hàm \(f(x,y,z) = x^2+y^2+z^2\) là hàm chẵn đối với từng biến \(x, y, z\).<br>
+  - Gọi \(\Omega_1 = \{(x,y,z) : x \ge 0, y \ge 0, z \ge 0, x+y+z \le a\}\) là phần ở góc phần tám thứ nhất, ta có:
+  \[I = 8 \iiint_{\Omega_1} (x^2+y^2+z^2)\,dxdydz\]
+  - Do vai trò của \(x, y, z\) trên \(\Omega_1\) hoàn toàn bình đẳng nên \(\iiint_{\Omega_1} x^2\,dV = \iiint_{\Omega_1} y^2\,dV = \iiint_{\Omega_1} z^2\,dV\). Suy ra:
+  \[I = 8 \cdot 3 \iiint_{\Omega_1} z^2\,dxdydz = 24 \int_0^a z^2\,dz \int_0^{a-z} dx \int_0^{a-z-x} dy\]</p>
+  <p><strong>Bước 2: Tính tích phân lặp từng bước.</strong><br>
+  - Tích phân theo \(y\): \(\displaystyle \int_0^{a-z-x} dy = a - z - x\).<br>
+  - Tích phân theo \(x\):
+  \[\int_0^{a-z} (a-z-x)\,dx = \left[-\frac{(a-z-x)^2}{2}\right]_{x=0}^{x=a-z} = \frac{(a-z)^2}{2}\]
+  - Tích phân theo \(z\):
+  \[I = 24 \int_0^a z^2 \cdot \frac{(a-z)^2}{2}\,dz = 12 \int_0^a z^2(a^2 - 2az + z^2)\,dz = 12 \int_0^a \left(a^2 z^2 - 2az^3 + z^4\right) dz\]
+  \[= 12 \left[ \frac{a^2 z^3}{3} - \frac{2a z^4}{4} + \frac{z^5}{5} \right]_0^a = 12a^5 \left( \frac{1}{3} - \frac{1}{2} + \frac{1}{5} \right) = 12a^5 \cdot \frac{10 - 15 + 6}{30} = \frac{12a^5}{30} = \frac{2a^5}{5}\]</p>
+  <p style="color:#27ae60; font-weight:bold;">\(\boxed{I = \dfrac{2a^5}{5}}\) ✓ Khớp hoàn toàn với đáp án!</p>
 </div>
         <div class="answer-box">&#10003; Kết quả: \(\dfrac{2a^5}{5}\)</div>
         <div class="check">Kết quả: \(\dfrac{2a^5}{5}\). Khớp đáp án đề: <strong>2a⁵/5</strong> ✓</div>
-        <h3>&#128202; Hình minh họa</h3>
+  </div>
+</div>
+
+<h3>&#128202; Hình minh họa</h3>
         
 <p style="text-align:center; color:#e67e22; font-weight:bold; margin-bottom:5px;">&#128208; Hình vẽ cho: \(\iiint_\Omega (x^2+y^2+z^2)\,dxdydz\), \(\Omega\): \(|x|+|y|+|z|\le a\)</p>
 <div class="plot-container"><div style="height:900px; width:800px;">                        <script>window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
@@ -169,9 +120,12 @@
         <h3>&#128187; Mã nguồn Python (tham khảo)</h3>
         <pre class="code-block"># Bát diện |x|+|y|+|z|<=a
 # I = 2a^5/5 (tính bằng Dirichlet hoặc đối xứng)</pre>
-    </div>
-  </div>
-</div><script>
+    
+<div style="margin-top: 35px; padding: 12px 16px; border-top: 1px dashed #cbd5e1; text-align: center; color: #94a3b8; font-size: 11.5px; line-height: 1.6;">
+  <em>* Tài liệu và mô phỏng được tạo với sự hỗ trợ của AI, có thể còn tồn tại sai sót. Rất mong nhận được đóng góp ý kiến từ thầy cô và các bạn.</em>
+</div>
+</div>
+<script>
     function toggleSolutionBox(btn) {
         const content = btn.nextElementSibling;
         const isOpen = content.classList.contains('is-open');
@@ -196,9 +150,5 @@
         }
     }
 </script>
-
-<div style="margin-top: 40px; padding: 12px 16px; border-top: 1px dashed #cbd5e1; text-align: center; color: #94a3b8; font-size: 11.5px; line-height: 1.6;">
-  <em>* Tài liệu và mô phỏng được tạo với sự hỗ trợ của AI, có thể còn tồn tại sai sót. Rất mong nhận được đóng góp ý kiến từ thầy cô và các bạn.</em>
-</div>
 </body>
 </html>

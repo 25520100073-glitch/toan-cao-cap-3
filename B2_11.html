@@ -93,66 +93,24 @@
   </button>
   <div class="solution-collapsible-content">
 <div style="background:#eaf4fb; border-left:5px solid #2980b9; padding:20px; margin-top:30px; border-radius:6px;">
-  <h3 style="color:#1a5276;">Lời giải chi tiết – Bài B2.11</h3>
-  <p><strong>Đề bài:</strong> Tính tích phân \( \iint_D xy \,dxdy \), với miền \( D \) bị kẹp bởi \( x^2+y^2 \le 2x \) và \( y \ge 0 \).</p>
-  
-  <h4>Bước 1: Phác họa "chân tướng" miền D</h4>
-  <ul>
-    <li>Từ \( x^2+y^2 \le 2x \), nếu đưa về dạng chuẩn bằng cách thêm 1 vào hai vế, ta có \( (x-1)^2 + y^2 \le 1 \). Đây là một hình tròn có bán kính 1, nhưng tâm không ở gốc mà bị đẩy lệch sang phải tới tọa độ \( (1,0) \).</li>
-    <li>Điều kiện \( y \ge 0 \) đóng vai trò như cây kéo, cắt lìa phần bên dưới trục hoành và chỉ giữ lại phần bên trên.</li>
-  </ul>
-  <p><em>Mô tả hình dáng:</em> Miền \( D \) là nửa trên của một hình tròn nằm lùi sang bên phải hệ trục tọa độ.</p>
-
-  
-  <h4>Bước 2: Sử dụng công cụ tọa độ cực</h4>
-  <p>Thế \( x = r \cos\theta \) và \( x^2+y^2 = r^2 \):</p>
-  \[ r^2 \le 2(r\cos\theta) \Rightarrow 0 \le r \le 2\cos\theta \]
-  
-  <p><strong>Xác định góc quay \(\theta\):</strong></p>
-  <p>Vì hình nằm gọn gẽ ở góc phần tư thứ nhất (bên trên và bên phải), nên nét vẽ xuất phát từ trục hoành \( 0^\circ \) và chĩa dần lên trục tung \( 90^\circ \) (hay \( \frac{\pi}{2} \)).</p>
-  \[ 0 \le \theta \le \frac{\pi}{2} \]
-
-  <h4>Bước 3: Lắp đặt tích phân và giải</h4>
-  <p>Chuyển hàm số \( xy \) thành \( (r \cos\theta)(r \sin\theta) \). Thêm cái lượng đuôi định thức \( r \,dr \,d\theta \). Ta gom lại được ruột tích phân là \( r^3 \cos\theta \sin\theta \).</p>
-  
-  \[ I = \int_0^{\pi/2} \left( \int_0^{2\cos\theta} (r^3 \cos\theta \sin\theta) \,dr \right) d\theta \]
-  
-  <p>Vì tích phân trong đang quét theo biến \( r \), cụm \(\cos\theta \sin\theta\) coi như bù nhìn hằng số, đẩy ra ngoài chơi:</p>
-  \[ I = \int_0^{\pi/2} \cos\theta \sin\theta \left( \int_0^{2\cos\theta} r^3 \,dr \right) d\theta \]
-  
-  <p><em>Lấy nguyên hàm phần trong (theo r):</em></p>
-  \[ \int_0^{2\cos\theta} r^3 \,dr = \left[ \frac{r^4}{4} \right]_0^{2\cos\theta} \]
-  \[ = \frac{(2\cos\theta)^4}{4} - 0 = \frac{16\cos^4\theta}{4} = 4\cos^4\theta \]
-
-  <p><em>Ráp lại ra vòng ngoài (theo \(\theta\)):</em></p>
-  \[ I = \int_0^{\pi/2} \cos\theta \sin\theta \cdot (4\cos^4\theta) \,d\theta \]
-  <p>Gộp \(\cos\theta\) với \(\cos^4\theta\) để ra mũ 5:</p>
-  \[ I = 4 \int_0^{\pi/2} \cos^5\theta \sin\theta \,d\theta \]
-
-  <p><em>Áp dụng đổi biến số lượng giác:</em></p>
-  <p>Đặt \( u = \cos\theta \), đạo hàm ta được \( du = -\sin\theta \,d\theta \Rightarrow \sin\theta \,d\theta = -du \).</p>
-  
-  <p>Làm lại điểm mốc (cận):</p>
-  <ul>
-    <li>Khi \( \theta = 0 \Rightarrow u = \cos(0) = 1 \).</li>
-    <li>Khi \( \theta = \frac{\pi}{2} \Rightarrow u = \cos(\frac{\pi}{2}) = 0 \).</li>
-  </ul>
-  
-  <p>Thay bộ cánh mới cho tích phân:</p>
-  \[ I = 4 \int_1^0 u^5 (-du) \]
-  <p>Dấu âm bên trong có thể dùng để lật ngược cận từ (1 đến 0) thành (0 đến 1) cho thuận mắt:</p>
-  \[ = 4 \int_0^1 u^5 \,du \]
-  
-  <p>Nguyên hàm của \( u^5 \) là \( \frac{u^6}{6} \):</p>
-  \[ I = 4 \left[ \frac{u^6}{6} \right]_0^1 = 4 \left( \frac{1}{6} - 0 \right) = \frac{4}{6} = \frac{2}{3} \]
-
-  <h4>Bước 4: Kết luận</h4>
-  <p style="color:#1a5276; font-weight:bold; font-size:18px;">\(\boxed{I = \dfrac{2}{3}}\)</p>
-  <p><strong>Ý nghĩa bài toán:</strong> Dù đối mặt với biên độ chạy bằng hàm lượng giác (\( 2\cos\theta \)), quy trình tích phân từng lớp (trong ra ngoài) kết hợp đổi biến số \( u \) vẫn "làm mềm" toàn bộ bài toán, dẫn về phân số \( 2/3 \) vô cùng thân thiện.</p>
+  <h3 style="color:#1a5276;">Lời giải – Bài B2.11</h3>
+  <p><strong>Đề bài:</strong> Tính \(\iint_D xy\,dxdy\), \(D\): \(x^2+y^2 \le 2x,\; y \ge 0\).</p>
+  <p><strong>Bước 1: Tọa độ cực.</strong><br>
+  \(r^2 \le 2r\cos\theta \Rightarrow 0 \le r \le 2\cos\theta\). Với \(y\ge 0\) ta có \(0 \le \theta \le \frac{\pi}{2}\).</p>
+  <p><strong>Bước 2: Tính tích phân.</strong></p>
+  \[I = \int_0^{\pi/2} \int_0^{2\cos\theta} (r\cos\theta)(r\sin\theta)\,r\,dr\,d\theta = \int_0^{\pi/2} \cos\theta\sin\theta \left[\frac{r^4}{4}\right]_0^{2\cos\theta} d\theta\]
+  \[= \int_0^{\pi/2} \cos\theta\sin\theta \cdot 4\cos^4\theta\,d\theta = 4 \int_0^{\pi/2} \cos^5\theta\sin\theta\,d\theta\]
+  <p>Đặt \(u = \cos\theta \Rightarrow du = -\sin\theta\,d\theta\).</p>
+  \[I = 4 \int_0^1 u^5\,du = 4 \left[\frac{u^6}{6}\right]_0^1 = \frac{4}{6} = \frac{2}{3}\]
+  <p style="color:#1a5276; font-weight:bold;">\(\boxed{I = \dfrac{2}{3}}\) ✓ Khớp với đáp án.</p>
 </div>
   </div>
 </div>
 
+
+<div style="margin-top: 35px; padding: 12px 16px; border-top: 1px dashed #cbd5e1; text-align: center; color: #94a3b8; font-size: 11.5px; line-height: 1.6;">
+  <em>* Tài liệu và mô phỏng được tạo với sự hỗ trợ của AI, có thể còn tồn tại sai sót. Rất mong nhận được đóng góp ý kiến từ thầy cô và các bạn.</em>
+</div>
 </div>
 <script>
     function toggleSolutionBox(btn) {
@@ -179,9 +137,5 @@
         }
     }
 </script>
-
-<div style="margin-top: 40px; padding: 12px 16px; border-top: 1px dashed #cbd5e1; text-align: center; color: #94a3b8; font-size: 11.5px; line-height: 1.6;">
-  <em>* Tài liệu và mô phỏng được tạo với sự hỗ trợ của AI, có thể còn tồn tại sai sót. Rất mong nhận được đóng góp ý kiến từ thầy cô và các bạn.</em>
-</div>
 </body>
 </html>

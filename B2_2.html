@@ -93,64 +93,26 @@
   </button>
   <div class="solution-collapsible-content">
 <div style="background:#eaf4fb; border-left:5px solid #2980b9; padding:20px; margin-top:30px; border-radius:6px;">
-  <h3 style="color:#1a5276;">Lời giải chi tiết – Bài B2.2</h3>
-  <p><strong>Đề bài:</strong> Tính tích phân kép \( \iint_D (5x^2+2y^2) \,dxdy \), với miền \( D \) là hình tròn giới hạn bởi \( x^2+y^2 \le 1 \).</p>
-  
-  <h4>Bước 1: Tìm hiểu miền D và định hướng cách làm</h4>
-  <ul>
-    <li>Ký hiệu \( \iint_D \) yêu cầu ta cộng gộp (tích phân) toàn bộ các giá trị của biểu thức \( (5x^2+2y^2) \) trên vùng diện tích \( D \).</li>
-    <li>Biểu thức \( x^2+y^2 \le 1 \) chính là phương trình của một hình tròn đặc, có tâm nằm ngay tại gốc tọa độ \( (0,0) \) và bán kính \( R = 1 \).</li>
-  </ul>
-  <p><em>Mô tả hình dáng miền D:</em> Một chiếc đĩa tròn xoay đều xung quanh gốc tọa độ, không bị cắt bớt phần nào cả.</p>
-
-  
-  <h4>Bước 2: Biến đổi sang tọa độ cực</h4>
-  <p>Đặt công thức đổi biến quen thuộc:<br>
-  \( x = r \cos\theta \)<br>
-  \( y = r \sin\theta \)</p>
-  <p>Thành phần diện tích nhỏ \( dxdy \) được thay bằng \( r \,dr \,d\theta \) (chữ \( r \) là lượng bù trừ để diện tích không bị méo, gọi là định thức Jacobi).</p>
-  
-  <p><strong>Tìm giới hạn (cận trên và dưới) cho \( r \) và \(\theta\):</strong></p>
-  <ol>
-    <li>Vì là hình tròn bán kính 1 bắt đầu từ tâm, khoảng cách \( r \) sẽ đi từ tâm ra đến mép vòng ngoài: \( 0 \le r \le 1 \).</li>
-    <li>Vì lấy trọn vẹn cả một vòng tròn, góc \( \theta \) sẽ quay đúng một vòng đủ 360 độ, tức là từ \( 0 \) đến \( 2\pi \) radian: \( 0 \le \theta \le 2\pi \).</li>
-  </ol>
-
-  <h4>Bước 3: Lắp công thức và tính toán</h4>
-  <p>Giờ ta thay \( x \) và \( y \) vào biểu thức chính của bài toán:</p>
-  \[ 5x^2 + 2y^2 = 5(r \cos\theta)^2 + 2(r \sin\theta)^2 \]
-  \[ = 5r^2 \cos^2\theta + 2r^2 \sin^2\theta \]
-  <p>Rút nhân tử chung là \( r^2 \) ra ngoài:</p>
-  \[ = r^2(5\cos^2\theta + 2\sin^2\theta) \]
-
-  <p>Thay cụm này và \( r \,dr \,d\theta \) vào tích phân ban đầu, ta có:</p>
-  \[ I = \int_0^{2\pi} \left( \int_0^1 \left[ r^2(5\cos^2\theta + 2\sin^2\theta) \right] \cdot r \,dr \right) d\theta \]
-  
-  <p>Ta nhóm phần chứa chữ \( r \) và phần chứa chữ \( \theta \) lại. Biểu thức bên trong ngoặc vuông nhân thêm \( r \) ở ngoài sẽ thành \( r^3 \):</p>
-  \[ I = \int_0^{2\pi} (5\cos^2\theta + 2\sin^2\theta) \,d\theta \cdot \int_0^1 r^3 \,dr \]
-
-  <p>Ta đi tính phần bán kính (theo \( r \)) trước cho dễ:</p>
-  <p><em>Nhắc lại quy tắc:</em> Nguyên hàm của \( r^n \) là \( \frac{r^{n+1}}{n+1} \).</p>
-  \[ \int_0^1 r^3 \,dr = \left[ \frac{r^4}{4} \right]_0^1 = \frac{1^4}{4} - \frac{0^4}{4} = \frac{1}{4} \]
-
-  <p>Giờ tính phần góc (theo \( \theta \)):</p>
-  <p><em>Nhắc lại công thức toán học cơ bản cần thuộc:</em> Tích phân của bình phương hàm sin hay hàm cos trên một vòng tròn (từ \( 0 \) đến \( 2\pi \)) luôn luôn bằng nhau và bằng một nửa chu kỳ quay, tức là bằng \( \pi \).</p>
-  \[ \int_0^{2\pi} \cos^2\theta \,d\theta = \pi \]
-  \[ \int_0^{2\pi} \sin^2\theta \,d\theta = \pi \]
-  
-  <p>Áp dụng mẹo trên vào bài, ta có:</p>
-  \[ \int_0^{2\pi} (5\cos^2\theta + 2\sin^2\theta) \,d\theta = 5\pi + 2\pi = 7\pi \]
-
-  <p>Ghép 2 mảnh ghép lại bằng phép nhân:</p>
-  \[ I = (7\pi) \cdot \left( \frac{1}{4} \right) = \frac{7\pi}{4} \]
-
-  <h4>Bước 4: Kết luận</h4>
-  <p style="color:#1a5276; font-weight:bold; font-size:18px;">\(\boxed{I = \dfrac{7\pi}{4}}\)</p>
-  <p><strong>Ý nghĩa bài toán:</strong> Bài toán cho thấy lợi ích to lớn của việc tách các biến số độc lập với nhau. Mặc dù hàm số bị lệch (hệ số 5 và 2 khác nhau), nhưng việc tính theo chu trình 1 vòng tròn khép kín đã giúp mọi thứ trở nên cân bằng và giải quyết gọn nhẹ, đảm bảo khớp hoàn toàn với kết quả gốc.</p>
+  <h3 style="color:#1a5276;">Lời giải – Bài B2.2</h3>
+  <p><strong>Đề bài:</strong> Tính \(\iint_D (5x^2+2y^2)\,dxdy\), với \(D\): \(x^2+y^2 \le 1\).</p>
+  <p><strong>Bước 1: Chuyển sang tọa độ cực.</strong><br>
+  Đặt \(x = r\cos\theta\), \(y = r\sin\theta\). Ta có \(0 \le r \le 1\) và \(0 \le \theta \le 2\pi\).</p>
+  <p><strong>Bước 2: Tính tích phân.</strong></p>
+  \[I = \int_0^{2\pi} \int_0^1 (5r^2\cos^2\theta + 2r^2\sin^2\theta)\,r\,dr\,d\theta\]
+  \[= \int_0^{2\pi} (5\cos^2\theta + 2\sin^2\theta)\,d\theta \cdot \int_0^1 r^3\,dr\]
+  <p>Ta biết \(\int_0^{2\pi}\cos^2\theta\,d\theta = \int_0^{2\pi}\sin^2\theta\,d\theta = \pi\).</p>
+  \[\int_0^{2\pi} (5\cos^2\theta + 2\sin^2\theta)\,d\theta = 5\pi + 2\pi = 7\pi\]
+  \[\int_0^1 r^3\,dr = \frac{1}{4}\]
+  \[I = 7\pi \cdot \frac{1}{4} = \frac{7\pi}{4}\]
+  <p style="color:#1a5276; font-weight:bold;">\(\boxed{I = \dfrac{7\pi}{4}}\) ✓ Khớp với đáp án.</p>
 </div>
   </div>
 </div>
 
+
+<div style="margin-top: 35px; padding: 12px 16px; border-top: 1px dashed #cbd5e1; text-align: center; color: #94a3b8; font-size: 11.5px; line-height: 1.6;">
+  <em>* Tài liệu và mô phỏng được tạo với sự hỗ trợ của AI, có thể còn tồn tại sai sót. Rất mong nhận được đóng góp ý kiến từ thầy cô và các bạn.</em>
+</div>
 </div>
 <script>
     function toggleSolutionBox(btn) {
@@ -177,9 +139,5 @@
         }
     }
 </script>
-
-<div style="margin-top: 40px; padding: 12px 16px; border-top: 1px dashed #cbd5e1; text-align: center; color: #94a3b8; font-size: 11.5px; line-height: 1.6;">
-  <em>* Tài liệu và mô phỏng được tạo với sự hỗ trợ của AI, có thể còn tồn tại sai sót. Rất mong nhận được đóng góp ý kiến từ thầy cô và các bạn.</em>
-</div>
 </body>
 </html>

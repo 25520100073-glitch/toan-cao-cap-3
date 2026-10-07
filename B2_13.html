@@ -93,118 +93,26 @@
   </button>
   <div class="solution-collapsible-content">
 <div style="background:#eaf4fb; border-left:5px solid #2980b9; padding:20px; margin-top:30px; border-radius:6px;">
-  <h3 style="color:#1a5276;">Lời giải cực kỳ chi tiết – Bài B2.13</h3>
-  <p><strong>Đề bài:</strong> Tính tích phân kép \(\iint_D (x+y) \, dxdy\).<br>
-  Trong đó, miền \(D\) là một nửa hình tròn có tâm tại \((3,0)\), bán kính bằng 3, và chỉ lấy phần nằm phía trên trục hoành (tức là \(y \ge 0\)).</p>
-
-  <div style="background:#d4edda; border-left:4px solid #28a745; padding:10px; margin:10px 0; border-radius:4px;">
-    <strong>Mẹo nhỏ:</strong> Ký hiệu \(\iint_D\) nghĩa là chúng ta đang tính tổng giá trị của biểu thức \((x+y)\) trên toàn bộ từng mảnh diện tích nhỏ xíu (kí hiệu là \(dxdy\)) nằm trong một khu vực cụ thể có tên là \(D\). Bạn có thể tưởng tượng như ta đang tính khối lượng của một miếng bánh hình nửa hình tròn, với \((x+y)\) là độ ngọt tại mỗi điểm.
-  </div>
-
-  <h4>Bước 1: Hình dung và viết phương trình của miền \(D\) (Khu vực hình tròn)</h4>
-  <p>Chúng ta cần biết "hàng rào" của khu vực này nằm ở đâu.</p>
-  <ul>
-    <li>Một hình tròn có tâm \((3,0)\) và bán kính \(R = 3\) có phương trình là: <br>
-      \((x - 3)^2 + (y - 0)^2 \le 3^2\)
-    </li>
-    <li>Bây giờ, chúng ta sẽ khai triển hằng đẳng thức \((x-3)^2\) ra. Ta dùng quy tắc \((A-B)^2 = A^2 - 2AB + B^2\):<br>
-      \((x^2 - 6x + 9) + y^2 \le 9\)
-    </li>
-    <li>Tiếp theo, ta trừ đi 9 ở cả hai vế (hoặc chuyển 9 từ vế trái sang phải):<br>
-      \(x^2 - 6x + 9 - 9 + y^2 \le 0\)<br>
-      \(x^2 + y^2 - 6x \le 0\)
-    </li>
-  </ul>
-  <p>Ngoài ra, đề bài có điều kiện \(y \ge 0\). Trục tọa độ chia làm 4 góc, \(y \ge 0\) nghĩa là phần nằm phía trên trục ngang (trục \(Ox\)). Do đó, miền \(D\) của chúng ta chỉ là <strong>nửa trên của hình tròn</strong>.</p>
-
-  <h4>Bước 2: Sử dụng "phép thuật" Đổi biến sang tọa độ cực</h4>
-  <div style="background:#fff3cd; border-left:4px solid #ffc107; padding:10px; margin:10px 0; border-radius:4px;">
-    <strong>Tại sao phải đổi biến?</strong> Khi tính toán với hình tròn, dùng tọa độ \(x, y\) (vuông góc) thường rất khó vì xuất hiện căn bậc hai phức tạp. Thay vào đó, ta đo bằng khoảng cách từ gốc tọa độ (\(r\)) và góc quay (\(\theta\)). Việc này giúp việc tính toán dễ như ăn kẹo!
-  </div>
-  <p>Quy tắc đổi biến sang tọa độ cực như sau:</p>
-  <ul>
-    <li>Thay \(x\) bằng \(r \cos\theta\) (hoành độ là góc kề)</li>
-    <li>Thay \(y\) bằng \(r \sin\theta\) (tung độ là góc đối)</li>
-    <li>Mảnh diện tích nhỏ \(dxdy\) sẽ biến thành \(r \, dr \, d\theta\) (đừng quên nhân thêm chữ \(r\) này, nó rất quan trọng, gọi là định thức Jacobi!)</li>
-    <li>Thay \(x^2 + y^2\) bằng \(r^2\) (theo định lý Pythagoras)</li>
-  </ul>
-  
-  <p><strong>Tìm cận (giới hạn) cho góc quay \(\theta\):</strong></p>
-  <p>Hình tròn ban đầu có \(x^2+y^2-6x \le 0\). Với \(x \ge 0\) và tâm hình tròn nằm trên phần dương của trục Ox. Điểm xa nhất nằm ở \((6,0)\), gốc là \((0,0)\). Do miền này hoàn toàn nằm ở phần bên phải của trục tung (\(x \ge 0\)) và phía trên trục hoành (\(y \ge 0\)), nên tia quét từ gốc tọa độ (0,0) sẽ bắt đầu từ trục hoành (góc 0 độ) và quét tối đa lên đến trục tung (góc 90 độ, tức là \(\frac{\pi}{2}\)).<br>
-  Vậy góc \(\theta\) chạy từ: \(0 \le \theta \le \frac{\pi}{2}\).</p>
-
-  <p><strong>Tìm cận cho khoảng cách \(r\):</strong></p>
-  <p>Ta thay \(x^2 + y^2 = r^2\) và \(x = r \cos\theta\) vào phương trình đường tròn \(x^2 + y^2 - 6x \le 0\):<br>
-    \(r^2 - 6(r \cos\theta) \le 0\)<br>
-    Chia cả 2 vế cho \(r\) (vì \(r \ge 0\)):<br>
-    \(r - 6 \cos\theta \le 0\)<br>
-    \(r \le 6 \cos\theta\)
-  </p>
-  <p>Vậy, khoảng cách \(r\) chạy từ: \(0 \le r \le 6 \cos\theta\).</p>
-
-  <h4>Bước 3: Lắp ráp vào công thức Tích phân</h4>
-  <p>Chúng ta viết lại bài toán (gọi là \(I\)) bằng các chữ cái mới (\(r, \theta\)):</p>
-  \[I = \int_{0}^{\pi/2} \left( \int_{0}^{6\cos\theta} (r\cos\theta + r\sin\theta) \cdot r \, dr \right) d\theta\]
-  
-  <p>Bên trong ngoặc, ta có thể rút nhân tử chung là \(r\):<br>
-  \((r\cos\theta + r\sin\theta) \cdot r = r(\cos\theta + \sin\theta) \cdot r = r^2(\cos\theta + \sin\theta)\).</p>
-  
-  <p>Vậy phép tính trở thành:</p>
-  \[I = \int_{0}^{\pi/2} (\cos\theta + \sin\theta) \left( \int_{0}^{6\cos\theta} r^2 \, dr \right) d\theta\]
-
-  <h4>Bước 4: Tính tích phân lần 1 (theo biến \(r\))</h4>
-  <p>Giống như việc cộng các mảnh nhỏ lại, nguyên hàm của \(r^2\) là gì? (Ta dùng công thức tăng số mũ lên 1 rồi chia cho số mũ mới: \(\int r^n = \frac{r^{n+1}}{n+1}\))<br>
-  Nguyên hàm của \(r^2\) là \(\frac{r^3}{3}\).</p>
-  <p>Thế giới hạn từ \(0\) đến \(6\cos\theta\) vào:</p>
-  \[ \left[ \frac{r^3}{3} \right]_{0}^{6\cos\theta} = \frac{(6\cos\theta)^3}{3} - \frac{0^3}{3} \]
-  <p>Tính toán tiếp (Ghi nhớ: \(6^3 = 6 \times 6 \times 6 = 216\)):</p>
-  \[ = \frac{216 \cos^3\theta}{3} = 72 \cos^3\theta \]
-
-  <h4>Bước 5: Tính tích phân lần 2 (theo biến \(\theta\))</h4>
-  <p>Đem kết quả \(72 \cos^3\theta\) nhân lại vào biểu thức bên ngoài, ta được:</p>
-  \[I = \int_{0}^{\pi/2} (\cos\theta + \sin\theta) \cdot 72 \cos^3\theta \, d\theta\]
-  <p>Đưa số 72 ra ngoài cho gọn và nhân phân phối \(\cos^3\theta\) vào bên trong ngoặc:</p>
-  \[I = 72 \int_{0}^{\pi/2} (\cos^4\theta + \cos^3\theta \sin\theta) \, d\theta\]
-  <p>Chúng ta sẽ tách thành 2 phần nhỏ để tính cho dễ dàng:</p>
-  <ol>
-    <li>
-      <strong>Phần thứ nhất: \(\int_0^{\pi/2}\cos^4\theta\,d\theta\)</strong><br>
-      Đây là một dạng tích phân kinh điển. Có công thức tính nhanh tên là Wallis. Đối với bậc chẵn (số 4), ta giảm dần mẫu số và tử số cách nhau 2 đơn vị, và nhân thêm \(\frac{\pi}{2}\):<br>
-      \[ \int_0^{\pi/2}\cos^4\theta\,d\theta = \frac{3}{4} \cdot \frac{1}{2} \cdot \frac{\pi}{2} = \frac{3\pi}{16} \]
-    </li>
-    <li>
-      <strong>Phần thứ hai: \(\int_0^{\pi/2}\cos^3\theta\sin\theta\,d\theta\)</strong><br>
-      Ở đây ta thấy \(\sin\theta\) là đạo hàm của \(-\cos\theta\). Nếu ta đặt \(u = \cos\theta\), thì nguyên hàm của \(u^3\) là \(\frac{u^4}{4}\). Nhưng vì có dấu âm khi đạo hàm \(\cos\theta\), nên nguyên hàm của ta là \(-\frac{\cos^4\theta}{4}\).<br>
-      Thay giới hạn từ 0 đến \(\frac{\pi}{2}\):<br>
-      \[ \left[ -\frac{\cos^4\theta}{4} \right]_0^{\pi/2} = \left(-\frac{\cos^4(\pi/2)}{4}\right) - \left(-\frac{\cos^4(0)}{4}\right) \]
-      Vì \(\cos(\pi/2) = 0\) và \(\cos(0) = 1\):<br>
-      \[ = (-0) - \left( -\frac{1}{4} \right) = \frac{1}{4} \]
-    </li>
-  </ol>
-
-  <h4>Bước 6: Gộp kết quả lại</h4>
-  <p>Bây giờ, ta chỉ việc cộng 2 mảnh vừa tính lại và nhân với 72 ở ngoài:</p>
-  \[I = 72 \left(\frac{3\pi}{16} + \frac{1}{4}\right)\]
-  <p>Nhân 72 vào từng cái:</p>
-  \[I = \left( 72 \cdot \frac{3\pi}{16} \right) + \left( 72 \cdot \frac{1}{4} \right)\]
-  <p>Rút gọn phân số. Với phân số đầu tiên, 72 và 16 cùng chia hết cho 8 (72 / 8 = 9, 16 / 8 = 2):<br>
-    \(72 \cdot \frac{3\pi}{16} = \frac{9 \cdot 3\pi}{2} = \frac{27\pi}{2}\)
-  </p>
-  <p>Với phân số thứ hai: \(72 / 4 = 18\).</p>
-  <p>Vậy, kết quả cuối cùng là:</p>
-  \[I = \frac{27\pi}{2} + 18\]
-
-  <p style="color:#1a5276; font-size:16px; margin-top:20px;">
-    <strong>Kết luận:</strong> <br>
-    \(\boxed{\mathbf{I = \frac{27\pi}{2} + 18}}\)
-  </p>
-  <p style="color:#555; font-style:italic;">
-    <strong>Ý nghĩa:</strong> Con số này chính là tổng giá trị của đại lượng \((x+y)\) phân bố trên mặt của một nửa chiếc đĩa tròn. Nó phản ánh rằng phần khối lượng phân bố về bên phải (x dương) và phía trên (y dương) khá lớn, mang lại một kết quả dương rất rõ ràng.
-  </p>
+  <h3 style="color:#1a5276;">Lời giải – Bài B2.13</h3>
+  <p><strong>Đề bài:</strong> Tính \(\iint_D (x+y)\,dxdy\), \(D\) tâm \((3,0)\) bk 3 lấy \(y \ge 0\).</p>
+  <p><strong>Bước 1: Phương trình hình tròn.</strong><br>
+  \((x-3)^2+y^2 \le 9 \Leftrightarrow x^2+y^2-6x \le 0\).<br>
+  Tọa độ cực: \(r \le 6\cos\theta\). Với \(y\ge 0\) ta có \(0 \le \theta \le \frac{\pi}{2}\).</p>
+  <p><strong>Bước 2: Tính tích phân.</strong></p>
+  \[I = \int_0^{\pi/2} \int_0^{6\cos\theta} (r\cos\theta+r\sin\theta)\,r\,dr\,d\theta = \int_0^{\pi/2} (\cos\theta+\sin\theta) \left[\frac{r^3}{3}\right]_0^{6\cos\theta} d\theta\]
+  \[= \frac{216}{3} \int_0^{\pi/2} (\cos\theta+\sin\theta) \cos^3\theta\,d\theta = 72 \int_0^{\pi/2} (\cos^4\theta + \cos^3\theta\sin\theta)\,d\theta\]
+  <p>Ta có: \(\int_0^{\pi/2}\cos^4\theta\,d\theta = \frac{3}{4}\frac{1}{2}\frac{\pi}{2} = \frac{3\pi}{16}\).</p>
+  <p>Và: \(\int_0^{\pi/2}\cos^3\theta\sin\theta\,d\theta = \left[-\frac{\cos^4\theta}{4}\right]_0^{\pi/2} = \frac{1}{4}\).</p>
+  \[I = 72 \left(\frac{3\pi}{16} + \frac{1}{4}\right) = \frac{216\pi}{16} + 18 = \frac{27\pi}{2} + 18\]
+  <p style="color:#1a5276; font-weight:bold;">\(\boxed{I = \dfrac{27\pi}{2} + 18}\) ✓ Khớp với đáp án.</p>
 </div>
   </div>
 </div>
 
+
+<div style="margin-top: 35px; padding: 12px 16px; border-top: 1px dashed #cbd5e1; text-align: center; color: #94a3b8; font-size: 11.5px; line-height: 1.6;">
+  <em>* Tài liệu và mô phỏng được tạo với sự hỗ trợ của AI, có thể còn tồn tại sai sót. Rất mong nhận được đóng góp ý kiến từ thầy cô và các bạn.</em>
+</div>
 </div>
 <script>
     function toggleSolutionBox(btn) {
@@ -231,9 +139,5 @@
         }
     }
 </script>
-
-<div style="margin-top: 40px; padding: 12px 16px; border-top: 1px dashed #cbd5e1; text-align: center; color: #94a3b8; font-size: 11.5px; line-height: 1.6;">
-  <em>* Tài liệu và mô phỏng được tạo với sự hỗ trợ của AI, có thể còn tồn tại sai sót. Rất mong nhận được đóng góp ý kiến từ thầy cô và các bạn.</em>
-</div>
 </body>
 </html>

@@ -89,6 +89,12 @@
     <span class="sol-arrow">▼</span>
   </button>
   <div class="solution-collapsible-content">
+<div class="solution-toggle-wrapper">
+  <button type="button" class="solution-toggle-btn" onclick="toggleSolutionBox(this)">
+    <span><span class="sol-icon">📖</span> <span class="sol-text">Xem lời giải chi tiết (Bấm để mở)</span></span>
+    <span class="sol-arrow">▼</span>
+  </button>
+  <div class="solution-collapsible-content">
 <h3>&#9998; Lời giải</h3>
         <div class="solution">
   <h4>Bước 1: Phân tích hình học "miền có thể tích lớn hơn"</h4>
@@ -140,7 +146,10 @@
 </div>
         <div class="answer-box">&#10003; Kết quả: \(\dfrac{16\pi(4+\sqrt{2})}{15}\)</div>
         <div class="check">Kết quả tính toán: \(\dfrac{16\pi(4+\sqrt{2})}{15}\). Khớp đáp án đề ✓</div>
-        <h3>&#128202; Hình minh họa</h3>
+  </div>
+</div>
+
+<h3>&#128202; Hình minh họa</h3>
         <p style="text-align:center; color:#e67e22; font-weight:bold; margin-bottom:5px;">&#128208; Hình vẽ cho: Tính \(\iiint_\Omega z^2\,dxdydz\), với \(\Omega\) là khối vật thể giới hạn bởi mặt nón \(z = \sqrt{x^2+y^2}\) và mặt cầu \(x^2+y^2+z^2 = 4\), biết rằng \(\Omega\) là miền có thể tích lớn hơn.</p>
         
         <div class="plot-container"><div style="height:900px; width:800px;">                        <script>window.PlotlyConfig = {MathJaxConfig: 'local'};</script>

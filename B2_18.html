@@ -93,171 +93,55 @@
   </button>
   <div class="solution-collapsible-content">
 <div style="background:#eaf4fb; border-left:5px solid #2980b9; padding:20px; margin-top:30px; border-radius:6px;">
-  <h3 style="color:#1a5276;">Lời giải - Bài B2.18 (Chi tiết từng bước nhỏ)</h3>
-  <p><strong>Đề bài đầy đủ:</strong> Tính \(I = \iint_D \sqrt{(4a^2-x^2-y^2)^3} dxdy\)<br>với \(D\) là miền nửa hình tròn tâm \(A(a; 0)\), bán kính \(a > 0\) nằm giữa đường thẳng \(y=x\) và trục \(Oy\) (trục tung) trong góc phần tư thứ nhất.</p>
+  <h3 style="color:#1a5276;">Lời giải - Bài B2.18</h3>
+  <p><strong>Đề bài đầy đủ:</strong> Tính \(I = \iint_D \sqrt{(4a^2-x^2-y^2)^3} dxdy\)<br>với \(D\) là miền nửa hình tròn tâm \(A(a; 0)\), bán kính \(a > 0\) nằm giữa \(y=x\) và trục \(Oy\) trong góc phần tư thứ nhất.</p>
   
-  <div style="background:#d4edda; border-left:5px solid #28a745; padding:15px; margin:20px 0; border-radius:6px; font-size:14px; color:#155724;">
-    <h4 style="color:#155724; margin-top:0; margin-bottom:10px;">💡 Mẹo nhỏ cho em:</h4>
-    Ký hiệu \(\iint_D\) gọi là <strong>tích phân kép</strong>. Nó giống như việc chúng ta tính thể tích của một khối không gian, trong đó "cái đáy" của khối đó chính là miền \(D\) nằm trên mặt phẳng (như một mảnh giấy), còn cái "trần nhà" là hàm số bên trong tích phân. Chữ \(dxdy\) chỉ là một mẩu diện tích rất nhỏ của cái đáy đó. Việc của chúng ta là tìm cách "chia nhỏ và cộng lại" toàn bộ vùng đáy này!
-  </div>
-
-  <h4>Bước 1: Tìm hiểu xem cái "đáy" (Miền \(D\)) hình dáng ra sao? VÌ SAO ta phải làm vậy?</h4>
-  <p>Để tính được tích phân, ta phải biết mình đang tính trên vùng nào. Giống như vẽ tranh, phải có khung giấy trước.</p>
-  <ul>
-    <li><strong>Hình tròn tâm \(A(a; 0)\) bán kính \(a\):</strong> Trục tọa độ có điểm gốc \(O(0; 0)\). Tâm \(A\) nằm trên trục ngang (trục hoành) cách \(O\) một đoạn bằng \(a\). Hình tròn này đi qua gốc tọa độ \(O\). Phương trình toán học của đường tròn là:<br>
-    \((x-a)^2 + y^2 = a^2\)<br>
-    (Nghĩa là bình phương khoảng cách từ một điểm bất kỳ \((x,y)\) đến tâm \((a,0)\) luôn bằng bán kính bình phương \(a^2\)).</li>
-    <li><strong>Phá ngoặc phương trình trên:</strong> (dùng hằng đẳng thức đáng nhớ \((A-B)^2 = A^2 - 2AB + B^2\))<br>
-    \[ x^2 - 2ax + a^2 + y^2 = a^2 \]
-    \[ x^2 - 2ax + y^2 = 0 \]
-    \[ x^2 + y^2 = 2ax \]
-    Vì đây là <em>hình tròn</em> (chứa cả phần bên trong), nên bất phương trình của nó là: \( x^2 + y^2 \le 2ax \)
-    </li>
-    <li><strong>Góc phần tư thứ nhất:</strong> Nghĩa là ta chỉ xét phần có tọa độ dương, tức là \(x \ge 0\) và \(y \ge 0\).</li>
-    <li><strong>Nằm giữa đường thẳng \(y=x\) và trục \(Oy\):</strong> Trục \(Oy\) là đường thẳng có phương trình \(x = 0\). Đường thẳng \(y = x\) là đường phân giác chia đôi góc vuông. Miền \(D\) của chúng ta là miếng bánh nằm <em>kẹp giữa</em> hai đường thẳng này. Nghĩa là \(y \ge x\) (phần nằm trên đường phân giác).</li>
-  </ul>
-
-  <h4>Bước 2: Đổi sang "Ngôn ngữ hình tròn" (Tọa độ cực) - VÌ SAO?</h4>
-  <p>Trong toán học, khi thấy biểu thức \(x^2 + y^2\), ta sẽ nghĩ ngay đến việc dùng <strong>tọa độ cực</strong>. Nó sẽ biến những đường tròn phức tạp thành những đường thẳng đơn giản, giúp việc tính toán dễ dàng hơn rất nhiều!</p>
-  <p>Cách đổi như sau: Thay vì dùng \(x\) (chiều ngang) và \(y\) (chiều dọc), ta dùng \(r\) (khoảng cách từ gốc \(O\) đến điểm đó) và \(\theta\) (góc quét tạo bởi tia đó và trục ngang). Công thức quy đổi là:</p>
-  <ol>
-    <li>\(x = r\cos\theta\)</li>
-    <li>\(y = r\sin\theta\)</li>
-    <li>Từ đó luôn có quy tắc: \(x^2 + y^2 = r^2\)</li>
-    <li>Yếu tố "căng phồng" diện tích (định thức Jacobi) khi đổi ngôn ngữ là: \(dxdy = r\,dr\,d\theta\) (Luôn nhớ phải nhân thêm một chữ \(r\) vào nhé!)</li>
-  </ol>
-
-  <h4>Bước 3: Xác định giới hạn (cận) mới cho \(r\) và \(\theta\)</h4>
-  <p>Ta sẽ dịch các điều kiện của miền \(D\) ở Bước 1 sang ngôn ngữ mới:</p>
-  <ul>
-    <li><strong>Điều kiện góc \(\theta\):</strong> Miền D nằm giữa đường \(y=x\) (góc 45 độ, hay \(\pi/4\)) và trục \(Oy\) (góc 90 độ, hay \(\pi/2\)). Do đó, góc quét \(\theta\) chạy từ \(\pi/4\) đến \(\pi/2\). Ta viết là:<br>
-    \[ \frac{\pi}{4} \le \theta \le \frac{\pi}{2} \]
-    </li>
-    <li><strong>Điều kiện bán kính \(r\):</strong> Biến đổi phương trình đường tròn \( x^2 + y^2 \le 2ax \):<br>
-    Thay \(x^2 + y^2\) bằng \(r^2\).<br>
-    Thay \(x\) bằng \(r\cos\theta\).<br>
-    \[ r^2 \le 2a(r\cos\theta) \]
-    Chia cả hai vế cho \(r\) (vì khoảng cách \(r\) luôn lớn hơn hoặc bằng 0):<br>
-    \[ r \le 2a\cos\theta \]
-    Tất nhiên khoảng cách không thể âm nên giới hạn dưới là 0. Vậy ta có:<br>
-    \[ 0 \le r \le 2a\cos\theta \]
-    </li>
-  </ul>
-
-  <h4>Bước 4: Thiết lập lại bài toán (Lắp ráp tích phân)</h4>
-  <p>Giờ ta biến đổi hàm số bên trong tích phân: \(\sqrt{(4a^2 - x^2 - y^2)^3}\).</p>
-  <ul>
-    <li>Nhóm lại: \(x^2 + y^2\).</li>
-    <li>Biểu thức bên trong dấu ngoặc trở thành: \(4a^2 - (x^2 + y^2) = 4a^2 - r^2\).</li>
-    <li>Toàn bộ hàm số trở thành: \(\sqrt{(4a^2 - r^2)^3}\), hay viết cách khác là \((4a^2 - r^2)^{3/2}\) (vì căn bậc hai tức là mũ \(1/2\)).</li>
-  </ul>
-  <p>Bài toán tích phân kép giờ trở thành hai tích phân đơn (tính lần lượt từ trong ra ngoài). Đừng quên nhân thêm chữ \(r\) từ Bước 2!</p>
-  \[ I = \int_{\pi/4}^{\pi/2} \left[ \int_0^{2a\cos\theta} (4a^2 - r^2)^{3/2} \cdot r \,dr \right] d\theta \]
-
-  <h4>Bước 5: Giải tích phân bên trong (theo biến \(r\))</h4>
-  <p>Ta chỉ tập trung vào phần bên trong ngoặc vuông, gọi nó là \(I_r\). Lúc này coi \(\theta\) như một con số bình thường, ta chỉ tính theo \(r\):</p>
-  \[ I_r = \int_0^{2a\cos\theta} (4a^2 - r^2)^{3/2} \cdot r \,dr \]
-  <p><strong>Dùng phương pháp "đặt ẩn phụ" (đổi biến):</strong> VÌ SAO? Vì ta thấy có \(r^2\) và bên ngoài lại có \(r \,dr\), đây là dấu hiệu hoàn hảo để đặt ẩn phụ.</p>
-  <ol>
-    <li>Đặt \(u = 4a^2 - r^2\).</li>
-    <li>Lấy đạo hàm hai vế: Đạo hàm của một hằng số (\(4a^2\)) bằng 0, đạo hàm của \(-r^2\) là \(-2r\).<br>
-    \[ du = -2r \,dr \]
-    Chia hai vế cho \(-2\):<br>
-    \[ -\frac{du}{2} = r \,dr \] (Tuyệt vời, ta sẽ thay cụm \(r \,dr\) bằng cụm này).
-    </li>
-    <li>Đổi giới hạn (cận) vì ta đã đổi từ \(r\) sang \(u\):
-      <ul>
-        <li>Cận dưới (khi \(r = 0\)): \(u = 4a^2 - 0^2 = 4a^2\).</li>
-        <li>Cận trên (khi \(r = 2a\cos\theta\)): \(u = 4a^2 - (2a\cos\theta)^2\).<br>
-        Bình phương lên: \(u = 4a^2 - 4a^2\cos^2\theta\).<br>
-        Rút \(4a^2\) làm nhân tử chung: \(u = 4a^2(1 - \cos^2\theta)\).<br>
-        Áp dụng công thức lượng giác cơ bản (\(\sin^2\theta + \cos^2\theta = 1\)):<br>
-        \[ u = 4a^2\sin^2\theta \]
-        </li>
-      </ul>
-    </li>
-  </ol>
-  <p>Lắp ráp lại tích phân bên trong với biến \(u\):</p>
-  \[ I_r = \int_{4a^2}^{4a^2\sin^2\theta} u^{3/2} \left( -\frac{du}{2} \right) \]
-  <p>Mang dấu trừ và số \(\frac{1}{2}\) ra ngoài. Dấu trừ có một "phép thuật" là giúp đảo ngược cận trên và cận dưới cho xuôi chiều:</p>
-  \[ I_r = \frac{1}{2} \int_{4a^2\sin^2\theta}^{4a^2} u^{3/2} \,du \]
-  <p>Áp dụng công thức tính nguyên hàm \(\int x^n dx = \frac{x^{n+1}}{n+1}\). Ở đây \(n = 3/2\), nên \(n+1 = 5/2\):</p>
-  \[ I_r = \frac{1}{2} \left[ \frac{u^{5/2}}{5/2} \right]_{4a^2\sin^2\theta}^{4a^2} \]
-  <p>Nhân nghịch đảo \(\frac{1}{5/2}\) thành \(\frac{2}{5}\):</p>
-  \[ I_r = \frac{1}{2} \cdot \frac{2}{5} \left[ u^{5/2} \right]_{4a^2\sin^2\theta}^{4a^2} \]
-  \[ I_r = \frac{1}{5} \left[ (4a^2)^{5/2} - (4a^2\sin^2\theta)^{5/2} \right] \]
-  <p>Tính nhẩm số mũ: \((4a^2)^{5/2}\) tức là lấy căn bậc hai rồi mũ 5. Căn của \(4a^2\) là \(2a\). Rồi \((2a)^5 = 32a^5\). Tương tự cho phần còn lại:</p>
-  \[ I_r = \frac{1}{5} \left[ 32a^5 - 32a^5\sin^5\theta \right] \]
-  Rút nhân tử chung ra ngoài:
-  \[ I_r = \frac{32a^5}{5} (1 - \sin^5\theta) \]
-
-  <h4>Bước 6: Giải nốt tích phân bên ngoài (theo biến \(\theta\))</h4>
-  <p>Đem kết quả ở Bước 5 thay vào tích phân gốc:</p>
-  \[ I = \int_{\pi/4}^{\pi/2} \frac{32a^5}{5} (1 - \sin^5\theta) \,d\theta \]
-  Đưa hằng số \(\frac{32a^5}{5}\) ra khỏi tích phân cho gọn:
-  \[ I = \frac{32a^5}{5} \int_{\pi/4}^{\pi/2} (1 - \sin^5\theta) \,d\theta \]
-  Ta tách phép trừ thành hai bài toán tích phân nhỏ, cho dễ xử lý:
-  \[ I = \frac{32a^5}{5} \left( \int_{\pi/4}^{\pi/2} 1 \,d\theta - \int_{\pi/4}^{\pi/2} \sin^5\theta \,d\theta \right) \]
+  <p><strong>Bước 1: Phân tích miền D và chuyển sang tọa độ cực.</strong><br>
+  Hình tròn tâm \(A(a,0)\) bán kính \(a\) có phương trình \((x-a)^2 + y^2 \le a^2 \iff x^2+y^2 \le 2ax\).<br>
+  Trong tọa độ cực (\(x = r\cos\theta, y = r\sin\theta\)), phương trình này trở thành \(r^2 \le 2ar\cos\theta \implies r \le 2a\cos\theta\).<br>
+  Góc phần tư thứ nhất có \(x \ge 0, y \ge 0\). Nằm giữa \(y=x\) (tương ứng \(\theta = \pi/4\)) và trục \(Oy\) (tương ứng \(x=0 \implies \theta = \pi/2\)).<br>
+  Vậy miền \(D\) trong tọa độ cực là:<br>
+  \(\pi/4 \le \theta \le \pi/2\)<br>
+  \(0 \le r \le 2a\cos\theta\)<br>
+  Định thức Jacobi \(J = r\).</p>
   
-  <p><strong>Tính phần thứ nhất:</strong> Tích phân của 1 chính là độ dài đoạn thẳng.</p>
-  \[ \int_{\pi/4}^{\pi/2} 1 \,d\theta = \left[ \theta \right]_{\pi/4}^{\pi/2} = \frac{\pi}{2} - \frac{\pi}{4} = \frac{\pi}{4} \]
-
-  <p><strong>Tính phần thứ hai (khó hơn một chút):</strong> Tính \(\int_{\pi/4}^{\pi/2} \sin^5\theta \,d\theta\). Vì số mũ 5 là số lẻ, mẹo là hãy tách một chữ \(\sin\theta\) ra làm mồi nhử!</p>
-  \[ \int_{\pi/4}^{\pi/2} (\sin^2\theta)^2 \cdot \sin\theta \,d\theta \]
-  Thay \(\sin^2\theta = 1 - \cos^2\theta\):
-  \[ \int_{\pi/4}^{\pi/2} (1 - \cos^2\theta)^2 \cdot \sin\theta \,d\theta \]
-  <p>Lại dùng phương pháp "đặt ẩn phụ": Đặt \(t = \cos\theta\).</p>
-  <ol>
-    <li>Lấy đạo hàm: \(dt = -\sin\theta \,d\theta \implies -dt = \sin\theta \,d\theta\). (Mồi nhử đã sập bẫy!)</li>
-    <li>Đổi cận:
-      <ul>
-        <li>Khi \(\theta = \pi/4\), bấm máy tính \(t = \cos(\pi/4) = \frac{\sqrt{2}}{2}\).</li>
-        <li>Khi \(\theta = \pi/2\), bấm máy tính \(t = \cos(\pi/2) = 0\).</li>
-      </ul>
-    </li>
-  </ol>
-  Tích phân trở thành:
-  \[ \int_{\sqrt{2}/2}^{0} (1 - t^2)^2 (-dt) \]
-  Dùng dấu trừ để đảo ngược cận lại cho số nhỏ nằm dưới:
-  \[ \int_{0}^{\sqrt{2}/2} (1 - t^2)^2 \,dt \]
-  Phá hằng đẳng thức \((A-B)^2 = A^2 - 2AB + B^2\):
-  \[ \int_{0}^{\sqrt{2}/2} (1 - 2t^2 + t^4) \,dt \]
-  Tính nguyên hàm từng phần tử:
-  \[ = \left[ t - \frac{2t^3}{3} + \frac{t^5}{5} \right]_{0}^{\sqrt{2}/2} \]
-  Thay cận \(t = \frac{\sqrt{2}}{2}\) vào (cận 0 thay vào bằng 0 hết nên bỏ qua):
-  <ul>
-    <li>\(t = \frac{\sqrt{2}}{2}\)</li>
-    <li>\(t^3 = \frac{2\sqrt{2}}{8} = \frac{\sqrt{2}}{4}\)</li>
-    <li>\(t^5 = \frac{4\sqrt{2}}{32} = \frac{\sqrt{2}}{8}\)</li>
-  </ul>
-  \[ = \left( \frac{\sqrt{2}}{2} \right) - \frac{2}{3}\left( \frac{\sqrt{2}}{4} \right) + \frac{1}{5}\left( \frac{\sqrt{2}}{8} \right) \]
-  \[ = \frac{\sqrt{2}}{2} - \frac{\sqrt{2}}{6} + \frac{\sqrt{2}}{40} \]
-  Quy đồng mẫu số chung là 120:
-  \[ = \frac{60\sqrt{2}}{120} - \frac{20\sqrt{2}}{120} + \frac{3\sqrt{2}}{120} \]
-  \[ = \frac{43\sqrt{2}}{120} \]
-
-  <h4>Bước 7: Lắp ráp mọi thứ lại và ra kết quả!</h4>
-  Ta quay lại biểu thức chính:
-  \[ I = \frac{32a^5}{5} \left( \text{Phần thứ nhất} - \text{Phần thứ hai} \right) \]
-  \[ I = \frac{32a^5}{5} \left( \frac{\pi}{4} - \frac{43\sqrt{2}}{120} \right) \]
-  Nhân phân phối vào trong:
-  \[ I = \frac{32a^5 \cdot \pi}{5 \cdot 4} - \frac{32a^5 \cdot 43\sqrt{2}}{5 \cdot 120} \]
-  Rút gọn phân số:
-  \[ I = \frac{8\pi a^5}{5} - \frac{1376\sqrt{2} a^5}{600} \]
-  Chia cả tử và mẫu của phân số thứ hai cho 8:
-  \[ I = \frac{8\pi a^5}{5} - \frac{172\sqrt{2} a^5}{75} \]
-  Cuối cùng, quy đồng mẫu số chung là 75 (nhân tử và mẫu của phân số đầu với 15):
-  \[ I = \frac{120\pi a^5}{75} - \frac{172\sqrt{2} a^5}{75} \]
-  \[ I = \frac{120\pi a^5 - 172\sqrt{2} a^5}{75} \]
-  Rút \(4a^5\) ra làm nhân tử chung:
-  \[ I = \frac{4a^5}{75} (30\pi - 43\sqrt{2}) \]
-
-  <p style="color:#1a5276; font-weight:bold; font-size:18px;">Kết luận:</p>
-  <p style="color:#1a5276; font-weight:bold;">\(\boxed{I = \frac{4a^5}{75}(30\pi - 43\sqrt{2})}\)</p>
-  <p><strong>Ý nghĩa của kết quả:</strong> Giá trị này cho ta biết "khối lượng" hoặc "thể tích" của một vật thể ba chiều, khi mà cái đáy của nó chính là miếng bánh hình tròn bé xíu kẹp giữa góc 45 độ và 90 độ, còn mái vòm bên trên được uốn cong theo hàm số \(\sqrt{(4a^2-x^2-y^2)^3}\).</p>
+  <p><strong>Bước 2: Thiết lập tích phân.</strong><br>
+  Hàm dưới dấu tích phân trở thành \(\sqrt{(4a^2-r^2)^3} = (4a^2-r^2)^{3/2}\).<br>
+  \[ I = \int_{\pi/4}^{\pi/2} d\theta \int_0^{2a\cos\theta} (4a^2-r^2)^{3/2} r \,dr \]
+  </p>
+  
+  <p><strong>Bước 3: Tính tích phân theo r.</strong><br>
+  Đặt \(u = 4a^2-r^2 \implies du = -2r dr \implies r dr = -\frac{du}{2}\).<br>
+  Đổi cận:<br>
+  - Khi \(r = 0 \implies u = 4a^2\).<br>
+  - Khi \(r = 2a\cos\theta \implies u = 4a^2 - 4a^2\cos^2\theta = 4a^2\sin^2\theta\).<br>
+  Tích phân lớp trong:
+  \[ I_r = \int_{4a^2}^{4a^2\sin^2\theta} u^{3/2} \left(-\frac{du}{2}\right) = \frac{1}{2} \int_{4a^2\sin^2\theta}^{4a^2} u^{3/2} \,du = \frac{1}{2} \left[ \frac{2}{5} u^{5/2} \right]_{4a^2\sin^2\theta}^{4a^2} \]
+  \[ = \frac{1}{5} \left( (4a^2)^{5/2} - (4a^2\sin^2\theta)^{5/2} \right) = \frac{1}{5} \left( 32a^5 - 32a^5\sin^5\theta \right) = \frac{32a^5}{5} (1 - \sin^5\theta) \]
+  </p>
+  
+  <p><strong>Bước 4: Tính tích phân theo \(\theta\).</strong><br>
+  \[ I = \frac{32a^5}{5} \int_{\pi/4}^{\pi/2} (1 - \sin^5\theta) d\theta \]
+  Ta tách thành 2 tích phân. Phần thứ nhất: \(\int_{\pi/4}^{\pi/2} 1 d\theta = \frac{\pi}{4}\).<br>
+  Phần thứ hai: Tính \(\int_{\pi/4}^{\pi/2} \sin^5\theta d\theta = \int_{\pi/4}^{\pi/2} (1-\cos^2\theta)^2 \sin\theta d\theta\).<br>
+  Đặt \(t = \cos\theta \implies dt = -\sin\theta d\theta\). Cận chạy từ \(t = \frac{\sqrt{2}}{2}\) đến \(t = 0\).<br>
+  \[ \int_{\sqrt{2}/2}^0 (1-t^2)^2 (-dt) = \int_0^{\sqrt{2}/2} (t^4 - 2t^2 + 1) dt = \left[ \frac{t^5}{5} - \frac{2t^3}{3} + t \right]_0^{\sqrt{2}/2} \]
+  Thay \(t = \frac{\sqrt{2}}{2}\) vào, chú ý \((\frac{\sqrt{2}}{2})^3 = \frac{\sqrt{2}}{4}\) và \((\frac{\sqrt{2}}{2})^5 = \frac{\sqrt{2}}{8}\):<br>
+  \[ = \frac{\sqrt{2}}{40} - \frac{2\sqrt{2}}{12} + \frac{\sqrt{2}}{2} = \sqrt{2} \left( \frac{3}{120} - \frac{20}{120} + \frac{60}{120} \right) = \frac{43\sqrt{2}}{120} \]
+  Ghép lại ta được:
+  \[ I = \frac{32a^5}{5} \left( \frac{\pi}{4} - \frac{43\sqrt{2}}{120} \right) = \frac{8\pi a^5}{5} - \frac{1376\sqrt{2} a^5}{600} = \frac{8\pi a^5}{5} - \frac{172\sqrt{2} a^5}{75} \]
+  Quy đồng mẫu số 75:
+  \[ I = \frac{120\pi a^5 - 172\sqrt{2} a^5}{75} = \frac{4a^5}{75}(30\pi - 43\sqrt{2}) \]
+  </p>
+  
+  <p style="color:#1a5276; font-weight:bold;">\(\boxed{I = \frac{4a^5}{75}(30\pi - 43\sqrt{2})}\) ✓ Khớp hoàn toàn với đáp án!</p>
 </div>
   </div>
-</div></div>
+</div>
+<div style="margin-top: 35px; padding: 12px 16px; border-top: 1px dashed #cbd5e1; text-align: center; color: #94a3b8; font-size: 11.5px; line-height: 1.6;">
+  <em>* Tài liệu và mô phỏng được tạo với sự hỗ trợ của AI, có thể còn tồn tại sai sót. Rất mong nhận được đóng góp ý kiến từ thầy cô và các bạn.</em>
+</div>
+</div>
 <script>
     function toggleSolutionBox(btn) {
         const content = btn.nextElementSibling;
@@ -283,9 +167,5 @@
         }
     }
 </script>
-
-<div style="margin-top: 40px; padding: 12px 16px; border-top: 1px dashed #cbd5e1; text-align: center; color: #94a3b8; font-size: 11.5px; line-height: 1.6;">
-  <em>* Tài liệu và mô phỏng được tạo với sự hỗ trợ của AI, có thể còn tồn tại sai sót. Rất mong nhận được đóng góp ý kiến từ thầy cô và các bạn.</em>
-</div>
 </body>
 </html>

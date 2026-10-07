@@ -93,97 +93,30 @@
   </button>
   <div class="solution-collapsible-content">
 <div style="background:#eaf4fb; border-left:5px solid #2980b9; padding:20px; margin-top:30px; border-radius:6px;">
-  <h3 style="color:#1a5276;">Lời giải chi tiết – Bài B1.13</h3>
-  <p><strong>Đề bài:</strong> Tính tích phân kép \(I = \iint_D \left(\frac{x}{y}+\frac{y}{x}\right)dxdy\), trong đó \(D\) là hình chữ nhật được giới hạn bởi các đường \(1 \le x \le 4\) và \(1 \le y \le 2\).</p>
+  <h3 style="color:#1a5276;">Lời giải – Bài B1.13</h3>
+  <p><strong>Đề bài:</strong> Tính \(\iint_D \left(\frac{x}{y}+\frac{y}{x}\right)dxdy\), D là hình chữ nhật \(1\le x\le 4\), \(1\le y\le 2\).</p>
 
-  <h4>Bước 1: Phân tích miền D và thiết lập cận tích phân</h4>
-  <p><strong>Ta đang làm gì?</strong> Ta cần hiểu rõ miền \(D\) hình dáng ra sao và thiết lập các giới hạn (gọi là "cận") cho 2 biến \(x\) và \(y\) để tính tích phân kép.</p>
-  <p><strong>Vì sao phải làm thế?</strong> Tích phân kép (ký hiệu là \(\iint_D\)) là phép tính tổng dồn trên một diện tích \(D\). Để tính được, ta phải chia nhỏ diện tích đó ra thành các dải theo \(x\) và theo \(y\). Các "cận" chính là điểm bắt đầu và kết thúc của các dải này.</p>
-  <ul>
-    <li>Ký hiệu \(\iint_D\) nghĩa là tích phân kép quét qua toàn bộ miền \(D\).</li>
-    <li>Ký hiệu \(dxdy\) cho biết ta sẽ tích phân theo biến \(x\) và biến \(y\).</li>
-    <li>Miền \(D\) được mô tả bởi \(1 \le x \le 4\) và \(1 \le y \le 2\). Nghĩa là hoành độ \(x\) chạy từ \(1\) đến \(4\) (đây là hai đường thẳng đứng \(x=1\) và \(x=4\)), và tung độ \(y\) chạy từ \(1\) đến \(2\) (đây là hai đường nằm ngang \(y=1\) và \(y=2\)).</li>
-    <li>Giao điểm của các đường thẳng này tạo thành một hình chữ nhật có 4 đỉnh là \((1, 1)\), \((4, 1)\), \((4, 2)\), và \((1, 2)\).</li>
-    <li>Vì tất cả các cận đều là hằng số (các con số cụ thể, không chứa biến), ta có thể tích phân theo \(x\) trước hay \(y\) trước đều được. Ở đây ta sẽ chọn tích phân theo \(y\) trước (tức là nằm bên trong), rồi mới tích phân theo \(x\) (nằm bên ngoài).</li>
-  </ul>
-  <div style="background:#fff3cd; padding:10px; border-radius:4px; border: 1px solid #ffc107; margin-bottom: 15px;">
-    <strong>💡 Mẹo:</strong> Khi miền \(D\) là hình chữ nhật (các cận đều là số), bạn có thể đổi thứ tự tích phân thoải mái mà không cần phải vẽ lại đường thẳng chéo hay tính lại tọa độ giao điểm.
-  </div>
-  <p>Ta viết lại tích phân kép thành tích phân lặp (hai lớp tích phân nối tiếp nhau):</p>
-  \[I = \int_{1}^{4} \left( \int_{1}^{2} \left(\frac{x}{y} + \frac{y}{x}\right) dy \right) dx\]
+  <p><strong>Tính tích phân.</strong></p>
+  \[I = \int_1^4\int_1^2\left(\frac{x}{y}+\frac{y}{x}\right)dy\,dx\]
 
-  <h4>Bước 2: Tính tích phân lớp bên trong theo biến \(y\)</h4>
-  <p><strong>Ta đang làm gì?</strong> Ta sẽ tính tích phân phần nằm trong dấu ngoặc đơn: \(\int_{1}^{2} \left(\frac{x}{y} + \frac{y}{x}\right) dy\).</p>
-  <p><strong>Vì sao phải làm thế?</strong> Nguyên tắc của tích phân lặp là tính từ trong ra ngoài. Ta coi \(x\) như một hằng số (giống như một con số bình thường, ví dụ số 5 chẳng hạn) và chỉ tìm nguyên hàm theo biến \(y\).</p>
-  <p><strong>Nhắc lại quy tắc nguyên hàm cơ bản:</strong></p>
-  <ul>
-    <li>\(\int \frac{1}{y} dy = \ln|y|\) (Nguyên hàm của \(1/y\) là logarit tự nhiên của trị tuyệt đối của \(y\)).</li>
-    <li>\(\int y dy = \frac{y^2}{2}\) (Áp dụng công thức lũy thừa \(\int y^n dy = \frac{y^{n+1}}{n+1}\) với \(n=1\)).</li>
-    <li>Vì \(y\) nằm trong khoảng từ 1 đến 2, nên \(y > 0\), do đó \(\ln|y| = \ln(y)\).</li>
-  </ul>
-  <p>Thực hiện tìm nguyên hàm theo \(y\):</p>
-  \[\int \left(\frac{x}{y} + \frac{y}{x}\right) dy = \int \left( x \cdot \frac{1}{y} + \frac{1}{x} \cdot y \right) dy\]
-  \[= x \cdot \int \frac{1}{y} dy + \frac{1}{x} \cdot \int y dy\]
-  \[= x \cdot \ln(y) + \frac{1}{x} \cdot \frac{y^2}{2}\]
-  <p>Bây giờ ta thay cận trên \(y=2\) và cận dưới \(y=1\) vào biểu thức vừa tìm được (lấy giá trị tại cận trên trừ đi giá trị tại cận dưới):</p>
-  \[\left[ x\ln(y) + \frac{y^2}{2x} \right]_{y=1}^{y=2} = \left( x\ln(2) + \frac{2^2}{2x} \right) - \left( x\ln(1) + \frac{1^2}{2x} \right)\]
-  <p>Ta biết rằng \(\ln(1) = 0\), \(2^2 = 4\) và \(1^2 = 1\), ta thay vào:</p>
-  \[= \left( x\ln(2) + \frac{4}{2x} \right) - \left( 0 + \frac{1}{2x} \right)\]
-  \[= x\ln(2) + \frac{4}{2x} - \frac{1}{2x}\]
-  <p>Trừ hai phân số có cùng mẫu số là \(2x\):</p>
-  \[= x\ln(2) + \frac{4 - 1}{2x}\]
-  \[= x\ln(2) + \frac{3}{2x}\]
+  <p>Tích phân trong theo \(y\):</p>
+  \[\int_1^2\left(\frac{x}{y}+\frac{y}{x}\right)dy = \left[x\ln y + \frac{y^2}{2x}\right]_1^2 = x\ln 2 + \frac{4}{2x} - 0 - \frac{1}{2x} = x\ln 2 + \frac{3}{2x}\]
 
-  <h4>Bước 3: Tính tích phân lớp bên ngoài theo biến \(x\)</h4>
-  <p><strong>Ta đang làm gì?</strong> Ta lấy kết quả vừa tính được ở Bước 2, thế vào vị trí tích phân bên trong để tạo thành một bài toán tích phân một biến thông thường theo biến \(x\).</p>
-  <p><strong>Vì sao phải làm thế?</strong> Để tính được giá trị cuối cùng của toàn bộ miền \(D\).</p>
-  <p>Tích phân bây giờ trở thành:</p>
-  \[I = \int_{1}^{4} \left( x\ln(2) + \frac{3}{2x} \right) dx\]
-  <p><strong>Nhắc lại quy tắc nguyên hàm:</strong></p>
-  <ul>
-    <li>\(\int x dx = \frac{x^2}{2}\)</li>
-    <li>\(\int \frac{1}{x} dx = \ln|x|\). Do \(x\) chạy từ 1 đến 4 (số dương) nên \(\ln|x| = \ln(x)\).</li>
-    <li>\(\ln(2)\) và \(\frac{3}{2}\) chỉ là các hằng số nhân kèm, ta giữ nguyên.</li>
-  </ul>
-  <p>Ta tìm nguyên hàm theo \(x\):</p>
-  \[\int \left( x\ln(2) + \frac{3}{2} \cdot \frac{1}{x} \right) dx\]
-  \[= \ln(2) \cdot \frac{x^2}{2} + \frac{3}{2} \cdot \ln(x)\]
-  <p>Bây giờ thay cận trên \(x=4\) và cận dưới \(x=1\) vào:</p>
-  \[\left[ \frac{x^2}{2}\ln(2) + \frac{3}{2}\ln(x) \right]_{x=1}^{x=4}\]
-  <p>Tính giá trị tại cận trên \(x=4\):</p>
-  \[\left( \frac{4^2}{2}\ln(2) + \frac{3}{2}\ln(4) \right) = \left( \frac{16}{2}\ln(2) + \frac{3}{2}\ln(4) \right) = 8\ln(2) + \frac{3}{2}\ln(4)\]
-  <p>Tính giá trị tại cận dưới \(x=1\):</p>
-  \[\left( \frac{1^2}{2}\ln(2) + \frac{3}{2}\ln(1) \right) = \left( \frac{1}{2}\ln(2) + 0 \right) = \frac{1}{2}\ln(2)\]
-  <p>Lấy giá trị cận trên trừ đi cận dưới:</p>
-  \[I = \left( 8\ln(2) + \frac{3}{2}\ln(4) \right) - \left( \frac{1}{2}\ln(2) \right)\]
-  <p>Ta gộp các số hạng chứa \(\ln(2)\) lại với nhau:</p>
-  \[I = \left( 8 - \frac{1}{2} \right)\ln(2) + \frac{3}{2}\ln(4)\]
-  <p>Quy đồng \(8 - \frac{1}{2} = \frac{16}{2} - \frac{1}{2} = \frac{15}{2}\):</p>
-  \[I = \frac{15}{2}\ln(2) + \frac{3}{2}\ln(4)\]
+  <p>Tích phân ngoài theo \(x\):</p>
+  \[I = \int_1^4\left(x\ln 2 + \frac{3}{2x}\right)dx = \left[\frac{x^2}{2}\ln 2 + \frac{3}{2}\ln x\right]_1^4\]
+  \[= \left(8\ln 2 + \frac{3}{2}\ln 4\right) - \left(\frac{1}{2}\ln 2 + 0\right)\]
+  \[= 8\ln 2 + \frac{3}{2}\cdot 2\ln 2 - \frac{1}{2}\ln 2\]
+  \[= 8\ln 2 + 3\ln 2 - \frac{1}{2}\ln 2 = \frac{21}{2}\ln 2\]
 
-  <h4>Bước 4: Rút gọn kết quả cuối cùng</h4>
-  <p><strong>Ta đang làm gì?</strong> Ta sẽ biến đổi biểu thức logarit để đáp án gọn gàng nhất.</p>
-  <p><strong>Vì sao phải làm thế?</strong> Để đối chiếu cho chính xác với đáp án chuẩn và làm quen với các phép tính logarit đơn giản.</p>
-  <p>Nhắc lại quy tắc logarit: \(\ln(a^b) = b \cdot \ln(a)\). Ta có \(4 = 2^2\), vậy:</p>
-  \[\ln(4) = \ln(2^2) = 2\ln(2)\]
-  <p>Thay \(\ln(4)\) vào biểu thức ta đang có:</p>
-  \[I = \frac{15}{2}\ln(2) + \frac{3}{2} \cdot \left( 2\ln(2) \right)\]
-  \[I = \frac{15}{2}\ln(2) + \frac{3 \cdot 2}{2}\ln(2)\]
-  \[I = \frac{15}{2}\ln(2) + 3\ln(2)\]
-  <p>Quy đồng số \(3 = \frac{6}{2}\):</p>
-  \[I = \frac{15}{2}\ln(2) + \frac{6}{2}\ln(2)\]
-  <p>Cộng hai tử số với nhau:</p>
-  \[I = \frac{15 + 6}{2}\ln(2)\]
-  \[I = \frac{21}{2}\ln(2)\]
-
-  <h4>Bước 5: Kết luận và ý nghĩa</h4>
-  <p><strong>Kết luận cuối cùng:</strong> Tích phân của chúng ta có giá trị là:</p>
-  <p style="color:#1a5276; font-size:1.2em; text-align:center;"><strong>\(\boxed{I = \frac{21}{2}\ln(2)}\)</strong></p>
-  <p><strong>Ý nghĩa của bài toán:</strong> Nếu ta coi hàm số \(f(x, y) = \frac{x}{y} + \frac{y}{x}\) biểu diễn chiều cao của một khối vật thể nào đó mọc lên từ mặt đất hình chữ nhật \(D\), thì con số \(\frac{21}{2}\ln(2)\) chính là <strong>thể tích</strong> của toàn bộ khối vật thể đó. Bài toán giúp ta rèn luyện cách chia nhỏ một khối phức tạp theo hai chiều \(x\) và \(y\) rồi cộng dồn lại để tính thể tích.</p>
+  <p style="color:#1a5276; font-weight:bold;">\(\boxed{I = \dfrac{21}{2}\ln 2}\) ✓ Khớp với đáp án \(21\ln(2)/2\).</p>
 </div>
   </div>
 </div>
 
+
+<div style="margin-top: 35px; padding: 12px 16px; border-top: 1px dashed #cbd5e1; text-align: center; color: #94a3b8; font-size: 11.5px; line-height: 1.6;">
+  <em>* Tài liệu và mô phỏng được tạo với sự hỗ trợ của AI, có thể còn tồn tại sai sót. Rất mong nhận được đóng góp ý kiến từ thầy cô và các bạn.</em>
+</div>
 </div>
 <script>
     function toggleSolutionBox(btn) {
@@ -210,9 +143,5 @@
         }
     }
 </script>
-
-<div style="margin-top: 40px; padding: 12px 16px; border-top: 1px dashed #cbd5e1; text-align: center; color: #94a3b8; font-size: 11.5px; line-height: 1.6;">
-  <em>* Tài liệu và mô phỏng được tạo với sự hỗ trợ của AI, có thể còn tồn tại sai sót. Rất mong nhận được đóng góp ý kiến từ thầy cô và các bạn.</em>
-</div>
 </body>
 </html>

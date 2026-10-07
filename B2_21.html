@@ -92,82 +92,27 @@
     <span class="sol-arrow">▼</span>
   </button>
   <div class="solution-collapsible-content">
-<div style="background:#eaf4fb; border-left:5px solid #2980b9; padding:20px; margin-top:30px; border-radius:6px; line-height:1.8;">
-  <h3 style="color:#1a5276;">Lời giải chi tiết – Bài B2.21</h3>
-  
-  <h4>1. Hiểu đề bài và các ký hiệu</h4>
-  <ul>
-    <li><strong>Ký hiệu \(\iint_D\):</strong> Đây là "tích phân kép". Em cứ tưởng tượng giống như ta đang tính tổng khối lượng của một cái bánh xèo (hình bầu dục) khi biết độ dày của nó ở mỗi điểm.</li>
-    <li><strong>Miền \(D\):</strong> Được cho bởi bất phương trình \(\frac{x^2}{a^2} + \frac{y^2}{b^2} \le 1\). Đây chính là một <em>hình elip</em> (giống quả trứng) nằm trên mặt phẳng tọa độ, với bán trục ngang là \(a\) và bán trục dọc là \(b\). Bất đẳng thức "\(\le 1\)" nghĩa là ta lấy toàn bộ phần diện tích <em>bên trong</em> và cả <em>đường viền</em> của elip.</li>
-    <li><strong>Biểu thức \((x-y)^2\):</strong> Đây là "độ dày" hoặc "mật độ" tại một điểm \((x, y)\) bất kỳ trên miền \(D\).</li>
-  </ul>
-
-  <div style="background:#e8f8f5; border-left:4px solid #1abc9c; padding:10px; margin:15px 0;">
-    <strong>💡 Mẹo (Tại sao phải đổi biến?):</strong> Tính trực tiếp trên hình elip bằng tọa độ \((x, y)\) thường rất khó vì ranh giới của nó cong và phức tạp. Ta sẽ dùng một "phép thuật" gọi là <strong>đổi sang hệ tọa độ cực suy rộng</strong> để biến hình elip méo mó này thành một hình tròn đơn giản, giúp việc tính toán dễ như ăn kẹo!
-  </div>
-
-  <h4>2. Đổi biến số (Biến elip thành hình tròn)</h4>
-  <ol>
-    <li>Ta đặt công thức đổi biến (gắn độ giãn \(a, b\) vào hệ tọa độ cực):
-      \[ x = a \cdot r\cos\theta \]
-      \[ y = b \cdot r\sin\theta \]
-      <em>(Giải thích: \(r\) giống như khoảng cách từ tâm ra viền, còn \(\theta\) là góc quét quay vòng tròn.)</em>
-    </li>
-    <li>Tìm giới hạn (cận) mới:
-      <ul>
-        <li>Góc quét \(\theta\) quay đủ một vòng nên đi từ \(0\) đến \(2\pi\) (tương đương 360 độ). Vậy \(0 \le \theta \le 2\pi\).</li>
-        <li>Bán kính \(r\) đi từ tâm (\(r=0\)) ra đến viền ngoài cùng (\(r=1\)). Vậy \(0 \le r \le 1\).</li>
-      </ul>
-    </li>
-    <li><strong>Định thức Jacobi \(J\):</strong> Khi đổi biến, diện tích bị kéo giãn ra một lượng là \(J = a \cdot b \cdot r\). Khi ráp vào tích phân kép, ta bắt buộc phải nhân thêm lượng này! Cụ thể là thay \(dxdy\) bằng \(ab\,r\,dr\,d\theta\).</li>
-  </ol>
-
-  <h4>3. Bắt tay vào tính toán tích phân</h4>
-  <p>Giờ ta thay tất cả \(x, y, dxdy\) vào biểu thức ban đầu:</p>
-  \[ I = \int_0^{2\pi} \int_0^1 (a \cdot r\cos\theta - b \cdot r\sin\theta)^2 \cdot (ab \cdot r) \,dr\,d\theta \]
-  
-  <p><strong>Bước 3.1: Rút gọn biểu thức bên trong</strong></p>
-  <ul>
-    <li>Kéo nhân tử chung \(r\) ra khỏi bình phương: \((r(a\cos\theta - b\sin\theta))^2 = r^2(a\cos\theta - b\sin\theta)^2\)</li>
-    <li>Khai triển hằng đẳng thức đáng nhớ \((A - B)^2 = A^2 - 2AB + B^2\):
-      \[ (a\cos\theta - b\sin\theta)^2 = a^2\cos^2\theta - 2ab\cos\theta\sin\theta + b^2\sin^2\theta \]
-    </li>
-    <li>Nhân thêm phần Jacobian \((ab \cdot r)\) vào:
-      \[ r^2 \cdot (ab \cdot r) = ab \cdot r^3 \]
-    </li>
-  </ul>
-  
-  <p>Ta được tích phân mới trông gọn gàng hơn:</p>
-  \[ I = ab \int_0^{2\pi} \int_0^1 r^3 \left( a^2\cos^2\theta - 2ab\cos\theta\sin\theta + b^2\sin^2\theta \right) \,dr\,d\theta \]
-
-  <p><strong>Bước 3.2: Tách đôi bài toán thành 2 phần (r và \(\theta\)) độc lập</strong></p>
-  <p>Vì các cận đều là số nguyên (không dính dáng đến biến khác), ta có thể tách phép nhân:</p>
-  \[ I = ab \cdot \left( \int_0^1 r^3 \,dr \right) \cdot \left( \int_0^{2\pi} (a^2\cos^2\theta - 2ab\cos\theta\sin\theta + b^2\sin^2\theta) \,d\theta \right) \]
-
-  <p><strong>Bước 3.3: Tính phần theo \(r\)</strong></p>
-  <p>Áp dụng công thức nguyên hàm cơ bản \(\int x^n dx = \frac{x^{n+1}}{n+1}\):</p>
-  \[ \int_0^1 r^3 \,dr = \left. \frac{r^4}{4} \right|_0^1 = \frac{1^4}{4} - \frac{0^4}{4} = \frac{1}{4} \]
-
-  <p><strong>Bước 3.4: Tính phần lượng giác theo \(\theta\)</strong></p>
-  <p>Ta tách thành 3 tích phân nhỏ cộng lại:</p>
-  <ol>
-    <li>\(\int_0^{2\pi} a^2\cos^2\theta \,d\theta = a^2 \cdot \pi\) <em>(Dùng công thức hạ bậc: \(\cos^2\theta = \frac{1+\cos 2\theta}{2}\), trên trọn một chu kỳ thì \(\cos 2\theta\) bằng 0, chỉ còn phần hằng số \(\frac{1}{2} \cdot 2\pi = \pi\))</em>.</li>
-    <li>\(\int_0^{2\pi} b^2\sin^2\theta \,d\theta = b^2 \cdot \pi\) <em>(Tương tự hạ bậc cho sin: \(\sin^2\theta = \frac{1-\cos 2\theta}{2}\))</em>.</li>
-    <li>\(\int_0^{2\pi} 2ab\cos\theta\sin\theta \,d\theta = ab \int_0^{2\pi} \sin(2\theta) \,d\theta = 0\) <em>(Hàm \(\sin\) tích phân trên một chu kỳ luôn bằng 0 do nửa âm bù cho nửa dương)</em>.</li>
-  </ol>
-  <p>Cộng 3 kết quả trên lại, ta được phần \(\theta\) là: \(a^2\pi + b^2\pi - 0 = \pi(a^2 + b^2)\).</p>
-
-  <h4>4. Ráp kết quả cuối cùng</h4>
-  <p>Nhân tất cả các phần lại với nhau:</p>
-  \[ I = ab \cdot \left(\frac{1}{4}\right) \cdot \left[\pi(a^2 + b^2)\right] \]
-  \[ I = \frac{\pi}{4}ab(a^2 + b^2) \]
-
-  <p style="font-size: 16px;"><strong>Kết luận:</strong> Giá trị của tích phân cần tìm là \(\mathbf{I = \frac{\pi}{4}ab(a^2+b^2)}\).</p>
-  <p><strong>🌟 Ý nghĩa:</strong> Con số này không chỉ là một đáp án khô khan! Nó đại diện cho khối lượng hoặc mômen quán tính của một vật thể hình elip có mật độ phụ thuộc vào vị trí. Sự kết hợp giữa diện tích hình elip và sự phân bố mật độ tạo ra một giá trị tích hợp đẹp đẽ và gọn gàng, thể hiện tính cân xứng trong toán học.</p>
+<div style="background:#eaf4fb; border-left:5px solid #2980b9; padding:20px; margin-top:30px; border-radius:6px;">
+  <h3 style="color:#1a5276;">Lời giải – Bài B2.21</h3>
+  <p><strong>Đề bài:</strong> Tính \(\iint_D (x-y)^2\,dxdy\), \(D\): \(x^2/a^2+y^2/b^2 \le 1\).</p>
+  <p><strong>Bước 1: Tọa độ cực suy rộng.</strong><br>
+  Đặt \(x = a\cdot r\cos\theta\), \(y = b\cdot r\sin\theta\). Định thức Jacobi \(J = ab\cdot r\).<br>
+  Miền tích phân: \(0 \le r \le 1\), \(0 \le \theta \le 2\pi\).</p>
+  <p><strong>Bước 2: Tính tích phân.</strong></p>
+  \[I = \int_0^{2\pi} \int_0^1 (ar\cos\theta - br\sin\theta)^2 \cdot ab\,r\,dr\,d\theta\]
+  \[= ab \int_0^{2\pi} \int_0^1 r^3 (a^2\cos^2\theta - 2ab\cos\theta\sin\theta + b^2\sin^2\theta)\,dr\,d\theta\]
+  <p>Ta có \(\int_0^1 r^3\,dr = \frac{1}{4}\). Tích phân phần lượng giác:</p>
+  <p>\(\int_0^{2\pi} \cos^2\theta\,d\theta = \pi\), \(\int_0^{2\pi} \sin^2\theta\,d\theta = \pi\), và \(\int_0^{2\pi} \cos\theta\sin\theta\,d\theta = 0\).</p>
+  \[I = ab \cdot \frac{1}{4} \cdot (a^2\pi + b^2\pi) = \frac{\pi}{4}ab(a^2+b^2)\]
+  <p style="color:#1a5276; font-weight:bold;">\(\boxed{I = \frac{\pi}{4}ab(a^2+b^2)}\) ✓ Khớp với đáp án.</p>
 </div>
   </div>
 </div>
 
+
+<div style="margin-top: 35px; padding: 12px 16px; border-top: 1px dashed #cbd5e1; text-align: center; color: #94a3b8; font-size: 11.5px; line-height: 1.6;">
+  <em>* Tài liệu và mô phỏng được tạo với sự hỗ trợ của AI, có thể còn tồn tại sai sót. Rất mong nhận được đóng góp ý kiến từ thầy cô và các bạn.</em>
+</div>
 </div>
 <script>
     function toggleSolutionBox(btn) {
@@ -194,9 +139,5 @@
         }
     }
 </script>
-
-<div style="margin-top: 40px; padding: 12px 16px; border-top: 1px dashed #cbd5e1; text-align: center; color: #94a3b8; font-size: 11.5px; line-height: 1.6;">
-  <em>* Tài liệu và mô phỏng được tạo với sự hỗ trợ của AI, có thể còn tồn tại sai sót. Rất mong nhận được đóng góp ý kiến từ thầy cô và các bạn.</em>
-</div>
 </body>
 </html>

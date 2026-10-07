@@ -93,64 +93,23 @@
   </button>
   <div class="solution-collapsible-content">
 <div style="background:#eaf4fb; border-left:5px solid #2980b9; padding:20px; margin-top:30px; border-radius:6px;">
-  <h3 style="color:#1a5276;">Lời giải chi tiết – Bài B2.1</h3>
-  <p><strong>Đề bài:</strong> Tính tích phân kép \( \iint_D (x^2+y^2)^2 \,dxdy \), với miền \( D \) được cho bởi: \( 1 \le x^2+y^2 \le 4 \), \( x \ge 0 \), \( y \ge 0 \).</p>
-  
-  <h4>Bước 1: Hiểu ý nghĩa của miền D và các ký hiệu</h4>
-  <ul>
-    <li>Ký hiệu \( \iint_D \) nghĩa là chúng ta đang đi tính tổng (tích phân) của hàm số \( (x^2+y^2)^2 \) quét qua toàn bộ miền diện tích \( D \). Ký hiệu \( dxdy \) cho biết ta đang tính theo hai trục ngang dọc (x và y).</li>
-    <li>Biểu thức \( x^2+y^2 \) chính là bình phương khoảng cách từ gốc tọa độ \( O(0,0) \) đến một điểm \( M(x,y) \). Nếu gọi khoảng cách này là \( r \), ta luôn có \( x^2+y^2 = r^2 \).</li>
-    <li>Điều kiện \( 1 \le x^2+y^2 \le 4 \) có nghĩa là \( 1 \le r^2 \le 4 \), căn bậc hai các vế ta được \( 1 \le r \le 2 \). Nghĩa là những điểm này nằm cách tâm từ 1 cm đến 2 cm. Đây là phần diện tích nằm giữa hai đường tròn (hình vành khăn).</li>
-    <li>Điều kiện \( x \ge 0 \) và \( y \ge 0 \) bắt buộc hoành độ và tung độ đều phải dương. Tức là ta chỉ lấy phần hình ở góc trên bên phải (góc phần tư thứ nhất).</li>
-  </ul>
-  <p><em>Mô tả hình dáng miền D:</em> Miền \( D \) là một phần tư (1/4) của chiếc "vành khăn" giới hạn bởi đường tròn nhỏ bán kính 1 và đường tròn lớn bán kính 2, nằm lọt trong góc trên bên phải của đồ thị.</p>
-
-  
-  <h4>Bước 2: Chuyển bài toán sang tọa độ cực</h4>
-  <p>Ta dùng quy tắc đổi biến quen thuộc, đặt: <br>
-  \( x = r \cos\theta \)<br>
-  \( y = r \sin\theta \)</p>
-  <p>Trong đó, \( r \) là khoảng cách tới tâm, và \( \theta \) là góc quét. Khi đổi sang tọa độ cực, diện tích nhỏ \( dxdy \) bắt buộc phải biến thành \( r \,dr \,d\theta \) (chữ \( r \) thêm vào gọi là định thức Jacobi, tuyệt đối không được quên nhé).</p>
-  
-  <p><strong>Xác định lại giới hạn (cận) cho \( r \) và \(\theta\):</strong></p>
-  <ol>
-    <li>Quét theo chiều dài tia: Từ đường tròn trong ra đường tròn ngoài, ta có \( 1 \le r \le 2 \).</li>
-    <li>Quét theo góc quay: Vì nằm ở góc phần tư thứ nhất, góc đi từ trục ngang Ox (\( 0^\circ \)) đến trục dọc Oy (\( 90^\circ \) hay \( \frac{\pi}{2} \) radian). Do đó, \( 0 \le \theta \le \frac{\pi}{2} \).</li>
-  </ol>
-
-  <h4>Bước 3: Lắp ráp và tính toán</h4>
-  <p>Thay cụm \( x^2+y^2 = r^2 \) và \( dxdy = r \,dr \,d\theta \) vào đề bài, ta có biểu thức mới:</p>
-  \[ I = \int_0^{\pi/2} \left( \int_1^2 (r^2)^2 \cdot r \,dr \right) d\theta \]
-  
-  <p>Bây giờ ta tính nhân chia lũy thừa ở bên trong ngoặc trước:</p>
-  \[ (r^2)^2 = r^4 \]
-  \[ r^4 \cdot r = r^5 \]
-  
-  <p>Vì các con số giới hạn (cận) đều là số cụ thể (0, \(\pi/2\), 1, 2) chứ không chứa biến số nào khác, ta được phép tách riêng làm 2 tích phân độc lập rồi nhân với nhau cho dễ:</p>
-  \[ I = \left( \int_0^{\pi/2} 1 \,d\theta \right) \cdot \left( \int_1^2 r^5 \,dr \right) \]
-
-  <p><em>Nhắc lại quy tắc nguyên hàm:</em> Nguyên hàm của số 1 là biến số của nó (ở đây là \(\theta\)). Nguyên hàm của lũy thừa \( r^n \) là \( \frac{r^{n+1}}{n+1} \).</p>
-  
-  <p>Tính phần góc (theo \( \theta \)):</p>
-  \[ \int_0^{\pi/2} 1 \,d\theta = \left[ \theta \right]_0^{\pi/2} = \frac{\pi}{2} - 0 = \frac{\pi}{2} \]
-  
-  <p>Tính phần bán kính (theo \( r \)):</p>
-  \[ \int_1^2 r^5 \,dr = \left[ \frac{r^6}{6} \right]_1^2 \]
-  \[ = \frac{2^6}{6} - \frac{1^6}{6} \]
-  \[ = \frac{64}{6} - \frac{1}{6} \]
-  \[ = \frac{63}{6} \]
-  <p>Rút gọn phân số \( \frac{63}{6} \) (bằng cách chia cả trên và dưới cho 3), ta được \( \frac{21}{2} \).</p>
-
-  <p>Cuối cùng, nhân 2 kết quả lại:</p>
-  \[ I = \frac{\pi}{2} \cdot \frac{21}{2} = \frac{21\pi}{4} \]
-
-  <h4>Bước 4: Kết luận</h4>
-  <p style="color:#1a5276; font-weight:bold; font-size:18px;">\(\boxed{I = \dfrac{21\pi}{4}}\)</p>
-  <p><strong>Ý nghĩa bài toán:</strong> Nhờ phép biến đổi linh hoạt từ hình học (vành khăn) sang đại số (hàm số mũ), bài toán tưởng phức tạp lại được giải quyết rất gọn gàng. Kết quả cuối cùng hoàn toàn khớp với đáp án kiểm tra.</p>
+  <h3 style="color:#1a5276;">Lời giải – Bài B2.1</h3>
+  <p><strong>Đề bài:</strong> Tính \(\iint_D (x^2+y^2)^2\,dxdy\), với \(D\): \(1 \le x^2+y^2 \le 4,\; x \ge 0,\; y \ge 0\).</p>
+  <p><strong>Bước 1: Chuyển sang tọa độ cực.</strong><br>
+  Đặt \(x = r\cos\theta\), \(y = r\sin\theta\). Định thức Jacobi \(J = r\).<br>
+  Từ điều kiện miền \(D\), ta có: \(1 \le r \le 2\) và \(0 \le \theta \le \frac{\pi}{2}\).</p>
+  <p><strong>Bước 2: Tính tích phân.</strong></p>
+  \[I = \int_0^{\pi/2} d\theta \int_1^2 (r^2)^2 \cdot r\,dr = \int_0^{\pi/2} d\theta \int_1^2 r^5\,dr\]
+  \[= \left[\theta\right]_0^{\pi/2} \cdot \left[\frac{r^6}{6}\right]_1^2 = \frac{\pi}{2} \cdot \left(\frac{64}{6} - \frac{1}{6}\right) = \frac{\pi}{2} \cdot \frac{63}{6} = \frac{63\pi}{12} = \frac{21\pi}{4}\]
+  <p style="color:#1a5276; font-weight:bold;">\(\boxed{I = \dfrac{21\pi}{4}}\) ✓ Khớp với đáp án.</p>
 </div>
   </div>
 </div>
 
+
+<div style="margin-top: 35px; padding: 12px 16px; border-top: 1px dashed #cbd5e1; text-align: center; color: #94a3b8; font-size: 11.5px; line-height: 1.6;">
+  <em>* Tài liệu và mô phỏng được tạo với sự hỗ trợ của AI, có thể còn tồn tại sai sót. Rất mong nhận được đóng góp ý kiến từ thầy cô và các bạn.</em>
+</div>
 </div>
 <script>
     function toggleSolutionBox(btn) {
@@ -177,9 +136,5 @@
         }
     }
 </script>
-
-<div style="margin-top: 40px; padding: 12px 16px; border-top: 1px dashed #cbd5e1; text-align: center; color: #94a3b8; font-size: 11.5px; line-height: 1.6;">
-  <em>* Tài liệu và mô phỏng được tạo với sự hỗ trợ của AI, có thể còn tồn tại sai sót. Rất mong nhận được đóng góp ý kiến từ thầy cô và các bạn.</em>
-</div>
 </body>
 </html>

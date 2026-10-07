@@ -93,70 +93,25 @@
   </button>
   <div class="solution-collapsible-content">
 <div style="background:#eaf4fb; border-left:5px solid #2980b9; padding:20px; margin-top:30px; border-radius:6px;">
-  <h3 style="color:#1a5276;">Lời giải chi tiết – Bài B2.4</h3>
-  <p><strong>Đề bài:</strong> Tính tích phân \( \iint_D y \,dxdy \), với miền \( D \) là nửa hình tròn thỏa mãn: \( x^2+y^2 \le 4x \) và \( y \le 0 \).</p>
-  
-  <h4>Bước 1: Giải mã hình dáng miền D</h4>
-  <ul>
-    <li>Ta xét bất phương trình \( x^2+y^2 \le 4x \). Chuyển vế ta được: \( x^2 - 4x + y^2 \le 0 \).</li>
-    <li>Thêm 4 vào hai vế để tạo hằng đẳng thức: \( (x^2 - 4x + 4) + y^2 \le 4 \), tức là \( (x-2)^2 + y^2 \le 2^2 \). Đây là một hình tròn có tâm nằm ở \( (2,0) \) trên trục Ox, và bán kính \( R = 2 \). Đường tròn này đi qua gốc tọa độ O.</li>
-    <li>Điều kiện \( y \le 0 \) bắt buộc ta chỉ được lấy phần diện tích nằm bên dưới trục hoành (phần nửa dưới của hình tròn).</li>
-  </ul>
-  <p><em>Mô tả hình dáng:</em> Miền \( D \) là nửa dưới của một hình tròn nằm lùi về phía bên phải trục tung.</p>
-
-  
-  <h4>Bước 2: Chuyển sang tọa độ cực</h4>
-  <p>Ta thay \( x = r \cos\theta \) và \( x^2+y^2 = r^2 \) vào phương trình \( x^2+y^2 \le 4x \):</p>
-  \[ r^2 \le 4(r \cos\theta) \]
-  <p>Chia cả 2 vế cho độ dài \( r \) (vì \( r > 0 \)), ta được giới hạn bán kính theo góc:</p>
-  \[ 0 \le r \le 4\cos\theta \]
-  
-  <p><strong>Tìm giới hạn của góc \( \theta \):</strong></p>
-  <p>Vì hình nằm ở góc phần tư thứ tư (bên phải trục tung và bên dưới trục hoành), tia quét sẽ đi từ vị trí thẳng đứng chĩa xuống (\( -90^\circ \) hay \( -\frac{\pi}{2} \)) quay lên vị trí nằm ngang (\( 0^\circ \)):</p>
-  \[ -\frac{\pi}{2} \le \theta \le 0 \]
-
-  <h4>Bước 3: Thiết lập và tính tích phân</h4>
-  <p>Thay hàm số \( y = r \sin\theta \) và \( dxdy = r \,dr \,d\theta \) vào đề bài, ta có:</p>
-  \[ I = \int_{-\pi/2}^0 \left( \int_0^{4\cos\theta} (r \sin\theta) \cdot r \,dr \right) d\theta \]
-  
-  <p>Gộp 2 chữ r lại, phần bên trong trở thành \( r^2 \sin\theta \). Chữ \( \sin\theta \) lúc này đóng vai trò như một hằng số khi lấy tích phân theo \( r \):</p>
-  \[ I = \int_{-\pi/2}^0 \sin\theta \left( \int_0^{4\cos\theta} r^2 \,dr \right) d\theta \]
-  
-  <p><em>Tính phần bên trong theo \( r \):</em> Nguyên hàm của \( r^2 \) là \( \frac{r^3}{3} \).</p>
-  \[ \int_0^{4\cos\theta} r^2 \,dr = \left[ \frac{r^3}{3} \right]_0^{4\cos\theta} \]
-  \[ = \frac{(4\cos\theta)^3}{3} - 0 = \frac{64\cos^3\theta}{3} \]
-
-  <p>Thay kết quả này ra tích phân vòng ngoài (theo \( \theta \)):</p>
-  \[ I = \int_{-\pi/2}^0 \sin\theta \cdot \frac{64\cos^3\theta}{3} \,d\theta \]
-  \[ I = \frac{64}{3} \int_{-\pi/2}^0 \cos^3\theta \sin\theta \,d\theta \]
-
-  <p><em>Sử dụng phương pháp đổi biến số để giải tích phân lượng giác:</em></p>
-  <p>Ta thấy bên ngoài có \(\sin\theta\), là họ hàng đạo hàm của \(\cos\theta\). Nên ta đặt:</p>
-  \[ u = \cos\theta \]
-  <p>Lấy đạo hàm 2 vế: \( du = -\sin\theta \,d\theta \Rightarrow \sin\theta \,d\theta = -du \)</p>
-  
-  <p>Đổi cận (điểm đầu điểm cuối) cho biến \( u \):</p>
-  <ul>
-    <li>Khi \( \theta = -\frac{\pi}{2} \) thì \( u = \cos(-\frac{\pi}{2}) = 0 \).</li>
-    <li>Khi \( \theta = 0 \) thì \( u = \cos(0) = 1 \).</li>
-  </ul>
-  
-  <p>Thay toàn bộ sang thế giới của biến \( u \):</p>
-  \[ I = \frac{64}{3} \int_0^1 u^3 (-du) \]
-  \[ = -\frac{64}{3} \int_0^1 u^3 \,du \]
-  
-  <p>Nguyên hàm của \( u^3 \) là \( \frac{u^4}{4} \):</p>
-  \[ I = -\frac{64}{3} \left[ \frac{u^4}{4} \right]_0^1 \]
-  \[ = -\frac{64}{3} \left( \frac{1}{4} - 0 \right) \]
-  \[ = -\frac{64}{12} = -\frac{16}{3} \]
-
-  <h4>Bước 4: Kết luận</h4>
-  <p style="color:#1a5276; font-weight:bold; font-size:18px;">\(\boxed{I = -\dfrac{16}{3}}\)</p>
-  <p><strong>Ý nghĩa bài toán:</strong> Dù diện tích luôn là một số dương, nhưng vì hàm số của chúng ta là hàm \( y \) và miền D lại hoàn toàn nằm ở phần âm của trục \( y \), kết quả tích phân chắc chắn mang dấu âm. Điều này vừa chứng minh quá trình tính toán là hợp lý, vừa là cách ta kiểm tra ngược lại xem mình có bị sai dấu ở đâu không.</p>
+  <h3 style="color:#1a5276;">Lời giải – Bài B2.4</h3>
+  <p><strong>Đề bài:</strong> Tính \(\iint_D y\,dxdy\), \(D\) là nửa hình tròn \(x^2+y^2 \le 4x\) thỏa \(y \le 0\).</p>
+  <p><strong>Bước 1: Chuyển sang tọa độ cực.</strong><br>
+  Phương trình đường tròn: \(r^2 \le 4r\cos\theta \Rightarrow 0 \le r \le 4\cos\theta\).<br>
+  Vì \(y \le 0\) và \(r \ge 0\) (nên \(\cos\theta \ge 0\)), ta có \(-\frac{\pi}{2} \le \theta \le 0\).</p>
+  <p><strong>Bước 2: Tính tích phân.</strong></p>
+  \[I = \int_{-\pi/2}^0 \int_0^{4\cos\theta} (r\sin\theta)\,r\,dr\,d\theta = \int_{-\pi/2}^0 \sin\theta \left[\frac{r^3}{3}\right]_0^{4\cos\theta} d\theta\]
+  \[= \frac{64}{3} \int_{-\pi/2}^0 \cos^3\theta \sin\theta\,d\theta\]
+  <p>Đặt \(u = \cos\theta \Rightarrow du = -\sin\theta\,d\theta\). Khi \(\theta = -\pi/2 \Rightarrow u = 0\); khi \(\theta = 0 \Rightarrow u = 1\).</p>
+  \[I = \frac{64}{3} \int_0^1 u^3\,(-du) = -\frac{64}{3} \left[\frac{u^4}{4}\right]_0^1 = -\frac{64}{3} \cdot \frac{1}{4} = -\frac{16}{3}\]
+  <p style="color:#1a5276; font-weight:bold;">\(\boxed{I = -\dfrac{16}{3}}\) ✓ Khớp với đáp án.</p>
 </div>
   </div>
 </div>
 
+
+<div style="margin-top: 35px; padding: 12px 16px; border-top: 1px dashed #cbd5e1; text-align: center; color: #94a3b8; font-size: 11.5px; line-height: 1.6;">
+  <em>* Tài liệu và mô phỏng được tạo với sự hỗ trợ của AI, có thể còn tồn tại sai sót. Rất mong nhận được đóng góp ý kiến từ thầy cô và các bạn.</em>
+</div>
 </div>
 <script>
     function toggleSolutionBox(btn) {
@@ -183,9 +138,5 @@
         }
     }
 </script>
-
-<div style="margin-top: 40px; padding: 12px 16px; border-top: 1px dashed #cbd5e1; text-align: center; color: #94a3b8; font-size: 11.5px; line-height: 1.6;">
-  <em>* Tài liệu và mô phỏng được tạo với sự hỗ trợ của AI, có thể còn tồn tại sai sót. Rất mong nhận được đóng góp ý kiến từ thầy cô và các bạn.</em>
-</div>
 </body>
 </html>

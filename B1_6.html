@@ -104,123 +104,42 @@ fig.show()</code></pre>
   </button>
   <div class="solution-collapsible-content">
 <div style="background:#eaf4fb; border-left:5px solid #2980b9; padding:20px; margin-top:30px; border-radius:6px;">
-  <h3 style="color:#1a5276;">Lời giải siêu chi tiết – Bài B1.6</h3>
-  
-  <p><strong>Đề bài yêu cầu:</strong> Tính tích phân kép \( \iint_D y \,dxdy \). Trong đó, miền \(D\) là phần diện tích bị kẹp giữa hai đường parabol: \(y = x^2\) và \(y = 4 - x^2 + 2x\).</p>
-  
-  
-  <h4>Bước 1: Tìm giao điểm của hai đường parabol để biết giới hạn theo chiều ngang (\(x\))</h4>
-  <p>Để biết miền \(D\) bắt đầu từ đâu và kết thúc ở đâu theo trục \(x\), ta cần tìm xem hai đường parabol cắt nhau tại những điểm nào. Ta lập phương trình hoành độ giao điểm bằng cách cho hai biểu thức của \(y\) bằng nhau:</p>
-  <ul>
-    <li>\( x^2 = 4 - x^2 + 2x \)</li>
-  </ul>
-  <p>Bây giờ, ta chuyển tất cả các số hạng sang vế trái để vế phải bằng 0:</p>
-  <ul>
-    <li>\( x^2 + x^2 - 2x - 4 = 0 \)</li>
-    <li>\( 2x^2 - 2x - 4 = 0 \)</li>
-  </ul>
-  <p>Chia cả hai vế cho 2 để phương trình đơn giản hơn:</p>
-  <ul>
-    <li>\( x^2 - x - 2 = 0 \)</li>
-  </ul>
-  <p>Đây là phương trình bậc hai. Ta có thể nhẩm nghiệm hoặc phân tích thành nhân tử. Nhận thấy \(2 \times (-1) = -2\) và \(2 + (-1) = 1\), ta tách ra:</p>
-  <ul>
-    <li>\( (x - 2)(x + 1) = 0 \)</li>
-  </ul>
-  <p>Suy ra hai nghiệm là:</p>
-  <ul>
-    <li>\( x = 2 \)</li>
-    <li>\( x = -1 \)</li>
-  </ul>
-  <p>Vậy, miền \(D\) chạy từ trái sang phải với \(x\) đi từ \(-1\) đến \(2\).</p>
+  <h3 style="color:#1a5276;">Lời giải – Bài B1.6</h3>
+  <p><strong>Đề bài:</strong> Tính \(\iint_D y\,dxdy\), với \(D\) giới hạn bởi \(y = x^2\) và \(y = 4 - x^2 + 2x\).</p>
 
-  <h4>Bước 2: Xác định đường nào nằm trên, đường nào nằm dưới</h4>
-  <p>Tiếp theo, với mỗi giá trị của \(x\) nằm trong khoảng từ \(-1\) đến \(2\), ta cần biết đường thẳng đứng sẽ chạm parabol nào trước (nằm dưới) và parabol nào sau (nằm trên). Ta thử chọn một điểm bất kỳ nằm giữa \(-1\) và \(2\), ví dụ \(x = 0\):</p>
-  <ul>
-    <li>Với đường thứ nhất \(y = x^2\): Khi \(x = 0\), ta có \(y = 0^2 = 0\).</li>
-    <li>Với đường thứ hai \(y = 4 - x^2 + 2x\): Khi \(x = 0\), ta có \(y = 4 - 0^2 + 2(0) = 4\).</li>
-  </ul>
-  <p>Vì \(4 > 0\), nên trên toàn bộ đoạn từ \(x = -1\) đến \(x = 2\), parabol \(y = 4 - x^2 + 2x\) sẽ nằm <strong>trên</strong> parabol \(y = x^2\).</p>
-  <p>Do đó, giới hạn của \(y\) sẽ là từ \(y = x^2\) (cận dưới) đến \(y = 4 - x^2 + 2x\) (cận trên).</p>
+  <p><strong>Bước 1: Tìm giao điểm.</strong><br>
+  \(x^2 = 4 - x^2 + 2x \Rightarrow 2x^2 - 2x - 4 = 0 \Rightarrow x^2 - x - 2 = 0\)<br>
+  \((x-2)(x+1)=0 \Rightarrow x = -1,\; x = 2\).<br>
+  Trên \([-1,2]\): \(x^2 \le y \le 4 - x^2 + 2x\).</p>
 
-  <h4>Bước 3: Thiết lập và tính tích phân lớp trong (theo \(y\))</h4>
-  <p>Giờ ta viết lại tích phân kép thành hai lớp (tích phân lặp). Ta sẽ tính theo \(y\) trước, rồi mới tính theo \(x\):</p>
-  \[ I = \int_{-1}^{2} \left[ \int_{x^2}^{4-x^2+2x} y \,dy \right] dx \]
-  <p>Nhắc lại quy tắc cơ bản của tích phân: Nguyên hàm của \(y\) theo biến \(y\) là \(\frac{y^2}{2}\). Ta thực hiện phép tính phần bên trong ngoặc vuông trước:</p>
-  \[ \int_{x^2}^{4-x^2+2x} y \,dy = \left[ \frac{y^2}{2} \right]_{y = x^2}^{y = 4-x^2+2x} \]
-  <p>Thay cận trên và cận dưới vào:</p>
-  \[ = \frac{1}{2} (4 - x^2 + 2x)^2 - \frac{1}{2} (x^2)^2 \]
-  \[ = \frac{1}{2} \left[ (4 - x^2 + 2x)^2 - x^4 \right] \]
+  <p><strong>Bước 2: Tính tích phân.</strong></p>
+  \[I = \int_{-1}^{2} \int_{x^2}^{4-x^2+2x} y\,dy\,dx = \int_{-1}^{2} \frac{1}{2}\left[(4-x^2+2x)^2 - x^4\right]dx\]
 
-  <h4>Bước 4: Rút gọn biểu thức trước khi tính lớp ngoài</h4>
-  <p>Để tính tiếp dễ dàng, ta sẽ rút gọn phần trong ngoặc. Nhớ lại hằng đẳng thức hiệu hai bình phương: \(A^2 - B^2 = (A + B)(A - B)\). Ở đây, \(A = 4 - x^2 + 2x\) và \(B = x^2\):</p>
-  \[ (4 - x^2 + 2x)^2 - (x^2)^2 = [ (4 - x^2 + 2x) + x^2 ] \cdot [ (4 - x^2 + 2x) - x^2 ] \]
-  <p>Rút gọn từng ngoặc:</p>
-  <ul>
-    <li>Ngoặc thứ nhất: \( 4 - x^2 + 2x + x^2 = 4 + 2x = 2(2 + x) \)</li>
-    <li>Ngoặc thứ hai: \( 4 - x^2 + 2x - x^2 = 4 + 2x - 2x^2 = 2(2 + x - x^2) \)</li>
-  </ul>
-  <p>Nhân hai ngoặc lại với nhau:</p>
-  \[ 2(2 + x) \cdot 2(2 + x - x^2) = 4(2 + x)(2 + x - x^2) \]
-  <p>Bây giờ ta nhân phân phối từ từ để phá ngoặc:</p>
-  \[ (2 + x)(2 + x - x^2) = 2 \cdot (2 + x - x^2) + x \cdot (2 + x - x^2) \]
-  \[ = (4 + 2x - 2x^2) + (2x + x^2 - x^3) \]
-  <p>Gom các số hạng giống nhau lại (sắp xếp theo thứ tự số mũ từ nhỏ đến lớn):</p>
-  \[ = 4 + (2x + 2x) + (-2x^2 + x^2) - x^3 \]
-  \[ = 4 + 4x - x^2 - x^3 \]
-  <p>Nhân số 4 đã để bên ngoài vào lại, ta được kết quả của phần trong ngoặc là \( 4(4 + 4x - x^2 - x^3) \).</p>
-  <p>Thay lại vào biểu thức tích phân (nhớ là ta còn nhân với \(\frac{1}{2}\) ở ngoài):</p>
-  \[ \frac{1}{2} \cdot 4(4 + 4x - x^2 - x^3) = 2(4 + 4x - x^2 - x^3) \]
+  <p>Đặt \(u = 4-x^2+2x\). Ta có:</p>
+  \[(4-x^2+2x)^2 - x^4 = (4-x^2+2x+x^2)(4-x^2+2x-x^2) = (4+2x)(4-2x^2+2x)\]
+  \[= 2(2+x)\cdot2(2-x^2+x) = 4(2+x)(2+x-x^2)\]
 
-  <h4>Bước 5: Tính tích phân lớp ngoài (theo \(x\))</h4>
-  <p>Bây giờ ta chỉ còn tính tích phân một lớp theo biến \(x\):</p>
-  \[ I = \int_{-1}^{2} 2(4 + 4x - x^2 - x^3) \,dx \]
-  <p>Ta đưa số 2 ra ngoài dấu tích phân và tìm nguyên hàm cho từng số hạng. Nhắc lại quy tắc: nguyên hàm của \(x^n\) là \(\frac{x^{n+1}}{n+1}\):</p>
-  <ul>
-    <li>Nguyên hàm của \(4\) là \(4x\)</li>
-    <li>Nguyên hàm của \(4x\) là \(4 \cdot \frac{x^2}{2} = 2x^2\)</li>
-    <li>Nguyên hàm của \(-x^2\) là \(-\frac{x^3}{3}\)</li>
-    <li>Nguyên hàm của \(-x^3\) là \(-\frac{x^4}{4}\)</li>
-  </ul>
-  <p>Gộp lại, ta được:</p>
-  \[ I = 2 \left[ 4x + 2x^2 - \frac{x^3}{3} - \frac{x^4}{4} \right]_{-1}^{2} \]
+  <p>Khai triển:</p>
+  \[(2+x)(2+x-x^2) = 4+2x-2x^2+2x+x^2-x^3 = 4+4x-x^2-x^3\]
 
-  <h4>Bước 6: Thay cận vào để ra đáp án cuối cùng</h4>
-  <p>Ta thay \(x = 2\) vào biểu thức trước, rồi trừ đi giá trị khi thay \(x = -1\):</p>
-  <p>Khi \(x = 2\):</p>
-  <ul>
-    <li>\( 4(2) + 2(2)^2 - \frac{2^3}{3} - \frac{2^4}{4} \)</li>
-    <li>\( = 8 + 2(4) - \frac{8}{3} - \frac{16}{4} \)</li>
-    <li>\( = 8 + 8 - \frac{8}{3} - 4 \)</li>
-    <li>\( = 12 - \frac{8}{3} \)</li>
-  </ul>
-  <p>Khi \(x = -1\):</p>
-  <ul>
-    <li>\( 4(-1) + 2(-1)^2 - \frac{(-1)^3}{3} - \frac{(-1)^4}{4} \)</li>
-    <li>\( = -4 + 2(1) - \frac{-1}{3} - \frac{1}{4} \)</li>
-    <li>\( = -4 + 2 + \frac{1}{3} - \frac{1}{4} \)</li>
-    <li>\( = -2 + \frac{1}{3} - \frac{1}{4} \)</li>
-  </ul>
-  <p>Lấy giá trị trên trừ đi giá trị dưới:</p>
-  \[ I = 2 \left[ \left(12 - \frac{8}{3}\right) - \left(-2 + \frac{1}{3} - \frac{1}{4}\right) \right] \]
-  <p>Phá ngoặc cẩn thận dấu trừ:</p>
-  \[ I = 2 \left[ 12 - \frac{8}{3} + 2 - \frac{1}{3} + \frac{1}{4} \right] \]
-  <p>Nhóm các số nguyên với nhau và các phân số với nhau:</p>
-  \[ I = 2 \left[ (12 + 2) + \left(-\frac{8}{3} - \frac{1}{3}\right) + \frac{1}{4} \right] \]
-  \[ I = 2 \left[ 14 - \frac{9}{3} + \frac{1}{4} \right] \]
-  \[ I = 2 \left[ 14 - 3 + \frac{1}{4} \right] \]
-  \[ I = 2 \left[ 11 + \frac{1}{4} \right] \]
-  <p>Quy đồng mẫu số cho 11 thành phân số mẫu là 4:</p>
-  \[ I = 2 \left[ \frac{44}{4} + \frac{1}{4} \right] = 2 \left[ \frac{45}{4} \right] \]
-  <p>Nhân với 2 ở ngoài:</p>
-  \[ I = \frac{45 \cdot 2}{4} = \frac{45}{2} \]
+  \[I = \frac{1}{2}\int_{-1}^{2} 4(4+4x-x^2-x^3)\,dx = 2\int_{-1}^{2}(4+4x-x^2-x^3)\,dx\]
+  \[= 2\left[4x + 2x^2 - \frac{x^3}{3} - \frac{x^4}{4}\right]_{-1}^{2}\]
+  \[= 2\left[\left(8+8-\frac{8}{3}-4\right) - \left(-4+2+\frac{1}{3}-\frac{1}{4}\right)\right]\]
+  \[= 2\left[\left(12-\frac{8}{3}\right) - \left(-2+\frac{1}{3}-\frac{1}{4}\right)\right]\]
+  \[= 2\left[12-\frac{8}{3}+2-\frac{1}{3}+\frac{1}{4}\right] = 2\left[14 - 3 + \frac{1}{4}\right]\]
 
-  <p style="color:#1a5276; font-weight:bold;">\(\boxed{I = \dfrac{45}{2}}\)</p>
-  <p><strong>Kết luận:</strong> Tích phân có kết quả là một số dương. Điều này hoàn toàn hợp lý vì trong suốt miền \(D\), hàm số \(y\) chủ yếu nhận các giá trị lớn hơn 0 (ví dụ parabol \(y = 4 - x^2 + 2x\) nhô lên tới đỉnh có tung độ dương rất lớn), nên tổng giá trị \(y\) trên vùng đó chắc chắn mang dấu dương!</p>
+  <p>Quy đồng mẫu 12: \(14 = \frac{168}{12}\), \(3 = \frac{36}{12}\), \(\frac{1}{4}=\frac{3}{12}\):</p>
+  \[= 2\cdot\frac{168-36+3}{12} = 2\cdot\frac{135}{12} = \frac{270}{12} = \frac{45}{2}\]
+
+  <p style="color:#1a5276; font-weight:bold;">\(\boxed{I = \dfrac{45}{2}}\) ✓ Khớp với đáp án.</p>
 </div>
   </div>
 </div>
 
+
+<div style="margin-top: 35px; padding: 12px 16px; border-top: 1px dashed #cbd5e1; text-align: center; color: #94a3b8; font-size: 11.5px; line-height: 1.6;">
+  <em>* Tài liệu và mô phỏng được tạo với sự hỗ trợ của AI, có thể còn tồn tại sai sót. Rất mong nhận được đóng góp ý kiến từ thầy cô và các bạn.</em>
+</div>
 </div>
 <script>
     function toggleSolutionBox(btn) {
@@ -247,9 +166,5 @@ fig.show()</code></pre>
         }
     }
 </script>
-
-<div style="margin-top: 40px; padding: 12px 16px; border-top: 1px dashed #cbd5e1; text-align: center; color: #94a3b8; font-size: 11.5px; line-height: 1.6;">
-  <em>* Tài liệu và mô phỏng được tạo với sự hỗ trợ của AI, có thể còn tồn tại sai sót. Rất mong nhận được đóng góp ý kiến từ thầy cô và các bạn.</em>
-</div>
 </body>
 </html>

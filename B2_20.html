@@ -93,99 +93,24 @@
   </button>
   <div class="solution-collapsible-content">
 <div style="background:#eaf4fb; border-left:5px solid #2980b9; padding:20px; margin-top:30px; border-radius:6px;">
-  <h3 style="color:#1a5276;">Lời giải chi tiết từng bước – Bài B2.20</h3>
-  <p><strong>Đề bài:</strong> Tính tích phân kép \(I = \iint_D y^2\,dxdy\), với miền \(D\) được giới hạn bởi phương trình: \(4x^2+y^2 \le 4\).</p>
-  
-  <h4>Bước 1: Phân tích đề bài và nhận diện miền D</h4>
-  <ul>
-    <li>Ký hiệu <strong>\(\iint_D\)</strong> nghĩa là chúng ta đang tính tổng bề mặt (tích phân kép) của hàm số trên một vùng phẳng gọi là miền \(D\).</li>
-    <li>Miền \(D\) được cho là \(4x^2+y^2 \le 4\). Để dễ nhìn hơn, ta chia cả hai vế cho 4:
-      \[\frac{4x^2}{4} + \frac{y^2}{4} \le \frac{4}{4}\]
-      \[x^2 + \frac{y^2}{4} \le 1\]
-      \[\frac{x^2}{1^2} + \frac{y^2}{2^2} \le 1\]
-    </li>
-    <li>Đây là phương trình của một <strong>hình elip</strong>. Miền \(D\) là toàn bộ phần bên trong và cả đường biên của hình elip này. Bán trục lớn là \(2\) (theo trục Oy) và bán trục nhỏ là \(1\) (theo trục Ox).
-    </li>
-  </ul>
-
-  
-  <h4>Bước 2: Đổi biến số sang tọa độ cực suy rộng</h4>
-  <ul>
-    <li>Vì ta muốn biến \(\frac{x^2}{1^2} + \frac{y^2}{2^2} = 1\) thành dạng quen thuộc của hình tròn \(X^2 + Y^2 = 1\), ta sẽ đặt:
-    </li>
-  </ul>
-  <ol>
-    <li>
-      \[x = 1 \cdot r\cos\theta = r\cos\theta\]
-    </li>
-    <li>
-      \[y = 2 \cdot r\sin\theta = 2r\sin\theta\]
-    </li>
-  </ol>
-  <ul>
-    <li>Trong đó:
-      <ul>
-        <li>\(r\) là khoảng cách từ tâm đến viền (độ lớn). Vì là elip kín chứa cả tâm, nên \(r\) chạy từ \(0\) đến \(1\). Nghĩa là: \(0 \le r \le 1\).</li>
-        <li>\(\theta\) là góc quét. Để quét hết trọn vẹn một vòng elip, góc \(\theta\) phải quét đủ một vòng tròn, tức là từ \(0\) độ đến \(360\) độ (hay \(0\) đến \(2\pi\) radian). Nghĩa là: \(0 \le \theta \le 2\pi\).</li>
-      </ul>
-    </li>
-    <li>Khi làm phép đổi biến, diện tích từng mảnh nhỏ không giữ nguyên. Ta phải nhân thêm một hệ số điều chỉnh gọi là <strong>Định thức Jacobi (\(J\))</strong>. Công thức chuẩn cho elip \(\frac{x^2}{a^2} + \frac{y^2}{b^2} \le 1\) là \(J = a \cdot b \cdot r\).
-      \[J = 1 \cdot 2 \cdot r = 2r\]
-    </li>
-  </ul>
-
-  <h4>Bước 3: Lắp vào công thức và tính toán</h4>
-  <ul>
-    <li>Bây giờ, ta thay tất cả \(x, y\) và \(dxdy\) vào tích phân ban đầu.
-      \[dxdy = |J| \,dr\,d\theta = 2r\,dr\,d\theta\]
-      Hàm số bên trong là \(y^2\). Thay \(y = 2r\sin\theta\):
-      \[y^2 = (2r\sin\theta)^2 = 4r^2\sin^2\theta\]
-    </li>
-    <li>Tích phân ban đầu trở thành:
-      \[I = \int_0^{2\pi} \int_0^1 (4r^2\sin^2\theta) \cdot (2r) \,dr\,d\theta\]
-    </li>
-    <li>Nhân các số hạng lại với nhau: \(4 \cdot 2 = 8\) và \(r^2 \cdot r = r^3\):
-      \[I = \int_0^{2\pi} \int_0^1 8r^3\sin^2\theta \,dr\,d\theta\]
-    </li>
-    <li>Vì các cận của \(r\) và \(\theta\) là những số cố định, và biểu thức bên trong chỉ là phép nhân, ta có thể tách riêng ra thành tích của 2 tích phân nhỏ:
-      \[I = \left( \int_0^{2\pi} \sin^2\theta\,d\theta \right) \times \left( \int_0^1 8r^3\,dr \right)\]
-    </li>
-  </ul>
-  
-  <h4>Bước 4: Tính từng tích phân nhỏ</h4>
-  <ol>
-    <li>Tính phần theo biến \(r\):
-      \[\int_0^1 8r^3\,dr\]
-      Quy tắc lấy nguyên hàm của \(r^n\) là \(\frac{r^{n+1}}{n+1}\):
-      \[= 8 \cdot \left[ \frac{r^4}{4} \right]_0^1 = 8 \cdot \left( \frac{1^4}{4} - \frac{0^4}{4} \right) = 8 \cdot \frac{1}{4} = 2\]
-    </li>
-    <li>Tính phần theo biến \(\theta\):
-      \[\int_0^{2\pi} \sin^2\theta\,d\theta\]
-      Để tính được, ta dùng công thức hạ bậc lượng giác: \(\sin^2\theta = \frac{1 - \cos(2\theta)}{2}\):
-      \[= \int_0^{2\pi} \frac{1 - \cos(2\theta)}{2}\,d\theta = \frac{1}{2} \int_0^{2\pi} (1 - \cos(2\theta))\,d\theta\]
-      Nguyên hàm của \(1\) là \(\theta\), nguyên hàm của \(\cos(2\theta)\) là \(\frac{\sin(2\theta)}{2}\):
-      \[= \frac{1}{2} \left[ \theta - \frac{\sin(2\theta)}{2} \right]_0^{2\pi}\]
-      Thay cận trên \(2\pi\) và cận dưới \(0\) vào:
-      \[= \frac{1}{2} \left( \left( 2\pi - \frac{\sin(4\pi)}{2} \right) - \left( 0 - \frac{\sin(0)}{2} \right) \right)\]
-      Vì \(\sin(4\pi) = 0\) và \(\sin(0) = 0\), ta chỉ còn:
-      \[= \frac{1}{2} (2\pi) = \pi\]
-    </li>
-  </ol>
-
-  <h4>Bước 5: Kết luận</h4>
-  <ul>
-    <li>Ghép kết quả của Bước 4 lại:
-      \[I = \pi \times 2 = 2\pi\]
-    </li>
-  </ul>
-  <p style="color:#1a5276; font-weight:bold; font-size:16px;">
-    \(\boxed{I = 2\pi}\) ✓
-  </p>
-  <p><strong>Ý nghĩa:</strong> Con số \(2\pi\) này đại diện cho sự tích lũy của đại lượng \(y^2\) (có thể hiểu như mô men quán tính đối với trục Ox) phân bố đều trên bề mặt của mảnh vật liệu hình elip nói trên. Phép đổi biến đã giúp ta giải một bài toán phức tạp một cách gọn gàng!</p>
+  <h3 style="color:#1a5276;">Lời giải – Bài B2.20</h3>
+  <p><strong>Đề bài:</strong> Tính \(\iint_D y^2\,dxdy\), \(D\): \(4x^2+y^2 \le 4\).</p>
+  <p><strong>Bước 1: Đổi biến số (Tọa độ cực suy rộng).</strong><br>
+  Viết lại biên: \(x^2 + \frac{y^2}{4} \le 1\).<br>
+  Đặt \(x = r\cos\theta\), \(y = 2r\sin\theta\). Định thức Jacobi là \(J = 1 \cdot 2 \cdot r = 2r\).<br>
+  Miền mới: \(0 \le r \le 1\), \(0 \le \theta \le 2\pi\).</p>
+  <p><strong>Bước 2: Tính tích phân.</strong></p>
+  \[I = \int_0^{2\pi} \int_0^1 (2r\sin\theta)^2 \cdot 2r\,dr\,d\theta = \int_0^{2\pi} \int_0^1 8r^3\sin^2\theta\,dr\,d\theta\]
+  \[= 8 \int_0^{2\pi} \sin^2\theta\,d\theta \cdot \int_0^1 r^3\,dr = 8 \cdot \pi \cdot \frac{1}{4} = 2\pi\]
+  <p style="color:#1a5276; font-weight:bold;">\(\boxed{I = 2\pi}\) ✓ Khớp với đáp án.</p>
 </div>
   </div>
 </div>
 
+
+<div style="margin-top: 35px; padding: 12px 16px; border-top: 1px dashed #cbd5e1; text-align: center; color: #94a3b8; font-size: 11.5px; line-height: 1.6;">
+  <em>* Tài liệu và mô phỏng được tạo với sự hỗ trợ của AI, có thể còn tồn tại sai sót. Rất mong nhận được đóng góp ý kiến từ thầy cô và các bạn.</em>
+</div>
 </div>
 <script>
     function toggleSolutionBox(btn) {
@@ -212,9 +137,5 @@
         }
     }
 </script>
-
-<div style="margin-top: 40px; padding: 12px 16px; border-top: 1px dashed #cbd5e1; text-align: center; color: #94a3b8; font-size: 11.5px; line-height: 1.6;">
-  <em>* Tài liệu và mô phỏng được tạo với sự hỗ trợ của AI, có thể còn tồn tại sai sót. Rất mong nhận được đóng góp ý kiến từ thầy cô và các bạn.</em>
-</div>
 </body>
 </html>

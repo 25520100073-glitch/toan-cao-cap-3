@@ -93,170 +93,47 @@
   </button>
   <div class="solution-collapsible-content">
 <div style="background:#eaf4fb; border-left:5px solid #2980b9; padding:20px; margin-top:30px; border-radius:6px;">
-  <h3 style="color:#1a5276;">Lời giải chi tiết – Bài B1.20</h3>
-  <p><strong>Đề bài:</strong> Tính tích phân kép \(I = \iint_D \max(x^2,y)\,dxdy\), với \(D\) là miền phẳng được giới hạn bởi đường cong \(y=8-x^2\) (một parabol úp ngược) và trục \(Ox\) (tức là đường thẳng \(y=0\)).</p>
+  <h3 style="color:#1a5276;">Lời giải – Bài B1.20</h3>
+  <p><strong>Đề bài:</strong> Tính \(\iint_D \max(x^2,y)\,dxdy\), D giới hạn bởi \(y=8-x^2\) và trục \(Ox\).</p>
 
-  <p>Tích phân kép (ký hiệu là \(\iint_D\)) là công cụ toán học giúp chúng ta tính thể tích hoặc một đại lượng tích lũy nào đó trên một vùng phẳng \(D\). Ở đây, hàm cần tính tích phân là \(\max(x^2,y)\), tức là tại mỗi điểm \((x,y)\) trong miền \(D\), ta sẽ lấy giá trị lớn hơn giữa \(x^2\) và \(y\).</p>
+  <p><strong>Bước 1: Xác định miền D.</strong><br>
+  \(y=8-x^2=0 \Rightarrow x=\pm 2\sqrt{2}\).<br>
+  D: \(-2\sqrt{2}\le x\le 2\sqrt{2}\), \(0\le y\le 8-x^2\).</p>
 
-  <hr>
+  <p><strong>Bước 2: Phân vùng max.</strong><br>
+  \(\max(x^2,y) = x^2\) khi \(y\le x^2\), và \(=y\) khi \(y\ge x^2\).<br>
+  Đường biên \(y=x^2\) trong D.<br>
+  — Vùng \(D_1\): \(0\le y\le x^2\): \(\max=x^2\).<br>
+  — Vùng \(D_2\): \(x^2\le y\le 8-x^2\): \(\max=y\). Yêu cầu \(x^2\le 8-x^2 \Rightarrow x^2\le 4 \Rightarrow |x|\le 2\).</p>
 
-  <h4>Bước 1: Hình dung và xác định ranh giới của miền \(D\)</h4>
-  <p>Miền \(D\) của chúng ta bị kẹp giữa hai đường:</p>
-  <ul>
-    <li>Đường ở trên: Parabol \(y = 8 - x^2\). Đây là một đường cong hình chữ U úp ngược, đỉnh cao nhất nằm ở trục tung tại \(y = 8\).</li>
-    <li>Đường ở dưới: Trục \(Ox\), có phương trình là \(y = 0\).</li>
-  </ul>
-  
-  <p><strong>Tìm hoành độ giao điểm:</strong></p>
-  <p>Để biết miền \(D\) rộng từ đâu đến đâu theo trục ngang \(Ox\), ta cần tìm xem parabol cắt trục \(Ox\) tại những điểm nào. Ta cho hai phương trình \(y\) bằng nhau:</p>
-  \[8 - x^2 = 0\]
-  \[x^2 = 8\]
-  \[x = \pm \sqrt{8} = \pm 2\sqrt{2}\]
-  <p><strong>Vì sao phải làm bước này?</strong> Nhờ vậy, ta biết giới hạn của biến \(x\) là từ \(-2\sqrt{2}\) đến \(2\sqrt{2}\). Ở giữa hai điểm này, bề lõm của parabol nằm phía trên trục \(Ox\) (vì \(8 - x^2 \ge 0\)), tạo thành một khu vực khép kín chính là miền \(D\).</p>
-  
-  <p>Vậy, ta viết lại miền \(D\) bằng các bất đẳng thức:</p>
-  \[D = \left\{ (x,y) \mid -2\sqrt{2} \le x \le 2\sqrt{2}, \, 0 \le y \le 8 - x^2 \right\}\]
+  <p><strong>Tính theo đối xứng (nhân 2 do tính chẵn):</strong></p>
+  \[I = 2\left[\int_0^{2\sqrt{2}}\int_0^{\min(x^2,\,8-x^2)} x^2\,dy\,dx + \int_0^2\int_{x^2}^{8-x^2} y\,dy\,dx + \int_2^{2\sqrt{2}}\int_0^{8-x^2} x^2\,dy\,dx\right]\]
 
-  <div style="background:#fff3cd; border-left:4px solid #ffc107; padding:10px; margin:10px 0; border-radius:4px;">
-    <strong>Mẹo:</strong> Khi thấy miền \(D\) đối xứng qua trục tung \(Oy\) (tức là nếu thay \(x\) bằng \(-x\) thì hàm số \(y = 8 - x^2\) và hàm dưới dấu tích phân \(\max(x^2, y)\) không thay đổi), ta có thể chỉ cần tính tích phân trên nửa miền bên phải (từ \(x=0\) đến \(x=2\sqrt{2}\)) rồi nhân đôi kết quả lên cho nhanh! Ta sẽ áp dụng tính chất chẵn lẻ này ở bước tính toán sau.
-  </div>
+  <p>Với \(x\in[0,2]\): \(x^2\le 4 = 8-x^2\big|_{x=2}\), nên đường \(y=x^2\) nằm dưới đường \(y=8-x^2\).</p>
 
-  <hr>
+  <p>Phần A: \(\int_0^2 x^2\cdot x^2\,dx=\int_0^2 x^4\,dx=\frac{32}{5}\).</p>
+  <p>Phần B: \(\int_0^2\frac{(8-x^2)^2-x^4}{2}\,dx = \frac{1}{2}\int_0^2(64-16x^2+x^4-x^4)\,dx = \frac{1}{2}\int_0^2(64-16x^2)\,dx\)<br>
+  \(= \frac{1}{2}\left[64x-\frac{16x^3}{3}\right]_0^2 = \frac{1}{2}\left(128-\frac{128}{3}\right)=\frac{1}{2}\cdot\frac{256}{3}=\frac{128}{3}\).</p>
+  <p>Phần C: \(\int_2^{2\sqrt{2}} x^2(8-x^2)\,dx = \int_2^{2\sqrt{2}}(8x^2-x^4)\,dx\)<br>
+  \(=\left[\frac{8x^3}{3}-\frac{x^5}{5}\right]_2^{2\sqrt{2}}\)<br>
+  Tại \(x=2\sqrt{2}\): \(x^3=16\sqrt{2}\), \(x^5=128\sqrt{2}\).<br>
+  \(=\left(\frac{128\sqrt{2}}{3}-\frac{128\sqrt{2}}{5}\right)-\left(\frac{64}{3}-\frac{32}{5}\right)\)<br>
+  \(=128\sqrt{2}\left(\frac{1}{3}-\frac{1}{5}\right)-\frac{2(160-48)}{15}=128\sqrt{2}\cdot\frac{2}{15}-\frac{224}{15}\)<br>
+  \(=\frac{256\sqrt{2}}{15}-\frac{224}{15}\).</p>
 
-  <h4>Bước 2: Phá bỏ dấu "max" (Chia nhỏ miền D)</h4>
-  <p>Hàm số cần tính là \(\max(x^2, y)\). Chúng ta không thể tính tích phân ngay với hàm "max" này được, mà phải phân tích xem khi nào thì lấy \(x^2\), khi nào thì lấy \(y\).</p>
-  <ul>
-    <li>Ta sẽ lấy \(\max(x^2, y) = x^2\) nếu \(x^2 \ge y\) (hay \(y \le x^2\)).</li>
-    <li>Ta sẽ lấy \(\max(x^2, y) = y\) nếu \(y \ge x^2\).</li>
-  </ul>
-  <p><strong>Ta đang làm gì?</strong> Ta sẽ dùng đường ranh giới \(y = x^2\) (một parabol ngửa lên) để cắt miền \(D\) ban đầu thành các phần nhỏ hơn. Ở mỗi phần, hàm "max" sẽ chỉ còn là một biểu thức đơn giản (\(x^2\) hoặc \(y\)).</p>
-  
-  <p>Bây giờ, ta xem giao điểm của hai parabol \(y = 8 - x^2\) (biên trên của D) và \(y = x^2\) (đường ranh giới chia "max"):</p>
-  \[8 - x^2 = x^2\]
-  \[2x^2 = 8\]
-  \[x^2 = 4\]
-  \[x = \pm 2\]
-  
-  <p>Nhờ có các giao điểm này, ta sẽ chia nửa bên phải của miền \(D\) (với \(x\) từ \(0\) đến \(2\sqrt{2}\)) thành hai phần dọc theo trục \(Ox\):</p>
-  <ol>
-    <li><strong>Phần từ \(x = 0\) đến \(x = 2\):</strong> 
-        <br>Ở vùng này, đường \(y=x^2\) nằm thấp hơn đường \(y=8-x^2\).
-        <br>Do đó, theo chiều dọc từ dưới lên (theo trục \(Oy\)), \(y\) sẽ chạy qua 2 giai đoạn:
-        <br>- Giai đoạn 1: \(0 \le y \le x^2\). Ở đây \(y\) nhỏ hơn \(x^2\), nên \(\max(x^2,y) = x^2\).
-        <br>- Giai đoạn 2: \(x^2 \le y \le 8-x^2\). Ở đây \(y\) lớn hơn \(x^2\), nên \(\max(x^2,y) = y\).
-    </li>
-    <li><strong>Phần từ \(x = 2\) đến \(x = 2\sqrt{2}\):</strong>
-        <br>Ở vùng này, đường \(y=8-x^2\) đã rớt xuống thấp hơn đường \(y=x^2\) (vì \(x > 2 \Rightarrow x^2 > 4\)).
-        <br>Nên toàn bộ các điểm \((x,y)\) trong miền \(D\) tại đoạn này đều có \(y \le 8-x^2 < x^2\).
-        <br>Nói cách khác, \(y\) luôn nhỏ hơn \(x^2\). Do đó, \(\max(x^2,y) = x^2\). Cận của \(y\) đơn giản chạy từ đường đáy \(y=0\) đến biên trên \(y=8-x^2\).
-    </li>
-  </ol>
+  \[I = 2\left(\frac{32}{5}+\frac{128}{3}+\frac{256\sqrt{2}}{15}-\frac{224}{15}\right)\]
+  \[= 2\left(\frac{96}{15}+\frac{640}{15}+\frac{256\sqrt{2}}{15}-\frac{224}{15}\right)\]
+  \[= 2\cdot\frac{512+256\sqrt{2}}{15} = \frac{1024+512\sqrt{2}}{15} = \frac{1024}{15}+\frac{512\sqrt{2}}{15}\]
 
-  <hr>
-
-  <h4>Bước 3: Thiết lập công thức tích phân và tính toán (Sử dụng tính đối xứng)</h4>
-  <p>Như đã nói ở phần mẹo, do cả miền \(D\) và hàm số \(\max(x^2, y)\) đều đối xứng (chẵn) qua trục \(Oy\), ta sẽ tính phần bên phải (với \(x \ge 0\)) rồi nhân đôi kết quả. Ta gọi \(I\) là tích phân cần tìm, ta tách \(I\) thành tổng của 3 tích phân con (gọi là \(I_A\), \(I_B\), \(I_C\)):</p>
-  \[I = 2 \times \left( I_A + I_B + I_C \right)\]
-  <p>Trong đó:</p>
-  <ul>
-    <li>\(I_A\) là phần ứng với khoảng \(x\) từ \(0\) đến \(2\) và \(y\) từ \(0\) đến \(x^2\).</li>
-    <li>\(I_B\) là phần ứng với khoảng \(x\) từ \(0\) đến \(2\) và \(y\) từ \(x^2\) đến \(8-x^2\).</li>
-    <li>\(I_C\) là phần ứng với khoảng \(x\) từ \(2\) đến \(2\sqrt{2}\) và \(y\) từ \(0\) đến \(8-x^2\).</li>
-  </ul>
-
-  <p><strong>Tính phần \(I_A\):</strong></p>
-  <p>Ở đây hàm số là \(x^2\). Nhắc lại quy tắc tích phân: lớp trong tính trước, ngoài sau. Biến tích phân lớp trong là \(dy\), khi đó \(x^2\) được coi là hằng số:</p>
-  \[I_A = \int_0^2 \left( \int_0^{x^2} x^2 \, dy \right) dx\]
-  \[I_A = \int_0^2 x^2 \left[ y \right]_0^{x^2} dx\]
-  \[I_A = \int_0^2 x^2 (x^2 - 0) dx\]
-  \[I_A = \int_0^2 x^4 dx\]
-  <p>Áp dụng quy tắc nguyên hàm cơ bản \(\int x^n dx = \frac{x^{n+1}}{n+1}\):</p>
-  \[I_A = \left[ \frac{x^5}{5} \right]_0^2\]
-  \[I_A = \frac{2^5}{5} - \frac{0^5}{5}\]
-  \[I_A = \frac{32}{5}\]
-
-  <p><strong>Tính phần \(I_B\):</strong></p>
-  <p>Ở đây hàm số là \(y\). Nguyên hàm của \(y\) theo biến \(y\) là \(\frac{y^2}{2}\):</p>
-  \[I_B = \int_0^2 \left( \int_{x^2}^{8-x^2} y \, dy \right) dx\]
-  \[I_B = \int_0^2 \left[ \frac{y^2}{2} \right]_{x^2}^{8-x^2} dx\]
-  <p>Thế cận trên trừ cận dưới:</p>
-  \[I_B = \int_0^2 \left( \frac{(8-x^2)^2}{2} - \frac{(x^2)^2}{2} \right) dx\]
-  <p>Khai triển hằng đẳng thức \((a-b)^2 = a^2 - 2ab + b^2\):</p>
-  \[I_B = \int_0^2 \frac{1}{2} \left( (64 - 16x^2 + x^4) - x^4 \right) dx\]
-  <p>Hai số hạng \(x^4\) triệt tiêu nhau, bài toán trở nên rất gọn gàng:</p>
-  \[I_B = \int_0^2 \frac{1}{2} (64 - 16x^2) dx\]
-  \[I_B = \frac{1}{2} \int_0^2 (64 - 16x^2) dx\]
-  <p>Tính nguyên hàm cho từng số hạng:</p>
-  \[I_B = \frac{1}{2} \left[ 64x - \frac{16x^3}{3} \right]_0^2\]
-  <p>Thay số vào (cận \(x=2\)):</p>
-  \[I_B = \frac{1}{2} \left( 64(2) - \frac{16(2^3)}{3} \right)\]
-  \[I_B = \frac{1}{2} \left( 128 - \frac{128}{3} \right)\]
-  <p>Quy đồng mẫu số trong ngoặc (\(128 = \frac{384}{3}\)):</p>
-  \[I_B = \frac{1}{2} \left( \frac{384 - 128}{3} \right)\]
-  \[I_B = \frac{1}{2} \left( \frac{256}{3} \right)\]
-  \[I_B = \frac{128}{3}\]
-
-  <p><strong>Tính phần \(I_C\):</strong></p>
-  <p>Ở vùng bên rìa này, hàm số lại quay về là \(x^2\):</p>
-  \[I_C = \int_2^{2\sqrt{2}} \left( \int_0^{8-x^2} x^2 \, dy \right) dx\]
-  \[I_C = \int_2^{2\sqrt{2}} x^2 \left[ y \right]_0^{8-x^2} dx\]
-  \[I_C = \int_2^{2\sqrt{2}} x^2 (8-x^2 - 0) dx\]
-  <p>Nhân phân phối \(x^2\) vào trong ngoặc:</p>
-  \[I_C = \int_2^{2\sqrt{2}} (8x^2 - x^4) dx\]
-  <p>Tính nguyên hàm từng phần:</p>
-  \[I_C = \left[ \frac{8x^3}{3} - \frac{x^5}{5} \right]_2^{2\sqrt{2}}\]
-  <p>Giờ ta từ từ thay các cận vào. Trước hết với cận trên \(x = 2\sqrt{2}\):</p>
-  <p>Ta biết \(x = 2\sqrt{2}\) nên \(x^2 = 8\). Do đó:</p>
-  <ul>
-    <li>\(x^3 = x^2 \cdot x = 8 \cdot 2\sqrt{2} = 16\sqrt{2}\)</li>
-    <li>\(x^5 = x^4 \cdot x = 8^2 \cdot 2\sqrt{2} = 64 \cdot 2\sqrt{2} = 128\sqrt{2}\)</li>
-  </ul>
-  <p>Thay cận trên vào biểu thức, ta được:</p>
-  \[\text{Phần cận trên} = \frac{8(16\sqrt{2})}{3} - \frac{128\sqrt{2}}{5} = \frac{128\sqrt{2}}{3} - \frac{128\sqrt{2}}{5}\]
-  <p>Bây giờ thay cận dưới \(x = 2\) vào (ta tính riêng phần này cho dễ nhìn):</p>
-  \[\text{Phần cận dưới} = \frac{8(2^3)}{3} - \frac{2^5}{5} = \frac{64}{3} - \frac{32}{5}\]
-  <p>Lấy phần cận trên trừ đi phần cận dưới:</p>
-  \[I_C = \left( \frac{128\sqrt{2}}{3} - \frac{128\sqrt{2}}{5} \right) - \left( \frac{64}{3} - \frac{32}{5} \right)\]
-  <p>Nhóm nhân tử chung để quy đồng mẫu số:</p>
-  \[I_C = 128\sqrt{2} \left( \frac{1}{3} - \frac{1}{5} \right) - \left( \frac{320}{15} - \frac{96}{15} \right)\]
-  \[I_C = 128\sqrt{2} \left( \frac{5 - 3}{15} \right) - \frac{224}{15}\]
-  \[I_C = 128\sqrt{2} \left( \frac{2}{15} \right) - \frac{224}{15}\]
-  \[I_C = \frac{256\sqrt{2}}{15} - \frac{224}{15}\]
-
-  <hr>
-
-  <h4>Bước 4: Tổng hợp lại kết quả</h4>
-  <p>Giờ ta lấy \(I_A, I_B, I_C\) cộng lại rồi nhân cho 2 như công thức đã lập ra từ đầu:</p>
-  \[I = 2 \times \left( I_A + I_B + I_C \right)\]
-  \[I = 2 \times \left( \frac{32}{5} + \frac{128}{3} + \frac{256\sqrt{2}}{15} - \frac{224}{15} \right)\]
-  <p>Quy đồng tất cả về mẫu số chung là 15 (vì \(5 \times 3 = 15\)):</p>
-  <ul>
-    <li>\(\frac{32}{5} = \frac{32 \times 3}{15} = \frac{96}{15}\)</li>
-    <li>\(\frac{128}{3} = \frac{128 \times 5}{15} = \frac{640}{15}\)</li>
-  </ul>
-  <p>Thay số đã quy đồng vào:</p>
-  \[I = 2 \times \left( \frac{96}{15} + \frac{640}{15} + \frac{256\sqrt{2}}{15} - \frac{224}{15} \right)\]
-  <p>Gộp các phân số không có căn lại với nhau (\(96 + 640 - 224\)):</p>
-  \[96 + 640 = 736\]
-  \[736 - 224 = 512\]
-  <p>Vậy ngoặc đơn trở thành:</p>
-  \[I = 2 \times \left( \frac{512}{15} + \frac{256\sqrt{2}}{15} \right)\]
-  <p>Nhân phân phối số 2 ở ngoài vào trong (tử số nhân cho 2, mẫu số giữ nguyên):</p>
-  \[I = \frac{1024}{15} + \frac{512\sqrt{2}}{15}\]
-
-  <hr>
-
-  <h4>Kết luận và kiểm tra lại</h4>
-  <p><strong>Kiểm tra lại:</strong> Bài toán yêu cầu tính tổng "thể tích" (vì ta đang lấy tích phân kép của một hàm 2 biến), trong đó chiều cao tại mỗi điểm là giá trị lớn nhất giữa một hàm bậc hai và một hàm bậc nhất. Việc chia nhỏ miền tích phân dựa trên đường ranh giới \(y=x^2\) giúp ta khử đi hoàn toàn dấu "max" phức tạp. Các bước biến đổi và thế số diễn ra đúng quy tắc cơ bản và cho ra một đáp án rất đẹp.</p>
-  
-  <p style="color:#1a5276; font-weight:bold; font-size:18px;">
-    \(\boxed{I = \dfrac{1024}{15} + \dfrac{512\sqrt{2}}{15}}\) 
-    <br><span style="font-size:14px; color:#27ae60;">✓ Kết quả này hoàn toàn trùng khớp với đáp án ban đầu của đề bài cung cấp!</span>
-  </p>
+  <p style="color:#1a5276; font-weight:bold;">\(\boxed{I = \dfrac{1024}{15}+\dfrac{512\sqrt{2}}{15}}\) ✓ Khớp với đáp án.</p>
 </div>
   </div>
 </div>
 
+
+<div style="margin-top: 35px; padding: 12px 16px; border-top: 1px dashed #cbd5e1; text-align: center; color: #94a3b8; font-size: 11.5px; line-height: 1.6;">
+  <em>* Tài liệu và mô phỏng được tạo với sự hỗ trợ của AI, có thể còn tồn tại sai sót. Rất mong nhận được đóng góp ý kiến từ thầy cô và các bạn.</em>
+</div>
 </div>
 <script>
     function toggleSolutionBox(btn) {
@@ -283,9 +160,5 @@
         }
     }
 </script>
-
-<div style="margin-top: 40px; padding: 12px 16px; border-top: 1px dashed #cbd5e1; text-align: center; color: #94a3b8; font-size: 11.5px; line-height: 1.6;">
-  <em>* Tài liệu và mô phỏng được tạo với sự hỗ trợ của AI, có thể còn tồn tại sai sót. Rất mong nhận được đóng góp ý kiến từ thầy cô và các bạn.</em>
-</div>
 </body>
 </html>

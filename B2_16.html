@@ -94,114 +94,23 @@
   <div class="solution-collapsible-content">
 <div style="background:#eaf4fb; border-left:5px solid #2980b9; padding:20px; margin-top:30px; border-radius:6px;">
   <h3 style="color:#1a5276;">Lời giải – Bài B2.16</h3>
-  <p><strong>Đề bài:</strong> Tính \(\iint_D xy\,dxdy\), với miền \(D\) bị giới hạn (bao bọc) bởi đường thẳng \(y = -x\) và đường tròn \(x^2+y^2=2x\).</p>
-  
-  <h4>Bước 1: Hiểu bài toán và các ký hiệu</h4>
-  <ul>
-    <li>Ký hiệu \(\iint_D\) nghĩa là "tích phân kép" trên miền \(D\). Cứ hiểu nôm na là ta đang cộng dồn các giá trị của biểu thức \(xy\) trên một vùng đất \(D\) có hình thù nào đó.</li>
-    <li>Biểu thức \(dxdy\) chỉ là một mẩu diện tích rất nhỏ của vùng đất \(D\).</li>
-    <li>Để tính được, ta phải biết vùng đất \(D\) này nằm ở đâu, giới hạn bởi những đường rào nào. Từ đó thiết lập "cận" (tức là giới hạn chạy từ đâu đến đâu).</li>
-  </ul>
-
-  <h4>Bước 2: Phân tích các "đường rào" và vẽ miền D</h4>
-  <ol>
-    <li><strong>Đường thứ nhất: \(x^2 + y^2 = 2x\)</strong>
-      <br>Chuyển vế ta được:
-      <br>\(x^2 - 2x + y^2 = 0\)
-      <br>Cộng thêm 1 vào hai vế để tạo thành hằng đẳng thức (quy tắc: \(a^2 - 2ab + b^2 = (a-b)^2\)):
-      <br>\((x^2 - 2x + 1) + y^2 = 1\)
-      <br>\((x - 1)^2 + y^2 = 1^2\)
-      <br>Đây là phương trình của một <strong>đường tròn</strong> có tâm nằm ở tọa độ \((1, 0)\) và bán kính bằng \(1\). Đường tròn này nằm trọn bên phải trục tung (vì \(x \ge 0\)).
-    </li>
-    <li><strong>Đường thứ hai: \(y = -x\)</strong>
-      <br>Đây là một đường thẳng đi qua gốc tọa độ \((0,0)\), dốc xuống (đi qua góc phần tư thứ hai và thứ tư).
-    </li>
-    <li><strong>Tìm giao điểm:</strong>
-      <br>Thay \(y = -x\) vào phương trình đường tròn:
-      <br>\(x^2 + (-x)^2 = 2x\)
-      <br>\(x^2 + x^2 = 2x\)
-      <br>\(2x^2 = 2x\)
-      <br>\(2x^2 - 2x = 0\)
-      <br>\(2x(x - 1) = 0\)
-      <br>Suy ra \(x = 0\) (lúc đó \(y = 0\)) hoặc \(x = 1\) (lúc đó \(y = -1\)).
-      <br>Vậy hai đường cắt nhau tại gốc tọa độ \((0, 0)\) và điểm \((1, -1)\).
-    </li>
-  </ol>
-
-  
-  <h4>Bước 3: Đổi sang tọa độ cực (để tính toán dễ hơn nhiều)</h4>
-  <p>Khi thấy có hình tròn \(x^2 + y^2\), ta thường dùng "tọa độ cực". Thay vì dùng \((x, y)\), ta dùng khoảng cách \(r\) (từ gốc tọa độ đến điểm) và góc \(\theta\) (góc quay so với trục ngang).</p>
-  <ul>
-    <li>Đặt \(x = r \cos\theta\)</li>
-    <li>Đặt \(y = r \sin\theta\)</li>
-    <li>Và phải nhớ quy tắc vàng: khi đổi biến sang tọa độ cực, ta phải thay \(dxdy\) bằng \(r\,dr\,d\theta\). (Chữ \(r\) này gọi là định thức Jacobi, luôn phải có!).</li>
-  </ul>
-  
-  <p><strong>Tìm cận (giới hạn) cho góc \(\theta\):</strong></p>
-  <ul>
-    <li>Đường thẳng \(y = -x\) tương ứng với góc \(\theta = -\frac{\pi}{4}\) (tức là góc âm 45 độ, chỉ xuống dưới).</li>
-    <li>Điểm xa nhất bên dưới của đường tròn nằm dọc theo trục tung âm, ứng với \(\theta = -\frac{\pi}{2}\) (góc âm 90 độ, chỉ thẳng xuống).</li>
-    <li>Vậy góc quay sẽ quét từ \(\theta = -\frac{\pi}{2}\) đến \(\theta = -\frac{\pi}{4}\).</li>
-  </ul>
-
-  <p><strong>Tìm cận (giới hạn) cho độ dài \(r\):</strong></p>
-  <ul>
-    <li>Bắt đầu từ gốc tọa độ: \(r = 0\).</li>
-    <li>Đâm ra ngoài đụng vào biên đường tròn \(x^2 + y^2 = 2x\).
-      <br>Thay \(x\) và \(y\) vào, ta có:
-      <br>\((r \cos\theta)^2 + (r \sin\theta)^2 = 2(r \cos\theta)\)
-      <br>\(r^2(\cos^2\theta + \sin^2\theta) = 2r \cos\theta\)
-      <br>Áp dụng quy tắc \(\cos^2\theta + \sin^2\theta = 1\):
-      <br>\(r^2 = 2r \cos\theta\)
-      <br>Chia hai vế cho \(r\) (vì \(r > 0\)):
-      <br>\(r = 2 \cos\theta\)
-    </li>
-    <li>Vậy khoảng cách \(r\) chạy từ \(0\) đến \(2 \cos\theta\).</li>
-  </ul>
-
-  <h4>Bước 4: Thiết lập và giải tích phân</h4>
-  <p>Bây giờ ta lắp ráp mọi thứ lại. Biểu thức cần tính là \(x \cdot y\):
-    <br>\(xy = (r \cos\theta) \cdot (r \sin\theta) = r^2 \cos\theta \sin\theta\)
-  </p>
-  <p>Gắn thêm \(r\,dr\,d\theta\), biểu thức bên trong sẽ là:
-    <br>\((r^2 \cos\theta \sin\theta) \cdot r = r^3 \cos\theta \sin\theta\)
-  </p>
-  
-  <p>Viết phép tính tích phân:</p>
-  \[I = \int_{-\pi/2}^{-\pi/4} \left( \int_0^{2\cos\theta} r^3 \cos\theta \sin\theta \,dr \right) d\theta\]
-  
-  <p><strong>Tính phần bên trong (theo \(r\)) trước:</strong></p>
-  <p>Hằng số \(\cos\theta \sin\theta\) giữ nguyên. Nguyên hàm của \(r^3\) là \(\frac{r^4}{4}\) (quy tắc \(\int r^n dr = \frac{r^{n+1}}{n+1}\)):</p>
-  \[\int_0^{2\cos\theta} r^3 \,dr = \left[ \frac{r^4}{4} \right]_0^{2\cos\theta}\]
-  <p>Thay cận trên (\(2\cos\theta\)) và cận dưới (\(0\)) vào:</p>
-  \[= \frac{(2\cos\theta)^4}{4} - \frac{0^4}{4}\]
-  \[= \frac{16\cos^4\theta}{4} - 0\]
-  \[= 4\cos^4\theta\]
-  <p>Vậy biểu thức sau khi tính theo \(r\) là:</p>
-  \[4\cos^4\theta \cdot (\cos\theta \sin\theta) = 4\cos^5\theta \sin\theta\]
-
-  <p><strong>Tính phần bên ngoài (theo \(\theta\)):</strong></p>
-  \[I = \int_{-\pi/2}^{-\pi/4} 4\cos^5\theta \sin\theta \,d\theta\]
-  <p>Dùng phương pháp đổi biến số, đặt \(u = \cos\theta\). Đạo hàm của \(u\) là \(du = -\sin\theta \,d\theta\), suy ra \(\sin\theta \,d\theta = -du\).</p>
-  <p>Nguyên hàm của \(u^5 (-du)\) là \(-\frac{u^6}{6}\) (vẫn quy tắc lũy thừa). Ta thế ngược \(u = \cos\theta\) lại:</p>
-  \[= \left[ -4 \cdot \frac{\cos^6\theta}{6} \right]_{-\pi/2}^{-\pi/4}\]
-  \[= - \frac{2}{3} \left[ \cos^6\theta \right]_{-\pi/2}^{-\pi/4}\]
-  
-  <p>Thay cận vào (lưu ý: \(\cos(-\frac{\pi}{4}) = \frac{\sqrt{2}}{2} = \frac{1}{\sqrt{2}}\) và \(\cos(-\frac{\pi}{2}) = 0\)):</p>
-  \[= - \frac{2}{3} \left( \left(\frac{1}{\sqrt{2}}\right)^6 - (0)^6 \right)\]
-  \[= - \frac{2}{3} \left( \frac{1}{(\sqrt{2})^6} - 0 \right)\]
-  <p>Vì \((\sqrt{2})^6 = 2^3 = 8\):</p>
-  \[= - \frac{2}{3} \cdot \frac{1}{8}\]
-  \[= - \frac{2}{24}\]
-  \[= - \frac{1}{12}\]
-
-  <h4>Kết luận</h4>
-  <p style="color:#1a5276; font-size:16px;"><strong>\(\boxed{I = -\dfrac{1}{12}}\)</strong></p>
-  <p><strong>Ý nghĩa:</strong> Kết quả tích phân mang dấu âm (-). Tại sao? Vì trong miền \(D\) mà ta đang xét (góc phần tư thứ 4), hoành độ \(x\) luôn dương nhưng tung độ \(y\) luôn âm. Do đó, tích của chúng là \(xy\) luôn mang giá trị âm. Khi cộng dồn tất cả các giá trị âm này trên toàn bộ diện tích \(D\), ta chắc chắn phải thu được một kết quả tổng là số âm!</p>
+  <p><strong>Đề bài:</strong> Tính \(\iint_D xy\,dxdy\), \(D\) giới hạn bởi \(y=-x\) và \(x^2+y^2=2x\).</p>
+  <p><em>Ghi chú: Bài toán này giống hệt bài B2.6. Miền diện tích nhỏ hơn được chọn theo đáp án.</em></p>
+  <p><strong>Bước 1: Xác định miền D.</strong><br>
+  Đường tròn tâm (1,0) bán kính 1: \(r = 2\cos\theta\).<br>
+  Miền cần tính ứng với \(-\frac{\pi}{2} \le \theta \le -\frac{\pi}{4}\).</p>
+  <p><strong>Bước 2: Tính tích phân.</strong></p>
+  \[I = \int_{-\pi/2}^{-\pi/4} \int_0^{2\cos\theta} (r\cos\theta)(r\sin\theta)\,r\,dr\,d\theta = \int_{-\pi/2}^{-\pi/4} \cos\theta\sin\theta \left[\frac{r^4}{4}\right]_0^{2\cos\theta} d\theta\]
+  \[= 4 \int_{-\pi/2}^{-\pi/4} \cos^5\theta\sin\theta\,d\theta = -4 \left[\frac{\cos^6\theta}{6}\right]_{-\pi/2}^{-\pi/4} = -\frac{2}{3} \left( \left(\frac{1}{\sqrt{2}}\right)^6 - 0 \right) = -\frac{2}{3} \cdot \frac{1}{8} = -\frac{1}{12}\]
+  <p style="color:#1a5276; font-weight:bold;">\(\boxed{I = -\dfrac{1}{12}}\) ✓ Khớp với đáp án.</p>
 </div>
   </div>
 </div>
 
+
+<div style="margin-top: 35px; padding: 12px 16px; border-top: 1px dashed #cbd5e1; text-align: center; color: #94a3b8; font-size: 11.5px; line-height: 1.6;">
+  <em>* Tài liệu và mô phỏng được tạo với sự hỗ trợ của AI, có thể còn tồn tại sai sót. Rất mong nhận được đóng góp ý kiến từ thầy cô và các bạn.</em>
+</div>
 </div>
 <script>
     function toggleSolutionBox(btn) {
@@ -228,9 +137,5 @@
         }
     }
 </script>
-
-<div style="margin-top: 40px; padding: 12px 16px; border-top: 1px dashed #cbd5e1; text-align: center; color: #94a3b8; font-size: 11.5px; line-height: 1.6;">
-  <em>* Tài liệu và mô phỏng được tạo với sự hỗ trợ của AI, có thể còn tồn tại sai sót. Rất mong nhận được đóng góp ý kiến từ thầy cô và các bạn.</em>
-</div>
 </body>
 </html>

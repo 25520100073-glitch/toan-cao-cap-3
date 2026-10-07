@@ -93,67 +93,28 @@
   </button>
   <div class="solution-collapsible-content">
 <div style="background:#eaf4fb; border-left:5px solid #2980b9; padding:20px; margin-top:30px; border-radius:6px;">
-  <h3 style="color:#1a5276;">Lời giải chi tiết – Bài B1.9</h3>
-  
-  
-  <h4>Bước 1: Tìm hoành độ giao điểm của hai đường cong</h4>
-  <p>Để biết miền D bắt đầu từ đâu và kết thúc ở đâu theo trục ngang \(x\), chúng ta cần tìm điểm cắt nhau của hai parabol. Ta lập phương trình hoành độ giao điểm bằng cách cho hai giá trị \(y\) bằng nhau:</p>
-  <ul>
-    <li>Cho đường cong này bằng đường cong kia: \(x^2 = 2 - x^2\)</li>
-    <li>Chuyển \(-x^2\) từ vế phải sang vế trái: \(x^2 + x^2 = 2\)</li>
-    <li>Gộp lại ta được: \(2x^2 = 2\)</li>
-    <li>Chia cả hai vế cho 2: \(x^2 = 1\)</li>
-    <li>Lấy căn bậc hai hai vế, ta có hai nghiệm: \(x = -1\) và \(x = 1\)</li>
-  </ul>
-  <p>Vậy miền D nằm trong khoảng từ \(x = -1\) đến \(x = 1\).</p>
+  <h3 style="color:#1a5276;">Lời giải – Bài B1.9</h3>
+  <p><strong>Đề bài:</strong> Tính diện tích miền D giới hạn bởi \(y = x^2\) và \(y = 2-x^2\).</p>
 
-  <h4>Bước 2: Xác định đường nào nằm trên, đường nào nằm dưới</h4>
-  <p>Trong khoảng từ \(-1\) đến \(1\), ta lấy thử một điểm ở giữa, ví dụ \(x = 0\):</p>
-  <ul>
-    <li>Với đường thứ nhất: \(y = 0^2 = 0\)</li>
-    <li>Với đường thứ hai: \(y = 2 - 0^2 = 2\)</li>
-  </ul>
-  <p>Vì \(2 > 0\), nên đường parabol \(y = 2 - x^2\) nằm <strong>trên</strong> đường parabol \(y = x^2\). Điều này giúp ta đặt cận tích phân cho đúng: cận dưới là \(y = x^2\) và cận trên là \(y = 2 - x^2\).</p>
+  <p><strong>Bước 1: Tìm giao điểm.</strong><br>
+  \(x^2 = 2-x^2 \Rightarrow 2x^2 = 2 \Rightarrow x = \pm 1\).<br>
+  Trên \([-1,1]\): \(x^2 \le y \le 2-x^2\).</p>
 
-  <h4>Bước 3: Thiết lập tích phân kép để tính diện tích</h4>
-  <p>Công thức tính diện tích miền D sử dụng tích phân kép là tính tổng tất cả các phần tử diện tích nhỏ bé \(dxdy\) (hoặc \(dA\)) trên toàn miền D. Ký hiệu \(\iint\) đọc là tích phân kép.</p>
-  \[ S = \iint_D dxdy \]
-  <p>Ta thay các cận đã tìm được vào (cận của \(x\) ở ngoài, cận của \(y\) ở trong):</p>
-  \[ S = \int_{-1}^{1} \left( \int_{x^2}^{2 - x^2} 1 \, dy \right) \, dx \]
+  <p><strong>Bước 2: Tính diện tích.</strong></p>
+  \[S = \iint_D dxdy = \int_{-1}^{1}\int_{x^2}^{2-x^2}dy\,dx = \int_{-1}^1 (2-x^2-x^2)\,dx = \int_{-1}^1(2-2x^2)\,dx\]
 
-  <h4>Bước 4: Tính toán từng bước một</h4>
-  <p>Đầu tiên, ta tính tích phân bên trong theo biến \(y\). Nguyên hàm của \(1\) theo \(y\) chính là \(y\):</p>
-  \[ \int_{x^2}^{2 - x^2} 1 \, dy = \left[ y \right]_{x^2}^{2 - x^2} \]
-  <p>Thế cận trên trừ đi thế cận dưới:</p>
-  \[ = (2 - x^2) - (x^2) \]
-  \[ = 2 - x^2 - x^2 \]
-  \[ = 2 - 2x^2 \]
-  
-  <p>Bây giờ, ta đưa kết quả này vào phần tích phân bên ngoài theo biến \(x\):</p>
-  \[ S = \int_{-1}^{1} (2 - 2x^2) \, dx \]
-  <p>Ta sẽ tìm nguyên hàm cho từng số hạng (nhớ lại quy tắc cơ bản: nguyên hàm của một số \(a\) là \(ax\), và nguyên hàm của \(x^n\) là \(\frac{x^{n+1}}{n+1}\)):</p>
-  <ul>
-    <li>Nguyên hàm của \(2\) là \(2x\)</li>
-    <li>Nguyên hàm của \(-2x^2\) là \(-2 \cdot \frac{x^3}{3} = -\frac{2x^3}{3}\)</li>
-  </ul>
-  <p>Gộp lại và thay cận từ \(-1\) đến \(1\):</p>
-  \[ S = \left[ 2x - \frac{2x^3}{3} \right]_{-1}^{1} \]
-  <p>Thế cận trên (\(x = 1\)):</p>
-  \[ = \left( 2(1) - \frac{2(1)^3}{3} \right) = 2 - \frac{2}{3} = \frac{6}{3} - \frac{2}{3} = \frac{4}{3} \]
-  <p>Thế cận dưới (\(x = -1\)):</p>
-  \[ = \left( 2(-1) - \frac{2(-1)^3}{3} \right) = -2 - \frac{2(-1)}{3} = -2 + \frac{2}{3} = -\frac{6}{3} + \frac{2}{3} = -\frac{4}{3} \]
-  <p>Lấy giá trị ở cận trên trừ đi giá trị ở cận dưới:</p>
-  \[ S = \frac{4}{3} - \left( -\frac{4}{3} \right) \]
-  \[ S = \frac{4}{3} + \frac{4}{3} \]
-  \[ S = \frac{8}{3} \]
+  <p>Hàm chẵn, nhân đôi:</p>
+  \[S = 2\int_0^1(2-2x^2)\,dx = 2\left[2x - \frac{2x^3}{3}\right]_0^1 = 2\left(2-\frac{2}{3}\right) = 2\cdot\frac{4}{3} = \frac{8}{3}\]
 
-  <h4>Kết luận</h4>
-  <p style="color:#1a5276; font-size:16px;"><strong>Vậy, diện tích của miền D là \(\boxed{S = \dfrac{8}{3}}\).</strong></p>
-  <p><em>Kết quả ra một con số dương, điều này là hoàn toàn hợp lý vì diện tích luôn luôn lớn hơn hoặc bằng không. Lời giải rất rõ ràng và dễ hiểu!</em></p>
+  <p style="color:#1a5276; font-weight:bold;">\(\boxed{S = \dfrac{8}{3}}\) ✓ Khớp với đáp án.</p>
 </div>
   </div>
 </div>
 
+
+<div style="margin-top: 35px; padding: 12px 16px; border-top: 1px dashed #cbd5e1; text-align: center; color: #94a3b8; font-size: 11.5px; line-height: 1.6;">
+  <em>* Tài liệu và mô phỏng được tạo với sự hỗ trợ của AI, có thể còn tồn tại sai sót. Rất mong nhận được đóng góp ý kiến từ thầy cô và các bạn.</em>
+</div>
 </div>
 <script>
     function toggleSolutionBox(btn) {
@@ -180,9 +141,5 @@
         }
     }
 </script>
-
-<div style="margin-top: 40px; padding: 12px 16px; border-top: 1px dashed #cbd5e1; text-align: center; color: #94a3b8; font-size: 11.5px; line-height: 1.6;">
-  <em>* Tài liệu và mô phỏng được tạo với sự hỗ trợ của AI, có thể còn tồn tại sai sót. Rất mong nhận được đóng góp ý kiến từ thầy cô và các bạn.</em>
-</div>
 </body>
 </html>

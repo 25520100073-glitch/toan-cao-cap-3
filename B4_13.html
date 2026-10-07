@@ -89,6 +89,12 @@
     <span class="sol-arrow">▼</span>
   </button>
   <div class="solution-collapsible-content">
+<div class="solution-toggle-wrapper">
+  <button type="button" class="solution-toggle-btn" onclick="toggleSolutionBox(this)">
+    <span><span class="sol-icon">📖</span> <span class="sol-text">Xem lời giải chi tiết (Bấm để mở)</span></span>
+    <span class="sol-arrow">▼</span>
+  </button>
+  <div class="solution-collapsible-content">
 <h3>&#9998; Lời giải</h3>
         <div class="solution">
   <h4>Bước 1: Xác định miền \(\Omega\) và đổi sang tọa độ trụ</h4>
@@ -133,7 +139,10 @@
 </div>
         <div class="answer-box">&#10003; Kết quả: \(\dfrac{8\pi}{3} + \dfrac{128}{15}\)</div>
         <div class="check">Kết quả tính toán: \(\dfrac{8\pi}{3} + \dfrac{128}{15}\). Khớp đáp án đề ✓</div>
-        <h3>&#128202; Hình minh họa</h3>
+  </div>
+</div>
+
+<h3>&#128202; Hình minh họa</h3>
         <p style="text-align:center; color:#e67e22; font-weight:bold; margin-bottom:5px;">&#128208; Hình vẽ cho: Tính \(\iiint_\Omega (x+y+z)\,dxdydz\) với \(\Omega\) là vật thể nằm trong góc phần tám thứ nhất bên dưới mặt paraboloid \(z = 4 - x^2 - y^2\).</p>
         
         <div class="plot-container"><div style="height:900px; width:800px;">                        <script>window.PlotlyConfig = {MathJaxConfig: 'local'};</script>

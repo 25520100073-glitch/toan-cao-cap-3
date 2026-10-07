@@ -93,64 +93,22 @@
   </button>
   <div class="solution-collapsible-content">
 <div style="background:#eaf4fb; border-left:5px solid #2980b9; padding:20px; margin-top:30px; border-radius:6px;">
-  <h3 style="color:#1a5276;">Lời giải chi tiết – Bài B2.9</h3>
-  <p><strong>Đề bài:</strong> Tính tích phân kép \( \iint_D \frac{\sqrt{x^2+y^2}-1}{x^2+y^2} \,dxdy \), với miền \( D \) nằm trong vùng: \( 1 \le x^2+y^2 \le 4 \).</p>
-  
-  <h4>Bước 1: Giải phẫu miền diện tích D</h4>
-  <ul>
-    <li>Điều kiện \( 1 \le x^2+y^2 \le 4 \) chính là khoảnh sân nằm giữa hai bờ rào hình tròn: bờ rào trong bán kính \( R=1 \) và bờ rào ngoài bán kính \( R=2 \).</li>
-    <li>Không có thêm giới hạn x hay y nào cả, nghĩa là ta lấy trọn vẹn cả vòng.</li>
-  </ul>
-  <p><em>Mô tả hình dáng:</em> Miền \( D \) là một chiếc "bánh donut" hay còn gọi là hình vành khăn tròn xoe hoàn chỉnh.</p>
-
-  
-  <h4>Bước 2: Dịch mã sang tọa độ cực</h4>
-  <p>Nhập mật mã: \( \sqrt{x^2+y^2} = r \), \( x^2+y^2 = r^2 \) và cái đuôi \( dxdy = r \,dr \,d\theta \).</p>
-  
-  <p><strong>Tìm giới hạn cận:</strong></p>
-  <ol>
-    <li>Từ đường tròn trong đến đường tròn ngoài: \( 1 \le r \le 2 \).</li>
-    <li>Lấy toàn bộ một vòng khép kín: góc \( \theta \) phải đi từ \( 0 \) tới \( 360^\circ \) (hay \( 2\pi \)). Do đó: \( 0 \le \theta \le 2\pi \).</li>
-  </ol>
-
-  <h4>Bước 3: Thực thi tích phân</h4>
-  <p>Thay các mật mã vào biểu thức gốc:</p>
-  \[ \frac{\sqrt{x^2+y^2}-1}{x^2+y^2} = \frac{r - 1}{r^2} \]
-  
-  <p>Gắn cái đuôi \( r \,dr \,d\theta \) vào, ta có:</p>
-  \[ I = \int_0^{2\pi} \left( \int_1^2 \frac{r - 1}{r^2} \cdot r \,dr \right) d\theta \]
-  
-  <p>Rút gọn chữ \( r \) ở tử và mẫu:</p>
-  \[ \frac{r - 1}{r^2} \cdot r = \frac{r - 1}{r} \]
-  
-  <p>Tách thành 2 phân số cho dễ xử lý:</p>
-  \[ \frac{r - 1}{r} = \frac{r}{r} - \frac{1}{r} = 1 - \frac{1}{r} \]
-
-  <p>Vì cận là hằng số, tách hai biến riêng biệt:</p>
-  \[ I = \left( \int_0^{2\pi} 1 \,d\theta \right) \cdot \left( \int_1^2 \left( 1 - \frac{1}{r} \right) \,dr \right) \]
-
-  <p><em>Cụm góc \(\theta\):</em></p>
-  \[ \int_0^{2\pi} 1 \,d\theta = 2\pi \]
-
-  <p><em>Cụm bán kính \( r \):</em></p>
-  <p>Nguyên hàm của số 1 là \( r \). Nguyên hàm của \( \frac{1}{r} \) là logarit tự nhiên \( \ln(r) \).</p>
-  \[ \int_1^2 \left( 1 - \frac{1}{r} \right) \,dr = \left[ r - \ln(r) \right]_1^2 \]
-  
-  <p>Thế cận trên (số 2): \( 2 - \ln(2) \).</p>
-  <p>Thế cận dưới (số 1): \( 1 - \ln(1) = 1 - 0 = 1 \).</p>
-  <p>Lấy trên trừ dưới:</p>
-  \[ (2 - \ln 2) - 1 = 1 - \ln 2 \]
-
-  <p>Nhân 2 kết quả lại:</p>
-  \[ I = (2\pi) \cdot (1 - \ln 2) = 2\pi(1 - \ln 2) \]
-
-  <h4>Bước 4: Kết luận</h4>
-  <p style="color:#1a5276; font-weight:bold; font-size:18px;">\(\boxed{I = 2\pi(1 - \ln 2)}\)</p>
-  <p><strong>Ý nghĩa bài toán:</strong> Sự hiện diện của hàm logarit cho thấy tính chất hội tụ đặc biệt của hàm phân thức. Lượng \( 1-\ln2 \) là một số dương (vì \(\ln2 \approx 0.69\)), đảm bảo kết quả phản ánh đúng sự tích lũy giá trị trên chiếc vành khăn.</p>
+  <h3 style="color:#1a5276;">Lời giải – Bài B2.9</h3>
+  <p><strong>Đề bài:</strong> Tính \(\iint_D \frac{\sqrt{x^2+y^2}-1}{x^2+y^2}\,dxdy\), \(D\): \(1 \le x^2+y^2 \le 4\).</p>
+  <p><strong>Bước 1: Chuyển sang tọa độ cực.</strong><br>
+  Miền \(D\): \(1 \le r \le 2\), \(0 \le \theta \le 2\pi\).</p>
+  <p><strong>Bước 2: Tính tích phân.</strong></p>
+  \[I = \int_0^{2\pi} \int_1^2 \frac{r-1}{r^2} \cdot r\,dr\,d\theta = 2\pi \int_1^2 \frac{r-1}{r}\,dr = 2\pi \int_1^2 \left(1 - \frac{1}{r}\right)\,dr\]
+  \[= 2\pi \left[r - \ln r\right]_1^2 = 2\pi \left((2-\ln 2) - (1-0)\right) = 2\pi(1 - \ln 2)\]
+  <p style="color:#1a5276; font-weight:bold;">\(\boxed{I = 2\pi(1 - \ln 2)}\) ✓ Khớp với đáp án.</p>
 </div>
   </div>
 </div>
 
+
+<div style="margin-top: 35px; padding: 12px 16px; border-top: 1px dashed #cbd5e1; text-align: center; color: #94a3b8; font-size: 11.5px; line-height: 1.6;">
+  <em>* Tài liệu và mô phỏng được tạo với sự hỗ trợ của AI, có thể còn tồn tại sai sót. Rất mong nhận được đóng góp ý kiến từ thầy cô và các bạn.</em>
+</div>
 </div>
 <script>
     function toggleSolutionBox(btn) {
@@ -177,9 +135,5 @@
         }
     }
 </script>
-
-<div style="margin-top: 40px; padding: 12px 16px; border-top: 1px dashed #cbd5e1; text-align: center; color: #94a3b8; font-size: 11.5px; line-height: 1.6;">
-  <em>* Tài liệu và mô phỏng được tạo với sự hỗ trợ của AI, có thể còn tồn tại sai sót. Rất mong nhận được đóng góp ý kiến từ thầy cô và các bạn.</em>
-</div>
 </body>
 </html>

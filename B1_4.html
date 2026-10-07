@@ -106,129 +106,31 @@ fig.show()</code></pre>
   <div class="solution-collapsible-content">
 <div style="background:#eaf4fb; border-left:5px solid #2980b9; padding:20px; margin-top:30px; border-radius:6px;">
   <h3 style="color:#1a5276;">Lời giải – Bài B1.4</h3>
-  
-  <h4>Bước 1: Phân tích miền lấy tích phân \(D\)</h4>
-  <p>
-    Đề bài yêu cầu chúng ta tính tích phân kép (ký hiệu là \(\iint\)) trên một vùng \(D\). 
-    Hãy cùng xem vùng \(D\) này có hình dáng như thế nào nhé:
-  </p>
-  <ul>
-    <li>Điều kiện thứ nhất: \(x^2 + y^2 \le 1\). Ký hiệu \(x^2 + y^2 = 1\) là phương trình của một đường tròn tâm tại gốc tọa độ \(O(0,0)\), bán kính \(R = 1\). Dấu "\(\le\)" nghĩa là ta lấy toàn bộ phần diện tích nằm <strong>bên trong</strong> và trên viền của đường tròn này.</li>
-    <li>Điều kiện thứ hai: \(x \ge 0\). Trục tọa độ chia mặt phẳng thành các phần. \(x \ge 0\) nghĩa là ta chỉ lấy phần nằm bên phải trục tung (trục dọc \(y\)).</li>
-    <li>Điều kiện thứ ba: \(y \ge 0\). Nghĩa là ta chỉ lấy phần nằm bên trên trục hoành (trục ngang \(x\)).</li>
-  </ul>
-  <p>
-    Kết hợp cả ba điều kiện lại, miền \(D\) của chúng ta chính là <strong>một phần tư hình tròn</strong> nằm ở góc phần tư thứ nhất (phía trên, bên phải).
-  </p>
+  <p><strong>Đề bài:</strong> Tính \(\iint_D x^3 y\,dxdy\), với \(D\) là phần tư hình tròn đơn vị \(x^2+y^2 \le 1,\; x\ge 0,\; y\ge 0\).</p>
 
-  
-  <h4>Bước 2: Đổi sang tọa độ cực</h4>
-  <p>
-    Để đổi sang tọa độ cực, chúng ta sẽ tưởng tượng mỗi điểm trên mặt phẳng được xác định bởi:
-  </p>
-  <ul>
-    <li>Khoảng cách từ điểm đó đến gốc tọa độ: gọi là \(r\).</li>
-    <li>Góc tạo bởi tia nối từ gốc tọa độ đến điểm đó và chiều dương của trục \(x\): gọi là góc \(\theta\).</li>
-  </ul>
-  <p>
-    Công thức đổi biến số tiêu chuẩn là:
-  </p>
-  \[ x = r\cos\theta \]
-  \[ y = r\sin\theta \]
-  <p>
-    Và đừng quên một quy tắc cực kỳ quan trọng: khi đổi từ biến \(x, y\) sang \(r, \theta\), "diện tích nhỏ xíu" \(dxdy\) phải được nhân thêm một hệ số gọi là định thức Jacobian, ở đây bằng \(r\). Nghĩa là:
-  </p>
-  \[ dxdy = r \, dr \, d\theta \]
+  <p><strong>Phương pháp: Tọa độ cực.</strong><br>
+  \(x = r\cos\theta,\; y = r\sin\theta,\; dxdy = r\,dr\,d\theta\).<br>
+  \(D\): \(0 \le r \le 1\), \(0 \le \theta \le \pi/2\).</p>
 
-  <h4>Bước 3: Xác định cận (giới hạn) mới cho \(r\) và \(\theta\)</h4>
-  <p>
-    Bây giờ ta phải tìm xem \(r\) và \(\theta\) chạy từ đâu đến đâu để "quét" hết phần tư hình tròn \(D\):
-  </p>
-  <ul>
-    <li>
-      <strong>Cận của \(r\):</strong> Bắt đầu từ gốc tọa độ (\(r = 0\)) tỏa ra đến mép ngoài của đường tròn có bán kính bằng \(1\). Do đó:
-      \\[ 0 \le r \le 1 \\]
-    </li>
-    <li>
-      <strong>Cận của \(\theta\):</strong> Miền D nằm gọn trong góc phần tư thứ nhất, nghĩa là quét từ tia \(Ox\) (tương ứng góc \(0^\circ\)) lên đến tia \(Oy\) (tương ứng góc vuông \(90^\circ\), hay \(\frac{\pi}{2}\) theo radian). Do đó:
-      \\[ 0 \le \theta \le \frac{\pi}{2} \\]
-    </li>
-  </ul>
+  \[I = \int_0^{\pi/2}\int_0^1 (r\cos\theta)^3(r\sin\theta)\cdot r\,dr\,d\theta\]
+  \[= \int_0^{\pi/2} \cos^3\theta\sin\theta\,d\theta \cdot \int_0^1 r^5\,dr\]
 
-  <h4>Bước 4: Thay tất cả vào biểu thức tích phân</h4>
-  <p>
-    Tích phân ban đầu của chúng ta là \( I = \iint_D x^3y \, dxdy \). Lần lượt thay \(x\), \(y\) và \(dxdy\) bằng các biểu thức theo \(r\) và \(\theta\):
-  </p>
-  \[ I = \int_{0}^{\frac{\pi}{2}} \int_{0}^{1} (r\cos\theta)^3 \cdot (r\sin\theta) \cdot (r \, dr) \, d\theta \]
-  <p>
-    Bây giờ ta làm gọn biểu thức bên trong:
-  </p>
-  \[ (r\cos\theta)^3 = r^3\cos^3\theta \]
-  \[ I = \int_{0}^{\frac{\pi}{2}} \int_{0}^{1} (r^3\cos^3\theta) \cdot (r\sin\theta) \cdot r \, dr \, d\theta \]
-  <p>
-    Nhân tất cả các \(r\) lại với nhau: \(r^3 \cdot r \cdot r = r^5\). Do đó biểu thức rút gọn là:
-  </p>
-  \[ I = \int_{0}^{\frac{\pi}{2}} \int_{0}^{1} r^5 \cos^3\theta \sin\theta \, dr \, d\theta \]
+  <p>Tích phân theo \(r\): \(\displaystyle\int_0^1 r^5\,dr = \frac{1}{6}\).</p>
 
-  <h4>Bước 5: Tách và tính từng tích phân một chiều</h4>
-  <p>
-    Vì giới hạn tích phân là các hằng số (không chứa biến) và hàm số có thể tách thành phần chỉ chứa \(r\) nhân với phần chỉ chứa \(\theta\), ta có thể tách tích phân kép thành tích của hai tích phân đơn (một chiều):
-  </p>
-  \[ I = \left( \int_{0}^{\frac{\pi}{2}} \cos^3\theta \sin\theta \, d\theta \right) \cdot \left( \int_{0}^{1} r^5 \, dr \right) \]
+  <p>Tích phân theo \(\theta\): đặt \(u=\cos\theta\), \(du=-\sin\theta\,d\theta\):</p>
+  \[\int_0^{\pi/2}\cos^3\theta\sin\theta\,d\theta = \int_1^0 u^3(-du) = \int_0^1 u^3\,du = \frac{1}{4}\]
 
-  <p><strong>Tính tích phân theo biến \(r\):</strong></p>
-  <p>
-    Theo quy tắc tính nguyên hàm cơ bản \(\int r^n \, dr = \frac{r^{n+1}}{n+1}\):
-  </p>
-  \[ \int_{0}^{1} r^5 \, dr = \left. \frac{r^6}{6} \right|_0^1 \]
-  \[ = \frac{1^6}{6} - \frac{0^6}{6} \]
-  \[ = \frac{1}{6} \]
+  \[I = \frac{1}{4}\cdot\frac{1}{6} = \frac{1}{24}\]
 
-  <p><strong>Tính tích phân theo biến \(\theta\):</strong></p>
-  <p>
-    Ta cần tính:
-  </p>
-  \[ J = \int_{0}^{\frac{\pi}{2}} \cos^3\theta \sin\theta \, d\theta \]
-  <p>
-    Dùng phương pháp đổi biến số (đặt ẩn phụ):<br>
-    Đặt \( u = \cos\theta \). Lấy đạo hàm hai vế ta được: \( du = -\sin\theta \, d\theta \), hay \(-du = \sin\theta \, d\theta\).<br>
-    Đổi cận:
-  </p>
-  <ul>
-    <li>Khi \(\theta = 0\), thì \( u = \cos(0) = 1 \).</li>
-    <li>Khi \(\theta = \frac{\pi}{2}\), thì \( u = \cos\left(\frac{\pi}{2}\right) = 0 \).</li>
-  </ul>
-  <p>
-    Thay vào tích phân:
-  </p>
-  \[ J = \int_{1}^{0} u^3 \cdot (-du) \]
-  <p>
-    Dấu trừ cho phép chúng ta lặp ngược hai cận trên và dưới lại với nhau (đảo từ \(1 \to 0\) thành \(0 \to 1\)):
-  </p>
-  \[ J = \int_{0}^{1} u^3 \, du \]
-  <p>
-    Dùng lại quy tắc lũy thừa:
-  </p>
-  \[ J = \left. \frac{u^4}{4} \right|_0^1 \]
-  \[ = \frac{1^4}{4} - \frac{0^4}{4} \]
-  \[ = \frac{1}{4} \]
-
-  <h4>Bước 6: Kết luận kết quả cuối cùng</h4>
-  <p>
-    Nhân hai kết quả vừa tính được lại với nhau:
-  </p>
-  \[ I = \frac{1}{4} \cdot \frac{1}{6} \]
-  \[ I = \frac{1}{24} \]
-
-  <p>
-    <strong>Kiểm tra tính hợp lý:</strong> Trong phần tư thứ nhất, cả \(x\) và \(y\) đều dương. Hàm số chúng ta lấy tích phân là \(f(x,y) = x^3y\), là tích của các số dương nên cũng luôn mang giá trị dương. Do đó, kết quả tích phân bắt buộc phải là một số dương. Kết quả \(1/24\) là một số dương, hoàn toàn hợp lý với hình học và hàm số đã cho!
-  </p>
-
-  <p style="color:#1a5276; font-size: 1.2em;"><strong>Kết luận cuối cùng:</strong> \(\mathbf{I = \dfrac{1}{24}}\)</p>
+  <p style="color:#1a5276; font-weight:bold;">\(\boxed{I = \dfrac{1}{24}}\) ✓ Khớp với đáp án.</p>
 </div>
   </div>
 </div>
 
+
+<div style="margin-top: 35px; padding: 12px 16px; border-top: 1px dashed #cbd5e1; text-align: center; color: #94a3b8; font-size: 11.5px; line-height: 1.6;">
+  <em>* Tài liệu và mô phỏng được tạo với sự hỗ trợ của AI, có thể còn tồn tại sai sót. Rất mong nhận được đóng góp ý kiến từ thầy cô và các bạn.</em>
+</div>
 </div>
 <script>
     function toggleSolutionBox(btn) {
@@ -255,9 +157,5 @@ fig.show()</code></pre>
         }
     }
 </script>
-
-<div style="margin-top: 40px; padding: 12px 16px; border-top: 1px dashed #cbd5e1; text-align: center; color: #94a3b8; font-size: 11.5px; line-height: 1.6;">
-  <em>* Tài liệu và mô phỏng được tạo với sự hỗ trợ của AI, có thể còn tồn tại sai sót. Rất mong nhận được đóng góp ý kiến từ thầy cô và các bạn.</em>
-</div>
 </body>
 </html>

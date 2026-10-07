@@ -92,63 +92,24 @@
   <div class="solution-collapsible-content">
 <h3>&#9998; Lời giải</h3>
         <div class="solution">
-  <h4>Bước 1: Hiểu đề bài và hình dáng vật thể \(\Omega\)</h4>
-  <p>Chúng ta cần tính một <strong>tích phân bội ba</strong>, ký hiệu là \(\iiint_\Omega\). Ký hiệu này có nghĩa là ta sẽ tính tổng một đại lượng nào đó (ở đây là hàm số \(x^3yz^2\)) trên toàn bộ một không gian 3 chiều \(\Omega\).</p>
-  <p>Vật thể \(\Omega\) trong bài này được mô tả bởi các giới hạn (gọi là <em>cận</em>):</p>
-  <ul>
-    <li>\(0 \le x \le 1\): Theo chiều ngang \(x\), vật thể bắt đầu từ \(0\) và kết thúc ở \(1\).</li>
-    <li>\(1 \le y \le 2\): Theo chiều sâu \(y\), vật thể trải dài từ \(1\) đến \(2\).</li>
-    <li>\(0 \le z \le 2\): Theo chiều cao \(z\), vật thể vươn từ mặt đất \(0\) lên đến độ cao \(2\).</li>
-  </ul>
-  <p>Vì tất cả các giới hạn đều là <strong>các con số cố định</strong> (không phụ thuộc vào nhau), nên \(\Omega\) có hình dáng rất đơn giản: một <strong>hình hộp chữ nhật</strong> giống như một viên gạch xếp ngay ngắn trong không gian.</p>
-
-  <div style="background:#e8f4f8; padding:10px; border-left:4px solid #3498db; margin:10px 0;">
-    <strong>Mẹo nhỏ:</strong> Khi tích phân bội ba có miền \(\Omega\) là hình hộp chữ nhật (tất cả các cận đều là số) VÀ hàm số cần tính phân tách được thành các phần chứa riêng rẽ từng biến \(x, y, z\) (ở đây là \(x^3 \cdot y \cdot z^2\)), ta có thể tách bài toán thành 3 bài toán tích phân 1 biến đơn giản rồi nhân kết quả lại với nhau!
-  </div>
-
-  <h4>Bước 2: Tách tích phân bội ba thành các tích phân đơn</h4>
-  <p>Vì hàm số là \(f(x,y,z) = x^3 y z^2\), ta tách riêng rẽ:</p>
+  <p><strong>Bước 1: Phân tích miền lấy tích phân \(\Omega\).</strong><br>
+  Miền \(\Omega\) là hình hộp chữ nhật có các cận hằng số độc lập: \(0 \le x \le 1,\; 1 \le y \le 2,\; 0 \le z \le 2\).<br>
+  Hàm dưới dấu tích phân \(f(x,y,z) = x^3 y z^2\) là tích của 3 hàm một biến độc lập nên tích phân bội ba tách thành tích của 3 tích phân đơn:</p>
   \[I = \left(\int_0^1 x^3\,dx\right) \cdot \left(\int_1^2 y\,dy\right) \cdot \left(\int_0^2 z^2\,dz\right)\]
-  <p>Bây giờ, chúng ta chỉ cần giải 3 bài toán nhỏ xíu này.</p>
-
-  <h4>Bước 3: Tính từng tích phân nhỏ</h4>
-  <p><strong>1. Tính phần của \(x\):</strong></p>
-  <p>Ta dùng công thức nguyên hàm cơ bản: \(\int x^n \, dx = \frac{x^{n+1}}{n+1}\). Với \(n=3\), ta có nguyên hàm là \(\frac{x^4}{4}\).</p>
-  \[ \int_0^1 x^3\,dx = \left[ \frac{x^4}{4} \right]_0^1 \]
-  \[ = \frac{1^4}{4} - \frac{0^4}{4} \]
-  \[ = \frac{1}{4} - 0 \]
-  \[ = \frac{1}{4} \]
-
-  <p><strong>2. Tính phần của \(y\):</strong></p>
-  <p>Tương tự, với \(y\) mũ \(1\) (\(y^1\)), nguyên hàm là \(\frac{y^2}{2}\).</p>
-  \[ \int_1^2 y\,dy = \left[ \frac{y^2}{2} \right]_1^2 \]
-  \[ = \frac{2^2}{2} - \frac{1^2}{2} \]
-  \[ = \frac{4}{2} - \frac{1}{2} \]
-  \[ = 2 - \frac{1}{2} \]
-  \[ = \frac{3}{2} \]
-
-  <p><strong>3. Tính phần của \(z\):</strong></p>
-  <p>Với \(z^2\), nguyên hàm là \(\frac{z^3}{3}\).</p>
-  \[ \int_0^2 z^2\,dz = \left[ \frac{z^3}{3} \right]_0^2 \]
-  \[ = \frac{2^3}{3} - \frac{0^3}{3} \]
-  \[ = \frac{8}{3} - 0 \]
-  \[ = \frac{8}{3} \]
-
-  <h4>Bước 4: Nhân các kết quả lại để ra đáp án cuối cùng</h4>
-  <p>Ta thay các kết quả vừa tính vào công thức ở Bước 2:</p>
-  \[ I = \frac{1}{4} \cdot \frac{3}{2} \cdot \frac{8}{3} \]
-  <p>Rút gọn phân số (chú ý số 4 và số 8 rút gọn còn 2, số 3 và số 3 triệt tiêu):</p>
-  \[ I = \frac{1 \cdot 3 \cdot 8}{4 \cdot 2 \cdot 3} \]
-  \[ I = \frac{24}{24} \]
-  \[ I = 1 \]
-
-  <h4>Kết luận và Ý nghĩa</h4>
-  <p style="color:#27ae60; font-weight:bold;">\(\boxed{I = 1}\) ✓</p>
-  <p><strong>Ý nghĩa:</strong> Nếu coi \(\Omega\) là một căn phòng hình hộp chữ nhật và hàm số \(x^3yz^2\) mô tả "nhiệt độ" (hay mật độ bụi) tại từng điểm trong phòng, thì con số 1 này đại diện cho "tổng lượng nhiệt" (hay tổng lượng bụi) tích tụ trong toàn bộ căn phòng đó. Phép tính phân tách giúp ta thấy rõ mức đóng góp của từng chiều \(x, y, z\) vào kết quả cuối cùng.</p>
+  <p><strong>Bước 2: Tính từng tích phân một lớp.</strong></p>
+  \[\int_0^1 x^3\,dx = \left[\frac{x^4}{4}\right]_0^1 = \frac{1}{4} - 0 = \frac{1}{4}\]
+  \[\int_1^2 y\,dy = \left[\frac{y^2}{2}\right]_1^2 = \frac{2^2}{2} - \frac{1^2}{2} = 2 - \frac{1}{2} = \frac{3}{2}\]
+  \[\int_0^2 z^2\,dz = \left[\frac{z^3}{3}\right]_0^2 = \frac{2^3}{3} - 0 = \frac{8}{3}\]
+  <p><strong>Bước 3: Nhân kết quả.</strong></p>
+  \[I = \frac{1}{4} \cdot \frac{3}{2} \cdot \frac{8}{3} = 1\]
+  <p style="color:#27ae60; font-weight:bold;">\(\boxed{I = 1}\) ✓ Khớp hoàn toàn với đáp án!</p>
 </div>
         <div class="answer-box">&#10003; Kết quả: \(1\)</div>
         <div class="check">Kết quả tính toán: \(1\). Khớp đáp án đề: <strong>1</strong> ✓</div>
-        <h3>&#128202; Hình minh họa</h3>
+  </div>
+</div>
+
+<h3>&#128202; Hình minh họa</h3>
         
 <p style="text-align:center; color:#e67e22; font-weight:bold; margin-bottom:5px;">&#128208; Hình vẽ cho: \(\iiint_\Omega x^3yz^2\,dxdydz\), \(\Omega\): hình hộp chữ nhật \(0\le x\le1,\;1\le y\le2,\;0\le z\le2\)</p>
 <div class="plot-container"><div style="height:900px; width:800px;">                        <script>window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
@@ -157,9 +118,12 @@
         <pre class="code-block">import sympy as sp
 x,y,z = sp.symbols('x y z')
 print(sp.integrate(x**3*y*z**2,(z,0,2),(y,1,2),(x,0,1)))</pre>
-    </div>
-  </div>
-</div><script>
+    
+<div style="margin-top: 35px; padding: 12px 16px; border-top: 1px dashed #cbd5e1; text-align: center; color: #94a3b8; font-size: 11.5px; line-height: 1.6;">
+  <em>* Tài liệu và mô phỏng được tạo với sự hỗ trợ của AI, có thể còn tồn tại sai sót. Rất mong nhận được đóng góp ý kiến từ thầy cô và các bạn.</em>
+</div>
+</div>
+<script>
     function toggleSolutionBox(btn) {
         const content = btn.nextElementSibling;
         const isOpen = content.classList.contains('is-open');
@@ -184,9 +148,5 @@ print(sp.integrate(x**3*y*z**2,(z,0,2),(y,1,2),(x,0,1)))</pre>
         }
     }
 </script>
-
-<div style="margin-top: 40px; padding: 12px 16px; border-top: 1px dashed #cbd5e1; text-align: center; color: #94a3b8; font-size: 11.5px; line-height: 1.6;">
-  <em>* Tài liệu và mô phỏng được tạo với sự hỗ trợ của AI, có thể còn tồn tại sai sót. Rất mong nhận được đóng góp ý kiến từ thầy cô và các bạn.</em>
-</div>
 </body>
 </html>

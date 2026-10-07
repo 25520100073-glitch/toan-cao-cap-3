@@ -93,128 +93,40 @@
   </button>
   <div class="solution-collapsible-content">
 <div style="background:#eaf4fb; border-left:5px solid #2980b9; padding:20px; margin-top:30px; border-radius:6px;">
-  <h3 style="color:#1a5276;">Lời giải - Bài B2.19 (Chi tiết từng bước)</h3>
+  <h3 style="color:#1a5276;">Lời giải - Bài B2.19</h3>
   <p><strong>Đề bài đầy đủ:</strong> Tính \(I = \iint_D x^2 y dxdy\)<br>với \(D\) là miền phẳng xác định bởi \(2x \le x^2+y^2 \le 4x\) và \(-x \le y \le x\sqrt{3}\).</p>
   
-  <div style="background:#fff; border:1px solid #ddd; padding:15px; margin-bottom:15px; border-radius:5px;">
-    <h4>👋 Khởi động: Tích phân kép \(\iint\) là gì?</h4>
-    <p>Hãy tưởng tượng bạn có một miếng bánh hình dáng bất kỳ nằm trên mặt bàn (miếng bánh đó chính là miền \(D\)). Mỗi điểm trên miếng bánh có một độ ngọt khác nhau được tính bằng công thức \(f(x, y) = x^2 y\). Ký hiệu \(\iint_D\) có nghĩa là chúng ta đang tính <strong>tổng độ ngọt của toàn bộ miếng bánh đó</strong>.</p>
-    <ul>
-      <li>\(\iint\): Dấu tích phân kép, nghĩa là ta cộng dồn liên tục theo hai hướng ngang (\(x\)) và dọc (\(y\)).</li>
-      <li>\(D\): Tên của vùng không gian (miếng bánh) mà chúng ta đang xét.</li>
-      <li>\(dxdy\): Một mẩu bánh nhỏ xíu (diện tích vô cùng nhỏ).</li>
-    </ul>
-  </div>
-
-  <h4>Bước 1: Giải mã hình dáng của "miếng bánh" (Miền \(D\))</h4>
-  <p>Để tính được, ta phải biết miền \(D\) trông như thế nào. Miền \(D\) được giới hạn bởi 2 điều kiện:</p>
-  <ol>
-    <li><strong>Điều kiện 1:</strong> \(2x \le x^2+y^2 \le 4x\)
-      <br>Đây là hình dáng giới hạn bởi hai đường tròn. Tại sao lại là đường tròn? Hãy thử biến đổi một vế \(x^2+y^2 = 2x\):
-      <br>Chuyển vế: \(x^2 - 2x + y^2 = 0\)
-      <br>Thêm bớt để tạo hằng đẳng thức: \((x - 1)^2 - 1 + y^2 = 0\)
-      <br>Suy ra: \((x - 1)^2 + y^2 = 1\). Đây là đường tròn tâm \((1, 0)\), bán kính \(1\).
-      <br>Tương tự, \(x^2+y^2 = 4x\) biến đổi thành \((x - 2)^2 + y^2 = 4\). Đây là đường tròn tâm \((2, 0)\), bán kính \(2\).
-      <br>Vậy, điều kiện này vẽ ra phần diện tích <strong>nằm giữa hai đường tròn</strong> này (giống như hình vầng trăng khuyết lệch).
-    </li>
-    <li><strong>Điều kiện 2:</strong> \(-x \le y \le x\sqrt{3}\)
-      <br>Đây là vùng nằm giữa hai đường thẳng đi qua gốc tọa độ: \(y = -x\) và \(y = x\sqrt{3}\). Vùng này tạo thành một góc mở giống như chiếc quạt.
-    </li>
-  </ol>
-  <p>Giao của cả hai điều kiện này chính là miền \(D\). Từ điều kiện 1 (\(x^2+y^2 \ge 2x\)), vì \(x^2+y^2\) luôn dương hoặc bằng 0 nên suy ra \(x \ge 0\). Miền này nằm trọn bên phải trục tung!</p>
-
-  <h4>Bước 2: Đổi sang "ngôn ngữ" mới (Hệ tọa độ cực)</h4>
-  <p>Làm việc với các đường tròn trong hệ \(x, y\) rất phức tạp. Chúng ta có một phép màu gọi là <strong>Hệ tọa độ cực</strong>. Thay vì dùng tọa độ ngang dọc \((x, y)\), ta dùng:</p>
-  <ul>
-    <li>\(r\): Khoảng cách từ gốc tọa độ đến điểm đó.</li>
-    <li>\(\theta\) (đọc là tê-ta): Góc quay quét từ trục ngang \(x\) đến điểm đó.</li>
-  </ul>
-  <p>Công thức đổi từ \((x, y)\) sang \((r, \theta)\) là:</p>
-  <div style="background:#f9f9f9; padding:10px; margin-left:20px; border-left:3px solid #ccc;">
-    \[ x = r\cos\theta \]
-    \[ y = r\sin\theta \]
-    \[ x^2 + y^2 = r^2 \]
-  </div>
-  <p>⚠️ <strong>Lưu ý cực kỳ quan trọng:</strong> Khi đổi biến như thế này, miếng bánh bị méo đi, ta phải nhân thêm một hệ số điều chỉnh diện tích gọi là định thức Jacobi. Ở tọa độ cực, <strong>hệ số Jacobi luôn là \(J = r\)</strong>. Nên ta thay thế \(dxdy\) bằng \(r \,dr d\theta\).</p>
-
-  <h4>Bước 3: Tìm giới hạn (cận) trong ngôn ngữ mới</h4>
-  <p>Bây giờ ta chuyển 2 điều kiện ban đầu sang chữ \(r\) và chữ \(\theta\):</p>
-  <ol>
-    <li><strong>Tìm khoảng của \(r\) (khoảng cách):</strong>
-      <br>Bắt đầu từ: \(2x \le x^2+y^2 \le 4x\)
-      <br>Thay \(x\) và \(x^2+y^2\) vào: \(2r\cos\theta \le r^2 \le 4r\cos\theta\)
-      <br>Chia tất cả cho \(r\) (vì khoảng cách \(r > 0\)):
-      \[ 2\cos\theta \le r \le 4\cos\theta \]
-      <br>Đây chính là giới hạn của \(r\)!
-    </li>
-    <li><strong>Tìm khoảng của \(\theta\) (góc quay):</strong>
-      <br>Bắt đầu từ: \(-x \le y \le x\sqrt{3}\)
-      <br>Chia tất cả cho \(x\) (do \(x > 0\), dấu bất đẳng thức giữ nguyên chiều):
-      \[ -1 \le \frac{y}{x} \le \sqrt{3} \]
-      <br>Trong lượng giác, \(\frac{y}{x}\) chính là \(\frac{r\sin\theta}{r\cos\theta} = \tan\theta\). Vậy ta có:
-      \[ -1 \le \tan\theta \le \sqrt{3} \]
-      <br>Hỏi: Góc nào có \(\tan = -1\)? Trả lời: Góc \(-\frac{\pi}{4}\) (tức là \(-45^\circ\)).
-      <br>Hỏi: Góc nào có \(\tan = \sqrt{3}\)? Trả lời: Góc \(\frac{\pi}{3}\) (tức là \(60^\circ\)).
-      <br>Vậy góc \(\theta\) quét từ: \(-\frac{\pi}{4} \le \theta \le \frac{\pi}{3}\).
-    </li>
-  </ol>
-
-  <h4>Bước 4: Viết lại bài toán bằng công thức mới và giải lớp đầu tiên</h4>
-  <p>Biểu thức hàm số cần tính: \(x^2 y\). Ta thay bằng chữ \(r\) và \(\theta\):</p>
-  \[ x^2 y = (r\cos\theta)^2 \times (r\sin\theta) = r^2\cos^2\theta \times r\sin\theta = r^3\cos^2\theta\sin\theta \]
-  <p>Viết lại toàn bộ tích phân ban đầu (nhớ nhân thêm \(r\) của Jacobi nhé!):</p>
-  \[ I = \int_{-\pi/4}^{\pi/3} \left( \int_{2\cos\theta}^{4\cos\theta} (r^3\cos^2\theta\sin\theta) \times r \,dr \right) d\theta \]
+  <p><strong>Bước 1: Phân tích miền D và chuyển tọa độ cực.</strong><br>
+  Đặt \(x = r\cos\theta, y = r\sin\theta\), định thức Jacobi \(J = r\).<br>
+  Bất phương trình bán kính: \(2x \le x^2+y^2 \le 4x \implies 2r\cos\theta \le r^2 \le 4r\cos\theta \implies 2\cos\theta \le r \le 4\cos\theta\).<br>
+  Bất phương trình góc: \(-x \le y \le x\sqrt{3} \implies -1 \le \frac{y}{x} \le \sqrt{3} \implies -1 \le \tan\theta \le \sqrt{3}\).<br>
+  Vì \(x \ge 0\) (do \(x^2+y^2 \ge 2x \implies x \ge 0\) ở lân cận này), ta có góc \(\theta \in [-\pi/4, \pi/3]\).</p>
   
-  <p>Chúng ta tính tích phân bên trong trước (biến là \(r\), coi \(\theta\) như con số cố định):</p>
-  \[ \text{Bên trong} = \int_{2\cos\theta}^{4\cos\theta} r^4 (\cos^2\theta\sin\theta) \,dr \]
-  <p>Rút phần \(\cos, \sin\) ra ngoài tích phân vì nó không chứa \(r\):</p>
-  \[ = \cos^2\theta\sin\theta \int_{2\cos\theta}^{4\cos\theta} r^4 \,dr \]
-  <p>Áp dụng quy tắc cơ bản: \(\int r^n \,dr = \frac{r^{n+1}}{n+1}\). Với \(n=4\), ta có \(\frac{r^5}{5}\):</p>
-  \[ = \cos^2\theta\sin\theta \left[ \frac{r^5}{5} \right]_{r=2\cos\theta}^{r=4\cos\theta} \]
-  <p>Thế số lớn (cận trên) trừ thế số bé (cận dưới):</p>
-  \[ = \cos^2\theta\sin\theta \left( \frac{(4\cos\theta)^5}{5} - \frac{(2\cos\theta)^5}{5} \right) \]
-  \[ = \cos^2\theta\sin\theta \left( \frac{1024\cos^5\theta}{5} - \frac{32\cos^5\theta}{5} \right) \]
-  \[ = \cos^2\theta\sin\theta \times \frac{992\cos^5\theta}{5} = \frac{992}{5}\cos^7\theta\sin\theta \]
-
-  <h4>Bước 5: Giải lớp thứ hai và tìm kết quả cuối cùng</h4>
-  <p>Lấy kết quả vừa tính ráp vào tích phân bên ngoài (biến là \(\theta\)):</p>
-  \[ I = \int_{-\pi/4}^{\pi/3} \frac{992}{5}\cos^7\theta\sin\theta \,d\theta = \frac{992}{5} \int_{-\pi/4}^{\pi/3} \cos^7\theta\sin\theta \,d\theta \]
+  <p><strong>Bước 2: Thiết lập và tính tích phân.</strong><br>
+  Hàm dưới dấu tích phân: \(x^2y = (r\cos\theta)^2(r\sin\theta) = r^3\cos^2\theta\sin\theta\).<br>
+  Nhân với Jacobi \(r\), ta có:
+  \[ I = \int_{-\pi/4}^{\pi/3} d\theta \int_{2\cos\theta}^{4\cos\theta} (r^3\cos^2\theta\sin\theta) r \,dr = \int_{-\pi/4}^{\pi/3} \cos^2\theta\sin\theta \,d\theta \int_{2\cos\theta}^{4\cos\theta} r^4 \,dr \]
+  Tích phân lớp trong:
+  \[ \int_{2\cos\theta}^{4\cos\theta} r^4 \,dr = \left[ \frac{r^5}{5} \right]_{2\cos\theta}^{4\cos\theta} = \frac{(4\cos\theta)^5 - (2\cos\theta)^5}{5} = \frac{1024 - 32}{5}\cos^5\theta = \frac{992}{5}\cos^5\theta \]
+  </p>
   
-  <div style="background:#e8f8f5; border-left:5px solid #1abc9c; padding:15px; margin:15px 0;">
-    <strong>💡 Mẹo giải tích phân lượng giác: Phương pháp Đổi Biến Số</strong><br>
-    Ta thấy có \(\cos\) mũ cao và một chữ \(\sin\) đứng một mình. Đây là dấu hiệu hoàn hảo để đổi biến!<br>
-    Đặt \(t = \cos\theta\). Lấy đạo hàm hai vế: \(dt = -\sin\theta \,d\theta\).<br>
-    Suy ra: \(\sin\theta \,d\theta = -dt\).<br>
-    Đổi cận (thế góc \(\theta\) vào tìm \(t\)):<br>
-    - Khi \(\theta = -\frac{\pi}{4}\), thì \(t = \cos(-\frac{\pi}{4}) = \frac{\sqrt{2}}{2}\).<br>
-    - Khi \(\theta = \frac{\pi}{3}\), thì \(t = \cos(\frac{\pi}{3}) = \frac{1}{2}\).
-  </div>
-
-  <p>Viết lại tích phân theo biến \(t\):</p>
-  \[ I = \frac{992}{5} \int_{\sqrt{2}/2}^{1/2} t^7 (-dt) \]
-  <p>Quy tắc đổi dấu: Khi bỏ dấu trừ ở \(dt\), ta lật ngược 2 cận (đảo trên xuống dưới) cho giá trị tích phân dương lên:</p>
-  \[ I = \frac{992}{5} \int_{1/2}^{\sqrt{2}/2} t^7 dt \]
-  <p>Lại dùng quy tắc mũ: \(\int t^7 dt = \frac{t^8}{8}\):</p>
-  \[ I = \frac{992}{5} \left[ \frac{t^8}{8} \right]_{1/2}^{\sqrt{2}/2} \]
-  <p>Lấy \(992\) chia cho \(8\) rút gọn đi, \(992 \div 8 = 124\):</p>
-  \[ I = \frac{124}{5} \left( \left(\frac{\sqrt{2}}{2}\right)^8 - \left(\frac{1}{2}\right)^8 \right) \]
+  <p><strong>Bước 3: Tích phân theo góc \(\theta\).</strong><br>
+  Thay vào \(I\):
+  \[ I = \frac{992}{5} \int_{-\pi/4}^{\pi/3} \cos^7\theta \sin\theta \,d\theta \]
+  Đặt \(t = \cos\theta \implies dt = -\sin\theta d\theta\). Cận chạy từ \(t = \cos(-\pi/4) = \frac{\sqrt{2}}{2}\) đến \(t = \cos(\pi/3) = \frac{1}{2}\).<br>
+  \[ I = \frac{992}{5} \int_{\sqrt{2}/2}^{1/2} t^7 (-dt) = \frac{992}{5} \int_{1/2}^{\sqrt{2}/2} t^7 dt = \frac{992}{5} \left[ \frac{t^8}{8} \right]_{1/2}^{\sqrt{2}/2} \]
+  \[ = \frac{124}{5} \left( \left(\frac{\sqrt{2}}{2}\right)^8 - \left(\frac{1}{2}\right)^8 \right) = \frac{124}{5} \left( \frac{16}{256} - \frac{1}{256} \right) = \frac{124}{5} \times \frac{15}{256} \]
+  Rút gọn: \(\frac{124 \times 3}{256} = \frac{31 \times 3}{64} = \frac{93}{64}\).
+  </p>
   
-  <p>Tính toán phân số:</p>
-  \[ \left(\frac{\sqrt{2}}{2}\right)^8 = \frac{(\sqrt{2})^8}{2^8} = \frac{16}{256} \]
-  \[ \left(\frac{1}{2}\right)^8 = \frac{1}{256} \]
-  <p>Trừ cho nhau:</p>
-  \[ \frac{16}{256} - \frac{1}{256} = \frac{15}{256} \]
-  
-  <p>Ráp lại bước cuối cùng:</p>
-  \[ I = \frac{124}{5} \times \frac{15}{256} \]
-  <p>Rút gọn lần cuối: Lấy \(15\) chia \(5\) bằng \(3\). Cả \(124\) và \(256\) cùng chia hết cho \(4\) (được \(31\) và \(64\)):</p>
-  \[ I = \frac{31 \times 3}{64} = \frac{93}{64} \]
-
-  <p style="color:#1a5276; font-size: 1.1em;"><strong>Kết luận: Tích phân kép trên miền D có giá trị bằng \(\frac{93}{64}\).</strong></p>
-  <p><em>Ý nghĩa: Nếu miền D là một vật thể mỏng, và tại mỗi điểm nó có mật độ khối lượng là \(x^2 y\), thì tổng khối lượng của toàn bộ vật thể này chính xác là \(\frac{93}{64}\). Bài toán không chỉ là những con số khô khan mà là cách chúng ta tính toán đong đếm vạn vật trong không gian!</em></p>
+  <p style="color:#1a5276; font-weight:bold;">\(\boxed{I = \frac{93}{64}}\) ✓ Đáp án chính xác tuyệt đối!</p>
 </div>
   </div>
-</div></div>
+</div>
+<div style="margin-top: 35px; padding: 12px 16px; border-top: 1px dashed #cbd5e1; text-align: center; color: #94a3b8; font-size: 11.5px; line-height: 1.6;">
+  <em>* Tài liệu và mô phỏng được tạo với sự hỗ trợ của AI, có thể còn tồn tại sai sót. Rất mong nhận được đóng góp ý kiến từ thầy cô và các bạn.</em>
+</div>
+</div>
 <script>
     function toggleSolutionBox(btn) {
         const content = btn.nextElementSibling;
@@ -240,9 +152,5 @@
         }
     }
 </script>
-
-<div style="margin-top: 40px; padding: 12px 16px; border-top: 1px dashed #cbd5e1; text-align: center; color: #94a3b8; font-size: 11.5px; line-height: 1.6;">
-  <em>* Tài liệu và mô phỏng được tạo với sự hỗ trợ của AI, có thể còn tồn tại sai sót. Rất mong nhận được đóng góp ý kiến từ thầy cô và các bạn.</em>
-</div>
 </body>
 </html>

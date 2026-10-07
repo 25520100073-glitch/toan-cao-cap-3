@@ -92,73 +92,26 @@
   <div class="solution-collapsible-content">
 <h3>&#9998; Lời giải</h3>
         <div class="solution">
-  <h4>Bước 1: Hiểu hình dáng vật thể và tìm các cận</h4>
-  <p>Chúng ta cần tính tích phân bội ba \(\iiint_\Omega z\,dxdydz\) trên một vật thể \(\Omega\) là hình <strong>tứ diện</strong> (giống như một góc phòng bị cắt vát). Tứ diện này tạo bởi 4 mặt phẳng:</p>
-  <ul>
-    <li>Mặt đất \(z = 0\) (mặt phẳng chứa trục \(x\) và \(y\)).</li>
-    <li>Bức tường bên trái \(x = 0\) (chứa \(y\) và \(z\)).</li>
-    <li>Bức tường phía sau \(y = 0\) (chứa \(x\) và \(z\)).</li>
-    <li>Mặt phẳng cắt chéo \(x + 2y + z = 6\). Từ phương trình này, ta suy ra ngay trần của vật thể là \(z = 6 - x - 2y\).</li>
-  </ul>
-  <p><strong>Cách xác định giới hạn (cận):</strong></p>
-  <p>Theo chiều cao \(z\): đi từ mặt đất lên mặt cắt chéo, nên \(0 \le z \le 6 - x - 2y\).</p>
-  <p>Tiếp theo, ta nhìn từ trên cao xuống mặt đất \(Oxy\) để xem cái bóng của vật thể. Bóng này (gọi là miền \(D\)) là một tam giác nằm giữa hai bức tường \(x=0, y=0\). Để tìm cạnh còn lại của tam giác, ta cho mặt cắt chéo chạm đất (\(z=0\)):</p>
-  \[ x + 2y + 0 = 6 \implies 2y = 6 - x \implies y = \frac{6-x}{2} \]
-  <p>Vậy trên mặt đất, theo chiều \(y\), ta đi từ \(0\) đến \(\frac{6-x}{2}\). Cận của \(y\) là: \(0 \le y \le \frac{6-x}{2}\).</p>
-  <p>Cuối cùng, giới hạn ngoài cùng cho \(x\): đường thẳng \(y = \frac{6-x}{2}\) cắt trục \(Ox\) (khi \(y=0\)) tại \(x = 6\). Nên \(x\) chạy từ \(0\) đến \(6\).</p>
-
-  <h4>Bước 2: Thiết lập và tính lớp tích phân đầu tiên (theo \(z\))</h4>
-  <p>Ghi lại tích phân lặp (tính từ trong ra ngoài):</p>
-  \[ I = \int_0^6 \left( \int_0^{\frac{6-x}{2}} \left( \int_0^{6-x-2y} z \, dz \right) dy \right) dx \]
-  <p>Tính phần trong cùng chứa \(z\). Nguyên hàm của \(z\) là \(\frac{z^2}{2}\).</p>
-  \[ \int_0^{6-x-2y} z \, dz = \left[ \frac{z^2}{2} \right]_0^{6-x-2y} \]
-  <p>Thay cận trên và cận dưới vào:</p>
-  \[ = \frac{(6-x-2y)^2}{2} - \frac{0^2}{2} \]
-  \[ = \frac{(6-x-2y)^2}{2} \]
-
-  <h4>Bước 3: Tính lớp thứ hai (theo \(y\))</h4>
-  <p>Ráp kết quả vào lớp giữa:</p>
-  \[ \int_0^{\frac{6-x}{2}} \frac{(6-x-2y)^2}{2} \, dy \]
-  <p>Để tính nguyên hàm này cho dễ, ta dùng phương pháp <strong>đổi biến số</strong>:</p>
-  <p>Đặt phần trong ngoặc là một biến mới: \(u = 6 - x - 2y\).</p>
-  <p>Khi đó, lấy đạo hàm hai vế theo \(y\) (coi \(x\) như một hằng số vì ta đang tính theo \(y\)):</p>
-  \[ du = -2 \, dy \implies dy = -\frac{du}{2} \]
-  <p>Đổi các giới hạn (cận) của \(y\) sang biến \(u\):</p>
-  <ul>
-    <li>Khi \(y = 0 \implies u = 6 - x - 2(0) = 6 - x\)</li>
-    <li>Khi \(y = \frac{6-x}{2} \implies u = 6 - x - 2\left(\frac{6-x}{2}\right) = 6 - x - (6 - x) = 0\)</li>
-  </ul>
-  <p>Viết lại tích phân theo biến \(u\):</p>
-  \[ \int_{6-x}^0 \frac{u^2}{2} \left( -\frac{du}{2} \right) \]
-  <p>Dấu trừ sẽ giúp ta lật ngược 2 cận lại (từ \(6-x \to 0\) thành \(0 \to 6-x\)):</p>
-  \[ = \int_0^{6-x} \frac{u^2}{4} \, du \]
-  <p>Nguyên hàm của \(u^2\) là \(\frac{u^3}{3}\), ghép với mẫu số 4 thành \(\frac{u^3}{12}\):</p>
-  \[ = \left[ \frac{u^3}{12} \right]_0^{6-x} \]
-  \[ = \frac{(6-x)^3}{12} - \frac{0^3}{12} \]
-  \[ = \frac{(6-x)^3}{12} \]
-
-  <h4>Bước 4: Tính lớp ngoài cùng (theo \(x\))</h4>
-  <p>Ráp kết quả vào lớp ngoài cùng:</p>
-  \[ I = \int_0^6 \frac{(6-x)^3}{12} \, dx \]
-  <p>Tiếp tục đổi biến nhẩm hoặc làm tương tự: nguyên hàm của \((A - x)^n\) là \(-\frac{(A - x)^{n+1}}{n+1}\). Ở đây \(A=6, n=3\), vậy nguyên hàm là \(-\frac{(6-x)^4}{4}\).</p>
-  <p>Đừng quên nhân với hằng số \(\frac{1}{12}\) ở mẫu:</p>
-  \[ = \left[ -\frac{(6-x)^4}{4 \cdot 12} \right]_0^6 \]
-  \[ = \left[ -\frac{(6-x)^4}{48} \right]_0^6 \]
-  <p>Thay cận trên \(x=6\):</p>
-  \[ = -\frac{(6-6)^4}{48} = 0 \]
-  <p>Thay cận dưới \(x=0\) (và trừ đi nó):</p>
-  \[ - \left( -\frac{(6-0)^4}{48} \right) = \frac{6^4}{48} \]
-  <p>Ta tính: \(6^4 = 6 \cdot 6 \cdot 6 \cdot 6 = 1296\).</p>
-  \[ I = \frac{1296}{48} \]
-  \[ I = 27 \]
-
-  <h4>Kết luận và Ý nghĩa</h4>
-  <p style="color:#27ae60; font-weight:bold;">\(\boxed{I = 27}\) ✓</p>
-  <p><strong>Ý nghĩa:</strong> Phép tính cho ta con số chính xác 27. Nếu vật thể tứ diện này có mật độ tại mỗi điểm tỉ lệ thuận với độ cao \(z\), thì 27 chính là khối lượng tổng cộng của nó. Điểm càng cao thì càng nặng, và tích phân đã gom tất cả lại một cách hoàn hảo.</p>
+  <p><strong>Bước 1: Xác định cận của tứ diện \(\Omega\).</strong><br>
+  - Mặt phẳng nghiêng \(x + 2y + z = 6 \Rightarrow z = 6 - x - 2y\). Vậy \(0 \le z \le 6 - x - 2y\).<br>
+  - Cho \(z = 0\) để tìm hình chiếu \(D\) trên mặt phẳng \(Oxy\): tam giác giới hạn bởi \(x = 0, y = 0\) và \(x + 2y = 6 \Rightarrow y = \frac{6-x}{2}\).<br>
+  - Vậy trên \(D\): \(0 \le x \le 6\) và \(0 \le y \le \frac{6-x}{2}\).</p>
+  <p><strong>Bước 2: Tính tích phân theo \(z\).</strong></p>
+  \[I = \int_0^6 dx \int_0^{(6-x)/2} dy \int_0^{6-x-2y} z\,dz = \int_0^6 dx \int_0^{(6-x)/2} \left[\frac{z^2}{2}\right]_0^{6-x-2y} dy = \int_0^6 dx \int_0^{(6-x)/2} \frac{(6-x-2y)^2}{2}\,dy\]
+  <p><strong>Bước 3: Tính tích phân theo \(y\).</strong><br>
+  Với \(x\) cố định, đặt \(u = 6 - x - 2y \Rightarrow du = -2\,dy \Rightarrow dy = -\frac{du}{2}\):<br>
+  Khi \(y = 0 \Rightarrow u = 6-x\); khi \(y = \frac{6-x}{2} \Rightarrow u = 0\).</p>
+  \[\int_0^{(6-x)/2} \frac{(6-x-2y)^2}{2}\,dy = \int_0^{6-x} \frac{u^2}{4}\,du = \left[\frac{u^3}{12}\right]_0^{6-x} = \frac{(6-x)^3}{12}\]
+  <p><strong>Bước 4: Tính tích phân theo \(x\).</strong></p>
+  \[I = \int_0^6 \frac{(6-x)^3}{12}\,dx = \left[-\frac{(6-x)^4}{48}\right]_0^6 = 0 - \left(-\frac{6^4}{48}\right) = \frac{1296}{48} = 27\]
+  <p style="color:#27ae60; font-weight:bold;">\(\boxed{I = 27}\) ✓ Khớp hoàn toàn với đáp án!</p>
 </div>
         <div class="answer-box">&#10003; Kết quả: \(27\)</div>
         <div class="check">Kết quả tính toán: \(27\). Khớp đáp án đề: <strong>27</strong> ✓</div>
-        <h3>&#128202; Hình minh họa</h3>
+  </div>
+</div>
+
+<h3>&#128202; Hình minh họa</h3>
         
 <p style="text-align:center; color:#e67e22; font-weight:bold; margin-bottom:5px;">&#128208; Hình vẽ cho: \(\iiint_\Omega z\,dxdydz\), \(\Omega\) là tứ diện \(x+2y+z=6,\;x=0,\;y=0,\;z=0\)</p>
 <div class="plot-container"><div style="height:900px; width:800px;">                        <script>window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
@@ -167,9 +120,12 @@
         <pre class="code-block">import sympy as sp
 x,y,z=sp.symbols('x y z')
 print(sp.integrate(z,(z,0,6-x-2*y),(y,0,(6-x)/2),(x,0,6)))</pre>
-    </div>
-  </div>
-</div><script>
+    
+<div style="margin-top: 35px; padding: 12px 16px; border-top: 1px dashed #cbd5e1; text-align: center; color: #94a3b8; font-size: 11.5px; line-height: 1.6;">
+  <em>* Tài liệu và mô phỏng được tạo với sự hỗ trợ của AI, có thể còn tồn tại sai sót. Rất mong nhận được đóng góp ý kiến từ thầy cô và các bạn.</em>
+</div>
+</div>
+<script>
     function toggleSolutionBox(btn) {
         const content = btn.nextElementSibling;
         const isOpen = content.classList.contains('is-open');
@@ -194,9 +150,5 @@ print(sp.integrate(z,(z,0,6-x-2*y),(y,0,(6-x)/2),(x,0,6)))</pre>
         }
     }
 </script>
-
-<div style="margin-top: 40px; padding: 12px 16px; border-top: 1px dashed #cbd5e1; text-align: center; color: #94a3b8; font-size: 11.5px; line-height: 1.6;">
-  <em>* Tài liệu và mô phỏng được tạo với sự hỗ trợ của AI, có thể còn tồn tại sai sót. Rất mong nhận được đóng góp ý kiến từ thầy cô và các bạn.</em>
-</div>
 </body>
 </html>

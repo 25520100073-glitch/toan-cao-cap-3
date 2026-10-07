@@ -93,126 +93,44 @@
   </button>
   <div class="solution-collapsible-content">
 <div style="background:#eaf4fb; border-left:5px solid #2980b9; padding:20px; margin-top:30px; border-radius:6px;">
-  <h3 style="color:#1a5276;">Lời giải chi tiết - Bài B2.22</h3>
+  <h3 style="color:#1a5276;">Lời giải - Bài B2.22</h3>
   <p><strong>Đề bài đầy đủ:</strong> Tính tích phân \(I = \iint_D xy dxdy\)<br>với \(D\) là hình bình hành với phương trình các cạnh là \(x-y=0\), \(x-y=1\), \(2x+y=1\), \(2x+y=3\).</p>
   
-  
-  <h4>Bước 1: Phân tích miền D và ý tưởng đổi biến</h4>
-  <p>Miền \(D\) của chúng ta được tạo bởi 4 đường thẳng. Bạn có thấy điều đặc biệt không? Chúng bắt cặp với nhau rất đẹp:</p>
-  <ul>
-    <li>Cặp đường song song thứ nhất: \(x - y = 0\) và \(x - y = 1\). Cả hai đều chứa biểu thức \(x - y\).</li>
-    <li>Cặp đường song song thứ hai: \(2x + y = 1\) và \(2x + y = 3\). Cả hai đều chứa biểu thức \(2x + y\).</li>
-  </ul>
-  <p><strong>VÌ SAO CẦN ĐỔI BIẾN?</strong> Nếu chúng ta tính trực tiếp với \(x\) và \(y\), chúng ta sẽ phải chia hình bình hành này thành nhiều phần nhỏ để tính, cực kỳ mất thời gian và dễ sai. 
-  Thay vì vậy, chúng ta đặt tên mới cho các biểu thức lặp lại kia. Chúng ta gọi chúng là \(u\) và \(v\).</p>
-  <ol>
-    <li>Đặt \(u = x - y\). Khi đó cặp đường thẳng thứ nhất sẽ biến thành \(u = 0\) và \(u = 1\). Tức là \(u\) chạy từ 0 đến 1.</li>
-    <li>Đặt \(v = 2x + y\). Khi đó cặp đường thẳng thứ hai sẽ biến thành \(v = 1\) và \(v = 3\). Tức là \(v\) chạy từ 1 đến 3.</li>
-  </ol>
-  <p>Tuyệt vời! Hình bình hành xéo xẹo ban đầu đã được "nắn" thành một hình chữ nhật mới trong thế giới \((u, v)\), giới hạn bởi \(0 \le u \le 1\) và \(1 \le v \le 3\). Miền này được gọi là \(D'\). Hình chữ nhật thì tính toán dễ hơn rất nhiều!</p>
-
-  <h4>Bước 2: Biểu diễn ngược x và y theo u và v</h4>
-  <p>Để thay thế hoàn toàn chữ \(x\) và \(y\) trong bài toán ban đầu, ta phải tìm xem \(x\) bằng mấy, \(y\) bằng mấy theo \(u\) và \(v\).
-  Ta có hệ phương trình:
-  \[ u = x - y \]
-  \[ v = 2x + y \]
-  Hãy giải hệ này bằng phương pháp cộng đại số (cộng vế theo vế):</p>
-  <ul>
-    <li>Cộng hai phương trình lại, chữ \(-y\) và \(+y\) sẽ tự triệt tiêu nhau:</li>
-    <li>\(u + v = (x - y) + (2x + y)\)</li>
-    <li>\(u + v = x - y + 2x + y\)</li>
-    <li>\(u + v = 3x\)</li>
-    <li>Từ đó suy ra: \(x = \frac{u + v}{3}\)</li>
-  </ul>
-  <p>Tiếp theo, thay \(x\) vừa tìm được vào phương trình thứ nhất \(u = x - y\):</p>
-  <ul>
-    <li>\(y = x - u\)</li>
-    <li>Thay biểu thức của \(x\) vào: \(y = \frac{u + v}{3} - u\)</li>
-    <li>Quy đồng mẫu số chung là 3: \(y = \frac{u + v}{3} - \frac{3u}{3}\)</li>
-    <li>Gộp lại: \(y = \frac{u + v - 3u}{3}\)</li>
-    <li>Thu gọn tử số: \(y = \frac{v - 2u}{3}\)</li>
-  </ul>
-
-  <h4>Bước 3: Tính "Tỷ lệ co giãn" (Jacobian)</h4>
-  <p>Khi bạn bóp méo hình bình hành thành hình chữ nhật, diện tích của nó sẽ bị thay đổi (co lại hoặc giãn ra). 
-  Định thức Jacobian (ký hiệu là \(J\)) chính là con số dùng để đo lường sự thay đổi diện tích đó.
-  Ta có thể tính nhanh bằng cách tính \(J^{-1}\) (Jacobian ngược) bằng đạo hàm của \(u, v\) theo \(x, y\):</p>
-  <ul>
-    <li>Đạo hàm của \(u = x - y\): theo \(x\) là 1, theo \(y\) là -1.</li>
-    <li>Đạo hàm của \(v = 2x + y\): theo \(x\) là 2, theo \(y\) là 1.</li>
-  </ul>
-  <p>Ta lập ma trận và tính định thức (tích đường chéo chính trừ tích đường chéo phụ):
-  \[ J^{-1} = \frac{\partial(u,v)}{\partial(x,y)} = \begin{vmatrix} 1 & -1 \\ 2 & 1 \end{vmatrix} = (1 \cdot 1) - (-1 \cdot 2) = 1 + 2 = 3 \]
-  Vì \(J^{-1} = 3\), suy ra Jacobian chính thức \(J = \frac{1}{3}\).<br>
-  Khi thay đổi biến, phần diện tích nhỏ xíu \(dxdy\) sẽ biến thành tỷ lệ co giãn nhân với \(dudv\). Tức là:
-  \[ dxdy = |J| dudv = \frac{1}{3} dudv \]
-  </p>
-
-  <h4>Bước 4: Thay thế và tính tích phân mới</h4>
-  <p>Bây giờ, ta thay tất cả mọi thứ vào bài toán ban đầu.</p>
-  <p>Biểu thức cần tính tích phân là \(xy\). Thay \(x\) và \(y\) bằng biểu thức theo \(u, v\) đã tìm ở Bước 2:</p>
-  <ul>
-    <li>\(xy = \left(\frac{u + v}{3}\right) \cdot \left(\frac{v - 2u}{3}\right)\)</li>
-    <li>Nhân tử với tử, mẫu với mẫu: \(xy = \frac{(u + v)(v - 2u)}{9}\)</li>
-    <li>Nhân phân phối trên tử số: \((u \cdot v) + (u \cdot -2u) + (v \cdot v) + (v \cdot -2u)\)</li>
-    <li>\(xy = \frac{uv - 2u^2 + v^2 - 2uv}{9}\)</li>
-    <li>Rút gọn các số hạng giống nhau (\(uv - 2uv = -uv\)):</li>
-    <li>\(xy = \frac{v^2 - uv - 2u^2}{9}\)</li>
-  </ul>
-  <p>Viết lại bài toán tích phân mới (nhớ nhân thêm \(J = \frac{1}{3}\)):
-  \[ I = \iint_{D'} \frac{v^2 - uv - 2u^2}{9} \cdot \frac{1}{3} dudv \]
-  Đẩy các số dưới mẫu ra ngoài (\(9 \cdot 3 = 27\)):
-  \[ I = \frac{1}{27} \iint_{D'} (v^2 - uv - 2u^2) dudv \]
-  Bởi vì \(D'\) là hình chữ nhật (\(0 \le u \le 1\) và \(1 \le v \le 3\)), ta có thể tách thành 2 lớp tích phân. Ta tính từ trong ra ngoài (tính \(v\) trước, \(u\) sau):
-  \[ I = \frac{1}{27} \int_0^1 \left( \int_1^3 (v^2 - uv - 2u^2) dv \right) du \]
-  </p>
-
-  <h4>Bước 5: Tính toán từng lớp tích phân</h4>
-  <p><strong>Lớp bên trong (tính theo v, coi u như là một con số cố định bình thường):</strong></p>
-  <ul>
-    <li>Nguyên hàm của \(v^2\) là \(\frac{v^3}{3}\).</li>
-    <li>Nguyên hàm của \(-uv\) (với \(u\) là hằng số) là \(-u \frac{v^2}{2}\).</li>
-    <li>Nguyên hàm của \(-2u^2\) (đây là hằng số hoàn toàn đối với \(v\)) là \(-2u^2 v\).</li>
-  </ul>
-  <p>Thế cận \(v = 3\) và \(v = 1\) vào biểu thức nguyên hàm:
-  \[ \left[ \frac{v^3}{3} - u\frac{v^2}{2} - 2u^2 v \right]_1^3 \]
-  Thế \(v = 3\): 
-  \[ \frac{3^3}{3} - u\frac{3^2}{2} - 2u^2(3) = 9 - \frac{9u}{2} - 6u^2 \]
-  Thế \(v = 1\):
-  \[ \frac{1^3}{3} - u\frac{1^2}{2} - 2u^2(1) = \frac{1}{3} - \frac{u}{2} - 2u^2 \]
-  Lấy vế cận trên trừ vế cận dưới:
-  \[ \left( 9 - \frac{9u}{2} - 6u^2 \right) - \left( \frac{1}{3} - \frac{u}{2} - 2u^2 \right) \]
-  Phá ngoặc (nhớ đổi dấu):
-  \[ 9 - \frac{9u}{2} - 6u^2 - \frac{1}{3} + \frac{u}{2} + 2u^2 \]
-  Gom các phần tử giống nhau lại:
-  \[ (9 - \frac{1}{3}) + (-\frac{9u}{2} + \frac{u}{2}) + (-6u^2 + 2u^2) \]
-  \[ = \frac{26}{3} - 4u - 4u^2 \]
-  </p>
-  <p><strong>Lớp bên ngoài (tính theo u):</strong><br>
-  Đem kết quả vừa rồi lắp vào tích phân ngoài cùng:
-  \[ I = \frac{1}{27} \int_0^1 \left( \frac{26}{3} - 4u - 4u^2 \right) du \]
-  Tìm nguyên hàm theo biến \(u\):
-  <ul>
-    <li>Nguyên hàm của \(\frac{26}{3}\) là \(\frac{26}{3}u\).</li>
-    <li>Nguyên hàm của \(-4u\) là \(-4\frac{u^2}{2} = -2u^2\).</li>
-    <li>Nguyên hàm của \(-4u^2\) là \(-4\frac{u^3}{3}\).</li>
-  </ul>
-  Thế cận \(u = 1\) và \(u = 0\) (khi bằng 0 thì cả cụm đều bằng 0, nên ta chỉ cần thế 1):
-  \[ \frac{1}{27} \left[ \frac{26}{3}(1) - 2(1^2) - \frac{4}{3}(1^3) \right] \]
-  \[ = \frac{1}{27} \left( \frac{26}{3} - 2 - \frac{4}{3} \right) \]
-  Đưa số 2 về chung mẫu số là 3 (tức là \(\frac{6}{3}\)):
-  \[ = \frac{1}{27} \left( \frac{26}{3} - \frac{6}{3} - \frac{4}{3} \right) \]
-  Thực hiện phép trừ trên tử số:
-  \[ = \frac{1}{27} \left( \frac{26 - 6 - 4}{3} \right) = \frac{1}{27} \left( \frac{16}{3} \right) \]
-  Nhân lại với nhau (\(27 \cdot 3 = 81\)):
-  \[ = \frac{16}{81} \]
+  <p><strong>Bước 1: Đổi biến số tổng quát.</strong><br>
+  Nhìn vào phương trình 4 cạnh, ta lập tức đặt ẩn phụ:
+  \[ u = x-y \]
+  \[ v = 2x+y \]
+  Khi đó miền \(D\) biến thành miền chữ nhật \(D'\) rất đơn giản: \(0 \le u \le 1\) và \(1 \le v \le 3\).<br>
+  Ta cần biểu diễn \(x, y\) theo \(u, v\). Giải hệ phương trình:<br>
+  Cộng 2 phương trình: \(3x = u+v \implies x = \frac{u+v}{3}\).<br>
+  Thay \(x\) vào phương trình 1: \(\frac{u+v}{3} - y = u \implies y = \frac{v-2u}{3}\).
   </p>
   
-  <p style="color:#1a5276; font-weight:bold;">\(\boxed{I = \frac{16}{81}}\)<br>
-  Kết luận: Việc đổi biến giúp chúng ta giải quyết bài toán phức tạp một cách vô cùng đơn giản. Thông qua các bước cộng trừ nhân chia tuần tự, từ một hình bình hành khó tính toán, chúng ta đã chuyển đổi thành hình chữ nhật quen thuộc và ra được đáp án cuối cùng.</p>
+  <p><strong>Bước 2: Tính Jacobian.</strong><br>
+  Tính định thức Jacobi ngược \(J^{-1}\):
+  \[ J^{-1} = \frac{\partial(u,v)}{\partial(x,y)} = \begin{vmatrix} 1 & -1 \\ 2 & 1 \end{vmatrix} = (1)(1) - (-1)(2) = 3 \]
+  Do đó \(|J| = \frac{1}{3} \implies dxdy = \frac{1}{3} dudv\).
+  </p>
+  
+  <p><strong>Bước 3: Thay vào và tính tích phân.</strong><br>
+  Hàm dưới dấu tích phân: \(xy = \left(\frac{u+v}{3}\right)\left(\frac{v-2u}{3}\right) = \frac{v^2 - uv - 2u^2}{9}\).<br>
+  \[ I = \iint_{D'} \frac{v^2 - uv - 2u^2}{9} \cdot \frac{1}{3} dudv = \frac{1}{27} \int_0^1 du \int_1^3 (v^2 - uv - 2u^2) dv \]
+  Tính lớp trong theo \(v\):
+  \[ \int_1^3 (v^2 - uv - 2u^2) dv = \left[ \frac{v^3}{3} - u\frac{v^2}{2} - 2u^2 v \right]_1^3 \]
+  \[ = \left( 9 - \frac{9u}{2} - 6u^2 \right) - \left( \frac{1}{3} - \frac{u}{2} - 2u^2 \right) = \frac{26}{3} - 4u - 4u^2 \]
+  Tính lớp ngoài theo \(u\):
+  \[ I = \frac{1}{27} \int_0^1 \left( \frac{26}{3} - 4u - 4u^2 \right) du = \frac{1}{27} \left[ \frac{26}{3}u - 2u^2 - \frac{4}{3}u^3 \right]_0^1 \]
+  \[ = \frac{1}{27} \left( \frac{26}{3} - 2 - \frac{4}{3} \right) = \frac{1}{27} \left( \frac{22}{3} - \frac{6}{3} \right) = \frac{1}{27} \times \frac{16}{3} = \frac{16}{81} \]
+  </p>
+  
+  <p style="color:#1a5276; font-weight:bold;">\(\boxed{I = \frac{16}{81}}\) ✓ Kết quả hoàn toàn trùng khớp!</p>
 </div>
   </div>
-</div></div>
+</div>
+<div style="margin-top: 35px; padding: 12px 16px; border-top: 1px dashed #cbd5e1; text-align: center; color: #94a3b8; font-size: 11.5px; line-height: 1.6;">
+  <em>* Tài liệu và mô phỏng được tạo với sự hỗ trợ của AI, có thể còn tồn tại sai sót. Rất mong nhận được đóng góp ý kiến từ thầy cô và các bạn.</em>
+</div>
+</div>
 <script>
     function toggleSolutionBox(btn) {
         const content = btn.nextElementSibling;
@@ -238,9 +156,5 @@
         }
     }
 </script>
-
-<div style="margin-top: 40px; padding: 12px 16px; border-top: 1px dashed #cbd5e1; text-align: center; color: #94a3b8; font-size: 11.5px; line-height: 1.6;">
-  <em>* Tài liệu và mô phỏng được tạo với sự hỗ trợ của AI, có thể còn tồn tại sai sót. Rất mong nhận được đóng góp ý kiến từ thầy cô và các bạn.</em>
-</div>
 </body>
 </html>

@@ -93,70 +93,26 @@
   </button>
   <div class="solution-collapsible-content">
 <div style="background:#eaf4fb; border-left:5px solid #2980b9; padding:20px; margin-top:30px; border-radius:6px;">
-  <h3 style="color:#1a5276;">Lời giải chi tiết – Bài B2.5</h3>
-  <p><strong>Đề bài:</strong> Tính tích phân \( \iint_D xy \,dxdy \), với miền \( D \) là nửa hình tròn có tâm nằm ở điểm \( (0,1) \), bán kính \( R=1 \) và lấy phần thỏa mãn \( x \ge 0 \).</p>
-  
-  <h4>Bước 1: Vẽ chân dung miền D trong hệ tọa độ cực</h4>
-  <ul>
-    <li>Phương trình chuẩn của hình tròn tâm \( (0,1) \), bán kính \( R=1 \) là: \( x^2 + (y-1)^2 \le 1 \).</li>
-    <li>Khai triển hằng đẳng thức ra, ta có: \( x^2 + y^2 - 2y + 1 \le 1 \), rút gọn hai số 1 ở hai bên, ta được: \( x^2 + y^2 \le 2y \).</li>
-    <li>Điều kiện \( x \ge 0 \) nghĩa là ta cắt đôi hình tròn bằng trục tung, và chỉ lấy nửa bên phải.</li>
-  </ul>
-  <p><em>Mô tả hình dáng:</em> Miền \( D \) là một nửa hình tròn nằm lồi lên phía trên, bám sát trục tung và nằm hoàn toàn ở góc phần tư thứ nhất.</p>
-
-  <h4>Bước 2: Tìm cận bằng tọa độ cực</h4>
-  <p>Thay đổi biến số: \( x = r \cos\theta \) và \( y = r \sin\theta \). Nhớ thay \( dxdy = r \,dr \,d\theta \).</p>
-  <p>Thay vào phương trình \( x^2+y^2 \le 2y \):</p>
-  \[ r^2 \le 2(r \sin\theta) \]
-  <p>Chia bớt chữ \( r \) hai bên, ta được độ dài bán kính biến đổi theo góc:</p>
-  \[ 0 \le r \le 2\sin\theta \]
-  
-  <p><strong>Tìm giới hạn của góc \( \theta \):</strong></p>
-  <p>Vì nửa hình tròn nằm ở góc phần tư thứ nhất (bên phải trục tung và bên trên trục hoành), góc quét đi từ trục nằm ngang sát mép dưới (\( 0^\circ \)) lên trục thẳng đứng sát mép trái (\( 90^\circ \) hay \( \frac{\pi}{2} \)):</p>
-  \[ 0 \le \theta \le \frac{\pi}{2} \]
-
-  <h4>Bước 3: Thiết lập và giải mã tích phân</h4>
-  <p>Ta thay cụm hàm số \( xy \) bằng \( (r \cos\theta)(r \sin\theta) = r^2 \sin\theta \cos\theta \). Thêm cái r của Jacobian thành \( r^3 \sin\theta \cos\theta \).</p>
-  \[ I = \int_0^{\pi/2} \left( \int_0^{2\sin\theta} (r^3 \sin\theta \cos\theta) \,dr \right) d\theta \]
-  
-  <p>Phần cụm lượng giác \( \sin\theta \cos\theta \) được xem là hằng số với biến \( r \), ta đẩy nó ra phía trước tích phân bên trong:</p>
-  \[ I = \int_0^{\pi/2} \sin\theta \cos\theta \left( \int_0^{2\sin\theta} r^3 \,dr \right) d\theta \]
-  
-  <p><em>Tính phần tích phân trong theo \( r \):</em> Nguyên hàm của \( r^3 \) là \( \frac{r^4}{4} \).</p>
-  \[ \int_0^{2\sin\theta} r^3 \,dr = \left[ \frac{r^4}{4} \right]_0^{2\sin\theta} \]
-  \[ = \frac{(2\sin\theta)^4}{4} - 0 = \frac{16\sin^4\theta}{4} = 4\sin^4\theta \]
-
-  <p>Gắn cái này vào tích phân vòng ngoài theo \( \theta \):</p>
-  \[ I = \int_0^{\pi/2} \sin\theta \cos\theta \cdot (4\sin^4\theta) \,d\theta \]
-  <p>Gộp \(\sin\theta\) và \(4\sin^4\theta\) lại thành \(4\sin^5\theta\):</p>
-  \[ I = 4 \int_0^{\pi/2} \sin^5\theta \cos\theta \,d\theta \]
-
-  <p><em>Tuyệt chiêu đổi biến số lượng giác:</em></p>
-  <p>Ta thấy bên ngoài có \(\cos\theta\), vốn là đạo hàm của \(\sin\theta\). Rất đẹp! Ta đặt:</p>
-  \[ u = \sin\theta \]
-  <p>Đạo hàm 2 vế: \( du = \cos\theta \,d\theta \).</p>
-  
-  <p>Đổi biên (điểm mốc cận):</p>
-  <ul>
-    <li>Khi \( \theta = 0 \Rightarrow u = \sin(0) = 0 \).</li>
-    <li>Khi \( \theta = \frac{\pi}{2} \Rightarrow u = \sin\left(\frac{\pi}{2}\right) = 1 \).</li>
-  </ul>
-  
-  <p>Đổi bộ quần áo mới cho tích phân sang biến \( u \):</p>
-  \[ I = 4 \int_0^1 u^5 \,du \]
-  
-  <p>Nguyên hàm của \( u^5 \) là \( \frac{u^6}{6} \):</p>
-  \[ I = 4 \left[ \frac{u^6}{6} \right]_0^1 \]
-  \[ = 4 \left( \frac{1}{6} - 0 \right) = \frac{4}{6} \]
-  <p>Rút gọn phân số chia cho 2, ta được \( \frac{2}{3} \).</p>
-
-  <h4>Bước 4: Kết luận</h4>
-  <p style="color:#1a5276; font-weight:bold; font-size:18px;">\(\boxed{I = \dfrac{2}{3}}\)</p>
-  <p><strong>Ý nghĩa bài toán:</strong> Dù tâm đường tròn bị đẩy lệch lên trên (tọa độ tâm 0, 1), thì cách giải bằng hệ tọa độ cực vẫn làm thẳng thớm lại được những đường cong méo mó, biến phép tính thành một tích phân hàm đa thức (hàm số đội mũ) rất cơ bản và trực quan.</p>
+  <h3 style="color:#1a5276;">Lời giải – Bài B2.5</h3>
+  <p><strong>Đề bài:</strong> Tính \(\iint_D xy\,dxdy\), \(D\) là nửa hình tròn tâm \((0,1)\) bán kính 1, \(x \ge 0\).</p>
+  <p><strong>Bước 1: Phương trình hình tròn.</strong><br>
+  \(x^2 + (y-1)^2 \le 1 \Leftrightarrow x^2 + y^2 - 2y \le 0\).<br>
+  Trong tọa độ cực: \(r^2 \le 2r\sin\theta \Rightarrow 0 \le r \le 2\sin\theta\).<br>
+  Vì \(x \ge 0\), ta có \(0 \le \theta \le \frac{\pi}{2}\).</p>
+  <p><strong>Bước 2: Tính tích phân.</strong></p>
+  \[I = \int_0^{\pi/2} \int_0^{2\sin\theta} (r\cos\theta)(r\sin\theta)\,r\,dr\,d\theta = \int_0^{\pi/2} \cos\theta\sin\theta \left[\frac{r^4}{4}\right]_0^{2\sin\theta} d\theta\]
+  \[= \int_0^{\pi/2} \cos\theta\sin\theta \frac{16\sin^4\theta}{4}\,d\theta = 4 \int_0^{\pi/2} \sin^5\theta\cos\theta\,d\theta\]
+  <p>Đặt \(u = \sin\theta \Rightarrow du = \cos\theta\,d\theta\):</p>
+  \[I = 4 \int_0^1 u^5\,du = 4 \left[\frac{u^6}{6}\right]_0^1 = 4 \cdot \frac{1}{6} = \frac{2}{3}\]
+  <p style="color:#1a5276; font-weight:bold;">\(\boxed{I = \dfrac{2}{3}}\) ✓ Khớp với đáp án.</p>
 </div>
   </div>
 </div>
 
+
+<div style="margin-top: 35px; padding: 12px 16px; border-top: 1px dashed #cbd5e1; text-align: center; color: #94a3b8; font-size: 11.5px; line-height: 1.6;">
+  <em>* Tài liệu và mô phỏng được tạo với sự hỗ trợ của AI, có thể còn tồn tại sai sót. Rất mong nhận được đóng góp ý kiến từ thầy cô và các bạn.</em>
+</div>
 </div>
 <script>
     function toggleSolutionBox(btn) {
@@ -183,9 +139,5 @@
         }
     }
 </script>
-
-<div style="margin-top: 40px; padding: 12px 16px; border-top: 1px dashed #cbd5e1; text-align: center; color: #94a3b8; font-size: 11.5px; line-height: 1.6;">
-  <em>* Tài liệu và mô phỏng được tạo với sự hỗ trợ của AI, có thể còn tồn tại sai sót. Rất mong nhận được đóng góp ý kiến từ thầy cô và các bạn.</em>
-</div>
 </body>
 </html>
