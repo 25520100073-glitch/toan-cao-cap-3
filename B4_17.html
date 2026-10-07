@@ -34,15 +34,21 @@
         <div class="de-bai"><strong>Đề bài:</strong> Tính \(\iiint_\Omega (x^2+y^2)\,dxdydz\) với \(\Omega\) là khối bán cầu \(x^2+y^2+z^2 \le 1\) nằm phía trên mặt phẳng \(Oxy\).</div>
         <h3>&#9998; Lời giải</h3>
         <div class="solution">
-  <p><strong>Bước 1: Đổi biến sang tọa độ cầu (hoặc tọa độ trụ).</strong><br>
-  Khối bán cầu đơn vị \(x^2+y^2+z^2 \le 1,\; z \ge 0\) xác định bởi:<br>
-  \(0 \le \varphi \le 2\pi,\; 0 \le \theta \le \frac{\pi}{2},\; 0 \le \rho \le 1\), với \(x^2+y^2 = \rho^2\sin^2\theta\) và \(|J| = \rho^2\sin\theta\).</p>
-  <p><strong>Bước 2: Tính tích phân chính xác.</strong></p>
-  \[I = \int_0^{2\pi} d\varphi \int_0^{\pi/2} \sin^3\theta\,d\theta \int_0^1 \rho^4\,d\rho = 2\pi \cdot \left(\int_0^{\pi/2} (1-\cos^2\theta)\sin\theta\,d\theta\right) \cdot \left[\frac{\rho^5}{5}\right]_0^1\]
-  \[= 2\pi \cdot \left[-\cos\theta + \frac{\cos^3\theta}{3}\right]_0^{\pi/2} \cdot \frac{1}{5} = 2\pi \cdot \frac{2}{3} \cdot \frac{1}{5} = \frac{4\pi}{15}\]
+  <h4>Bước 1: Thiết lập bài toán trong cả 2 hệ tọa độ (Cầu & Trụ) để kiểm chứng</h4>
+  <p>Miền \(\Omega\) là khối bán cầu đơn vị \(x^2+y^2+z^2 \le 1,\; z \ge 0\).<br>
+  <strong>Cách 1 (Tọa độ cầu):</strong> \(0 \le \varphi \le 2\pi,\; 0 \le \theta \le \frac{\pi}{2},\; 0 \le \rho \le 1\), với \(x^2+y^2 = \rho^2\sin^2\theta\) và \(|J| = \rho^2\sin\theta\):</p>
+  \[ I = \left( \int_0^{2\pi} d\varphi \right) \cdot \left( \int_0^{\pi/2} \sin^3\theta\,d\theta \right) \cdot \left( \int_0^1 \rho^4\,d\rho \right) \]
+  <ul>
+    <li>\(\displaystyle \int_0^{2\pi} d\varphi = 2\pi\), và \(\displaystyle \int_0^1 \rho^4\,d\rho = \frac{1}{5}\).</li>
+    <li>\(\displaystyle \int_0^{\pi/2} \sin^3\theta\,d\theta = \int_0^{\pi/2} (1 - \cos^2\theta)\sin\theta\,d\theta = \left[ -\cos\theta + \frac{\cos^3\theta}{3} \right]_0^{\pi/2} = 0 - \left(-1 + \frac{1}{3}\right) = \frac{2}{3}\).</li>
+    <li>\(\implies I = 2\pi \cdot \frac{2}{3} \cdot \frac{1}{5} = \dfrac{4\pi}{15}\).</li>
+  </ul>
+  <p><strong>Cách 2 (Tọa độ trụ):</strong> \(0 \le \varphi \le 2\pi,\; 0 \le r \le 1,\; 0 \le z \le \sqrt{1-r^2}\):</p>
+  \[ I = 2\pi \int_0^1 r^3\sqrt{1-r^2}\,dr = 2\pi \cdot \frac{2}{15} = \frac{4\pi}{15} \]
   <div style="background:#fff3cd; border-left:4px solid #f39c12; padding:10px; margin-top:8px;">
-    <strong>Lưu ý đính chính slide:</strong> Đáp số chính xác của tích phân \(\iiint_\Omega (x^2+y^2)\,dxdydz\) trên bán cầu đơn vị là \(\mathbf{\dfrac{4\pi}{15}}\). Con số \(\dfrac{4\pi}{5}\) in trong khung đỏ trên slide là do tác giả giáo trình copy nhầm đáp số từ <strong>Bài B4.7</strong> (\(\iiint (x^2+y^2+z^2)\,dxdydz = \dfrac{4\pi}{5}\)).
-  </div></div>
+    <strong>Lưu ý đính chính slide:</strong> Kết quả giải tích chính xác của bài toán này là \(\mathbf{\dfrac{4\pi}{15}}\). Trong slide bài giảng ghi khung đỏ là \(\dfrac{4\pi}{5}\) do lỗi đánh máy (copy nhầm đáp số của <strong>Bài B4.7</strong>: \(\iiint_{\text{cầu}} (x^2+y^2+z^2)\,dxdydz = \dfrac{4\pi}{5}\)).
+  </div>
+</div>
         <div class="answer-box">&#10003; Kết quả: \(\dfrac{4\pi}{15}\) (Slide in nhầm \(4\pi/5\) của B4.7)</div>
         <div class="check">Kết quả giải tích chuẩn xác: \(\dfrac{4\pi}{15}\) (Đáp số khung đỏ \(4\pi/5\) trong slide bị in nhầm từ bài B4.7) ✓</div>
         <h3>&#128202; Hình minh họa</h3>

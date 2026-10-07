@@ -34,15 +34,38 @@
         <div class="de-bai"><strong>Đề bài:</strong> Tính thể tích của khối vật thể \(\Omega\) giới hạn bởi mặt cầu \(x^2+y^2+z^2=2\) và mặt paraboloid \(z = x^2+y^2\), biết rằng \(\Omega\) nằm hoàn toàn trong phần không gian \(z \ge 0\).</div>
         <h3>&#9998; Lời giải</h3>
         <div class="solution">
-  <p><strong>Bước 1: Tìm giao tuyến và xác định miền trong tọa độ trụ.</strong><br>
-  Thay \(x^2+y^2 = z\) vào phương trình mặt cầu \(x^2+y^2+z^2 = 2\):<br>
-  \(z + z^2 = 2 \iff z^2 + z - 2 = 0 \implies z = 1\) (do \(z \ge 0\)).<br>
-  Khi \(z = 1 \implies x^2+y^2 = 1 \implies r = 1\).<br>
-  Miền \(\Omega\) trong tọa độ trụ: \(0 \le \varphi \le 2\pi,\; 0 \le r \le 1,\; r^2 \le z \le \sqrt{2-r^2}\).</p>
-  <p><strong>Bước 2: Tính thể tích \(V\).</strong></p>
-  \[V = \int_0^{2\pi} d\varphi \int_0^1 r\left(\sqrt{2-r^2} - r^2\right)dr = 2\pi \left[-\frac{1}{3}(2-r^2)^{3/2} - \frac{r^4}{4}\right]_0^1\]
-  \[= 2\pi \left[\left(-\frac{1}{3} - \frac{1}{4}\right) - \left(-\frac{2\sqrt{2}}{3} - 0\right)\right] = 2\pi\left(\frac{2\sqrt{2}}{3} - \frac{7}{12}\right) = \pi\left(\frac{4\sqrt{2}}{3} - \frac{7}{6}\right)\]
-  <p style="color:#27ae60; font-weight:bold;">\(\boxed{V = \pi\left(\dfrac{4\sqrt{2}}{3} - \dfrac{7}{6}\right)}\) ✓ Khớp hoàn toàn với đáp án!</p></div>
+  <h4>Bước 1: Tìm giao tuyến giữa mặt cầu và mặt paraboloid</h4>
+  <p>Vật thể \(\Omega\) nằm trong miền \(z \ge 0\), giới hạn bởi:</p>
+  <ul>
+    <li>Mặt dưới: Paraboloid \(z = x^2+y^2\).</li>
+    <li>Mặt trên: Nửa mặt cầu \(x^2+y^2+z^2 = 2 \implies z = \sqrt{2 - (x^2+y^2)}\) (do \(z \ge 0\)).</li>
+  </ul>
+  <p><strong>Tìm giao tuyến:</strong> Thay \(x^2+y^2 = z\) vào phương trình mặt cầu:</p>
+  \[ z + z^2 = 2 \iff z^2 + z - 2 = 0 \iff (z - 1)(z + 2) = 0 \]
+  <p>Vì \(z \ge 0\) nên ta nhận \(z = 1\). Thay lại được \(x^2+y^2 = 1\). Vậy hình chiếu của \(\Omega\) lên mặt phẳng \(Oxy\) là hình tròn đơn vị \(D: x^2+y^2 \le 1\).</p>
+
+  <h4>Bước 2: Đổi biến sang tọa độ trụ</h4>
+  <p>Đặt \(x = r\cos\varphi,\; y = r\sin\varphi,\; z = z\) với \(|J| = r\). Các cận của miền \(\Omega_{r\varphi z}\):</p>
+  <ul>
+    <li>\(0 \le \varphi \le 2\pi,\quad 0 \le r \le 1\).</li>
+    <li>\(r^2 \le z \le \sqrt{2 - r^2}\) (đi từ sàn paraboloid \(z = r^2\) lên vòm cầu \(z = \sqrt{2-r^2}\)).</li>
+  </ul>
+
+  <h4>Bước 3: Thiết lập và tính tích phân thể tích</h4>
+  \[ V = \iiint_\Omega dxdydz = \int_0^{2\pi} d\varphi \int_0^1 r\,dr \int_{r^2}^{\sqrt{2-r^2}} dz = 2\pi \int_0^1 r\left( \sqrt{2-r^2} - r^2 \right) dr \]
+  <p>Tách thành hai nguyên hàm cơ bản:</p>
+  <ul>
+    <li>Với \(\displaystyle \int_0^1 r\sqrt{2-r^2}\,dr\): Đặt \(u = 2 - r^2 \implies du = -2r\,dr \implies r\,dr = -\frac{1}{2}du\).<br>
+      Khi \(r = 0 \to u = 2\); khi \(r = 1 \to u = 1\):
+      \[ \int_2^1 u^{1/2}\left(-\frac{1}{2}du\right) = \frac{1}{2}\int_1^2 u^{1/2}\,du = \frac{1}{2}\left[ \frac{2}{3}u^{3/2} \right]_1^2 = \frac{1}{3}\left( 2\sqrt{2} - 1 \right) = \frac{2\sqrt{2}}{3} - \frac{1}{3} \]
+    </li>
+    <li>Với \(\displaystyle \int_0^1 r^3\,dr = \left[ \frac{r^4}{4} \right]_0^1 = \frac{1}{4}\).</li>
+  </ul>
+
+  <h4>Bước 4: Rút gọn kết quả cuối cùng</h4>
+  \[ V = 2\pi \left( \frac{2\sqrt{2}}{3} - \frac{1}{3} - \frac{1}{4} \right) = 2\pi \left( \frac{2\sqrt{2}}{3} - \frac{7}{12} \right) = \pi\left( \frac{4\sqrt{2}}{3} - \frac{7}{6} \right) \]
+  <p style="color:#27ae60; font-weight:bold;">\(\boxed{V = \pi\left(\dfrac{4\sqrt{2}}{3} - \dfrac{7}{6}\right)}\) ✓ Khớp hoàn toàn với đáp án đề bài!</p>
+</div>
         <div class="answer-box">&#10003; Kết quả: \(\pi\left(\dfrac{4\sqrt{2}}{3} - \dfrac{7}{6}\right)\)</div>
         <div class="check">Kết quả tính toán: \(\pi\left(\dfrac{4\sqrt{2}}{3} - \dfrac{7}{6}\right)\). Khớp đáp án đề ✓</div>
         <h3>&#128202; Hình minh họa</h3>

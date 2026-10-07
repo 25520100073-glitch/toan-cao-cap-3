@@ -34,15 +34,37 @@
         <div class="de-bai"><strong>Đề bài:</strong> Tính \(\iiint_\Omega z^2\,dxdydz\), với \(\Omega\) là khối vật thể giới hạn bởi mặt nón \(z = \sqrt{x^2+y^2}\) và mặt cầu \(x^2+y^2+z^2 = 4\), biết rằng \(\Omega\) là miền có thể tích lớn hơn.</div>
         <h3>&#9998; Lời giải</h3>
         <div class="solution">
-  <p><strong>Bước 1: Xác định miền có thể tích lớn hơn trong tọa độ cầu.</strong><br>
-  Mặt cầu \(x^2+y^2+z^2 = 4\) có bán kính \(R = 2\).<br>
-  Mặt nón \(z = \sqrt{x^2+y^2}\) ứng với góc \(\theta = \frac{\pi}{4}\).<br>
-  Mặt nón chia khối cầu thành 2 phần: phần nhỏ bên trong nón (\(0 \le \theta \le \frac{\pi}{4}\)) và <strong>phần lớn bên ngoài nón</strong> (\(\frac{\pi}{4} \le \theta \le \pi\)).<br>
-  Do đó \(\Omega_{\rho\varphi\theta}: 0 \le \varphi \le 2\pi,\; \frac{\pi}{4} \le \theta \le \pi,\; 0 \le \rho \le 2\).</p>
-  <p><strong>Bước 2: Tính tích phân.</strong></p>
-  \[I = \int_0^{2\pi} d\varphi \int_{\pi/4}^{\pi} \cos^2\theta\sin\theta\,d\theta \int_0^2 \rho^2 \cdot \rho^2\,d\rho\]
-  \[= 2\pi \cdot \left[-\frac{\cos^3\theta}{3}\right]_{\pi/4}^{\pi} \cdot \left[\frac{\rho^5}{5}\right]_0^2 = 2\pi \cdot \frac{1}{3}\left(1 + \frac{\sqrt{2}}{4}\right) \cdot \frac{32}{5} = \frac{16\pi(4+\sqrt{2})}{15}\]
-  <p style="color:#27ae60; font-weight:bold;">\(\boxed{I = \dfrac{16\pi(4+\sqrt{2})}{15}}\) ✓ Khớp hoàn toàn với đáp án!</p></div>
+  <h4>Bước 1: Phân tích hình học "miền có thể tích lớn hơn"</h4>
+  <p>Mặt cầu \(x^2+y^2+z^2 = 4\) có bán kính \(R = 2\).<br>
+  Mặt nón \(z = \sqrt{x^2+y^2}\) trong tọa độ cầu có phương trình:</p>
+  \[ \rho\cos\theta = \sqrt{\rho^2\sin^2\theta} = \rho\sin\theta \implies \tan\theta = 1 \implies \theta = \frac{\pi}{4} \]
+  <p>Mặt nón \(\theta = \frac{\pi}{4}\) chia khối cầu \(R = 2\) thành hai phần:</p>
+  <ul>
+    <li>Phần hình phễu nhỏ nằm phía trên (bên trong mặt nón): \(0 \le \theta \le \frac{\pi}{4}\).</li>
+    <li><strong>Phần lớn hơn</strong> nằm bên ngoài mặt nón (bao gồm phần xung quanh và toàn bộ bán cầu dưới \(z \le 0\)): \(\frac{\pi}{4} \le \theta \le \pi\).</li>
+  </ul>
+  <p>Vì đề bài yêu cầu lấy <strong>miền có thể tích lớn hơn</strong>, nên cận của miền \(\Omega\) trong tọa độ cầu là:</p>
+  \[ 0 \le \varphi \le 2\pi, \quad \frac{\pi}{4} \le \theta \le \pi, \quad 0 \le \rho \le 2 \]
+
+  <h4>Bước 2: Thiết lập tích phân trong tọa độ cầu</h4>
+  <p>Thay \(z^2 = (\rho\cos\theta)^2 = \rho^2\cos^2\theta\) và \(|J| = \rho^2\sin\theta\):</p>
+  \[ I = \int_0^{2\pi} d\varphi \int_{\pi/4}^\pi \cos^2\theta\sin\theta\,d\theta \int_0^2 \rho^4\,d\rho \]
+
+  <h4>Bước 3: Tính từng tích phân đơn</h4>
+  <ul>
+    <li><strong>Theo \(\varphi\):</strong> \(\displaystyle \int_0^{2\pi} d\varphi = 2\pi\).</li>
+    <li><strong>Theo \(\rho\):</strong> \(\displaystyle \int_0^2 \rho^4\,d\rho = \left[ \frac{\rho^5}{5} \right]_0^2 = \frac{32}{5}\).</li>
+    <li><strong>Theo \(\theta\):</strong> Đặt \(u = \cos\theta \implies du = -\sin\theta\,d\theta\):
+      \[ \int_{\pi/4}^\pi \cos^2\theta\sin\theta\,d\theta = \left[ -\frac{\cos^3\theta}{3} \right]_{\pi/4}^\pi = \left( -\frac{\cos^3\pi}{3} \right) - \left( -\frac{\cos^3(\pi/4)}{3} \right) \]
+      Do \(\cos\pi = -1 \implies -\frac{(-1)^3}{3} = \frac{1}{3}\); và \(\cos\frac{\pi}{4} = \frac{\sqrt{2}}{2} \implies \cos^3\frac{\pi}{4} = \frac{2\sqrt{2}}{8} = \frac{\sqrt{2}}{4}\):
+      \[ = \frac{1}{3} + \frac{\sqrt{2}}{12} = \frac{4 + \sqrt{2}}{12} \]
+    </li>
+  </ul>
+
+  <h4>Bước 4: Nhân kết quả và rút gọn</h4>
+  \[ I = 2\pi \cdot \frac{32}{5} \cdot \frac{4 + \sqrt{2}}{12} = \frac{64\pi(4 + \sqrt{2})}{60} = \frac{16\pi(4 + \sqrt{2})}{15} \]
+  <p style="color:#27ae60; font-weight:bold;">\(\boxed{I = \dfrac{16\pi(4 + \sqrt{2})}{15}}\) ✓ Khớp hoàn toàn với đáp án đề bài!</p>
+</div>
         <div class="answer-box">&#10003; Kết quả: \(\dfrac{16\pi(4+\sqrt{2})}{15}\)</div>
         <div class="check">Kết quả tính toán: \(\dfrac{16\pi(4+\sqrt{2})}{15}\). Khớp đáp án đề ✓</div>
         <h3>&#128202; Hình minh họa</h3>

@@ -34,13 +34,28 @@
         <div class="de-bai"><strong>Đề bài:</strong> Tính \(\iiint_\Omega z\,dxdydz\), với \(\Omega\) là phần vật thể được nằm giữa hai mặt cầu \(x^2+y^2+z^2 = 1\) và \(x^2+y^2+z^2 = 4\) trong góc phần tám thứ nhất.</div>
         <h3>&#9998; Lời giải</h3>
         <div class="solution">
-  <p><strong>Bước 1: Đổi biến sang tọa độ cầu.</strong><br>
-  Trong góc phần tám thứ nhất (\(x \ge 0,\; y \ge 0,\; z \ge 0\)), phần nằm giữa hai mặt cầu \(R_1 = 1\) và \(R_2 = 2\) xác định bởi:<br>
-  \(1 \le \rho \le 2,\; 0 \le \theta \le \frac{\pi}{2},\; 0 \le \varphi \le \frac{\pi}{2}\).</p>
-  <p><strong>Bước 2: Tính tích phân.</strong></p>
-  \[I = \int_0^{\pi/2} d\varphi \int_0^{\pi/2} \cos\theta\sin\theta\,d\theta \int_1^2 \rho \cdot \rho^2\,d\rho\]
-  \[= \frac{\pi}{2} \cdot \left[\frac{\sin^2\theta}{2}\right]_0^{\pi/2} \cdot \left[\frac{\rho^4}{4}\right]_1^2 = \frac{\pi}{2} \cdot \frac{1}{2} \cdot \frac{16 - 1}{4} = \frac{15\pi}{16}\]
-  <p style="color:#27ae60; font-weight:bold;">\(\boxed{I = \dfrac{15\pi}{16}}\) ✓ Khớp hoàn toàn với đáp án!</p></div>
+  <h4>Bước 1: Xác định miền \(\Omega\) trong tọa độ cầu</h4>
+  <p>Vật thể \(\Omega\) nằm giữa hai mặt cầu đồng tâm \(O\):</p>
+  <ul>
+    <li>Mặt cầu trong: \(x^2+y^2+z^2 = 1 \implies R_1 = 1\).</li>
+    <li>Mặt cầu ngoài: \(x^2+y^2+z^2 = 4 \implies R_2 = 2\).</li>
+    <li>Góc phần tám thứ nhất (\(x \ge 0,\; y \ge 0,\; z \ge 0\)): \(0 \le \varphi \le \frac{\pi}{2}\) và \(0 \le \theta \le \frac{\pi}{2}\).</li>
+  </ul>
+  <p>Vậy miền \(\Omega_{\rho\varphi\theta}\) là hình hộp chữ nhật trong không gian cầu: \(1 \le \rho \le 2,\; 0 \le \theta \le \frac{\pi}{2},\; 0 \le \varphi \le \frac{\pi}{2}\).</p>
+
+  <h4>Bước 2: Thiết lập và tách tích phân</h4>
+  <p>Với \(z = \rho\cos\theta\) và \(dxdydz = \rho^2\sin\theta\,d\rho\,d\theta\,d\varphi\):</p>
+  \[ I = \iiint_\Omega z\,dxdydz = \left( \int_0^{\pi/2} d\varphi \right) \cdot \left( \int_0^{\pi/2} \cos\theta\sin\theta\,d\theta \right) \cdot \left( \int_1^2 \rho^3\,d\rho \right) \]
+
+  <h4>Bước 3: Tính từng tích phân</h4>
+  <ul>
+    <li><strong>Theo \(\varphi\):</strong> \(\displaystyle \int_0^{\pi/2} d\varphi = \frac{\pi}{2}\).</li>
+    <li><strong>Theo \(\theta\):</strong> \(\displaystyle \int_0^{\pi/2} \sin\theta\cos\theta\,d\theta = \left[ \frac{\sin^2\theta}{2} \right]_0^{\pi/2} = \frac{1}{2}\).</li>
+    <li><strong>Theo \(\rho\):</strong> \(\displaystyle \int_1^2 \rho^3\,d\rho = \left[ \frac{\rho^4}{4} \right]_1^2 = \frac{2^4}{4} - \frac{1^4}{4} = \frac{16 - 1}{4} = \frac{15}{4}\).</li>
+  </ul>
+  \[ I = \frac{\pi}{2} \cdot \frac{1}{2} \cdot \frac{15}{4} = \frac{15\pi}{16} \]
+  <p style="color:#27ae60; font-weight:bold;">\(\boxed{I = \dfrac{15\pi}{16}}\) ✓ Khớp hoàn toàn với đáp án đề bài!</p>
+</div>
         <div class="answer-box">&#10003; Kết quả: \(\dfrac{15\pi}{16}\)</div>
         <div class="check">Kết quả tính toán: \(\dfrac{15\pi}{16}\). Khớp đáp án đề: <strong>15π/16</strong> ✓</div>
         <h3>&#128202; Hình minh họa</h3>

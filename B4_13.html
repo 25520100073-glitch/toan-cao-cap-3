@@ -34,17 +34,36 @@
         <div class="de-bai"><strong>Đề bài:</strong> Tính \(\iiint_\Omega (x+y+z)\,dxdydz\) với \(\Omega\) là vật thể nằm trong góc phần tám thứ nhất bên dưới mặt paraboloid \(z = 4 - x^2 - y^2\).</div>
         <h3>&#9998; Lời giải</h3>
         <div class="solution">
-  <p><strong>Bước 1: Đổi biến sang tọa độ trụ.</strong><br>
-  Trong góc phần tám thứ nhất (\(x \ge 0,\; y \ge 0,\; z \ge 0\)) bên dưới paraboloid \(z = 4 - x^2 - y^2 = 4 - r^2\):<br>
-  \(0 \le \varphi \le \frac{\pi}{2},\; 0 \le r \le 2,\; 0 \le z \le 4 - r^2\).</p>
-  <p><strong>Bước 2: Tính tích phân theo \(z\) trước.</strong></p>
-  \[I = \int_0^{\pi/2} d\varphi \int_0^2 r\,dr \int_0^{4-r^2} \big(r(\cos\varphi + \sin\varphi) + z\big) dz\]
-  \[= \int_0^{\pi/2} d\varphi \int_0^2 \left[r^2(\cos\varphi+\sin\varphi)(4-r^2) + \frac{r(4-r^2)^2}{2}\right] dr\]
-  <p>Tách thành tổng hai tích phân:</p>
-  \[I_1 = \left(\int_0^{\pi/2} (\cos\varphi+\sin\varphi)d\varphi\right) \left(\int_0^2 (4r^2 - r^4)dr\right) = 2 \cdot \left[\frac{4r^3}{3} - \frac{r^5}{5}\right]_0^2 = 2\left(\frac{32}{3} - \frac{32}{5}\right) = \frac{128}{15}\]
-  \[I_2 = \frac{\pi}{2} \int_0^2 \frac{r(4-r^2)^2}{2}dr = \frac{\pi}{2} \left[-\frac{(4-r^2)^3}{12}\right]_0^2 = \frac{\pi}{2} \cdot \frac{64}{12} = \frac{8\pi}{3}\]
-  \[I = I_1 + I_2 = \frac{8\pi}{3} + \frac{128}{15}\]
-  <p style="color:#27ae60; font-weight:bold;">\(\boxed{I = \dfrac{8\pi}{3} + \dfrac{128}{15}}\) ✓ Khớp hoàn toàn với đáp án!</p></div>
+  <h4>Bước 1: Xác định miền \(\Omega\) và đổi sang tọa độ trụ</h4>
+  <p>Vật thể \(\Omega\) nằm trong góc phần tám thứ nhất (\(x \ge 0,\; y \ge 0,\; z \ge 0\)) và phía dưới mặt paraboloid \(z = 4 - x^2 - y^2\):</p>
+  <ul>
+    <li>Giao của paraboloid với mặt đáy \(z = 0\) là \(x^2+y^2 = 4\) (bán kính \(R = 2\)).</li>
+    <li>Vì \(x \ge 0,\; y \ge 0\) nên hình chiếu \(D\) là hình quạt tròn một phần tư ở góc phần tư thứ nhất: \(0 \le \varphi \le \frac{\pi}{2}\) và \(0 \le r \le 2\).</li>
+    <li>Chiều cao \(z\) chạy từ \(0\) đến \(4 - (x^2+y^2) = 4 - r^2\).</li>
+  </ul>
+
+  <h4>Bước 2: Thiết lập tích phân lặp và tính lớp trong theo \(z\)</h4>
+  <p>Thay \(x + y + z = r\cos\varphi + r\sin\varphi + z\) và \(dxdydz = r\,dz\,dr\,d\varphi\):</p>
+  \[ I = \int_0^{\pi/2} d\varphi \int_0^2 r\,dr \int_0^{4-r^2} \Big( r(\cos\varphi + \sin\varphi) + z \Big) dz \]
+  <p>Tính tích phân theo \(z\):</p>
+  \[ \int_0^{4-r^2} \Big( r(\cos\varphi + \sin\varphi) + z \Big) dz = \left[ r(\cos\varphi + \sin\varphi)z + \frac{z^2}{2} \right]_{z=0}^{z=4-r^2} \]
+  \[ = r(\cos\varphi + \sin\varphi)(4 - r^2) + \frac{(4 - r^2)^2}{2} \]
+
+  <h4>Bước 3: Nhân thêm \(r\) (Jacobi) và tách thành 2 tích phân \(I_1 + I_2\)</h4>
+  \[ I = \underbrace{\int_0^{\pi/2} (\cos\varphi + \sin\varphi)\,d\varphi \int_0^2 r^2(4 - r^2)\,dr}_{I_1} + \underbrace{\int_0^{\pi/2} d\varphi \int_0^2 \frac{r(4 - r^2)^2}{2}\,dr}_{I_2} \]
+  <ul>
+    <li><strong>Tính \(I_1\):</strong>
+      \[ \int_0^{\pi/2} (\cos\varphi + \sin\varphi)\,d\varphi = \Big[ \sin\varphi - \cos\varphi \Big]_0^{\pi/2} = (1 - 0) - (0 - 1) = 2 \]
+      \[ \int_0^2 (4r^2 - r^4)\,dr = \left[ \frac{4r^3}{3} - \frac{r^5}{5} \right]_0^2 = \frac{32}{3} - \frac{32}{5} = \frac{160 - 96}{15} = \frac{64}{15} \]
+      \[ \implies I_1 = 2 \cdot \frac{64}{15} = \frac{128}{15} \]
+    </li>
+    <li><strong>Tính \(I_2\):</strong> Đặt \(u = 4 - r^2 \implies du = -2r\,dr \implies r\,dr = -\frac{1}{2}du\):
+      \[ I_2 = \frac{\pi}{2} \cdot \left[ -\frac{(4 - r^2)^3}{12} \right]_0^2 = \frac{\pi}{2} \cdot \left( 0 - \left(-\frac{4^3}{12}\right) \right) = \frac{\pi}{2} \cdot \frac{64}{12} = \frac{8\pi}{3} \]
+    </li>
+  </ul>
+  \[ I = I_2 + I_1 = \frac{8\pi}{3} + \frac{128}{15} \]
+  <p style="color:#27ae60; font-weight:bold;">\(\boxed{I = \dfrac{8\pi}{3} + \dfrac{128}{15}}\) ✓ Khớp hoàn toàn với đáp án đề bài!</p>
+</div>
         <div class="answer-box">&#10003; Kết quả: \(\dfrac{8\pi}{3} + \dfrac{128}{15}\)</div>
         <div class="check">Kết quả tính toán: \(\dfrac{8\pi}{3} + \dfrac{128}{15}\). Khớp đáp án đề ✓</div>
         <h3>&#128202; Hình minh họa</h3>

@@ -34,12 +34,22 @@
         <div class="de-bai"><strong>Đề bài:</strong> Tính thể tích của vật thể \(\Omega\) nằm bên trong của hai mặt cong: mặt trụ \(x^2+y^2 = 1\) và mặt cầu \(x^2+y^2+z^2 = 4\).</div>
         <h3>&#9998; Lời giải</h3>
         <div class="solution">
-  <p><strong>Bước 1: Đổi biến sang tọa độ trụ.</strong><br>
-  Vật thể \(\Omega\) nằm bên trong mặt trụ \(x^2+y^2 \le 1 \implies 0 \le r \le 1\), và bên trong mặt cầu \(x^2+y^2+z^2 \le 4 \implies -\sqrt{4-r^2} \le z \le \sqrt{4-r^2}\).</p>
-  <p><strong>Bước 2: Tính thể tích \(V\).</strong></p>
-  \[V = \int_0^{2\pi} d\varphi \int_0^1 r\,dr \int_{-\sqrt{4-r^2}}^{\sqrt{4-r^2}} dz = 2\pi \int_0^1 2r\sqrt{4-r^2}\,dr\]
-  \[= 2\pi \left[-\frac{2}{3}(4-r^2)^{3/2}\right]_0^1 = 2\pi \left(-\frac{2}{3}\cdot 3\sqrt{3} + \frac{2}{3}\cdot 8\right) = \frac{32\pi}{3} - 4\pi\sqrt{3}\]
-  <p style="color:#27ae60; font-weight:bold;">\(\boxed{V = \dfrac{32\pi}{3} - 4\pi\sqrt{3}}\) ✓ Khớp hoàn toàn với đáp án!</p></div>
+  <h4>Bước 1: Hình dung vật thể và chọn tọa độ trụ</h4>
+  <p>Vật thể \(\Omega\) nằm bên trong mặt trụ \(x^2+y^2 = 1\) và bên trong mặt cầu \(x^2+y^2+z^2 = 4\):</p>
+  <ul>
+    <li>Hình chiếu xuống mặt phẳng \(Oxy\) là hình tròn \(D: x^2+y^2 \le 1 \implies 0 \le r \le 1,\; 0 \le \varphi \le 2\pi\).</li>
+    <li>Từ \(x^2+y^2+z^2 \le 4 \implies z^2 \le 4 - (x^2+y^2) = 4 - r^2 \implies -\sqrt{4-r^2} \le z \le \sqrt{4-r^2}\).</li>
+  </ul>
+
+  <h4>Bước 2: Thiết lập và tính tích phân thể tích</h4>
+  \[ V = \iiint_\Omega dxdydz = \int_0^{2\pi} d\varphi \int_0^1 r\,dr \int_{-\sqrt{4-r^2}}^{\sqrt{4-r^2}} dz = 2\pi \int_0^1 2r\sqrt{4-r^2}\,dr \]
+  <p>Đặt \(u = 4 - r^2 \implies du = -2r\,dr \implies 2r\,dr = -du\).<br>
+  Đổi cận: khi \(r = 0 \to u = 4\); khi \(r = 1 \to u = 3\):</p>
+  \[ V = 2\pi \int_4^3 \sqrt{u}\,(-du) = 2\pi \int_3^4 u^{1/2}\,du = 2\pi \left[ \frac{2}{3}u^{3/2} \right]_3^4 \]
+  <p>Ta có \(4^{3/2} = (\sqrt{4})^3 = 2^3 = 8\) và \(3^{3/2} = 3\sqrt{3}\):</p>
+  \[ V = \frac{4\pi}{3} \left( 8 - 3\sqrt{3} \right) = \frac{32\pi}{3} - 4\pi\sqrt{3} \]
+  <p style="color:#27ae60; font-weight:bold;">\(\boxed{V = \dfrac{32\pi}{3} - 4\pi\sqrt{3}}\) ✓ Khớp hoàn toàn với đáp án đề bài!</p>
+</div>
         <div class="answer-box">&#10003; Kết quả: \(\dfrac{32\pi}{3} - 4\pi\sqrt{3}\)</div>
         <div class="check">Kết quả tính toán: \(\dfrac{32\pi}{3} - 4\pi\sqrt{3}\). Khớp đáp án đề ✓</div>
         <h3>&#128202; Hình minh họa</h3>

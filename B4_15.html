@@ -34,14 +34,25 @@
         <div class="de-bai"><strong>Đề bài:</strong> Tính \(\iiint_\Omega e^z\,dxdydz\) với \(\Omega\) là vật thể được giới hạn bởi mặt paraboloid \(z = 1+x^2+y^2\), mặt trụ \(x^2+y^2 = 5\) và mặt phẳng \(Oxy\).</div>
         <h3>&#9998; Lời giải</h3>
         <div class="solution">
-  <p><strong>Bước 1: Đổi biến sang tọa độ trụ.</strong><br>
-  Mặt trụ \(x^2+y^2 = 5\) có bán kính \(R = \sqrt{5}\).<br>
-  Miền \(\Omega_{r\varphi z}: 0 \le \varphi \le 2\pi,\; 0 \le r \le \sqrt{5},\; 0 \le z \le 1 + r^2\).</p>
-  <p><strong>Bước 2: Tính tích phân.</strong></p>
-  \[I = \int_0^{2\pi} d\varphi \int_0^{\sqrt{5}} r\,dr \int_0^{1+r^2} e^z\,dz = 2\pi \int_0^{\sqrt{5}} r\left(e^{1+r^2} - 1\right)dr\]
-  <p>Đặt \(u = r^2 \implies du = 2r\,dr\) (với \(u \in [0, 5]\)):</p>
-  \[I = \pi \int_0^5 \left(e^{1+u} - 1\right)du = \pi \Big[e^{1+u} - u\Big]_0^5 = \pi\big((e^6 - 5) - (e^1 - 0)\big) = \pi(e^6 - e - 5)\]
-  <p style="color:#27ae60; font-weight:bold;">\(\boxed{I = \pi(e^6 - e - 5)}\) ✓ Khớp hoàn toàn với đáp án!</p></div>
+  <h4>Bước 1: Đổi biến sang tọa độ trụ</h4>
+  <ul>
+    <li>Mặt trụ \(x^2+y^2 = 5\) giới hạn bán kính \(0 \le r \le \sqrt{5}\) và \(0 \le \varphi \le 2\pi\).</li>
+    <li>Chiều cao \(z\) đi từ mặt phẳng \(Oxy\) (\(z = 0\)) đến mặt paraboloid \(z = 1 + x^2 + y^2 = 1 + r^2\).</li>
+  </ul>
+
+  <h4>Bước 2: Tính tích phân lớp trong theo \(z\)</h4>
+  \[ I = \int_0^{2\pi} d\varphi \int_0^{\sqrt{5}} r\,dr \int_0^{1+r^2} e^z\,dz \]
+  <p>Nguyên hàm của \(e^z\) theo \(z\) chính là \(e^z\):</p>
+  \[ \int_0^{1+r^2} e^z\,dz = \Big[ e^z \Big]_{z=0}^{z=1+r^2} = e^{1+r^2} - e^0 = e^{1+r^2} - 1 \]
+
+  <h4>Bước 3: Tính tích phân theo \(r\) và \(\varphi\)</h4>
+  \[ I = 2\pi \int_0^{\sqrt{5}} r\left( e^{1+r^2} - 1 \right) dr \]
+  <p>Đặt \(u = r^2 \implies du = 2r\,dr \implies r\,dr = \frac{1}{2}du\).<br>
+  Đổi cận: khi \(r = 0 \to u = 0\); khi \(r = \sqrt{5} \to u = 5\):</p>
+  \[ I = 2\pi \int_0^5 \left( e^{1+u} - 1 \right) \frac{1}{2}du = \pi \Big[ e^{1+u} - u \Big]_0^5 \]
+  \[ = \pi \Big( (e^{1+5} - 5) - (e^{1+0} - 0) \Big) = \pi(e^6 - e - 5) \]
+  <p style="color:#27ae60; font-weight:bold;">\(\boxed{I = \pi(e^6 - e - 5)}\) ✓ Khớp hoàn toàn với đáp án đề bài!</p>
+</div>
         <div class="answer-box">&#10003; Kết quả: \(\pi(e^6 - e - 5)\)</div>
         <div class="check">Kết quả tính toán: \(\pi(e^6 - e - 5)\). Khớp đáp án đề ✓</div>
         <h3>&#128202; Hình minh họa</h3>

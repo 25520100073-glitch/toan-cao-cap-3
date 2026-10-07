@@ -34,13 +34,29 @@
         <div class="de-bai"><strong>Đề bài:</strong> Tính \(\iiint_\Omega z(x^2+y^2)\,dxdydz\) với \(\Omega\) là vật thể được giới hạn bởi mặt nửa nón \(z = \sqrt{x^2+y^2}\) và mặt phẳng \(z = a > 0\).</div>
         <h3>&#9998; Lời giải</h3>
         <div class="solution">
-  <p><strong>Bước 1: Đổi biến sang tọa độ trụ.</strong><br>
-  Mặt nửa nón \(z = \sqrt{x^2+y^2} = r\) cắt mặt phẳng \(z = a\) (\(a > 0\)) theo đường tròn bán kính \(r = a\).<br>
-  Miền \(\Omega_{r\varphi z}: 0 \le \varphi \le 2\pi,\; 0 \le r \le a,\; r \le z \le a\).</p>
-  <p><strong>Bước 2: Tính tích phân.</strong></p>
-  \[I = \int_0^{2\pi} d\varphi \int_0^a dr \int_r^a z \cdot r^2 \cdot r\,dz = 2\pi \int_0^a r^3 \left[\frac{z^2}{2}\right]_r^a dr\]
-  \[= \pi \int_0^a r^3(a^2 - r^2)\,dr = \pi \left[\frac{a^2 r^4}{4} - \frac{r^6}{6}\right]_0^a = \pi\left(\frac{a^6}{4} - \frac{a^6}{6}\right) = \frac{\pi a^6}{12}\]
-  <p style="color:#27ae60; font-weight:bold;">\(\boxed{I = \dfrac{\pi a^6}{12}}\) ✓ Khớp hoàn toàn với đáp án!</p></div>
+  <h4>Bước 1: Đổi biến sang tọa độ trụ</h4>
+  <ul>
+    <li>Giao tuyến của mặt nửa nón \(z = \sqrt{x^2+y^2} = r\) và mặt phẳng \(z = a\) (\(a > 0\)) là đường tròn \(r = a\).</li>
+    <li>Miền \(\Omega_{r\varphi z}\): \(0 \le \varphi \le 2\pi,\; 0 \le r \le a,\; r \le z \le a\).</li>
+    <li>Hàm dưới dấu tích phân kèm Jacobi: \(z(x^2+y^2) \cdot r = z \cdot r^2 \cdot r = r^3 z\).</li>
+  </ul>
+
+  <h4>Bước 2: Tính tích phân từng lớp</h4>
+  \[ I = \int_0^{2\pi} d\varphi \int_0^a r^3\,dr \int_r^a z\,dz \]
+  <ul>
+    <li><strong>Lớp trong theo \(z\):</strong>
+      \[ \int_r^a z\,dz = \left[ \frac{z^2}{2} \right]_r^a = \frac{a^2 - r^2}{2} \]
+    </li>
+    <li><strong>Lớp giữa theo \(r\):</strong>
+      \[ \int_0^a r^3 \cdot \frac{a^2 - r^2}{2}\,dr = \frac{1}{2} \int_0^a (a^2 r^3 - r^5)\,dr = \frac{1}{2} \left[ a^2\frac{r^4}{4} - \frac{r^6}{6} \right]_0^a \]
+      \[ = \frac{1}{2} \left( \frac{a^6}{4} - \frac{a^6}{6} \right) = \frac{1}{2} \cdot \frac{3a^6 - 2a^6}{12} = \frac{a^6}{24} \]
+    </li>
+    <li><strong>Lớp ngoài theo \(\varphi\):</strong>
+      \[ I = 2\pi \cdot \frac{a^6}{24} = \frac{\pi a^6}{12} \]
+    </li>
+  </ul>
+  <p style="color:#27ae60; font-weight:bold;">\(\boxed{I = \dfrac{\pi a^6}{12}}\) ✓ Khớp hoàn toàn với đáp án đề bài!</p>
+</div>
         <div class="answer-box">&#10003; Kết quả: \(\dfrac{\pi a^6}{12}\)</div>
         <div class="check">Kết quả tính toán: \(\dfrac{\pi a^6}{12}\). Khớp đáp án đề: <strong>πa⁶/12</strong> ✓</div>
         <h3>&#128202; Hình minh họa</h3>

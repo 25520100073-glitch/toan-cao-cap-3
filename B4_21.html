@@ -34,15 +34,24 @@
         <div class="de-bai"><strong>Đề bài:</strong> Tính \(\int_{-2}^{2} \int_{-\sqrt{4-y^2}}^{\sqrt{4-y^2}} \int_{\sqrt{x^2+y^2}}^{2} xz\,dzdxdy\).</div>
         <h3>&#9998; Lời giải</h3>
         <div class="solution">
-  <p><strong>Bước 1: Phân tích miền và đổi biến sang tọa độ trụ.</strong><br>
-  Từ các cận tích phân: \(-2 \le y \le 2,\; -\sqrt{4-y^2} \le x \le \sqrt{4-y^2}\), hình chiếu \(D\) trên \(Oxy\) là hình tròn \(x^2+y^2 \le 4\) (bán kính \(R = 2\)).<br>
-  Cận \(z\) đi từ mặt nón \(z = \sqrt{x^2+y^2} = r\) đến mặt phẳng \(z = 2\).<br>
-  Trong tọa độ trụ: \(0 \le \varphi \le 2\pi,\; 0 \le r \le 2,\; r \le z \le 2\), với \(xz\,dzdxdy = (r\cos\varphi)z \cdot r\,dz\,dr\,d\varphi\).</p>
-  <p><strong>Bước 2: Tính tích phân (hoặc nhận xét tính đối xứng).</strong></p>
-  \[I = \left(\int_0^{2\pi} \cos\varphi\,d\varphi\right) \left(\int_0^2 r^2\,dr \int_r^2 z\,dz\right)\]
-  <p>Vì \(\int_0^{2\pi} \cos\varphi\,d\varphi = \Big[\sin\varphi\Big]_0^{2\pi} = 0\) (hoặc do miền \(\Omega\) đối xứng qua mặt phẳng \(x = 0\) mà hàm \(f(x,y,z) = xz\) là hàm lẻ theo \(x\)), nên:</p>
-  \[I = 0\]
-  <p style="color:#27ae60; font-weight:bold;">\(\boxed{I = 0}\) ✓ Khớp hoàn toàn với đáp án!</p></div>
+  <h4>Bước 1: Đọc miền \(\Omega\) từ cận tích phân</h4>
+  <p>Từ tích phân lặp đã cho, miền \(\Omega\) xác định bởi:</p>
+  \[ \begin{cases} -2 \le y \le 2 \\ -\sqrt{4-y^2} \le x \le \sqrt{4-y^2} \\ \sqrt{x^2+y^2} \le z \le 2 \end{cases} \]
+  <ul>
+    <li>Hai dòng đầu xác định hình chiếu \(D\) trên \(Oxy\) là <strong>hình tròn</strong> \(x^2+y^2 \le 4\) (tâm \(O\), bán kính \(R = 2\)).</li>
+    <li>Dòng thứ ba cho biết \(z\) đi từ mặt nón \(z = \sqrt{x^2+y^2}\) lên đến mặt phẳng \(z = 2\).</li>
+  </ul>
+
+  <h4>Bước 2: Giải theo 2 cách (Đổi biến tọa độ trụ & Tính chất đối xứng)</h4>
+  <p><strong>Cách 1 (Đổi biến sang tọa độ trụ):</strong><br>
+  Đặt \(x = r\cos\varphi,\; y = r\sin\varphi,\; z = z\) với \(|J| = r\). Khi đó \(0 \le \varphi \le 2\pi,\; 0 \le r \le 2,\; r \le z \le 2\):</p>
+  \[ I = \int_0^{2\pi} d\varphi \int_0^2 dr \int_r^2 (r\cos\varphi)z \cdot r\,dz = \left( \int_0^{2\pi} \cos\varphi\,d\varphi \right) \cdot \left( \int_0^2 r^2 \left[ \frac{z^2}{2} \right]_r^2 dr \right) \]
+  <p>Do \(\displaystyle \int_0^{2\pi} \cos\varphi\,d\varphi = \Big[ \sin\varphi \Big]_0^{2\pi} = 0 - 0 = 0\), nên \(I = 0\).</p>
+
+  <p><strong>Cách 2 (Nhận xét nhanh bằng tính đối xứng):</strong><br>
+  Miền \(\Omega\) đối xứng hoàn toàn qua mặt phẳng \(x = 0\) (vì \(x \in [-\sqrt{4-y^2}, \sqrt{4-y^2}]\)), trong khi hàm dưới dấu tích phân \(f(x,y,z) = xz\) là <strong>hàm lẻ theo biến \(x\)</strong> (\(f(-x,y,z) = -f(x,y,z)\)). Do đó tích phân trên toàn miền bằng \(0\).</p>
+  <p style="color:#27ae60; font-weight:bold;">\(\boxed{I = 0}\) ✓ Khớp hoàn toàn với đáp án đề bài!</p>
+</div>
         <div class="answer-box">&#10003; Kết quả: \(0\)</div>
         <div class="check">Kết quả tính toán: \(0\). Khớp đáp án đề: <strong>0</strong> ✓</div>
         <h3>&#128202; Hình minh họa</h3>

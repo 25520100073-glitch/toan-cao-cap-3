@@ -34,15 +34,48 @@
         <div class="de-bai"><strong>Đề bài:</strong> Tính \(\iiint_\Omega (x^2+y^2)z\,dxdydz\), với \(\Omega\) là khối bán cầu \(x^2+y^2+z^2 \le 4,\; z \ge 0\).</div>
         <h3>&#9998; Lời giải</h3>
         <div class="solution">
-  <p><strong>Bước 1: Đổi biến sang tọa độ cầu.</strong><br>
-  Đặt \(x = \rho\sin\theta\cos\varphi,\; y = \rho\sin\theta\sin\varphi,\; z = \rho\cos\theta\), với \(|J| = \rho^2\sin\theta\).<br>
-  Khối bán cầu \(x^2+y^2+z^2 \le 4,\; z \ge 0\) có bán kính \(R = 2\), xác định bởi:<br>
-  \(\Omega_{\rho\varphi\theta}: \begin{cases} 0 \le \varphi \le 2\pi \\ 0 \le \theta \le \pi/2 \\ 0 \le \rho \le 2 \end{cases}\)</p>
-  <p><strong>Bước 2: Biến đổi hàm dưới dấu tích phân và tính toán.</strong><br>
-  Ta có \(x^2+y^2 = \rho^2\sin^2\theta\) và \(z = \rho\cos\theta\). Khi đó:</p>
-  \[I = \int_0^{2\pi} d\varphi \int_0^{\pi/2} \sin^3\theta\cos\theta\,d\theta \int_0^2 \rho^5\,d\rho\]
-  \[= 2\pi \cdot \left[\frac{\sin^4\theta}{4}\right]_0^{\pi/2} \cdot \left[\frac{\rho^6}{6}\right]_0^2 = 2\pi \cdot \frac{1}{4} \cdot \frac{64}{6} = \frac{16\pi}{3}\]
-  <p style="color:#27ae60; font-weight:bold;">\(\boxed{I = \dfrac{16\pi}{3}}\) ✓ Khớp hoàn toàn với đáp án!</p></div>
+  <h4>Bước 1: Phân tích miền lấy tích phân và chọn hệ tọa độ cầu</h4>
+  <p>Miền \(\Omega\) là <strong>khối bán cầu</strong> \(x^2+y^2+z^2 \le 4,\; z \ge 0\):</p>
+  <ul>
+    <li>Tâm mặt cầu tại gốc tọa độ \(O(0,0,0)\), bán kính \(R = \sqrt{4} = 2\).</li>
+    <li>Điều kiện \(z \ge 0\) cho biết vật thể chỉ lấy nửa khối cầu nằm phía trên mặt phẳng nằm ngang \(Oxy\).</li>
+  </ul>
+  <p>Khi miền \(\Omega\) là hình cầu hoặc bán cầu tâm \(O\), công cụ tối ưu nhất là <strong>đổi biến sang tọa độ cầu</strong>.</p>
+
+  <h4>Bước 2: Công thức tọa độ cầu và xác định cận</h4>
+  <div style="background:#e8f4f8; padding:10px; border-left:4px solid #3498db; margin:10px 0;">
+    <strong>Công thức tọa độ cầu:</strong>
+    \[ \begin{cases} x = \rho\sin\theta\cos\varphi \\ y = \rho\sin\theta\sin\varphi \\ z = \rho\cos\theta \end{cases} \implies \begin{cases} x^2+y^2+z^2 = \rho^2 \\ x^2+y^2 = \rho^2\sin^2\theta \end{cases} \]
+    Định thức Jacobi: \(|J| = \rho^2\sin\theta \implies dxdydz = \rho^2\sin\theta\,d\rho\,d\theta\,d\varphi\).
+  </div>
+  <p>Xác định cận cho nửa trên của khối cầu bán kính \(R = 2\):</p>
+  <ul>
+    <li><strong>Bán kính cầu \(\rho\):</strong> Đi từ tâm \(O\) (\(\rho = 0\)) ra tới vỏ cầu (\(\rho = 2\)): \(0 \le \rho \le 2\).</li>
+    <li><strong>Góc cực \(\theta\) (góc hợp với tia \(Oz\)):</strong> Tia \(Oz\) thẳng đứng ứng với \(\theta = 0\), mở dần xuống mặt phẳng ngang \(Oxy\) (\(z=0\)) ứng với \(\theta = \frac{\pi}{2}\): \(0 \le \theta \le \frac{\pi}{2}\).</li>
+    <li><strong>Góc phương vị \(\varphi\):</strong> Quay trọn một vòng trên mặt phẳng \(Oxy\): \(0 \le \varphi \le 2\pi\).</li>
+  </ul>
+
+  <h4>Bước 3: Biến đổi hàm dưới dấu tích phân và tách biến</h4>
+  <p>Thay công thức tọa độ cầu vào biểu thức \((x^2+y^2)z\,dxdydz\):</p>
+  \[ (x^2+y^2) \cdot z \cdot |J| = (\rho^2\sin^2\theta) \cdot (\rho\cos\theta) \cdot (\rho^2\sin\theta) = \rho^5 \sin^3\theta \cos\theta \]
+  <p>Vì các cận đều là hằng số và hàm dưới dấu tích phân là tích của 3 hàm độc lập theo \(\varphi, \theta, \rho\), ta tách thành tích 3 tích phân đơn:</p>
+  \[ I = \left( \int_0^{2\pi} d\varphi \right) \cdot \left( \int_0^{\pi/2} \sin^3\theta\cos\theta\,d\theta \right) \cdot \left( \int_0^2 \rho^5\,d\rho \right) \]
+
+  <h4>Bước 4: Tính từng tích phân thành phần</h4>
+  <ul>
+    <li><strong>Tích phân theo \(\varphi\):</strong> \(\displaystyle \int_0^{2\pi} d\varphi = 2\pi\).</li>
+    <li><strong>Tích phân theo \(\theta\):</strong> Đặt \(u = \sin\theta \implies du = \cos\theta\,d\theta\). Khi \(\theta=0 \to u=0\); khi \(\theta=\frac{\pi}{2} \to u=1\):
+      \[ \int_0^{\pi/2} \sin^3\theta\cos\theta\,d\theta = \int_0^1 u^3\,du = \left[ \frac{u^4}{4} \right]_0^1 = \frac{1}{4} \]
+    </li>
+    <li><strong>Tích phân theo \(\rho\):</strong>
+      \[ \int_0^2 \rho^5\,d\rho = \left[ \frac{\rho^6}{6} \right]_0^2 = \frac{2^6}{6} - 0 = \frac{64}{6} = \frac{32}{3} \]
+    </li>
+  </ul>
+
+  <h4>Bước 5: Nhân các kết quả lại</h4>
+  \[ I = 2\pi \cdot \frac{1}{4} \cdot \frac{32}{3} = \frac{16\pi}{3} \]
+  <p style="color:#27ae60; font-weight:bold;">\(\boxed{I = \dfrac{16\pi}{3}}\) ✓ Khớp hoàn toàn với đáp án đề bài!</p>
+</div>
         <div class="answer-box">&#10003; Kết quả: \(\dfrac{16\pi}{3}\)</div>
         <div class="check">Kết quả tính toán: \(\dfrac{16\pi}{3}\). Khớp đáp án đề: <strong>16π/3</strong> ✓</div>
         <h3>&#128202; Hình minh họa</h3>

@@ -34,15 +34,42 @@
         <div class="de-bai"><strong>Đề bài:</strong> Tính \(\iiint_\Omega x^2\,dxdydz\), với \(\Omega\) là vật thể giới hạn bởi mặt trụ \(x^2+y^2=1\), mặt paraboloid \(z = 1+x^2+y^2\) và mặt phẳng \(z=0\).</div>
         <h3>&#9998; Lời giải</h3>
         <div class="solution">
-  <p><strong>Bước 1: Đổi biến sang tọa độ trụ.</strong><br>
-  Đặt \(x = r\cos\varphi,\; y = r\sin\varphi,\; z = z\), với \(|J| = r\).<br>
-  Miền \(\Omega\) nằm trong mặt trụ \(x^2+y^2 \le 1 \implies 0 \le r \le 1\), giới hạn dưới bởi \(z = 0\) và trên bởi paraboloid \(z = 1+x^2+y^2 = 1+r^2\).</p>
-  <p><strong>Bước 2: Tính tích phân.</strong></p>
-  \[I = \int_0^{2\pi} d\varphi \int_0^1 dr \int_0^{1+r^2} (r^2\cos^2\varphi)\cdot r\,dz\]
-  \[= \left(\int_0^{2\pi} \cos^2\varphi\,d\varphi\right) \left(\int_0^1 r^3(1+r^2)\,dr\right)\]
-  <p>Ta có \(\int_0^{2\pi} \cos^2\varphi\,d\varphi = \pi\), suy ra:</p>
-  \[I = \pi \int_0^1 (r^3 + r^5)\,dr = \pi \left[\frac{r^4}{4} + \frac{r^6}{6}\right]_0^1 = \pi\left(\frac{1}{4} + \frac{1}{6}\right) = \frac{5\pi}{12}\]
-  <p style="color:#27ae60; font-weight:bold;">\(\boxed{I = \dfrac{5\pi}{12}}\) ✓ Khớp hoàn toàn với đáp án!</p></div>
+  <h4>Bước 1: Hình dung vật thể \(\Omega\) và chọn tọa độ trụ</h4>
+  <p>Vật thể \(\Omega\) có dạng một khối trụ đứng bị lõm ở mặt trên:</p>
+  <ul>
+    <li><strong>Thành xung quanh:</strong> Mặt trụ đứng \(x^2+y^2 = 1\) (hình chiếu xuống \(Oxy\) là hình tròn đơn vị \(D: x^2+y^2 \le 1\)).</li>
+    <li><strong>Mặt đáy dưới:</strong> Mặt phẳng \(z = 0\) (mặt phẳng \(Oxy\)).</li>
+    <li><strong>Mặt nắp trên:</strong> Mặt paraboloid \(z = 1 + x^2 + y^2\) (luôn dương vì \(1+x^2+y^2 \ge 1 > 0\)).</li>
+  </ul>
+
+  <h4>Bước 2: Đổi biến sang tọa độ trụ</h4>
+  <p>Đặt \(x = r\cos\varphi,\; y = r\sin\varphi,\; z = z\) với \(|J| = r\). Khi đó:</p>
+  <ul>
+    <li>\(0 \le \varphi \le 2\pi\)</li>
+    <li>\(0 \le r \le 1\) (do \(x^2+y^2 \le 1\))</li>
+    <li>\(0 \le z \le 1 + r^2\) (đi từ mặt phẳng \(z=0\) lên mặt paraboloid \(z = 1+x^2+y^2\))</li>
+    <li>Hàm dưới dấu tích phân: \(x^2 = (r\cos\varphi)^2 = r^2\cos^2\varphi\).</li>
+  </ul>
+
+  <h4>Bước 3: Thiết lập và tính tích phân lớp trong theo \(z\)</h4>
+  \[ I = \int_0^{2\pi} d\varphi \int_0^1 dr \int_0^{1+r^2} (r^2\cos^2\varphi) \cdot r\,dz = \int_0^{2\pi} \cos^2\varphi\,d\varphi \int_0^1 r^3 \left( \int_0^{1+r^2} dz \right) dr \]
+  <p>Tính tích phân theo \(z\): \(\displaystyle \int_0^{1+r^2} dz = \Big[ z \Big]_0^{1+r^2} = 1 + r^2\). Suy ra:</p>
+  \[ I = \left( \int_0^{2\pi} \cos^2\varphi\,d\varphi \right) \cdot \left( \int_0^1 r^3(1 + r^2)\,dr \right) \]
+
+  <h4>Bước 4: Tính hai tích phân đơn theo \(\varphi\) và \(r\)</h4>
+  <ul>
+    <li><strong>Theo \(\varphi\):</strong> Áp dụng công thức hạ bậc \(\cos^2\varphi = \frac{1 + \cos 2\varphi}{2}\):
+      \[ \int_0^{2\pi} \cos^2\varphi\,d\varphi = \int_0^{2\pi} \frac{1 + \cos 2\varphi}{2}\,d\varphi = \left[ \frac{\varphi}{2} + \frac{\sin 2\varphi}{4} \right]_0^{2\pi} = \frac{2\pi}{2} + 0 = \pi \]
+    </li>
+    <li><strong>Theo \(r\):</strong> Nhân phân phối \(r^3(1+r^2) = r^3 + r^5\):
+      \[ \int_0^1 (r^3 + r^5)\,dr = \left[ \frac{r^4}{4} + \frac{r^6}{6} \right]_0^1 = \frac{1}{4} + \frac{1}{6} = \frac{3 + 2}{12} = \frac{5}{12} \]
+    </li>
+  </ul>
+
+  <h4>Bước 5: Kết hợp kết quả</h4>
+  \[ I = \pi \cdot \frac{5}{12} = \frac{5\pi}{12} \]
+  <p style="color:#27ae60; font-weight:bold;">\(\boxed{I = \dfrac{5\pi}{12}}\) ✓ Khớp hoàn toàn với đáp án đề bài!</p>
+</div>
         <div class="answer-box">&#10003; Kết quả: \(\dfrac{5\pi}{12}\)</div>
         <div class="check">Kết quả tính toán: \(\dfrac{5\pi}{12}\). Khớp đáp án đề: <strong>5π/12</strong> ✓</div>
         <h3>&#128202; Hình minh họa</h3>

@@ -34,12 +34,27 @@
         <div class="de-bai"><strong>Đề bài:</strong> Tính \(\iiint_\Omega (x^2+y^2+z^2)\,dxdydz\), với \(\Omega\) là khối cầu đơn vị.</div>
         <h3>&#9998; Lời giải</h3>
         <div class="solution">
-  <p><strong>Bước 1: Đổi biến sang tọa độ cầu.</strong><br>
-  Khối cầu đơn vị \(x^2+y^2+z^2 \le 1\) trong tọa độ cầu:<br>
-  \(0 \le \varphi \le 2\pi,\; 0 \le \theta \le \pi,\; 0 \le \rho \le 1\), với \(x^2+y^2+z^2 = \rho^2\) và \(|J| = \rho^2\sin\theta\).</p>
-  <p><strong>Bước 2: Tính tích phân.</strong></p>
-  \[I = \int_0^{2\pi} d\varphi \int_0^\pi \sin\theta\,d\theta \int_0^1 \rho^2 \cdot \rho^2\,d\rho = 2\pi \cdot \Big[-\cos\theta\Big]_0^\pi \cdot \left[\frac{\rho^5}{5}\right]_0^1 = 2\pi \cdot 2 \cdot \frac{1}{5} = \frac{4\pi}{5}\]
-  <p style="color:#27ae60; font-weight:bold;">\(\boxed{I = \dfrac{4\pi}{5}}\) ✓ Khớp hoàn toàn với đáp án!</p></div>
+  <h4>Bước 1: Đổi biến sang tọa độ cầu</h4>
+  <p>Khối cầu đơn vị là khối cầu tâm \(O(0,0,0)\), bán kính \(R = 1\) có phương trình \(x^2+y^2+z^2 \le 1\).</p>
+  <p>Áp dụng công thức tọa độ cầu:</p>
+  <ul>
+    <li>\(x = \rho\sin\theta\cos\varphi,\; y = \rho\sin\theta\sin\varphi,\; z = \rho\cos\theta\) với \(|J| = \rho^2\sin\theta\).</li>
+    <li>Cận lấy tích phân cho toàn bộ khối cầu: \(0 \le \varphi \le 2\pi,\; 0 \le \theta \le \pi,\; 0 \le \rho \le 1\).</li>
+    <li>Hàm dưới dấu tích phân: \(x^2+y^2+z^2 = \rho^2\).</li>
+  </ul>
+
+  <h4>Bước 2: Tách và tính tích phân 3 lớp</h4>
+  \[ I = \iiint_\Omega (x^2+y^2+z^2)\,dxdydz = \int_0^{2\pi} d\varphi \int_0^\pi \sin\theta\,d\theta \int_0^1 \rho^2 \cdot \rho^2\,d\rho \]
+  \[ = \left( \int_0^{2\pi} d\varphi \right) \cdot \left( \int_0^\pi \sin\theta\,d\theta \right) \cdot \left( \int_0^1 \rho^4\,d\rho \right) \]
+  <p>Tính từng thừa số:</p>
+  <ul>
+    <li>\(\displaystyle \int_0^{2\pi} d\varphi = 2\pi\)</li>
+    <li>\(\displaystyle \int_0^\pi \sin\theta\,d\theta = \Big[ -\cos\theta \Big]_0^\pi = (-\cos\pi) - (-\cos 0) = 1 - (-1) = 2\)</li>
+    <li>\(\displaystyle \int_0^1 \rho^4\,d\rho = \left[ \frac{\rho^5}{5} \right]_0^1 = \frac{1}{5}\)</li>
+  </ul>
+  \[ I = 2\pi \cdot 2 \cdot \frac{1}{5} = \frac{4\pi}{5} \]
+  <p style="color:#27ae60; font-weight:bold;">\(\boxed{I = \dfrac{4\pi}{5}}\) ✓ Khớp hoàn toàn với đáp án đề bài!</p>
+</div>
         <div class="answer-box">&#10003; Kết quả: \(\dfrac{4\pi}{5}\)</div>
         <div class="check">Kết quả tính toán: \(\dfrac{4\pi}{5}\). Khớp đáp án đề: <strong>4π/5</strong> ✓</div>
         <h3>&#128202; Hình minh họa</h3>

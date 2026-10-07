@@ -34,13 +34,28 @@
         <div class="de-bai"><strong>Đề bài:</strong> Cho vật thể \(\Omega\) được giới hạn bởi các mặt cong: mặt cầu \(x^2+y^2+z^2 = 1\), mặt cầu \(x^2+y^2+z^2 = 4\) và nửa mặt nón \(z = \sqrt{x^2+y^2}\). Biết rằng \(\Omega\) nằm trong phần không gian \(z \ge 0\). Tính thể tích của \(\Omega\).</div>
         <h3>&#9998; Lời giải</h3>
         <div class="solution">
-  <p><strong>Bước 1: Đổi biến sang tọa độ cầu.</strong><br>
-  Vật thể \(\Omega\) nằm giữa hai mặt cầu \(\rho = 1\) và \(\rho = 2\), bên trong nửa mặt nón \(z = \sqrt{x^2+y^2}\) (tức \(0 \le \theta \le \frac{\pi}{4}\)):<br>
-  \(\Omega_{\rho\varphi\theta}: 0 \le \varphi \le 2\pi,\; 0 \le \theta \le \frac{\pi}{4},\; 1 \le \rho \le 2\).</p>
-  <p><strong>Bước 2: Tính thể tích \(V\).</strong></p>
-  \[V = \int_0^{2\pi} d\varphi \int_0^{\pi/4} \sin\theta\,d\theta \int_1^2 \rho^2\,d\rho\]
-  \[= 2\pi \cdot \Big[-\cos\theta\Big]_0^{\pi/4} \cdot \left[\frac{\rho^3}{3}\right]_1^2 = 2\pi \left(1 - \frac{\sqrt{2}}{2}\right) \cdot \frac{7}{3} = \frac{7\pi(2 - \sqrt{2})}{3}\]
-  <p style="color:#27ae60; font-weight:bold;">\(\boxed{V = \dfrac{7\pi(2 - \sqrt{2})}{3}}\) ✓ Khớp hoàn toàn với đáp án!</p></div>
+  <h4>Bước 1: Đổi biến sang tọa độ cầu</h4>
+  <p>Phân tích các mặt biên của vật thể \(\Omega\) trong phần không gian \(z \ge 0\):</p>
+  <ul>
+    <li>Giới hạn giữa hai mặt cầu \(x^2+y^2+z^2 = 1\) (\(\rho = 1\)) và \(x^2+y^2+z^2 = 4\) (\(\rho = 2\)) \(\implies 1 \le \rho \le 2\).</li>
+    <li>Nửa mặt nón \(z = \sqrt{x^2+y^2} \iff \rho\cos\theta = \rho\sin\theta \iff \tan\theta = 1 \iff \theta = \frac{\pi}{4}\). Vật thể nằm trong nón vùng \(z \ge 0\) nên \(0 \le \theta \le \frac{\pi}{4}\).</li>
+    <li>Quay tròn đều quanh trục \(Oz\) nên \(0 \le \varphi \le 2\pi\).</li>
+  </ul>
+
+  <h4>Bước 2: Tính thể tích \(V\)</h4>
+  \[ V = \iiint_\Omega dxdydz = \left( \int_0^{2\pi} d\varphi \right) \cdot \left( \int_0^{\pi/4} \sin\theta\,d\theta \right) \cdot \left( \int_1^2 \rho^2\,d\rho \right) \]
+  <ul>
+    <li><strong>Theo \(\varphi\):</strong> \(\displaystyle \int_0^{2\pi} d\varphi = 2\pi\).</li>
+    <li><strong>Theo \(\theta\):</strong>
+      \[ \int_0^{\pi/4} \sin\theta\,d\theta = \Big[ -\cos\theta \Big]_0^{\pi/4} = -\cos\frac{\pi}{4} - (-\cos 0) = 1 - \frac{\sqrt{2}}{2} = \frac{2 - \sqrt{2}}{2} \]
+    </li>
+    <li><strong>Theo \(\rho\):</strong>
+      \[ \int_1^2 \rho^2\,d\rho = \left[ \frac{\rho^3}{3} \right]_1^2 = \frac{2^3 - 1^3}{3} = \frac{8 - 1}{3} = \frac{7}{3} \]
+    </li>
+  </ul>
+  \[ V = 2\pi \cdot \frac{2 - \sqrt{2}}{2} \cdot \frac{7}{3} = \frac{7\pi(2 - \sqrt{2})}{3} \]
+  <p style="color:#27ae60; font-weight:bold;">\(\boxed{V = \dfrac{7\pi(2 - \sqrt{2})}{3}}\) ✓ Khớp hoàn toàn với đáp án đề bài!</p>
+</div>
         <div class="answer-box">&#10003; Kết quả: \(\dfrac{7\pi(2-\sqrt{2})}{3}\)</div>
         <div class="check">Kết quả tính toán: \(\dfrac{7\pi(2-\sqrt{2})}{3}\). Khớp đáp án đề ✓</div>
         <h3>&#128202; Hình minh họa</h3>

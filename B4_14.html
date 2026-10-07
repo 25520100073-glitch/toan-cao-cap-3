@@ -34,16 +34,33 @@
         <div class="de-bai"><strong>Đề bài:</strong> Tính \(\iiint_\Omega (x-y)\,dxdydz\) với \(\Omega\) là vật thể nằm giữa hai mặt trụ \(x^2+y^2 = 1\) và \(x^2+y^2 = 16\), bên trên mặt phẳng \(Oxy\), và bên dưới mặt phẳng \(z = y + 4\).</div>
         <h3>&#9998; Lời giải</h3>
         <div class="solution">
-  <p><strong>Bước 1: Đổi biến sang tọa độ trụ.</strong><br>
-  Hình chiếu \(D\) trên \(Oxy\) là hình vành khăn giữa hai đường tròn bán kính \(R_1 = 1\) và \(R_2 = 4\).<br>
-  Trên miền \(r \le 4\), ta có \(y \ge -4 \implies z = y + 4 \ge 0\).<br>
-  Vậy \(\Omega_{r\varphi z}: 0 \le \varphi \le 2\pi,\; 1 \le r \le 4,\; 0 \le z \le r\sin\varphi + 4\).</p>
-  <p><strong>Bước 2: Tính tích phân.</strong></p>
-  \[I = \int_0^{2\pi} d\varphi \int_1^4 dr \int_0^{r\sin\varphi+4} r(\cos\varphi - \sin\varphi) \cdot r\,dz\]
-  \[= \int_0^{2\pi} d\varphi \int_1^4 r^2(\cos\varphi - \sin\varphi)(r\sin\varphi + 4)\,dr\]
-  <p>Khai triển theo \(\varphi\): trên đoạn \([0, 2\pi]\), các tích phân của \(\cos\varphi,\; \sin\varphi,\; \sin\varphi\cos\varphi\) đều bằng \(0\). Chỉ còn lại hạng tử \(-r^3\sin^2\varphi\):</p>
-  \[I = -\left(\int_0^{2\pi} \sin^2\varphi\,d\varphi\right) \left(\int_1^4 r^3\,dr\right) = -\pi \cdot \left[\frac{r^4}{4}\right]_1^4 = -\pi \cdot \frac{256 - 1}{4} = -\frac{255\pi}{4}\]
-  <p style="color:#27ae60; font-weight:bold;">\(\boxed{I = -\dfrac{255\pi}{4}}\) ✓ Khớp hoàn toàn với đáp án!</p></div>
+  <h4>Bước 1: Xác định miền \(\Omega\) trong tọa độ trụ</h4>
+  <ul>
+    <li>Hình chiếu trên \(Oxy\) nằm giữa hai mặt trụ \(x^2+y^2 = 1\) (\(R_1 = 1\)) và \(x^2+y^2 = 16\) (\(R_2 = 4\)) \(\implies\) hình vành khăn: \(1 \le r \le 4,\; 0 \le \varphi \le 2\pi\).</li>
+    <li>Giới hạn chiều cao \(z\): từ mặt phẳng \(Oxy\) (\(z = 0\)) lên đến mặt phẳng nghiêng \(z = y + 4 = r\sin\varphi + 4\) (do \(r \le 4 \implies y \ge -4 \implies y+4 \ge 0\)).</li>
+  </ul>
+
+  <h4>Bước 2: Thiết lập tích phân và tính lớp trong theo \(z\)</h4>
+  <p>Với \(x - y = r(\cos\varphi - \sin\varphi)\) và \(|J| = r\):</p>
+  \[ I = \int_0^{2\pi} d\varphi \int_1^4 r^2(\cos\varphi - \sin\varphi)\,dr \int_0^{r\sin\varphi+4} dz \]
+  \[ = \int_0^{2\pi} d\varphi \int_1^4 r^2(\cos\varphi - \sin\varphi)(r\sin\varphi + 4)\,dr \]
+
+  <h4>Bước 3: Khai triển và sử dụng tính chất tích phân lượng giác trên \([0, 2\pi]\)</h4>
+  <p>Khai triển biểu thức dưới dấu tích phân:</p>
+  \[ r^2(\cos\varphi - \sin\varphi)(r\sin\varphi + 4) = r^3\sin\varphi\cos\varphi + 4r^2\cos\varphi - 4r^2\sin\varphi - r^3\sin^2\varphi \]
+  <p>Khi lấy tích phân theo \(\varphi\) trên một chu kỳ đầy đủ \([0, 2\pi]\):</p>
+  \[ \int_0^{2\pi} \cos\varphi\,d\varphi = 0, \quad \int_0^{2\pi} \sin\varphi\,d\varphi = 0, \quad \int_0^{2\pi} \sin\varphi\cos\varphi\,d\varphi = 0 \]
+  <p>Do đó 3 số hạng đầu đều triệt tiêu bằng \(0\), chỉ còn lại số hạng cuối cùng \(-r^3\sin^2\varphi\):</p>
+  \[ I = -\left( \int_0^{2\pi} \sin^2\varphi\,d\varphi \right) \cdot \left( \int_1^4 r^3\,dr \right) \]
+
+  <h4>Bước 4: Tính kết quả</h4>
+  <ul>
+    <li>\(\displaystyle \int_0^{2\pi} \sin^2\varphi\,d\varphi = \int_0^{2\pi} \frac{1 - \cos 2\varphi}{2}\,d\varphi = \pi\).</li>
+    <li>\(\displaystyle \int_1^4 r^3\,dr = \left[ \frac{r^4}{4} \right]_1^4 = \frac{4^4 - 1^4}{4} = \frac{256 - 1}{4} = \frac{255}{4}\).</li>
+  </ul>
+  \[ I = -\pi \cdot \frac{255}{4} = -\frac{255\pi}{4} \]
+  <p style="color:#27ae60; font-weight:bold;">\(\boxed{I = -\dfrac{255\pi}{4}}\) ✓ Khớp hoàn toàn với đáp án đề bài!</p>
+</div>
         <div class="answer-box">&#10003; Kết quả: \(-\dfrac{255\pi}{4}\)</div>
         <div class="check">Kết quả tính toán: \(-\dfrac{255\pi}{4}\). Khớp đáp án đề: <strong>-255π/4</strong> ✓</div>
         <h3>&#128202; Hình minh họa</h3>

@@ -34,14 +34,37 @@
         <div class="de-bai"><strong>Đề bài:</strong> Tính \(\iiint_\Omega xyz\,dxdydz\), với \(\Omega\) là một phần tám khối cầu \(x^2+y^2+z^2 \le 2,\; x \ge 0,\; y \ge 0,\; z \ge 0\).</div>
         <h3>&#9998; Lời giải</h3>
         <div class="solution">
-  <p><strong>Bước 1: Đổi biến sang tọa độ cầu.</strong><br>
-  Một phần tám khối cầu \(x^2+y^2+z^2 \le 2,\; x \ge 0,\; y \ge 0,\; z \ge 0\) có bán kính \(R = \sqrt{2}\):<br>
-  \(0 \le \rho \le \sqrt{2},\; 0 \le \theta \le \frac{\pi}{2},\; 0 \le \varphi \le \frac{\pi}{2}\).<br>
-  Khi đó \(xyz\,|J| = (\rho\sin\theta\cos\varphi)(\rho\sin\theta\sin\varphi)(\rho\cos\theta)\cdot \rho^2\sin\theta = \rho^5 \sin^3\theta\cos\theta \sin\varphi\cos\varphi\).</p>
-  <p><strong>Bước 2: Tách tích phân theo 3 biến độc lập.</strong></p>
-  \[I = \left(\int_0^{\pi/2} \sin\varphi\cos\varphi\,d\varphi\right) \cdot \left(\int_0^{\pi/2} \sin^3\theta\cos\theta\,d\theta\right) \cdot \left(\int_0^{\sqrt{2}} \rho^5\,d\rho\right)\]
-  \[= \left[\frac{\sin^2\varphi}{2}\right]_0^{\pi/2} \cdot \left[\frac{\sin^4\theta}{4}\right]_0^{\pi/2} \cdot \left[\frac{\rho^6}{6}\right]_0^{\sqrt{2}} = \frac{1}{2} \cdot \frac{1}{4} \cdot \frac{8}{6} = \frac{1}{6}\]
-  <p style="color:#27ae60; font-weight:bold;">\(\boxed{I = \dfrac{1}{6}}\) ✓ Khớp hoàn toàn với đáp án!</p></div>
+  <h4>Bước 1: Xác định cận trong tọa độ cầu cho góc phần tám thứ nhất</h4>
+  <p>Miền \(\Omega\): \(x^2+y^2+z^2 \le 2\) và \(x \ge 0,\; y \ge 0,\; z \ge 0\).</p>
+  <ul>
+    <li>Bán kính mặt cầu là \(R = \sqrt{2} \implies 0 \le \rho \le \sqrt{2}\).</li>
+    <li>Vì \(z \ge 0\) nên góc cực \(\theta\) chỉ đi từ trục \(Oz\) dương đến mặt phẳng \(Oxy\): \(0 \le \theta \le \frac{\pi}{2}\).</li>
+    <li>Vì \(x \ge 0,\; y \ge 0\) (góc phần tư thứ nhất trên \(Oxy\)) nên góc phương vị: \(0 \le \varphi \le \frac{\pi}{2}\).</li>
+  </ul>
+
+  <h4>Bước 2: Biến đổi hàm dưới dấu tích phân</h4>
+  <p>Thay \(x = \rho\sin\theta\cos\varphi,\; y = \rho\sin\theta\sin\varphi,\; z = \rho\cos\theta\) và \(dxdydz = \rho^2\sin\theta\,d\rho\,d\theta\,d\varphi\):</p>
+  \[ xyz\,dxdydz = (\rho\sin\theta\cos\varphi)(\rho\sin\theta\sin\varphi)(\rho\cos\theta) \cdot \rho^2\sin\theta\,d\rho\,d\theta\,d\varphi \]
+  \[ = \rho^5 \cdot (\sin^3\theta\cos\theta) \cdot (\sin\varphi\cos\varphi)\,d\rho\,d\theta\,d\varphi \]
+
+  <h4>Bước 3: Tách tích phân và tính từng biến</h4>
+  \[ I = \left( \int_0^{\pi/2} \sin\varphi\cos\varphi\,d\varphi \right) \cdot \left( \int_0^{\pi/2} \sin^3\theta\cos\theta\,d\theta \right) \cdot \left( \int_0^{\sqrt{2}} \rho^5\,d\rho \right) \]
+  <ul>
+    <li><strong>Theo \(\varphi\):</strong> Đặt \(u = \sin\varphi \implies du = \cos\varphi\,d\varphi\):
+      \[ \int_0^{\pi/2} \sin\varphi\cos\varphi\,d\varphi = \left[ \frac{\sin^2\varphi}{2} \right]_0^{\pi/2} = \frac{1^2}{2} - 0 = \frac{1}{2} \]
+    </li>
+    <li><strong>Theo \(\theta\):</strong> Đặt \(v = \sin\theta \implies dv = \cos\theta\,d\theta\):
+      \[ \int_0^{\pi/2} \sin^3\theta\cos\theta\,d\theta = \left[ \frac{\sin^4\theta}{4} \right]_0^{\pi/2} = \frac{1^4}{4} - 0 = \frac{1}{4} \]
+    </li>
+    <li><strong>Theo \(\rho\):</strong> Lưu ý \((\sqrt{2})^6 = (2^{1/2})^6 = 2^3 = 8\):
+      \[ \int_0^{\sqrt{2}} \rho^5\,d\rho = \left[ \frac{\rho^6}{6} \right]_0^{\sqrt{2}} = \frac{8}{6} = \frac{4}{3} \]
+    </li>
+  </ul>
+
+  <h4>Bước 4: Nhân 3 kết quả</h4>
+  \[ I = \frac{1}{2} \cdot \frac{1}{4} \cdot \frac{4}{3} = \frac{1}{6} \]
+  <p style="color:#27ae60; font-weight:bold;">\(\boxed{I = \dfrac{1}{6}}\) ✓ Khớp hoàn toàn với đáp án đề bài!</p>
+</div>
         <div class="answer-box">&#10003; Kết quả: \(\dfrac{1}{6}\)</div>
         <div class="check">Kết quả tính toán: \(\dfrac{1}{6}\). Khớp đáp án đề: <strong>1/6</strong> ✓</div>
         <h3>&#128202; Hình minh họa</h3>

@@ -34,15 +34,43 @@
         <div class="de-bai"><strong>Đề bài:</strong> Tính \(\iiint_\Omega z\,dxdydz\), với \(\Omega\) là vật thể giới hạn bởi nửa mặt nón \(z = \sqrt{x^2+y^2}\) và mặt phẳng \(z = 1\).</div>
         <h3>&#9998; Lời giải</h3>
         <div class="solution">
-  <p><strong>Bước 1: Đổi biến sang tọa độ trụ.</strong><br>
-  Đặt \(x = r\cos\varphi,\; y = r\sin\varphi,\; z = z\), với \(|J| = r\).<br>
-  Giao tuyến của mặt nón \(z = \sqrt{x^2+y^2} = r\) và mặt phẳng \(z = 1\) là đường tròn \(r = 1\) trên mặt phẳng \(z=1\).<br>
-  Hình chiếu của \(\Omega\) lên \(Oxy\) là hình tròn \(D: x^2+y^2 \le 1\).<br>
-  Miền \(\Omega_{r\varphi z}\): \(\begin{cases} 0 \le \varphi \le 2\pi \\ 0 \le r \le 1 \\ r \le z \le 1 \end{cases}\)</p>
-  <p><strong>Bước 2: Thiết lập và tính tích phân.</strong></p>
-  \[I = \int_0^{2\pi} d\varphi \int_0^1 r\,dr \int_r^1 z\,dz = 2\pi \int_0^1 r \left[\frac{z^2}{2}\right]_r^1 dr\]
-  \[= \pi \int_0^1 (r - r^3)\,dr = \pi \left[\frac{r^2}{2} - \frac{r^4}{4}\right]_0^1 = \pi\left(\frac{1}{2} - \frac{1}{4}\right) = \frac{\pi}{4}\]
-  <p style="color:#27ae60; font-weight:bold;">\(\boxed{I = \dfrac{\pi}{4}}\) ✓ Khớp hoàn toàn với đáp án!</p></div>
+  <h4>Bước 1: Hình dung vật thể \(\Omega\) và chọn hệ tọa độ</h4>
+  <p>Vật thể \(\Omega\) được giới hạn bởi hai mặt:</p>
+  <ul>
+    <li><strong>Mặt dưới:</strong> Nửa mặt nón \(z = \sqrt{x^2+y^2}\). Đỉnh nón nằm tại gốc tọa độ \(O(0,0,0)\), bề mặt loe tròn đều lên phía trên theo trục \(Oz\).</li>
+    <li><strong>Mặt trên (nắp phẳng):</strong> Mặt phẳng nằm ngang \(z = 1\) cắt ngang mặt nón.</li>
+  </ul>
+  <p><strong>Tìm giao tuyến và hình chiếu:</strong> Thay \(z = 1\) vào phương trình mặt nón ta được \(\sqrt{x^2+y^2} = 1 \iff x^2+y^2 = 1\). Vậy hình chiếu của vật thể lên mặt phẳng \(Oxy\) là hình tròn đơn vị \(D: x^2+y^2 \le 1\).</p>
+  <p>Vì miền lấy tích phân có tính đối xứng trụ quanh trục \(Oz\) và xuất hiện cụm \(\sqrt{x^2+y^2}\), ta sử dụng <strong>phép đổi biến sang tọa độ trụ</strong>.</p>
+
+  <h4>Bước 2: Công thức đổi biến tọa độ trụ và xác định cận</h4>
+  <div style="background:#e8f4f8; padding:10px; border-left:4px solid #3498db; margin:10px 0;">
+    <strong>Công thức tọa độ trụ:</strong>
+    \[ \begin{cases} x = r\cos\varphi \\ y = r\sin\varphi \\ z = z \end{cases} \implies x^2+y^2 = r^2, \quad \text{Định thức Jacobi: } |J| = r \]
+    Vi phân thể tích: \(dxdydz = r\,dr\,d\varphi\,dz\).
+  </div>
+  <p>Xác định cận của các biến trong miền \(\Omega_{r\varphi z}\):</p>
+  <ul>
+    <li><strong>Góc quay \(\varphi\):</strong> Hình chiếu \(D\) là trọn vẹn một hình tròn tâm \(O\) nên \(\varphi\) quét hết một vòng: \(0 \le \varphi \le 2\pi\).</li>
+    <li><strong>Bán kính \(r\):</strong> Đi từ tâm \(O\) (\(r=0\)) ra tới mép đường tròn \(x^2+y^2=1\) (\(r=1\)): \(0 \le r \le 1\).</li>
+    <li><strong>Chiều cao \(z\):</strong> Với mỗi điểm \((r,\varphi)\) cố định, tia thẳng đứng đi từ vỏ mặt nón \(z = \sqrt{x^2+y^2} = r\) lên đến nắp phẳng \(z = 1\): \(r \le z \le 1\).</li>
+  </ul>
+
+  <h4>Bước 3: Thiết lập tích phân lặp và tính lớp trong cùng (theo \(z\))</h4>
+  \[ I = \iiint_\Omega z\,dxdydz = \int_0^{2\pi} d\varphi \int_0^1 r\,dr \int_r^1 z\,dz \]
+  <p>Tính tích phân lớp trong cùng theo biến \(z\) (nguyên hàm của \(z\) là \(\frac{z^2}{2}\)):</p>
+  \[ \int_r^1 z\,dz = \left[ \frac{z^2}{2} \right]_{z=r}^{z=1} = \frac{1^2}{2} - \frac{r^2}{2} = \frac{1 - r^2}{2} \]
+
+  <h4>Bước 4: Tính lớp tích phân theo bán kính \(r\)</h4>
+  <p>Thay kết quả vừa tính vào tích phân theo \(r\):</p>
+  \[ \int_0^1 r \cdot \frac{1 - r^2}{2} \,dr = \frac{1}{2} \int_0^1 (r - r^3)\,dr = \frac{1}{2} \left[ \frac{r^2}{2} - \frac{r^4}{4} \right]_0^1 \]
+  <p>Thế cận \(r = 1\) và \(r = 0\):</p>
+  \[ = \frac{1}{2} \left( \frac{1}{2} - \frac{1}{4} - 0 \right) = \frac{1}{2} \cdot \frac{1}{4} = \frac{1}{8} \]
+
+  <h4>Bước 5: Tính lớp tích phân ngoài cùng theo góc \(\varphi\)</h4>
+  \[ I = \int_0^{2\pi} \frac{1}{8}\,d\varphi = \frac{1}{8} \Big[ \varphi \Big]_0^{2\pi} = \frac{2\pi}{8} = \frac{\pi}{4} \]
+  <p style="color:#27ae60; font-weight:bold;">\(\boxed{I = \dfrac{\pi}{4}}\) ✓ Khớp hoàn toàn với đáp án đề bài!</p>
+</div>
         <div class="answer-box">&#10003; Kết quả: \(\dfrac{\pi}{4}\)</div>
         <div class="check">Kết quả tính toán: \(\dfrac{\pi}{4}\). Khớp đáp án đề: <strong>π/4</strong> ✓</div>
         <h3>&#128202; Hình minh họa</h3>
