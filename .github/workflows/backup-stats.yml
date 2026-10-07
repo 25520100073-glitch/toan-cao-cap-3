@@ -1,0 +1,137 @@
+name: Auto-backup Stats
+
+on:
+  schedule:
+    # Chạy mỗi ngày lúc 00:00 UTC (07:00 giờ VN) và 12:00 UTC (19:00 giờ VN)
+    - cron: '0 0,12 * * *'
+  workflow_dispatch: # Cho phép bấm chạy thủ công trên giao diện GitHub bất cứ lúc nào
+
+permissions:
+  contents: write
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Fetch Stats and Update History
+        run: |
+          python - << 'EOF'
+          import urllib.request
+          import json
+          import os
+          from datetime import datetime, timezone, timedelta
+
+          NAMESPACE = "tcc3_xd25_25520100073"
+          NTFY_TOPIC = "tcc3_xd25_25520100073_stream"
+          HISTORY_PATH = os.path.join("data", "history.json")
+
+          def get_counter(key):
+              try:
+                  url = f"https://abacus.jasoncameron.dev/get/{NAMESPACE}/{key}"
+                  req = urllib.request.Request(url, headers={"User-Agent": "GitHub-Action-Backup/1.0"})
+                  with urllib.request.urlopen(req, timeout=10) as res:
+                      if res.status == 200:
+                          data = json.loads(res.read().decode("utf-8"))
+                          return int(data.get("value", 0))
+              except Exception as e:
+                  print(f"Error fetching counter {key}: {e}")
+              return 0
+
+          def get_last_log():
+              try:
+                  url = f"https://ntfy.sh/{NTFY_TOPIC}/json?poll=1&since=all"
+                  req = urllib.request.Request(url, headers={"User-Agent": "GitHub-Action-Backup/1.0"})
+                  with urllib.request.urlopen(req, timeout=10) as res:
+                      lines = res.read().decode("utf-8").strip().split("\n")
+                      logs = []
+                      for line in lines:
+                          if not line:
+                              continue
+                          try:
+                              item = json.loads(line)
+                              if item.get("event") == "message" and item.get("message"):
+                                  msg = json.loads(item["message"])
+                                  if msg.get("ts"):
+                                      logs.append(msg)
+                          except Exception:
+                              pass
+                      if logs:
+                          logs.sort(key=lambda x: x.get("ts", 0), reverse=True)
+                          return logs[0]
+              except Exception as e:
+                  print(f"Error fetching logs from ntfy: {e}")
+              return None
+
+          total_clicks = get_counter("total_clicks")
+          real_users = get_counter("real_users")
+          bot_blocked = get_counter("bot_clicks")
+          last_log = get_last_log()
+
+          effective_total = max(total_clicks, real_users + bot_blocked)
+          human_rate = f"{round((real_users / effective_total) * 100)}%" if effective_total > 0 else "100%"
+
+          # Tính thời gian hiện tại
+          utc_now = datetime.now(timezone.utc)
+          vn_now = utc_now + timedelta(hours=7)
+
+          entry = {
+              "timestamp": utc_now.strftime("%Y-%m-%dT%H:%M:%SZ"),
+              "date_vn": vn_now.strftime("%H:%M:%S %d/%m/%Y"),
+              "total_clicks": effective_total,
+              "real_users": real_users,
+              "bot_blocked": bot_blocked,
+              "human_rate": human_rate,
+              "last_click_time": last_log.get("timeStr", "N/A") if last_log else "N/A",
+              "last_click_device": last_log.get("device", "N/A") if last_log else "N/A",
+              "last_click_os": last_log.get("os", "N/A") if last_log else "N/A",
+              "last_click_browser": last_log.get("browser", "N/A") if last_log else "N/A"
+          }
+
+          history = []
+          os.makedirs("data", exist_ok=True)
+          if os.path.exists(HISTORY_PATH):
+              try:
+                  with open(HISTORY_PATH, "r", encoding="utf-8") as f:
+                      history = json.load(f)
+                      if not isinstance(history, list):
+                          history = []
+              except Exception:
+                  history = []
+
+          # Kiểm tra nếu số liệu không thay đổi so với snapshot gần nhất thì không thêm snapshot trùng lặp
+          if history:
+              prev = history[-1]
+              if (prev.get("total_clicks") == entry["total_clicks"] and
+                  prev.get("real_users") == entry["real_users"] and
+                  prev.get("bot_blocked") == entry["bot_blocked"] and
+                  prev.get("last_click_time") == entry["last_click_time"]):
+                  print("No changes in stats since last backup. Skipping duplicate record.")
+                  exit(0)
+
+          history.append(entry)
+          with open(HISTORY_PATH, "w", encoding="utf-8") as f:
+              json.dump(history, f, ensure_ascii=False, indent=2)
+
+          print(f"Appended new backup entry: {entry}")
+          EOF
+
+      - name: Commit and Push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet data/history.json; then
+            echo "No changes to commit."
+          else
+            TIMESTAMP=$(TZ='Asia/Ho_Chi_Minh' date '+%Y-%m-%d %H:%M:%S')
+            git add data/history.json
+            git commit -m "Auto-backup stats: $TIMESTAMP"
+            git push
+          fi
