@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toán Cao Cấp C3 — Đang chuyển hướng...</title>
+    <meta property="og:title" content="Toán Cao Cấp C3 — Trọn Bộ 83 Bài Giải & Mô Phỏng 3D">
+    <meta property="og:description" content="Hệ thống bài giải chi tiết Tích phân bội (Đề-các, Cực, Trụ, Cầu) kèm hình vẽ 2D/3D tương tác.">
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+            color: #f8fafc;
+            padding: 20px;
+        }
+        .card {
+            background: rgba(30, 41, 59, 0.92);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            border-radius: 16px;
+            padding: 32px 28px;
+            max-width: 440px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+        }
+        .spinner {
+            width: 48px;
+            height: 48px;
+            border: 4px solid rgba(56, 189, 248, 0.2);
+            border-top-color: #38bdf8;
+            border-radius: 50%;
+            margin: 0 auto 20px auto;
+            animation: spin 0.85s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        h1 {
+            font-size: 20px;
+            margin: 0 0 10px 0;
+            color: #38bdf8;
+        }
+        p {
+            font-size: 14px;
+            color: #cbd5e1;
+            line-height: 1.6;
+            margin: 0 0 18px 0;
+        }
+        .check-list {
+            text-align: left;
+            background: rgba(15, 23, 42, 0.65);
+            border-radius: 10px;
+            padding: 12px 16px;
+            font-size: 13px;
+            color: #94a3b8;
+            margin-bottom: 18px;
+        }
+        .check-item {
+            margin: 6px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-verify {
+            display: none;
+            width: 100%;
+            padding: 13px 20px;
+            background: #38bdf8;
+            color: #0f172a;
+            font-weight: 700;
+            font-size: 15px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.15s, background 0.15s;
+        }
+        .btn-verify:hover {
+            background: #7dd3fc;
+            transform: translateY(-1px);
+        }
+        .fallback-link {
+            font-size: 12px;
+            color: #64748b;
+            text-decoration: none;
+        }
+        .fallback-link:hover {
+            color: #94a3b8;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="spinner" id="spinner"></div>
+        <h1 id="statusTitle">Đang kiểm tra trình duyệt...</h1>
+        <p id="statusDesc">Hệ thống đang xác thực người dùng thật và chuyển hướng tới Toán Cao Cấp C3.</p>
+
+        <div class="check-list" id="checkList">
+            <div class="check-item" id="chkJs">✅ Hỗ trợ JavaScript</div>
+            <div class="check-item" id="chkEnv">⏳ Kiểm tra trình duyệt & thiết bị...</div>
+            <div class="check-item" id="chkBot">⏳ Kiểm tra chống Bot / AI Crawler...</div>
+        </div>
+
+        <button class="btn-verify" id="manualVerifyBtn">👆 Bấm vào đây để tiếp tục vào trang web</button>
+        <div style="margin-top: 14px;">
+            <a class="fallback-link" id="directLink" href="index.html">Chuyển hướng thủ công nếu trình duyệt không tự mở ↗</a>
+        </div>
+    </div>
+
+    <script>
+    (function() {
+        const NAMESPACE = "tcc3_xd25_25520100073";
+        const NTFY_TOPIC = "tcc3_xd25_25520100073_stream";
+        const BASE_URL = "https://25520100073-glitch.github.io/toan-cao-cap-3/";
+
+        // Xác định trang đích từ query parameter ?to=...
+        const params = new URLSearchParams(window.location.search);
+        const toParam = (params.get("to") || "").trim();
+        const tagParam = (params.get("ref") || params.get("tag") || "").trim();
+
+        let targetUrl = BASE_URL;
+        let targetLabel = "Trang chủ (index.html)";
+        if (toParam.toLowerCase() === "bundle" || toParam.toLowerCase() === "all") {
+            targetUrl = BASE_URL + "TCC3_Tron_Bo_57_Bai.html";
+            targetLabel = "Bản gộp 83 bài";
+        } else if (/^[AB]\d+_\d+$/i.test(toParam)) {
+            targetUrl = BASE_URL + "TCC3_Tron_Bo_57_Bai.html#" + toParam.toUpperCase();
+            targetLabel = "Bài " + toParam.toUpperCase().replace("_", ".");
+        } else if (toParam) {
+            targetUrl = BASE_URL + toParam;
+            targetLabel = toParam;
+        }
+        document.getElementById("directLink").href = targetUrl;
+
+        // Phân tích thông tin trình duyệt & thiết bị
+        function parseEnvironment() {
+            const ua = navigator.userAgent || "";
+            let os = "Khác";
+            if (/Windows/i.test(ua)) os = "Windows";
+            else if (/iPhone|iPad|iPod/i.test(ua)) os = "iOS (iPhone/iPad)";
+            else if (/Android/i.test(ua)) os = "Android";
+            else if (/Mac OS X|Macintosh/i.test(ua)) os = "macOS";
+            else if (/Linux/i.test(ua)) os = "Linux";
+
+            let browser = "Trình duyệt khác";
+            if (/Zalo/i.test(ua)) browser = "Zalo In-App";
+            else if (/FBAN|FBAV|FB_IAB/i.test(ua)) browser = "Facebook/Messenger In-App";
+            else if (/Edg\//i.test(ua)) browser = "Microsoft Edge";
+            else if (/CocCoc/i.test(ua)) browser = "Cốc Cốc";
+            else if (/Chrome\//i.test(ua) && !/Edg\//i.test(ua)) browser = "Google Chrome";
+            else if (/Safari\//i.test(ua) && !/Chrome\//i.test(ua)) browser = "Apple Safari";
+            else if (/Firefox\//i.test(ua)) browser = "Mozilla Firefox";
+
+            const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(ua);
+            const device = isMobile ? "📱 Điện thoại / Tablet" : "💻 Máy tính (PC/Laptop)";
+            const screenRes = (window.screen ? window.screen.width + "x" + window.screen.height : "N/A");
+
+            return { ua, os, browser, device, screenRes };
+        }
+
+        // Hệ thống chấm điểm phát hiện Bot / AI Crawler vs User thật
+        function evaluateHumanScore() {
+            const ua = navigator.userAgent || "";
+            let score = 100;
+            const reasons = [];
+
+            // 1. Kiểm tra chữ ký Bot/AI/Preview Crawler trong User-Agent
+            const hardBotRegex = /bot|crawl|spider|slurp|facebookexternalhit|Facebot|TelegramBot|Twitterbot|Discordbot|WhatsApp|Slackbot|LinkedInBot|GPTBot|ChatGPT|ClaudeBot|Anthropic|Perplexity|Bytespider|GoogleOther|HeadlessChrome|PhantomJS|Selenium|Playwright|Puppeteer|python-requests|aiohttp|curl|wget|axios|node-fetch|Go-http-client/i;
+            if (hardBotRegex.test(ua)) {
+                score -= 85;
+                reasons.push("UA chứa chữ ký Bot/AI");
+            }
+
+            // 2. Kiểm tra cờ trình duyệt tự động (Webdriver / Headless)
+            if (navigator.webdriver === true) {
+                score -= 70;
+                reasons.push("navigator.webdriver = true");
+            }
+            if (window._phantom || window.__nightmare || window.callPhantom) {
+                score -= 70;
+                reasons.push("Headless framework");
+            }
+
+            // 3. Kiểm tra kích thước màn hình thật
+            const sw = window.screen ? window.screen.width : 0;
+            const sh = window.screen ? window.screen.height : 0;
+            if (sw < 100 || sh < 100) {
+                score -= 50;
+                reasons.push("Không có màn hình thật (" + sw + "x" + sh + ")");
+            }
+
+            // 4. Kiểm tra ngôn ngữ & múi giờ trình duyệt
+            if (!navigator.languages || navigator.languages.length === 0) {
+                score -= 20;
+                reasons.push("Thiếu navigator.languages");
+            }
+            try {
+                const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+                if (!tz) {
+                    score -= 15;
+                    reasons.push("Thiếu TimeZone");
+                }
+            } catch (e) {
+                score -= 15;
+            }
+
+            // 5. Kiểm tra khả năng đồ họa Canvas/WebGL cơ bản
+            try {
+                const canvas = document.createElement("canvas");
+                const ctx = canvas.getContext("2d");
+                if (!ctx) {
+                    score -= 20;
+                    reasons.push("Không hỗ trợ Canvas 2D");
+                }
+            } catch (e) {
+                score -= 20;
+            }
+
+            if (reasons.length === 0) {
+                reasons.push("Trình duyệt chuẩn + JS + Màn hình hợp lệ");
+            }
+            return {
+                score: Math.max(0, score),
+                reasons: reasons
+            };
+        }
+
+        function getTodayKey() {
+            const now = new Date();
+            const yyyy = now.getFullYear();
+            const mm = String(now.getMonth() + 1).padStart(2, "0");
+            const dd = String(now.getDate()).padStart(2, "0");
+            return `real_${yyyy}_${mm}_${dd}`;
+        }
+
+        async function recordVisit(isHuman, verificationMethod, evalResult) {
+            const env = parseEnvironment();
+            const now = new Date();
+            const logPayload = {
+                ts: now.getTime(),
+                timeStr: now.toLocaleString("vi-VN", { hour12: false }),
+                isHuman: isHuman,
+                method: verificationMethod,
+                score: evalResult.score,
+                reasons: evalResult.reasons.join(", "),
+                device: env.device,
+                os: env.os,
+                browser: env.browser,
+                screen: env.screenRes,
+                target: targetLabel,
+                tag: tagParam || "Trực tiếp",
+                referrer: document.referrer || "Trực tiếp (Zalo/Messenger/Copy)"
+            };
+
+            // Lưu bản sao vào localStorage trên trình duyệt hiện tại
+            try {
+                const localLogs = JSON.parse(localStorage.getItem("tcc3_click_logs") || "[]");
+                localLogs.unshift(logPayload);
+                localStorage.setItem("tcc3_click_logs", JSON.stringify(localLogs.slice(0, 200)));
+            } catch (e) {}
+
+            // Gửi đồng thời tới bộ đếm vĩnh viễn Abacus và luồng sự kiện chi tiết ntfy.sh
+            const tasks = [
+                fetch(`https://abacus.jasoncameron.dev/hit/${NAMESPACE}/total_clicks`, { mode: "cors", keepalive: true }).catch(() => {}),
+                fetch(`https://ntfy.sh/${NTFY_TOPIC}`, {
+                    method: "POST",
+                    body: JSON.stringify(logPayload),
+                    keepalive: true
+                }).catch(() => {})
+            ];
+
+            if (isHuman) {
+                tasks.push(fetch(`https://abacus.jasoncameron.dev/hit/${NAMESPACE}/real_users`, { mode: "cors", keepalive: true }).catch(() => {}));
+                tasks.push(fetch(`https://abacus.jasoncameron.dev/hit/${NAMESPACE}/${getTodayKey()}`, { mode: "cors", keepalive: true }).catch(() => {}));
+            } else {
+                tasks.push(fetch(`https://abacus.jasoncameron.dev/hit/${NAMESPACE}/bot_clicks`, { mode: "cors", keepalive: true }).catch(() => {}));
+            }
+
+            // Chờ tối đa 650ms để đảm bảo request được gửi đi mà không làm chậm người dùng
+            await Promise.race([
+                Promise.allSettled(tasks),
+                new Promise(res => setTimeout(res, 650))
+            ]);
+        }
+
+        async function runGatekeeper() {
+            const evalResult = evaluateHumanScore();
+            const chkEnv = document.getElementById("chkEnv");
+            const chkBot = document.getElementById("chkBot");
+            const titleEl = document.getElementById("statusTitle");
+            const descEl = document.getElementById("statusDesc");
+            const btnEl = document.getElementById("manualVerifyBtn");
+            const spinnerEl = document.getElementById("spinner");
+
+            if (evalResult.score >= 75) {
+                // Người dùng thật 100% -> Ghi nhận & Tự động redirect
+                chkEnv.textContent = "✅ Thiết bị & màn hình hợp lệ";
+                chkBot.textContent = "✅ Xác thực User thật thành công (" + evalResult.score + "/100)";
+                titleEl.textContent = "Xác thực thành công!";
+                descEl.textContent = "Đang mở " + targetLabel + "...";
+
+                await recordVisit(true, "Tự động (JS + Browser Check)", evalResult);
+                window.location.replace(targetUrl);
+            } else if (evalResult.score >= 40) {
+                // Nghi ngờ (ví dụ trình duyệt nhúng thiếu thông tin) -> Yêu cầu 1 cú chạm thật (hành vi người dùng)
+                chkEnv.textContent = "⚠️ Trình duyệt cần xác nhận tương tác";
+                chkBot.textContent = "⏳ Vui lòng bấm nút bên dưới để xác nhận";
+                titleEl.textContent = "Xác nhận bạn không phải Robot";
+                descEl.textContent = "Chỉ cần bấm nút bên dưới để truy cập vào Toán Cao Cấp C3.";
+                spinnerEl.style.display = "none";
+                btnEl.style.display = "block";
+
+                btnEl.addEventListener("click", async function(evt) {
+                    if (evt.isTrusted) {
+                        btnEl.disabled = true;
+                        btnEl.textContent = "Đang chuyển hướng...";
+                        evalResult.score = 95;
+                        evalResult.reasons = ["Xác thực bằng hành vi click thật (isTrusted)"];
+                        await recordVisit(true, "Hành vi Click thật", evalResult);
+                        window.location.replace(targetUrl);
+                    }
+                });
+            } else {
+                // Bot / AI Crawler rõ ràng -> Ghi nhận là Bot và chặn chuyển hướng tự động
+                chkEnv.textContent = "❌ Phát hiện trình duyệt tự động / Crawler";
+                chkBot.textContent = "🤖 Đã chặn Bot/AI (" + evalResult.reasons.join(", ") + ")";
+                titleEl.textContent = "Truy cập tự động bị từ chối";
+                descEl.textContent = "Hệ thống phát hiện truy cập từ Bot hoặc trình thu thập dữ liệu tự động.";
+                spinnerEl.style.display = "none";
+                btnEl.style.display = "block";
+                btnEl.textContent = "Tôi là người thật — Bấm để mở trang";
+
+                await recordVisit(false, "Bot/AI bị chặn tự động", evalResult);
+
+                // Vẫn cho phép nếu có người thật thực sự bấm tay (isTrusted)
+                btnEl.addEventListener("click", async function(evt) {
+                    if (evt.isTrusted) {
+                        evalResult.score = 90;
+                        evalResult.reasons = ["Người dùng bấm xác nhận thủ công"];
+                        await recordVisit(true, "Click xác nhận thủ công", evalResult);
+                        window.location.replace(targetUrl);
+                    }
+                });
+            }
+        }
+
+        // Chờ 150ms để môi trường DOM/Layout ổn định rồi kiểm tra
+        setTimeout(runGatekeeper, 150);
+    })();
+    </script>
+</body>
+</html>

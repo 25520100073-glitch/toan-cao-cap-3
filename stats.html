@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Thống Kê Tracking Link — Toán Cao Cấp C3</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: #0f172a;
+            color: #f8fafc;
+            padding: 0 0 60px 0;
+        }
+        .header {
+            background: #1e293b;
+            border-bottom: 1px solid #334155;
+            padding: 20px 28px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 22px;
+            color: #38bdf8;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .live-badge {
+            font-size: 12px;
+            background: rgba(34, 197, 94, 0.18);
+            color: #4ade80;
+            border: 1px solid rgba(34, 197, 94, 0.4);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background: #4ade80;
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.35; }
+        }
+        .container {
+            max-width: 1220px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+        .share-box {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border: 1px solid #38bdf8;
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 8px 25px rgba(56, 189, 248, 0.1);
+        }
+        .share-box h2 {
+            margin: 0 0 12px 0;
+            font-size: 17px;
+            color: #38bdf8;
+        }
+        .link-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 12px;
+            align-items: center;
+        }
+        .link-input {
+            flex: 1;
+            min-width: 260px;
+            background: #090d16;
+            border: 1px solid #334155;
+            color: #e2e8f0;
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 13.5px;
+        }
+        .btn {
+            background: #0284c7;
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            transition: background 0.15s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .btn:hover { background: #0369a1; }
+        .btn-secondary {
+            background: #334155;
+            color: #f8fafc;
+        }
+        .btn-secondary:hover { background: #475569; }
+
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        .kpi-card {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 20px;
+        }
+        .kpi-label {
+            font-size: 13px;
+            color: #94a3b8;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .kpi-value {
+            font-size: 34px;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+        .kpi-sub {
+            font-size: 12px;
+            color: #64748b;
+        }
+        .val-blue { color: #38bdf8; }
+        .val-green { color: #4ade80; }
+        .val-orange { color: #fb923c; }
+        .val-purple { color: #c084fc; }
+
+        .panels-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 18px;
+            margin-bottom: 24px;
+        }
+        @media (max-width: 850px) {
+            .panels-grid { grid-template-columns: 1fr; }
+        }
+        .panel {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 20px;
+        }
+        .panel h3 {
+            margin: 0 0 16px 0;
+            font-size: 16px;
+            color: #e2e8f0;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 10px;
+        }
+        .bar-chart {
+            display: flex;
+            align-items: flex-end;
+            gap: 12px;
+            height: 170px;
+            padding-top: 20px;
+        }
+        .bar-col {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100%;
+            justify-content: flex-end;
+        }
+        .bar-fill {
+            width: 100%;
+            max-width: 46px;
+            background: linear-gradient(180deg, #38bdf8 0%, #0284c7 100%);
+            border-radius: 6px 6px 0 0;
+            min-height: 4px;
+            transition: height 0.3s;
+        }
+        .bar-num {
+            font-size: 12px;
+            font-weight: 700;
+            color: #38bdf8;
+            margin-bottom: 4px;
+        }
+        .bar-date {
+            font-size: 11px;
+            color: #94a3b8;
+            margin-top: 6px;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13.5px;
+        }
+        th, td {
+            text-align: left;
+            padding: 12px 14px;
+            border-bottom: 1px solid #334155;
+        }
+        th {
+            background: #0f172a;
+            color: #94a3b8;
+            font-weight: 600;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+        tr:hover td {
+            background: rgba(51, 65, 85, 0.35);
+        }
+        .badge {
+            display: inline-block;
+            padding: 3px 9px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .badge-human {
+            background: rgba(74, 222, 128, 0.15);
+            color: #4ade80;
+        }
+        .badge-bot {
+            background: rgba(251, 146, 60, 0.15);
+            color: #fb923c;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div>
+            <h1>
+                📊 Dashboard Thống Kê Tracking Link
+                <span class="live-badge"><span class="live-dot"></span> Real-time Cloud Sync</span>
+            </h1>
+        </div>
+        <div style="display:flex; gap:10px;">
+            <button class="btn btn-secondary" onclick="refreshAll()">🔄 Làm mới dữ liệu</button>
+            <a class="btn" href="index.html">🏠 Về Trang Chủ TCC3</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Hộp lấy link share -->
+        <div class="share-box">
+            <h2>🔗 Link Tracking Duy Nhất Để Share Cho Bạn Bè (Đã tích hợp lọc Bot/AI)</h2>
+            <div class="link-row">
+                <span style="min-width: 170px; font-size: 13px; color:#cbd5e1; font-weight:600;">1. Link về Trang chủ:</span>
+                <input class="link-input" id="shareMain" readonly value="https://25520100073-glitch.github.io/toan-cao-cap-3/go.html">
+                <button class="btn" onclick="copyInput('shareMain', this)">📋 Copy Link</button>
+                <a class="btn btn-secondary" href="go.html" target="_blank">⚡ Click thử</a>
+            </div>
+            <div class="link-row" style="margin-bottom:0;">
+                <span style="min-width: 170px; font-size: 13px; color:#cbd5e1; font-weight:600;">2. Link vào Bản gộp 83 bài:</span>
+                <input class="link-input" id="shareBundle" readonly value="https://25520100073-glitch.github.io/toan-cao-cap-3/go.html?to=bundle">
+                <button class="btn" onclick="copyInput('shareBundle', this)">📋 Copy Link</button>
+                <a class="btn btn-secondary" href="go.html?to=bundle" target="_blank">⚡ Click thử</a>
+            </div>
+        </div>
+
+        <!-- 4 Ô KPI Tổng quan -->
+        <div class="kpi-grid">
+            <div class="kpi-card">
+                <div class="kpi-label">TỔNG LƯỢT CLICK VÀO LINK</div>
+                <div class="kpi-value val-blue" id="kpiTotal">...</div>
+                <div class="kpi-sub">Bao gồm cả người thật và Bot xem trước</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">NGƯỜI DÙNG THẬT (REAL USERS)</div>
+                <div class="kpi-value val-green" id="kpiHuman">...</div>
+                <div class="kpi-sub">Đã vượt qua kiểm tra JS + Màn hình + Chống Bot</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">BOT / AI CRAWLER BỊ CHẶN</div>
+                <div class="kpi-value val-orange" id="kpiBot">...</div>
+                <div class="kpi-sub">Bot thu thập dữ liệu hoặc trình duyệt tự động</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">TỶ LỆ NGƯỜI THẬT</div>
+                <div class="kpi-value val-purple" id="kpiRate">...</div>
+                <div class="kpi-sub" id="kpiLastTime">Cập nhật theo thời gian thực</div>
+            </div>
+        </div>
+
+        <!-- Biểu đồ 7 ngày & Thống kê Thiết bị -->
+        <div class="panels-grid">
+            <div class="panel">
+                <h3>📈 Lượt Người Thật Click Trong 7 Ngày Gần Nhất</h3>
+                <div class="bar-chart" id="dailyChart"></div>
+            </div>
+            <div class="panel">
+                <h3>📱 Phân Bố Thiết Bị & Trình Duyệt (Từ Nhật Ký)</h3>
+                <div id="deviceBreakdown" style="font-size:13.5px; line-height:1.9; color:#cbd5e1;">
+                    Đang tải dữ liệu...
+                </div>
+            </div>
+        </div>
+
+        <!-- Bảng lịch sử từng lượt click -->
+        <div class="panel">
+            <h3>🕒 Nhật Ký Chi Tiết Từng Lượt Click (Khi nào click, Thiết bị gì, Người thật hay Bot)</h3>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Thời gian click</th>
+                            <th>Phân loại</th>
+                            <th>Thiết bị & HĐH</th>
+                            <th>Trình duyệt & Màn hình</th>
+                            <th>Trang đích</th>
+                            <th>Chi tiết xác thực (Score)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="logTableBody">
+                        <tr>
+                            <td colspan="6" style="text-align:center; color:#94a3b8; padding:24px;">Đang đồng bộ nhật ký truy cập từ Cloud...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    const NAMESPACE = "tcc3_xd25_25520100073";
+    const NTFY_TOPIC = "tcc3_xd25_25520100073_stream";
+    let cachedLogs = [];
+
+    function copyInput(id, btn) {
+        const el = document.getElementById(id);
+        el.select();
+        navigator.clipboard.writeText(el.value);
+        const old = btn.textContent;
+        btn.textContent = "✅ Đã Copy!";
+        setTimeout(() => { btn.textContent = old; }, 1800);
+    }
+
+    async function getCounter(key) {
+        try {
+            const res = await fetch(`https://abacus.jasoncameron.dev/get/${NAMESPACE}/${key}`);
+            if (!res.ok) return 0;
+            const data = await res.json();
+            return Number(data.value || 0);
+        } catch (e) {
+            return 0;
+        }
+    }
+
+    async function loadCountersAndChart() {
+        const [total, human, bot] = await Promise.all([
+            getCounter("total_clicks"),
+            getCounter("real_users"),
+            getCounter("bot_clicks")
+        ]);
+
+        const effectiveTotal = Math.max(total, human + bot);
+        document.getElementById("kpiTotal").textContent = effectiveTotal;
+        document.getElementById("kpiHuman").textContent = human;
+        document.getElementById("kpiBot").textContent = bot;
+
+        const rate = effectiveTotal > 0 ? Math.round((human / effectiveTotal) * 100) : 100;
+        document.getElementById("kpiRate").textContent = rate + "%";
+
+        // Tải biểu đồ 7 ngày gần nhất
+        const days = [];
+        for (let i = 6; i >= 0; i--) {
+            const d = new Date();
+            d.setDate(d.getDate() - i);
+            const yyyy = d.getFullYear();
+            const mm = String(d.getMonth() + 1).padStart(2, "0");
+            const dd = String(d.getDate()).padStart(2, "0");
+            days.push({
+                key: `real_${yyyy}_${mm}_${dd}`,
+                label: `${dd}/${mm}`
+            });
+        }
+
+        const counts = await Promise.all(days.map(d => getCounter(d.key)));
+        const maxVal = Math.max(1, ...counts);
+        const chartEl = document.getElementById("dailyChart");
+        chartEl.innerHTML = days.map((d, idx) => {
+            const c = counts[idx];
+            const hPct = Math.max(6, Math.round((c / maxVal) * 115));
+            return `
+                <div class="bar-col">
+                    <div class="bar-num">${c}</div>
+                    <div class="bar-fill" style="height:${hPct}px;"></div>
+                    <div class="bar-date">${d.label}</div>
+                </div>
+            `;
+        }).join("");
+    }
+
+    function mergeAndSaveLogs(newItems) {
+        let saved = [];
+        try {
+            saved = JSON.parse(localStorage.getItem("tcc3_dashboard_logs") || "[]");
+        } catch (e) {}
+
+        const map = new Map();
+        [...newItems, ...saved].forEach(item => {
+            if (item && item.ts) {
+                map.set(item.ts + "_" + (item.screen || ""), item);
+            }
+        });
+
+        cachedLogs = Array.from(map.values()).sort((a, b) => b.ts - a.ts).slice(0, 200);
+        try {
+            localStorage.setItem("tcc3_dashboard_logs", JSON.stringify(cachedLogs));
+        } catch (e) {}
+        renderLogTable();
+    }
+
+    function renderLogTable() {
+        const tbody = document.getElementById("logTableBody");
+        if (cachedLogs.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; color:#94a3b8; padding:24px;">Chưa có lượt click nào. Hãy bấm nút <strong>"⚡ Click thử"</strong> ở trên để kiểm tra ngay!</td></tr>`;
+            document.getElementById("deviceBreakdown").innerHTML = "Chưa có dữ liệu thiết bị.";
+            return;
+        }
+
+        document.getElementById("kpiLastTime").textContent = "Click gần nhất: " + cachedLogs[0].timeStr;
+
+        // Thống kê thiết bị & trình duyệt
+        const osCount = {};
+        const brCount = {};
+        cachedLogs.forEach(l => {
+            if (l.os) osCount[l.os] = (osCount[l.os] || 0) + 1;
+            if (l.browser) brCount[l.browser] = (brCount[l.browser] || 0) + 1;
+        });
+
+        const osLines = Object.entries(osCount).map(([k, v]) => `<div>• <strong>${k}:</strong> ${v} lượt</div>`).join("");
+        const brLines = Object.entries(brCount).map(([k, v]) => `<div>• <strong>${k}:</strong> ${v} lượt</div>`).join("");
+        document.getElementById("deviceBreakdown").innerHTML = `
+            <div style="margin-bottom:8px; color:#38bdf8; font-weight:600;">Hệ điều hành:</div>
+            ${osLines || "<div>Chưa có</div>"}
+            <div style="margin:12px 0 8px 0; color:#38bdf8; font-weight:600;">Trình duyệt:</div>
+            ${brLines || "<div>Chưa có</div>"}
+        `;
+
+        tbody.innerHTML = cachedLogs.map(item => {
+            const badge = item.isHuman
+                ? `<span class="badge badge-human">✅ Người thật</span>`
+                : `<span class="badge badge-bot">🤖 Bot / AI</span>`;
+            return `
+                <tr>
+                    <td style="white-space:nowrap; font-weight:600; color:#e2e8f0;">${item.timeStr || ""}</td>
+                    <td>${badge}</td>
+                    <td>${item.device || ""}<br><span style="color:#94a3b8; font-size:12px;">${item.os || ""}</span></td>
+                    <td>${item.browser || ""}<br><span style="color:#94a3b8; font-size:12px;">Màn hình: ${item.screen || ""}</span></td>
+                    <td><span style="color:#38bdf8; font-weight:600;">${item.target || "Trang chủ"}</span></td>
+                    <td>
+                        <strong>${item.score !== undefined ? item.score + "/100" : ""}</strong> — ${item.method || ""}<br>
+                        <span style="color:#94a3b8; font-size:12px;">${item.reasons || ""}</span>
+                    </td>
+                </tr>
+            `;
+        }).join("");
+    }
+
+    async function loadCloudLogs() {
+        try {
+            const res = await fetch(`https://ntfy.sh/${NTFY_TOPIC}/json?poll=1&since=all`);
+            const text = await res.text();
+            const lines = text.trim().split("\n").filter(Boolean);
+            const parsed = [];
+            for (const line of lines) {
+                try {
+                    const env = JSON.parse(line);
+                    if (env.event === "message" && env.message) {
+                        const payload = JSON.parse(env.message);
+                        if (payload && payload.ts) parsed.push(payload);
+                    }
+                } catch (e) {}
+            }
+            mergeAndSaveLogs(parsed);
+        } catch (e) {
+            mergeAndSaveLogs([]);
+        }
+    }
+
+    function connectRealtimeStream() {
+        try {
+            const es = new EventSource(`https://ntfy.sh/${NTFY_TOPIC}/sse`);
+            es.onmessage = (evt) => {
+                try {
+                    const env = JSON.parse(evt.data);
+                    if (env.event === "message" && env.message) {
+                        const payload = JSON.parse(env.message);
+                        if (payload && payload.ts) {
+                            mergeAndSaveLogs([payload]);
+                            loadCountersAndChart();
+                        }
+                    }
+                } catch (e) {}
+            };
+        } catch (e) {}
+    }
+
+    async function refreshAll() {
+        await Promise.all([loadCountersAndChart(), loadCloudLogs()]);
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+        refreshAll();
+        connectRealtimeStream();
+    });
+    </script>
+</body>
+</html>
