@@ -22,5 +22,17 @@
     "last_click_device": "💻 Máy tính (PC/Laptop)",
     "last_click_os": "Windows",
     "last_click_browser": "Mozilla Firefox"
+  },
+  {
+    "timestamp": "2026-10-08T05:02:54Z",
+    "date_vn": "12:02:54 08/10/2026",
+    "total_clicks": 11,
+    "real_users": 11,
+    "bot_blocked": 0,
+    "human_rate": "100%",
+    "last_click_time": "N/A",
+    "last_click_device": "N/A",
+    "last_click_os": "N/A",
+    "last_click_browser": "N/A"
   }
 ]
