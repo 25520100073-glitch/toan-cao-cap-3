@@ -46,5 +46,17 @@
     "last_click_device": "📱 Điện thoại / Tablet",
     "last_click_os": "Android",
     "last_click_browser": "Facebook/Messenger In-App"
+  },
+  {
+    "timestamp": "2026-10-09T05:05:51Z",
+    "date_vn": "12:05:51 09/10/2026",
+    "total_clicks": 12,
+    "real_users": 12,
+    "bot_blocked": 0,
+    "human_rate": "100%",
+    "last_click_time": "N/A",
+    "last_click_device": "N/A",
+    "last_click_os": "N/A",
+    "last_click_browser": "N/A"
   }
 ]
