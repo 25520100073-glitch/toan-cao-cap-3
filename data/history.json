@@ -82,5 +82,17 @@
     "last_click_device": "N/A",
     "last_click_os": "N/A",
     "last_click_browser": "N/A"
+  },
+  {
+    "timestamp": "2026-11-16T21:44:42Z",
+    "date_vn": "04:44:42 17/11/2026",
+    "total_clicks": 0,
+    "real_users": 0,
+    "bot_blocked": 0,
+    "human_rate": "100%",
+    "last_click_time": "N/A",
+    "last_click_device": "N/A",
+    "last_click_os": "N/A",
+    "last_click_browser": "N/A"
   }
 ]
